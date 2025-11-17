@@ -24,8 +24,8 @@ function Header() {
                           {(
                             { isActive }) => (
                             <div className={`absolute bottom-[-45px] w-[80px] h-[80px] bg-[#233da3] text-white rounded-lg flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 ${isActive ? 'bg-[#ff4109]' : 'group-hover:bg-[#1a2b7a]'}`}>
-                              <img className="h-7" src="https://ovaltine-website-dev.estuary.solutions/img/menu/product.png" alt="Sản phẩm" />
-                              <span className="text-xs font-medium text-center leading-tight">Danh Sách <br /> Sản Phẩm</span>
+                            <img className="h-7" src="https://ovaltine-website-dev.estuary.solutions/img/menu/product.png" alt="Sản phẩm" />
+                            <span className="text-xs font-medium text-center leading-tight">Danh Sách <br /> Sản Phẩm</span>
                           </div>
                           )}
                       </NavLink>
