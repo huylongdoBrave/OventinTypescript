@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 import Wheel from './wheel.tsx';
-// import ResultPopup from './ResultPopup'; 
+import ResultPopup from './resultpopup.tsx'; 
 // import RateTablePopup from './RateTablePopup';
 // import AddPrizePopup from './AddPrizePopup'; 
 
@@ -214,13 +214,13 @@ function WheelGame() {
       <p className="title-down">Bấm vào Vòng Quay May Mắn để bắt đầu quay</p>
 
       {/* POPUPS */}
-      {/* <ResultPopup
+      <ResultPopup
         isOpen={isResultPopupOpen}
         prize={winningPrize}
         onClose={() => setIsResultPopupOpen(false)}
       />
 
-      <RateTablePopup
+      {/* <RateTablePopup
         isOpen={isRatePopupOpen}
         prizes={prizes}
         onClose={() => setIsRatePopupOpen(false)}
