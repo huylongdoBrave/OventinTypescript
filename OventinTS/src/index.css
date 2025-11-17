@@ -152,8 +152,6 @@ header {
     background-color: #1a2b7a; 
 }
 
-
-
 /* --- Right Side Menu--- */
 
 .img-nav-right{
@@ -259,10 +257,10 @@ main {
 }
 
 .btn-action {
-    height: 50px;
+  height: 50px;
 	width: 150px;
-    font-family: 'Times New Roman', Times, serif;
-    display: inline-block;
+  font-family: 'Times New Roman', Times, serif;
+  display: inline-block;
 	background: #ff6702;
 	font-size: 16px;
 	color: white;

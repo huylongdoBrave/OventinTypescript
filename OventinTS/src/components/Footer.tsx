@@ -5,9 +5,10 @@ import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 function Footer(){
   return (
-    <footer className="bg-[#ff4109] text-white pt-5 pb-5 absolute bottom-0 w-full">
+    <footer className="bg-[#ff4109] text-white pt-5 w-full">
         <div className="container mx-auto px-4">
             <div className="flex flex-col gap-8">
+              
                 {/* footer-top */}
                 <div className="text-center lg:text-left  pb-6">
                     <p className="font-bold text-lg">CÔNG TY TNHH AB AGRI VIỆT NAM</p>
