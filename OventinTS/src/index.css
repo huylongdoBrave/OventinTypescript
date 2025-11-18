@@ -341,59 +341,6 @@ main {
     border: 5px solid #004a8d;
 }
 
-.container-wheel{
-	height: var(--container-wheel-size);
-	width: var(--container-wheel-size);
-	background: #ffffff;
-	position: relative;
-	border-radius: 50%;
-	overflow: hidden;
-	box-shadow: 0 0 10px gray;
-	transition: 3s all;
-}
-
-.container-wheel-part{
-	height: calc(50% + 1px); /* Tăng nhẹ chiều cao để các đỉnh tam giác chồng lên nhau ở tâm, che đi kẽ hở do lỗi làm tròn */
-    /* width: 150px;  */
-	clip-path: polygon(100% 0, 50% 100%, 0 0);
-	transform: translateX(-50%);
-	transform-origin: bottom;
-	position: absolute;
-	left: 50%;
-	display: flex;
-	align-items: center; /* Căn giữa theo chiều ngang */
-	justify-content: flex-start; /* Căn chỉnh từ đỉnh xuống */
-	flex-direction: column; /* Xếp chồng các phần tử con theo chiều dọc */
-    color:red; 
-    padding-top: 20px; /* Đẩy nội dung xuống một khoảng từ đỉnh */
-    box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước của ô */
-	font-family: monospace;
-	font-weight: 1000;
-
-}
-.image-wheel{
-    width: 35%; /* Use relative width, giảm nhẹ để có không gian cho tên */
-    height: auto;
-    align-items: center;
-}
-.p-wheel{
-    /* transform: translateY(-100%); */
-    margin-right: 0;
-    font-size: 0.9em; /* Use relative font size */
-    align-items: center;
-    text-align: center;
-    max-width: 70%; /* Use relative max-width */
-    color: #050505;
-}
-
-/* .mid{
-	height: 25px;
-	width: 25px;
-	border-radius: 50%;
-	position: absolute;
-	background: #e4ba00;
-} */
-
 #spin{
 	height: var(--spin-button-size);
 	width: var(--spin-button-size);
@@ -675,26 +622,6 @@ footer {
     cursor: pointer;
 }
 /* 
-.prize-id-display{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-} */
-
-.prize-name-display {
-    transform: translateY(10%); /* Đẩy tên lên dưới ảnh */
-    font-size: 9px; 
-    font-weight: bold;
-    color: #020202;
-    width: 80%; /* Giới hạn chiều rộng */
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 0 5px;
-    box-sizing: border-box;
-}
 /* --- Popup Add Prize --- */
 #add-prize-popup-overlay {
     position: fixed;
