@@ -545,138 +545,6 @@ footer {
     font-size: 13px;
 }
 
-/* --- Popup Result Prize--- */
-#popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1001;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-}
-
-#popup-box {
-    position: relative;
-    width: 350px;
-    height: 180px;
-    background-image: url('/static/modal.png');
-    background-size: cover; /* Đảm bảo hình ảnh lấp đầy khung */
-    background-position: center; /* Căn giữa hình ảnh */
-    background-repeat: no-repeat; /* Không lặp lại hình ảnh */
-    border-radius: 15px; 
-    border: 5px solid white; 
-    padding: 40px 20px 40px 20px;
-    text-align: center;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-}
-
-#popup-box .popup-logo {
-    position: absolute;
-    top: -190px; 
-    left: 50%;
-    transform: translateX(-50%);
-    width: 150px;
-    height: auto;
-    border-radius: 50%;
-    padding: 5px;
-    /* box-shadow: 0 0 15px rgba(0,0,0,0.3); */
-    filter: drop-shadow(rgb(255, 255, 255) 0px 0px 12px);
-}
-
- .popup-title{
-    position: absolute;
-    top: -50px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 300px;
-    height: auto;
-    padding: 5px;
-    /* filter: drop-shadow(rgb(255, 255, 255) 0px 0px 12px); */
-}
-
-#popup-box .popup-title {
-    font-weight: bold; /* Chữ in đậm */
-    font-size: 1.2rem;
-    margin-top: 10px;
-    margin-bottom: 15px;
-}
-
-#popup-box .popup-prize {
-    font-size: 1.5rem;
-    font-weight: 900;
-    margin: 0; /* Remove margin as flexbox will handle centering */
-    min-height: 50px; 
-    color: #233da3;
-}
-
-#popup-prize-id {
-    font-size: 1.5rem;
-    font-weight: 900;
-    margin: 0; /* Remove margin as flexbox will handle centering */
-    min-height: 50px; 
-    color: #233da3;
-}
-
-/* #popup-box .popup-close {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 2rem;
-    color: white;
-    cursor: pointer;
-} */
-
-#popup-box .popup-confirm {
-    position: absolute;
-    bottom: -70px; /* Đẩy nút ra ngoài */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #f85a00;
-    color: white;
-    border: none;
-    padding: 10px 30px;
-    border-radius: 20px;
-    font-weight: bold;
-    cursor: pointer;
-	font-size: 18px;
-	/* font-weight: 900; */
-	border: 3px solid white;
-	/* box-shadow: 0 5px 10px gray; */
-	transition: 0.2s all;
-}
-
-#popup-box .popup-confirm:hover {
-    background-color: #ffffff;
-    color: #f85a00;
-}
-
-.side-image-popup {
-    position: absolute;
-    width: var(--side-image-default-width);
-    height: auto;
-    transition: all 0.3s ease-in-out;
-    margin-top:50px;
-    z-index: 5;
-}
-.side-image-popup:first-of-type {
-    left: calc(50% - var(--wheel-wrapper-size) / 2 - 180px);
-}
-.side-image-popup:last-of-type { 
-    right: calc(50% - var(--wheel-wrapper-size) / 2 - 180px);
-}
-
 .popup-hidden {
     display: none !important;
     opacity: 0;
@@ -1034,19 +902,6 @@ footer {
         right: 10%;
     }
 
-    /* popup img */
-    .side-image-popup {
-        width: 120px; 
-        margin-top: 90px;
-    }
-    .side-image-popup:first-of-type {
-            left: calc(50% - var(--wheel-wrapper-size) / 2 - 80px); 
-    }
-
-    .side-image-popup:last-of-type {
-            right: calc(50% - var(--wheel-wrapper-size) / 2 - 80px);
-    }
-
     .btn-add {
         height: 45px;
         width: 135px;
@@ -1117,31 +972,12 @@ footer {
     .side-image:last-of-type {
         right: calc(50% - var(--wheel-wrapper-size) / 2 - 10px);
     }
-    /* popup image mb */
-    .side-image-popup {
-        width: 100px; 
-        margin-top: 120px;
-    }
-    .side-image-popup:first-of-type {
-        left: calc(50% - var(--wheel-wrapper-size) / 2 - 10px); 
-    }
-
-    .side-image-popup:last-of-type {
-        right: calc(50% - var(--wheel-wrapper-size) / 2 - 10px);
-    }
 
     /* Adjust add spins button */
     .btn-add {
         width: 120px;
         height: 40px;
         font-size: 16px;
-    }
-
-    #popup-box .popup-prize{
-        font-size: 18px;
-    }
-    #popup-prize-id{
-        font-size: 18px;
     }
 
     #probabilities-popup-box {
@@ -1371,5 +1207,3 @@ footer {
     margin-top: 25px;
     text-align: center;
 }
-
-

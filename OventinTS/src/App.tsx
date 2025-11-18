@@ -7,7 +7,7 @@ import WheelGame from './components/luckywheel/wheelgame.tsx';
 function App() {
 
   return (
-    <div className="pb-[80px] lg:pb-0">    
+    <div className="pb-[5px] lg:pb-0">    
       <Header />
 
       <Routes>

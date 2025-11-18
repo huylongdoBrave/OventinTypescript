@@ -21,6 +21,7 @@ interface ResultPopupProps { isOpen: boolean; prize: Prize | null; onClose: () =
 interface RateTablePopupProps { isOpen: boolean; prizes: Prize[]; onClose: () => void; onApplyChanges: (updatedPrizes: Prize[]) => void; }
 interface AddPrizePopupProps { isOpen: boolean; prizes: Prize[]; onClose: () => void; onAddPrize: (newPrize: Prize) => void; }
 
+
 function WheelGame() {
   // === STATE MANAGEMENT ===
   const [prizes, setPrizes] = useState<Prize[]>([]);
@@ -91,21 +92,6 @@ function WheelGame() {
     return () => document.body.classList.remove('body-no-scroll');
   }, [isResultPopupOpen, isRatePopupOpen, isAddPrizePopupOpen]);
 
-
-  // === Tính bảo hiểm khi quay ===
-  const getWeightedRandomIndex = () => {
-    const prizeProbabilities = prizes.map((p: Prize) => p.probability);     // Lấy mảng tỉ lệ mới nhất từ RateManager. Ví dụ: [0.1, 0.7, 0.2].
-    const rand = Math.random();     // Tạo một số ngẫu nhiên trong khoảng từ 0 (bao gồm) đến 1 (loại trừ).
-    let cumulativeProbability = 0;     // Biến để theo dõi tổng tỉ lệ tích lũy.
-
-    for (let i = 0; i < prizeProbabilities.length; i++) {
-      cumulativeProbability += prizeProbabilities[i];       // Cộng tỉ lệ của ô hiện tại vào tổng tích lũy.
-      if (rand < cumulativeProbability) {
-        return i;
-      }
-    }
-    return prizeProbabilities.length - 1;
-  };
   
   // === Sự kiện quay ===
   const handleSpin = () => {
@@ -120,7 +106,7 @@ function WheelGame() {
     const cssOffsetAngle = -(sliceAngle / 2);
     const randomSpins = Math.floor(Math.random() * 6) + 5;
     const targetAngle = winningSliceIndex * sliceAngle + cssOffsetAngle;
-    const totalRotation = -(randomSpins * 360 + targetAngle);     // LUÔN tính góc quay mới, không dựa vào góc cũ. Dấu trừ để quay ngược chiều kim đồng hồ.
+    const totalRotation = -(randomSpins * 360 + targetAngle);     // Luôn tính góc quay mới, không dựa vào góc cũ. Dấu trừ để quay ngược chiều kim đồng hồ.
     const spinDuration = 5;
 
     // Sử dụng ref để thao tác trực tiếp với style, đảm bảo animation chạy đúng
@@ -146,6 +132,23 @@ function WheelGame() {
       }
       setIsSpinning(false); // Báo hiệu đã quay xong
     }, spinDuration * 1000);
+  };
+
+
+  
+  // === Tính bảo hiểm khi quay ===
+  const getWeightedRandomIndex = () => {
+    const prizeProbabilities = prizes.map((p: Prize) => p.probability);     // Lấy mảng tỉ lệ mới nhất từ RateManager. Ví dụ: [0.1, 0.7, 0.2].
+    const rand = Math.random();     // Tạo một số ngẫu nhiên trong khoảng từ 0 (bao gồm) đến 1 (loại trừ).
+    let cumulativeProbability = 0;     // Biến để theo dõi tổng tỉ lệ tích lũy.
+
+    for (let i = 0; i < prizeProbabilities.length; i++) {
+      cumulativeProbability += prizeProbabilities[i];       // Cộng tỉ lệ của ô hiện tại vào tổng tích lũy.
+      if (rand < cumulativeProbability) {
+        return i;
+      }
+    }
+    return prizeProbabilities.length - 1;
   };
 
 /*   //Cập nhật quà
@@ -218,8 +221,10 @@ function WheelGame() {
       {/* SETUP BUTTONS */}
       <div className="show-button-container">
         <div className="button-group-top">
-          <button id="show-probabilities-btn" className="btn-action" onClick={() => setIsRatePopupOpen(true)} disabled={isSpinning} style={{ cursor: isSpinning ? 'not-allowed' : 'pointer' }}>Tỉ lệ</button>
-          <button id="add-prize-btn" className="btn-action" onClick={() => setIsAddPrizePopupOpen(true)} disabled={isSpinning} style={{ cursor: isSpinning ? 'not-allowed' : 'pointer' }}>Thêm quà</button>
+          <button id="show-probabilities-btn" className="btn-action" onClick={() => setIsRatePopupOpen(true)}
+           disabled={isSpinning} style={{ cursor: isSpinning ? 'not-allowed' : 'pointer' }}>Tỉ lệ</button>
+          <button id="add-prize-btn" className="btn-action" onClick={() => setIsAddPrizePopupOpen(true)}
+           disabled={isSpinning} style={{ cursor: isSpinning ? 'not-allowed' : 'pointer' }}>Thêm quà</button>
         </div>
         <div className="button-group-top">
           <button id="restart-btn" className="btn-action"

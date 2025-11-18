@@ -36,7 +36,7 @@ function Footer(){
                     </div>
                 </div>
                 {/* footer-bottom */}
-                <div className="text-center  pt-1 mt-5 mb-30 ">
+                <div className="text-center pt-1 mt-5 pb-10 ">
                     <p>Ovaltine Vietnam © 2025</p>
                 </div>
             </div>

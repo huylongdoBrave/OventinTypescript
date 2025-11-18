@@ -1,4 +1,4 @@
-import React, { useMemo, FC } from 'react';
+import React, { useMemo, type FC } from 'react';
 import type { Prize } from './wheelgame'; // Import kiểu Prize từ file wheelgame
 
 interface WheelProps {
