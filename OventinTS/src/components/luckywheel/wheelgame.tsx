@@ -17,10 +17,9 @@ export interface Prize {
 }
 
 // Định nghĩa props cho các component con (trừ Wheel đã tự định nghĩa)
-interface ResultPopupProps { isOpen: boolean; prize: Prize | null; onClose: () => void; }
-interface RateTablePopupProps { isOpen: boolean; prizes: Prize[]; onClose: () => void; onApplyChanges: (updatedPrizes: Prize[]) => void; }
-interface AddPrizePopupProps { isOpen: boolean; prizes: Prize[]; onClose: () => void; onAddPrize: (newPrize: Prize) => void; }
-
+// interface ResultPopupProps { isOpen: boolean; prize: Prize | null; onClose: () => void; }
+// interface RateTablePopupProps { isOpen: boolean; prizes: Prize[]; onClose: () => void; onApplyChanges: (updatedPrizes: Prize[]) => void; }
+// interface AddPrizePopupProps { isOpen: boolean; prizes: Prize[]; onClose: () => void; onAddPrize: (newPrize: Prize) => void; }
 
 function WheelGame() {
   // === STATE MANAGEMENT ===
