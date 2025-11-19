@@ -1,6 +1,9 @@
 import React, { useMemo, type FC } from 'react';
 import type { Prize } from './wheelgame'; // Import kiểu Prize từ file wheelgame
 
+function welcome(){
+  return React.createElement("h1",null,"xin chào");
+}
 interface WheelProps {
   prizes: Prize[];
 }

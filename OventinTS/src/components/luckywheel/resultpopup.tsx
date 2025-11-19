@@ -18,7 +18,7 @@ const ResultPopup: React.FC<ResultPopupProps> = ({ isOpen, prize, onClose }) => 
 
   return (
     <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-[1001]
-     transition-opacity duration-300 ease-in-out">
+    transition-opacity duration-300 ease-in-out">
         <img 
             src="/static/dolphine.png" 
             alt="Dolphine" 

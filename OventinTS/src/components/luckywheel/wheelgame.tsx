@@ -35,7 +35,6 @@ function WheelGame() {
   const [isAddPrizePopupOpen, setIsAddPrizePopupOpen] = useState(false);
 
   // === DATA LOADING (useEffect) ===
-  // Chạy 1 lần khi component được mount để tải dữ liệu
   useEffect(() => {
     const loadPrizes = async () => {
       const LOCAL_STORAGE_KEY = 'oventinPrizes';
@@ -75,6 +74,7 @@ function WheelGame() {
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(mockData));
         console.log("Loaded mock data and saved to Local Storage.");
       }
+
     };
 
     loadPrizes();
@@ -133,7 +133,6 @@ function WheelGame() {
     }, spinDuration * 1000);
   };
 
-
   
   // === Tính bảo hiểm khi quay ===
   const getWeightedRandomIndex = () => {
@@ -168,9 +167,11 @@ function WheelGame() {
   return (
     <>
       <main>
-        <div className="game-area">
-          <div className="container-title">
-            <img src="/static/lucky-draw.png" alt="Lucky Draw" />
+        <div className="flex flex-col items-center w-100%">
+          <div className="flex justify-center align-center mt-5 w-100% h-100% relative z-0">
+            <img src="/static/lucky-draw.png"
+             className="w-90% max-h-100 h-auto w-[80%] 
+            max-w-[400px] lg:w-full lg:max-w-none" alt="Lucky Draw" />
           </div>
           <div className="spin-counter">
             <p className="title-down">Bạn còn <span id="spin-count">{currentSpins}</span> lượt quay</p>
