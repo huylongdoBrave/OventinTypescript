@@ -3,7 +3,7 @@ import ButtonOrange from '../Button/buttonOrange.tsx'; // Sửa tên import
 
 import Wheel from './wheel.tsx';
 import ResultPopup from './resultpopup.tsx'; 
-// import RateTablePopup from './RateTablePopup';
+import RateTablePopup from './rateTablePopup.tsx';
 // import AddPrizePopup from './AddPrizePopup'; 
 
 // --- TYPE DEFINITIONS ---
@@ -150,7 +150,7 @@ function WheelGame() {
     return prizeProbabilities.length - 1;
   };
 
-/*   //Cập nhật quà
+  //Cập nhật quà
   const handleApplyPrizeChanges = (updatedPrizes: Prize[]) => {
     setPrizes(updatedPrizes);
     localStorage.setItem('oventinPrizes', JSON.stringify(updatedPrizes));
@@ -158,12 +158,12 @@ function WheelGame() {
   };
 
   //Thêm quà
-  const handleAddPrize = (newPrize: Prize) => {
-    const updatedPrizes = [...prizes, newPrize]; //Cập nhật newPrize vào prizes
-    setPrizes(updatedPrizes);
-    localStorage.setItem('oventinPrizes', JSON.stringify(updatedPrizes));
-    alert(`Đã thêm quà "${newPrize.name}"!`);
-  }; */
+  // const handleAddPrize = (newPrize: Prize) => {
+  //   const updatedPrizes = [...prizes, newPrize]; //Cập nhật newPrize vào prizes
+  //   setPrizes(updatedPrizes);
+  //   localStorage.setItem('oventinPrizes', JSON.stringify(updatedPrizes));
+  //   alert(`Đã thêm quà "${newPrize.name}"!`);
+  // }; 
 
 
 
@@ -191,7 +191,8 @@ function WheelGame() {
                         lg:w-[150px] lg:h-[50px] lg:text-[20px]"
             >Thêm lượt</ButtonOrange>
           </div>
-          <div className="wheel-row">
+          <div className="relative flex justify-center items-center w-[100%] mt-[20px] 
+           min-h-[var(--wheel-wrapper-size)]">
               <img src="/static/dolphine.png" alt="Dolphine" className="side-image" />
               <div className="wheel-wrapper">
                 <div className="arrow-top"></div>
@@ -216,19 +217,19 @@ function WheelGame() {
         onClose={() => setIsResultPopupOpen(false)}
       />
 
-      {/* <RateTablePopup
+       <RateTablePopup
         isOpen={isRatePopupOpen}
         prizes={prizes}
         onClose={() => setIsRatePopupOpen(false)}
         onApplyChanges={handleApplyPrizeChanges}
       />
 
-      <AddPrizePopup
+{/*       <AddPrizePopup
         isOpen={isAddPrizePopupOpen}
         prizes={prizes}
         onClose={() => setIsAddPrizePopupOpen(false)}
         onAddPrize={handleAddPrize}
-      /> */}
+      />  */}
 
       {/* SETUP BUTTONS */}
       <div className="show-button-container">
