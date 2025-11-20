@@ -176,9 +176,10 @@ function WheelGame() {
             <img 
               src="/static/lucky-draw.png"
               alt="Lucky Draw"
-              className="max-h-[400px] w-[70%] max-w-[300px] 
-                                    md:w-[80%] md:max-w-[400px] 
-                                    lg:w-[90%] lg:max-w-[400px]"
+              className="h-auto 
+                         w-[70%] max-w-[300px]
+                         md:w-[80%] md:max-w-[400px] 
+                         lg:w-[90%]"
             />
           </div>
           <div className="spin-counter">
@@ -192,9 +193,23 @@ function WheelGame() {
             >Thêm lượt</ButtonOrange>
           </div>
           <div className="relative flex justify-center items-center w-[100%] mt-[20px] 
-           min-h-[var(--wheel-wrapper-size)]">
-              <img src="/static/dolphine.png" alt="Dolphine" className="side-image" />
-              <div className="wheel-wrapper">
+           min-h-[var(--wheel-wrapper-size)]"
+          >
+              <img src="/static/dolphine.png" alt="Dolphine"
+                  className="absolute z-[5] h-auto transition-all duration-300 ease-in-out
+                             w-[90px] bottom-[30px] left-[calc(50%-var(--wheel-wrapper-size)/2-10px)]
+                             md:w-[150px] md:bottom-auto md:mt-0 md:left-[10%]
+                             lg:w-[200px] lg:left-[calc(50%-var(--wheel-wrapper-size)/2-180px)]"
+              />
+              <div className="absolute mb-5 flex h-[var(--wheel-wrapper-size)] w-[var(--wheel-wrapper-size)] 
+                              items-center justify-center rounded-full border-[5px] border-[#004a8d] bg-[#002d6f] 
+                              shadow-[0_0_20px_rgba(0,0,0,0.5),_inset_0_0_15px_rgba(0,0,0,0.3)]"
+              >
+                
+{/* <div className="wheel-wrapper lg:w-[--wheel-wrapper-size] lg:h-[--wheel-wrapper-size] bg-[#002d6f] rounded-[50%]
+                              lg:mb-[20px] border-[5px_solid_#004a8d] absolute flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.5),inset_0_0_15px_rgba(0,0,0,0.3)] ">
+                              */}
+
                 <div className="arrow-top"></div>
                 <div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div>
                 <div ref={wheelRef} className="wheel-container">
@@ -204,7 +219,12 @@ function WheelGame() {
                   <img src="/static/favicon_oven.png" alt="Spin" />
                 </button>
               </div>
-              <img src="/static/boy.png" alt="Boy" className="side-image" />
+              <img src="/static/boy.png" alt="Boy"
+                  className="absolute z-[5] h-auto transition-all duration-300 ease-in-out
+                             w-[90px] bottom-[30px] right-[calc(50%-var(--wheel-wrapper-size)/2-10px)]
+                             md:w-[150px] md:bottom-auto md:mt-0 md:right-[10%]
+                             lg:w-[200px] lg:right-[calc(50%-var(--wheel-wrapper-size)/2-180px)]"
+              />
           </div>
         </div>
       </main>
