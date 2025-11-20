@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Định nghĩa các props mà Button có thể nhận
 // React.ButtonHTMLAttributes<HTMLButtonElement> cho phép component nhận tất cả các thuộc tính của thẻ <button> HTML (onClick, disabled, type,...)
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode; // 'children' là nội dung nằm giữa thẻ <Button>...</Button>

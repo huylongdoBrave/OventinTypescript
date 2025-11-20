@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import ButtonOrange from '../Button/button.tsx'; // Sửa tên import
+import ButtonOrange from '../Button/buttonOrange.tsx'; // Sửa tên import
 
 import Wheel from './wheel.tsx';
 import ResultPopup from './resultpopup.tsx'; 
@@ -187,8 +187,8 @@ function WheelGame() {
           <div className="add-spin-container">
             <ButtonOrange id="add-spins-btn" onClick={() => setCurrentSpins(currentSpins + 10)}
               className="w-[120px] h-[40px] text-[16px] mt-2.5 mb-[50px] 
-                         md:w-[135px] md:h-[45px] md:text-[18px] md:mb-[30px]
-                         lg:w-[150px] lg:h-[50px] lg:text-[20px]"
+                        md:w-[135px] md:h-[45px] md:text-[18px] md:mb-[30px]
+                        lg:w-[150px] lg:h-[50px] lg:text-[20px]"
             >Thêm lượt</ButtonOrange>
           </div>
           <div className="wheel-row">
