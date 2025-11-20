@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import ButtonOrange from '../Button/button.tsx'; // Sửa tên import
 
 import Wheel from './wheel.tsx';
 import ResultPopup from './resultpopup.tsx'; 
@@ -164,20 +165,31 @@ function WheelGame() {
     alert(`Đã thêm quà "${newPrize.name}"!`);
   }; */
 
+
+
   return (
     <>
       <main>
-        <div className="flex flex-col items-center w-100%">
-          <div className="flex justify-center align-center mt-5 w-100% h-100% relative z-0">
-            <img src="/static/lucky-draw.png"
-             className="w-90% max-h-100 h-auto w-[80%] 
-            max-w-[400px] lg:w-full lg:max-w-none" alt="Lucky Draw" />
+
+        <div className="flex flex-col items-center w-full">
+          <div className="flex justify-center items-center mt-5 w-full h-full relative z-0">
+            <img 
+              src="/static/lucky-draw.png"
+              alt="Lucky Draw"
+              className="max-h-[400px] w-[70%] max-w-[300px] 
+                                    md:w-[80%] md:max-w-[400px] 
+                                    lg:w-[90%] lg:max-w-[400px]"
+            />
           </div>
           <div className="spin-counter">
-            <p className="title-down">Bạn còn <span id="spin-count">{currentSpins}</span> lượt quay</p>
+            <p className="text-xl font-black text-[#002d6f] mt-[20px] text-center">Bạn còn <span id="spin-count">{currentSpins}</span> lượt quay</p>
           </div>
           <div className="add-spin-container">
-            <button id="add-spins-btn" className="btn-add" onClick={() => setCurrentSpins(currentSpins + 10)}>Thêm lượt</button>
+            <ButtonOrange id="add-spins-btn" onClick={() => setCurrentSpins(currentSpins + 10)}
+              className="w-[120px] h-[40px] text-[16px] mt-2.5 mb-[50px] 
+                         md:w-[135px] md:h-[45px] md:text-[18px] md:mb-[30px]
+                         lg:w-[150px] lg:h-[50px] lg:text-[20px]"
+            >Thêm lượt</ButtonOrange>
           </div>
           <div className="wheel-row">
               <img src="/static/dolphine.png" alt="Dolphine" className="side-image" />
@@ -221,10 +233,22 @@ function WheelGame() {
       {/* SETUP BUTTONS */}
       <div className="show-button-container">
         <div className="button-group-top">
-          <button id="show-probabilities-btn" className="btn-action" onClick={() => setIsRatePopupOpen(true)}
+
+          {/* DẠNG CŨ <button id="show-probabilities-btn" className="btn-action" onClick={() => setIsRatePopupOpen(true)}
            disabled={isSpinning} style={{ cursor: isSpinning ? 'not-allowed' : 'pointer' }}>Tỉ lệ</button>
           <button id="add-prize-btn" className="btn-action" onClick={() => setIsAddPrizePopupOpen(true)}
-           disabled={isSpinning} style={{ cursor: isSpinning ? 'not-allowed' : 'pointer' }}>Thêm quà</button>
+           disabled={isSpinning} style={{ cursor: isSpinning ? 'not-allowed' : 'pointer' }}>Thêm quà</button> */}
+
+          <ButtonOrange 
+            id="show-probabilities-btn" 
+            onClick={() => setIsRatePopupOpen(true)}
+            disabled={isSpinning}
+            className="h-[50px] w-[150px] text-base">Tỉ lệ</ButtonOrange>
+          <ButtonOrange 
+            id="add-prize-btn" 
+            onClick={() => setIsAddPrizePopupOpen(true)}
+            disabled={isSpinning} className="h-[50px] w-[150px] text-base">Thêm quà</ButtonOrange>
+
         </div>
         <div className="button-group-top">
           <button id="restart-btn" className="btn-action"
