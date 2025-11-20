@@ -2,7 +2,6 @@ import React, { useState, useRef, useMemo } from 'react';
 import { ReactSortable } from "react-sortablejs";
 import type { Prize } from './wheelgame'; // Import kiểu Prize
 
-// Định nghĩa props cho component
 interface RateTablePopupProps {
   isOpen: boolean;
   prizes: Prize[];
