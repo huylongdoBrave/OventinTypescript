@@ -11,8 +11,8 @@ interface RateTablePopupProps {
 
 const RateTablePopup: React.FC<RateTablePopupProps> = ({ isOpen, prizes, onClose, onApplyChanges }) => {
   const [tempPrizes, setTempPrizes] = useState<Prize[]>(prizes);
-  const prevPrizesRef = useRef<Prize[]>();
-
+  const prevPrizesRef = useRef<Prize[] | undefined>(undefined); // hoặc const prevPrizesRef = useRef<Prize[]>([]);
+  
   // cách để đồng bộ prop vào state mà không gây "cascading renders".
   // kiểm tra xem prop `prizes` có thực sự thay đổi so với lần render trước không.
   // Nếu có, nó sẽ cập nhật state. Việc này xảy ra trong cùng một chu kỳ render.
@@ -26,7 +26,8 @@ const RateTablePopup: React.FC<RateTablePopupProps> = ({ isOpen, prizes, onClose
     return tempPrizes.reduce((sum, prize) => sum + (Number(prize.probability) || 0), 0) * 100;
   }, [tempPrizes]);
 
-  // Cập nhật thuộc tính của quà
+
+  // Cập nhật tỉ lệ của quà
   const handlePrizeChange = (id: number, field: keyof Prize, value: string) => {
     setTempPrizes(currentPrizes =>
       currentPrizes.map(p => {
@@ -62,9 +63,12 @@ const RateTablePopup: React.FC<RateTablePopupProps> = ({ isOpen, prizes, onClose
   }
 
   return (
-    <div id="probabilities-popup-overlay">
-      <div id="probabilities-popup-box">
-        <button id="probabilities-close-btn" className="popup-close" onClick={onClose}>&times;</button>
+    <div className="fixed top-0 left-0 w-[100%] h-[100%] bg-[black]/60 flex justify-center items-center z-[1002]">
+      <div className="flex justify-center items-center flex-col 
+                relative w-[90%] max-w-[500px] bg-[#f85a00] border-4 border-white border-solid rounded-[15px] p-[20px] text-white
+                shadow-[0_5px_20px_rgba(0,0,0,0.4)]">
+        <button id="probabilities-close-btn" className="absolute top-[5px] right-[15px] bg-none border-none 
+        text-[2.5rem] text-white cursor-pointer leading-none" onClick={onClose}>&times;</button>
         <h3 className="probabilities-title">Bảng Tỉ Lệ Trúng Thưởng</h3>
         <div className="probabilities-table">
           <div id="probabilities-table-body">

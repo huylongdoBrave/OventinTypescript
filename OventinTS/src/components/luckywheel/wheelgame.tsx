@@ -4,7 +4,7 @@ import ButtonOrange from '../Button/buttonOrange.tsx'; // Sửa tên import
 import Wheel from './wheel.tsx';
 import ResultPopup from './resultpopup.tsx'; 
 import RateTablePopup from './rateTablePopup.tsx';
-// import AddPrizePopup from './AddPrizePopup'; 
+import AddPrizePopup from './addPrizePopup.tsx'; 
 
 // --- TYPE DEFINITIONS ---
 
@@ -24,16 +24,19 @@ export interface Prize {
 
 function WheelGame() {
   // === STATE MANAGEMENT ===
-  const [prizes, setPrizes] = useState<Prize[]>([]);
+  const [prizes, setPrizes] = useState<Prize[]>([]); // một mảng chứa các đối tượng Prize, ban đầu nó rỗng
   const [currentSpins, setCurrentSpins] = useState(5);
   const [isSpinning, setIsSpinning] = useState(false);
   const wheelRef = useRef<HTMLDivElement>(null); // Ref để tham chiếu đến DOM của vòng quay
 
-  // State cho các popup
+  // State các popup
   const [isResultPopupOpen, setIsResultPopupOpen] = useState(false);
   const [winningPrize, setWinningPrize] = useState<Prize | null>(null);
+    // rate table popup
   const [isRatePopupOpen, setIsRatePopupOpen] = useState(false);
+    // addprize table popup
   const [isAddPrizePopupOpen, setIsAddPrizePopupOpen] = useState(false);
+
 
   // === DATA LOADING (useEffect) ===
   useEffect(() => {
@@ -75,13 +78,12 @@ function WheelGame() {
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(mockData));
         console.log("Loaded mock data and saved to Local Storage.");
       }
-
     };
-
     loadPrizes();
   }, []);
 
-  // Effect để quản lý class 'body-no-scroll' khi popup mở/đóng
+
+  // Effect quản lý class 'body-no-scroll' khi popup mở/đóng
   useEffect(() => {
     if (isResultPopupOpen || isRatePopupOpen || isAddPrizePopupOpen) {
       document.body.classList.add('body-no-scroll');
@@ -96,10 +98,8 @@ function WheelGame() {
   // === Sự kiện quay ===
   const handleSpin = () => {
     if (isSpinning || currentSpins <= 0 || prizes.length === 0) return;
-
     setCurrentSpins(currentSpins - 1);
     setIsSpinning(true); // Báo hiệu bắt đầu quay, các nút sẽ bị vô hiệu hóa
-
     const winningSliceIndex = getWeightedRandomIndex();
     const sliceCount = prizes.length;
     const sliceAngle = 360 / sliceCount;
@@ -108,23 +108,20 @@ function WheelGame() {
     const targetAngle = winningSliceIndex * sliceAngle + cssOffsetAngle;
     const totalRotation = -(randomSpins * 360 + targetAngle);     // Luôn tính góc quay mới, không dựa vào góc cũ. Dấu trừ để quay ngược chiều kim đồng hồ.
     const spinDuration = 5;
-
-    // Sử dụng ref để thao tác trực tiếp với style, đảm bảo animation chạy đúng
+      // Sử dụng ref để thao tác trực tiếp với style, đảm bảo animation chạy đúng
     const wheelElement = wheelRef.current;
     if (wheelElement) {
-      // 1. Bật animation
+        // 1. Bật animation
       wheelElement.style.transition = `transform ${spinDuration}s cubic-bezier(0.25, 0.1, 0.25, 1)`;
-      // 2. Bắt đầu quay
+        // 2. Bắt đầu quay
       wheelElement.style.transform = `rotate(${totalRotation}deg)`;
     }
-
-    // Đặt hẹn giờ để xử lý kết quả sau khi animation kết thúc
+      // Đặt hẹn giờ để xử lý kết quả sau khi animation kết thúc
     setTimeout(() => {
       const winningPrizeData = prizes[winningSliceIndex];
       setWinningPrize(winningPrizeData);
       setIsResultPopupOpen(true);
 
-      // Reset vòng quay để chuẩn bị cho lần sau
       const finalRotation = totalRotation % 360;
       if (wheelElement) {
         wheelElement.style.transition = 'none'; // Tắt animation
@@ -158,15 +155,15 @@ function WheelGame() {
   };
 
   //Thêm quà
-  // const handleAddPrize = (newPrize: Prize) => {
-  //   const updatedPrizes = [...prizes, newPrize]; //Cập nhật newPrize vào prizes
-  //   setPrizes(updatedPrizes);
-  //   localStorage.setItem('oventinPrizes', JSON.stringify(updatedPrizes));
-  //   alert(`Đã thêm quà "${newPrize.name}"!`);
-  // }; 
+  const handleAddPrize = (newPrize: Prize) => {
+    const updatedPrizes = [...prizes, newPrize]; //Cập nhật newPrize vào prizes
+    setPrizes(updatedPrizes);
+    localStorage.setItem('oventinPrizes', JSON.stringify(updatedPrizes));
+    alert(`Đã thêm quà "${newPrize.name}"!`);
+  }; 
 
-
-
+  const translateY = -195;
+  const lights = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
   return (
     <>
       <main>
@@ -182,7 +179,7 @@ function WheelGame() {
                          lg:w-[90%]"
             />
           </div>
-          <div className="spin-counter">
+          <div> {/* Spin */}
             <p className="text-xl font-black text-[#002d6f] mt-[20px] text-center">Bạn còn <span id="spin-count">{currentSpins}</span> lượt quay</p>
           </div>
           <div className="add-spin-container">
@@ -193,26 +190,42 @@ function WheelGame() {
             >Thêm lượt</ButtonOrange>
           </div>
           <div className="relative flex justify-center items-center w-[100%] mt-[20px] 
-           min-h-[var(--wheel-wrapper-size)]"
-          >
+           min-h-[var(--wheel-wrapper-size)]">
               <img src="/static/dolphine.png" alt="Dolphine"
                   className="absolute z-[5] h-auto transition-all duration-300 ease-in-out
                              w-[90px] bottom-[30px] left-[calc(50%-var(--wheel-wrapper-size)/2-10px)]
                              md:w-[150px] md:bottom-auto md:mt-0 md:left-[10%]
                              lg:w-[200px] lg:left-[calc(50%-var(--wheel-wrapper-size)/2-180px)]"
               />
-              <div className="absolute mb-5 flex h-[var(--wheel-wrapper-size)] w-[var(--wheel-wrapper-size)] 
+              {/* <div className="absolute mb-5 flex h-[var(--wheel-wrapper-size)] w-[var(--wheel-wrapper-size)] 
                               items-center justify-center rounded-full border-[5px] border-[#004a8d] bg-[#002d6f] 
                               shadow-[0_0_20px_rgba(0,0,0,0.5),_inset_0_0_15px_rgba(0,0,0,0.3)]"
-              >
-                
-{/* <div className="wheel-wrapper lg:w-[--wheel-wrapper-size] lg:h-[--wheel-wrapper-size] bg-[#002d6f] rounded-[50%]
-                              lg:mb-[20px] border-[5px_solid_#004a8d] absolute flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.5),inset_0_0_15px_rgba(0,0,0,0.3)] ">
-                              */}
+              > */}
+              <div className=" w-[var(--wheel-wrapper-size)] h-[var(--wheel-wrapper-size)]
+                           bg-[#002d6f] rounded-[50%] mb-[20px] border-[5px_solid_#004a8d] 
+                              absolute flex items-center justify-center 
+                              shadow-[0_0_20px_rgba(0,0,0,0.5),inset_0_0_15px_rgba(0,0,0,0.3)] ">
+                <div className="h-[var(--arrow-top-height)] w-[var(--arrow-top-width)]
+                                bg-[#ffd600] absolute [clip-path:polygon(50%_100%,_0_0,_100%_0)]
+                                top-[var(--arrow-top-offset)] z-20"></div>
+               
+                {/* <div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div>
+                 */}
 
-                <div className="arrow-top"></div>
-                <div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div>
-                <div ref={wheelRef} className="wheel-container">
+                 <div> {/* light */}
+                    {lights.map((degree, index) => (
+                      <div
+                        key={index}
+                        className="absolute top-[50%] left-[50%] w-[10px] h-[10px] mb-[10px] bg-[#ffdd00] 
+                          rounded-[50%] shadow-[0_0_8px_2px_rgba(255,255,255,0.6)] origin-top-left"
+                        style={{
+                          transform: `rotate(${degree}deg)` + ` translateY(${translateY}px)`
+                        }}
+                      />
+                    ))}
+                </div>
+
+                <div ref={wheelRef}>
                   <Wheel prizes={prizes} />
                 </div>
                 <button id="spin" onClick={handleSpin} disabled={isSpinning}>
@@ -221,14 +234,14 @@ function WheelGame() {
               </div>
               <img src="/static/boy.png" alt="Boy"
                   className="absolute z-[5] h-auto transition-all duration-300 ease-in-out
-                             w-[90px] bottom-[30px] right-[calc(50%-var(--wheel-wrapper-size)/2-10px)]
-                             md:w-[150px] md:bottom-auto md:mt-0 md:right-[10%]
-                             lg:w-[200px] lg:right-[calc(50%-var(--wheel-wrapper-size)/2-180px)]"
+                            w-[90px] bottom-[30px] right-[calc(50%-var(--wheel-wrapper-size)/2-10px)]
+                            md:w-[150px] md:bottom-auto md:mt-0 md:right-[10%]
+                            lg:w-[200px] lg:right-[calc(50%-var(--wheel-wrapper-size)/2-180px)]"
               />
           </div>
         </div>
       </main>
-      <p className="title-down">Bấm vào Vòng Quay May Mắn để bắt đầu quay</p>
+      <p className="text-[#002d6f] text-[18px] lg:text-[20px] mt-[20px] text-center font-[1000] ">Bấm vào Vòng Quay May Mắn để bắt đầu quay</p>
 
       {/* POPUPS */}
       <ResultPopup
@@ -244,12 +257,12 @@ function WheelGame() {
         onApplyChanges={handleApplyPrizeChanges}
       />
 
-{/*       <AddPrizePopup
+      <AddPrizePopup
         isOpen={isAddPrizePopupOpen}
         prizes={prizes}
         onClose={() => setIsAddPrizePopupOpen(false)}
         onAddPrize={handleAddPrize}
-      />  */}
+      /> 
 
       {/* SETUP BUTTONS */}
       <div className="show-button-container">
