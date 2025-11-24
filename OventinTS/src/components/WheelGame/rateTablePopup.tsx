@@ -1,6 +1,6 @@
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { ReactSortable } from "react-sortablejs";
-import type { Prize } from './wheelgame'; // Import kiểu Prize
+import type { Prize } from './wheelGame'; // Import kiểu Prize
 
 interface RateTablePopupProps {
   isOpen: boolean;
@@ -11,15 +11,13 @@ interface RateTablePopupProps {
 
 const RateTablePopup: React.FC<RateTablePopupProps> = ({ isOpen, prizes, onClose, onApplyChanges }) => {
   const [tempPrizes, setTempPrizes] = useState<Prize[]>(prizes);
-  const prevPrizesRef = useRef<Prize[] | undefined>(undefined); // hoặc const prevPrizesRef = useRef<Prize[]>([]);
-  
-  // cách để đồng bộ prop vào state mà không gây "cascading renders".
-  // kiểm tra xem prop `prizes` có thực sự thay đổi so với lần render trước không.
-  // Nếu có, nó sẽ cập nhật state. Việc này xảy ra trong cùng một chu kỳ render.
-  if (prizes !== prevPrizesRef.current) {
-    setTempPrizes(structuredClone(prizes));
-    prevPrizesRef.current = prizes;
-  }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() =>{
+    if (isOpen) {
+      setTempPrizes(JSON.parse(JSON.stringify(prizes)));
+    }
+  }, [isOpen, prizes]);
 
   // Tính tổng tỉ lệ mỗi khi tempPrizes thay đổi
   const totalProbability = useMemo(() => {
@@ -43,7 +41,7 @@ const RateTablePopup: React.FC<RateTablePopupProps> = ({ isOpen, prizes, onClose
 
   // Xóa quà
   const handleDeletePrize = (id: number, name: string) => {
-    if (window.confirm(`Bạn có chắc chắn muốn xóa quà "${name}" không?`)) {
+    if (window.confirm(`Xóa quà "${name}" ?`)) {
       setTempPrizes(currentPrizes => currentPrizes.filter(p => p.id !== id));
     }
   };
@@ -52,6 +50,10 @@ const RateTablePopup: React.FC<RateTablePopupProps> = ({ isOpen, prizes, onClose
   const handleApply = () => {
     if (totalProbability > 100.01) {
       alert(`Cảnh báo tỉ lệ đang ${totalProbability.toFixed(2)}% . Vui lòng chỉnh tổng dưới 100%`);
+      return;
+    }
+    else if (totalProbability == 0) {
+      alert('Tổng tỉ lệ không thể bằng 0%. Hãy nhập lớn 0.');
       return;
     }
     onApplyChanges(tempPrizes); // Gửi dữ liệu đã thay đổi ra component cha
@@ -95,16 +97,17 @@ const RateTablePopup: React.FC<RateTablePopupProps> = ({ isOpen, prizes, onClose
                       onChange={(e) => handlePrizeChange(prize.id, 'color', e.target.value)}
                     />
                   </div>
-                  <div className="prize-prob-cell">
+                  <div className="prize-prob-cell relative flex items-center">
                     <input
                       type="number"
-                      className="prize-prob-input"
-                      value={(prize.probability * 100).toPrecision(4)}
+                      className="prize-prob-input pr-5"
+                      value={(prize.probability * 100).toFixed(2)}
                       onChange={(e) => handlePrizeChange(prize.id, 'probability', e.target.value)}
                       min="0"
                       max="100"
                       step="0.01"
                     />
+                    <span className="absolute right-1 text-white pointer-events-none">%</span>
                   </div>
                   <div style={{ marginLeft: '10px' }} className="prize-delete-cell">
                     <button
@@ -124,7 +127,11 @@ const RateTablePopup: React.FC<RateTablePopupProps> = ({ isOpen, prizes, onClose
           Tổng tỉ lệ: {totalProbability.toFixed(2)}%
         </p>
         <center>
-          <button id="apply-probabilities-btn" type="button" className="btn-action" style={{ width: '300px' }} onClick={handleApply}>
+          <button id="apply-probabilities-btn"
+            type="button"
+            style={{ width: '300px' }}
+            onClick={handleApply}             
+            className="btn-action">
             Cập nhật
           </button>
         </center>

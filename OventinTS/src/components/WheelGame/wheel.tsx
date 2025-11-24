@@ -1,5 +1,5 @@
 import  { useMemo, type FC } from 'react';
-import type { Prize } from './wheelgame'; // Import kiểu Prize từ file wheelgame
+import type { Prize } from './wheelGame'; // Import kiểu Prize từ file wheelgame
 
 interface WheelProps {
   prizes: Prize[];

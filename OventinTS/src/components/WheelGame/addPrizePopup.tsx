@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import type { Prize } from './wheelgame'; // Import kiểu Prize
+import type { Prize } from './wheelGame'; // Import kiểu Prize
 
 interface AddPrizePopupProps {
   isOpen: boolean;
@@ -27,6 +27,7 @@ const AddPrizePopup: React.FC<AddPrizePopupProps> = ({ isOpen, prizes, onClose, 
   const [formData, setFormData] = useState<FormDataState>(INITIAL_FORM_STATE);
 
   // Reset form khi popup đóng
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!isOpen) {
       setFormData(INITIAL_FORM_STATE);

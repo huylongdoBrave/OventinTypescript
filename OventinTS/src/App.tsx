@@ -1,8 +1,8 @@
 
-import Header from './components/Header.tsx'
-import Footer from './components/Footer.tsx'
+import Header from './components/header.tsx'
+import Footer from './components/footer.tsx'
 import { Route, Routes } from 'react-router-dom';
-import WheelGame from './components/luckywheel/wheelgame.tsx';
+import WheelGame from './components/WheelGame/wheelGame.tsx';
 
 function App() {
 

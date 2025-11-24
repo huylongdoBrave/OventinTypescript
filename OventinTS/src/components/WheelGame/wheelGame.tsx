@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import ButtonOrange from '../Button/buttonOrange.tsx'; // Sửa tên import
 
 import Wheel from './wheel.tsx';
-import ResultPopup from './resultpopup.tsx'; 
+import ResultPopup from './resultPopup.tsx'; 
 import RateTablePopup from './rateTablePopup.tsx';
 import AddPrizePopup from './addPrizePopup.tsx'; 
 
@@ -30,8 +30,9 @@ function WheelGame() {
   const wheelRef = useRef<HTMLDivElement>(null); // Ref để tham chiếu đến DOM của vòng quay
 
   // State các popup
-  const [isResultPopupOpen, setIsResultPopupOpen] = useState(false);
   const [winningPrize, setWinningPrize] = useState<Prize | null>(null);
+    // result popup
+  const [isResultPopupOpen, setIsResultPopupOpen] = useState(false);
     // rate table popup
   const [isRatePopupOpen, setIsRatePopupOpen] = useState(false);
     // addprize table popup
@@ -134,17 +135,26 @@ function WheelGame() {
   
   // === Tính bảo hiểm khi quay ===
   const getWeightedRandomIndex = () => {
-    const prizeProbabilities = prizes.map((p: Prize) => p.probability);     // Lấy mảng tỉ lệ mới nhất từ RateManager. Ví dụ: [0.1, 0.7, 0.2].
-    const rand = Math.random();     // Tạo một số ngẫu nhiên trong khoảng từ 0 (bao gồm) đến 1 (loại trừ).
-    let cumulativeProbability = 0;     // Biến để theo dõi tổng tỉ lệ tích lũy.
+    const probabilities = prizes.map(p => p.probability);
+    const totalProbability = probabilities.reduce((sum, p) => sum + p, 0);
 
-    for (let i = 0; i < prizeProbabilities.length; i++) {
-      cumulativeProbability += prizeProbabilities[i];       // Cộng tỉ lệ của ô hiện tại vào tổng tích lũy.
+    // Nếu tổng tỉ lệ bằng 0 (tất cả các quà đều có tỉ lệ 0%),
+    // thì coi như tất cả các quà đều có cơ hội như nhau.
+    if (totalProbability === 0) {
+      return Math.floor(Math.random() * prizes.length);
+    }
+    // Chuẩn hóa tỉ lệ để tổng luôn bằng 1
+    const normalizedProbabilities = probabilities.map(p => p / totalProbability);
+    const rand = Math.random();
+    let cumulativeProbability = 0;
+    for (let i = 0; i < normalizedProbabilities.length; i++) {
+      cumulativeProbability += normalizedProbabilities[i];
       if (rand < cumulativeProbability) {
         return i;
       }
     }
-    return prizeProbabilities.length - 1;
+    // Fallback an toàn: trả về index cuối cùng 
+    return prizes.length - 1;
   };
 
   //Cập nhật quà
@@ -278,6 +288,7 @@ function WheelGame() {
             onClick={() => setIsRatePopupOpen(true)}
             disabled={isSpinning}
             className="h-[50px] w-[150px] text-base">Tỉ lệ</ButtonOrange>
+
           <ButtonOrange 
             id="add-prize-btn" 
             onClick={() => setIsAddPrizePopupOpen(true)}
