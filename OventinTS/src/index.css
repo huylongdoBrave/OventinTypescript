@@ -523,12 +523,6 @@ footer {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
 }
 
-.probabilities-title {
-    text-align: center;
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-}
 
 .popup-close {
     position: absolute;

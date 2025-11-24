@@ -51,7 +51,7 @@ const RateTablePopup: React.FC<RateTablePopupProps> = ({
 
   // Xóa quà
   const handleDeletePrize = (id: number, name: string) => {
-    if (window.confirm(`Xóa quà "${name}" ?`)) {
+    if (window.confirm(`Xóa quà "${name}" không?`)) {
       setTempPrizes((currentPrizes) =>
         currentPrizes.filter((p) => p.id !== id)
       );
@@ -62,7 +62,9 @@ const RateTablePopup: React.FC<RateTablePopupProps> = ({
   const handleApply = () => {
     if (totalProbability > 100.01) {
       alert(
-        `Cảnh báo tỉ lệ đang ${totalProbability.toFixed(2)}% . Vui lòng chỉnh tổng dưới 100%`
+        `Cảnh báo tỉ lệ đang ${totalProbability.toFixed(
+          2
+        )}% . Vui lòng chỉnh tổng dưới 100%`
       );
       return;
     } else if (totalProbability == 0) {
@@ -92,21 +94,21 @@ const RateTablePopup: React.FC<RateTablePopupProps> = ({
         >
           &times;
         </button>
-        <h3 className="probabilities-title">Bảng Tỉ Lệ Trúng Thưởng</h3>
-        <div className="probabilities-table">
-          <div id="probabilities-table-body">
+        <h3 className="text-center text-2xl font-bold mb-4">Bảng Tỉ Lệ Trúng Thưởng</h3>
+        <div className="w-full my-2">
+          <div id="max-h-[50vh] overflow-y-auto pr-2">
             {/* Dùng ReactSortables để bọc các item có thể kéo thả */}
             <ReactSortable
               list={tempPrizes}
               setList={setTempPrizes}
               handle=".prize-name-cell"
               animation={150}
-              ghostClass="dragging"
+              ghostClass="opacity-30" // c2: opacity-30
             >
               {tempPrizes.map((prize) => (
                 <div
                   key={prize.id}
-                  className="probabilities-table-row"
+                  className="flex items-center gap-2 p-2 mb-2 bg-black/10 rounded"
                   data-prize-id={prize.id}
                 >
                   <div className="prize-id-cell">{prize.id}</div>
