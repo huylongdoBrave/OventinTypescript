@@ -8,7 +8,7 @@ interface AddPrizePopupProps {
   onAddPrize: (newPrize: Prize) => void;
 }
 
-// Định nghĩa cấu trúc state cho form
+// Định nghĩa cấu trúc state cho forms
 interface FormDataState {
   name: string;
   value: string;

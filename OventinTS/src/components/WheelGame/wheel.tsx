@@ -37,7 +37,7 @@ const Wheel: FC<WheelProps> = ({ prizes }) => {
             style={{
               transform: `translateX(-50%) rotate(${rotation}deg)`,
               background: prize.color,
-              width: `${dynamicWidth}px`, // Áp dụng chiều rộng động
+              width: `${dynamicWidth}px`, // Áp dụng chiều rộng động s
             }}
             data-id={prize.id}
             data-name={prize.name}

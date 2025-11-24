@@ -750,7 +750,7 @@ footer {
 /* --- Responsive --- */
 /* Tablet (max-width: 900px) */
 @media (max-width: 900px) {
-    /* Add padding to body to avoid content being hidden by the new bottom nav */
+    /* Add padding to bodys to avoid content being hidden by the new bottom nav */
     body {
         padding-bottom: 80px; /* Height of the new bottom menu */
     }

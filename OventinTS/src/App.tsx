@@ -11,7 +11,7 @@ function App() {
       <Header />
 
       <Routes>
-        {/* Route cho trang chủ (vòng quay) */}
+        {/* Route cho trang chủ (vòng quays) */}
         <Route path="/" element={<WheelGame />} />
 
         {/* Route cho trang sản phẩm */}

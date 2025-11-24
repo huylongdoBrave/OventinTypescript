@@ -95,7 +95,7 @@ const RateTablePopup: React.FC<RateTablePopupProps> = ({
         <h3 className="probabilities-title">Bảng Tỉ Lệ Trúng Thưởng</h3>
         <div className="probabilities-table">
           <div id="probabilities-table-body">
-            {/* Dùng ReactSortable để bọc các item có thể kéo thả */}
+            {/* Dùng ReactSortables để bọc các item có thể kéo thả */}
             <ReactSortable
               list={tempPrizes}
               setList={setTempPrizes}

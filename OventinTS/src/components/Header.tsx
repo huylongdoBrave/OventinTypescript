@@ -8,7 +8,7 @@ function Header() {
 
     <>  
     
-    {/* Header had responsive */}
+    {/* Header had responsives */}
       <header className="hidden lg:block h-[115px] mb-5">
         <nav className="sticky h-[70px] flex justify-between items-center px-4
          relative text-white bg-[linear-gradient(rgb(35,61,163)_0%,rgb(35,61,163)_65px,transparent_65px)] ">

@@ -361,7 +361,7 @@ function WheelGame() {
       {/* SETUP BUTTONS */}
       <div className="show-button-container">
         <div className="button-group-top">
-          {/* DẠNG CŨ <button id="show-probabilities-btn" className="btn-action" onClick={() => setIsRatePopupOpen(true)}
+          {/* DẠNG CŨ x <button id="show-probabilities-btn" className="btn-action" onClick={() => setIsRatePopupOpen(true)}
            disabled={isSpinning} style={{ cursor: isSpinning ? 'not-allowed' : 'pointer' }}>Tỉ lệ</button>
           <button id="add-prize-btn" className="btn-action" onClick={() => setIsAddPrizePopupOpen(true)}
            disabled={isSpinning} style={{ cursor: isSpinning ? 'not-allowed' : 'pointer' }}>Thêm quà</button> */}

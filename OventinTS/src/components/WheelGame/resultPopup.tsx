@@ -6,7 +6,7 @@ interface Prize {
   name: string;
 }
 
-// Định nghĩa kiểu dữ liệu cho props của component
+// Định nghĩa kiểu dữ liệu cho props của components
 interface ResultPopupProps {
   isOpen: boolean;
   prize: Prize | null;

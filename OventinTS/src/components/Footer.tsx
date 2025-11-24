@@ -35,7 +35,7 @@ function Footer(){
                         <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><FontAwesomeIcon icon={faGavel} className="w-4" /><span>/Ovaltine Vietnam</span></a>
                     </div>
                 </div>
-                {/* footer-bottom */}
+                {/* footer-bottoms */}
                 <div className="text-center pt-1 mt-5 pb-10 ">
                     <p>Ovaltine Vietnam © 2025</p>
                 </div>
