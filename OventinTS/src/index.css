@@ -5,20 +5,6 @@
 @import "tailwindcss";
 @tailwind utilities;
 
-/* html,
-body,
-#root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  margin: 0;
-  height: 100%; 
-  font-family: 'Times New Roman', Times, serif;
-} */
-
 
 :root {
     --primary-blue: #005aab; /* Màu xanh dương chính */
@@ -34,7 +20,7 @@ body {
     --spin-button-size: 60px;
     --spin-button-img-size: 40px;
     --arrow-top-height: 48px;
-    --arrow-top-width: 32px;
+    --arrow-top-width: 40px;
     --arrow-top-offset: -12px;
     --light-translateY: -195px;
     --side-image-default-width: 200px;
@@ -47,8 +33,21 @@ html{
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Times New Roman', Times, serif;
-    background: url('/static/coin.png'), radial-gradient(circle, #dbbe7a 0%, #d19439 20%, #f85a00 100%);
+    font-family: rowdies, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* CŨ background: url('/static/coin.png'), radial-gradient(circle, #dbbe7a 0%, #d19439 20%, #f85a00 100%); */
+    /* Cấu hình nhiều lớp nền:
+       1. Lớp trên cùng: Họa tiết coin lặp lại.
+       2. Lớp giữa: Ảnh nền chính, cover toàn bộ màn hình, không lặp.
+       3. Lớp dưới cùng: Màu gradient làm fallback.
+    */
+    background-image: url('/static/coin.png'), url('/static/ovaltinebg.jpg'), radial-gradient(circle, #dbbe7a 0%, #d19439 20%, #f85a00 100%);
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-position: center top, top, center;
+    /* Kích thước:
+       - coin.png: 250px để họa tiết nhỏ hơn.
+       - ovaltinebg.jpg: contain để ảnh luôn nằm trọn trong khung nhìn, không bị cắt. */
+    background-size: 90%, cover, auto;
+    background-attachment: scroll; /* Thay 'fixed' thành 'scroll' để ảnh nền cuộn theo trang */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -63,17 +62,6 @@ header {
     margin-bottom: 20px;
 }
 
-.main-nav {
-    background: linear-gradient(rgb(35, 61, 163) 0%, rgb(35, 61, 163) 65px, transparent 65px);
-    position: sticky;
-    height: var(--menu-bar-height);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0;
-    position: relative;
-    color: var(--text-color);
-}
 
 /* --- Left Side Menu--- */
 .nav-left {

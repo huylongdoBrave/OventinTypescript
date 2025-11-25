@@ -181,7 +181,7 @@ const RateTablePopup: React.FC<RateTablePopupProps> = ({
             color:
               Math.abs(totalProbability - 100) > 0.01 ? "#ffeb3b" : "white",
           }}
-          className="text-center font-bold mt-4"
+          className="w-full text-left font-bold mt-3 mb-3"
         >
           Tổng tỉ lệ: {totalProbability.toFixed(2)}%
         </p>

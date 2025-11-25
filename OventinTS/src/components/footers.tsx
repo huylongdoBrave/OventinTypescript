@@ -6,35 +6,38 @@ import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 function Footer(){
   return (
     <footer className="bg-[#ff4109] text-white pt-5 w-[100%]">
-        <div className="container mx-auto px-4 w-[60%]">
-            <div className="flex flex-col gap-8">
+        {/* CŨ <div className="container mx-auto px-1 w-[90%] sm:w-[50%] lg:w-[50%]"></div> */}
+        {/* Thêm max-w-4xl để giới hạn chiều rộng tối đa trên màn hình lớn */}
+        <div className="container mx-auto pl-[100px] pr-[100px] px-4 w-full max-w-4xl">
+            <div className="w-[100%] text-center flex flex-col gap-8">
               
                 {/* footer-top */}
-                <div className="text-center lg:text-left pb-6">
+                <div className=" text-left w-[100%] pb-6">
                     <p className="font-bold text-lg">CÔNG TY TNHH AB AGRI VIỆT NAM</p>
                     <p className="text-sm text-neutral-100 mt-1">Tầng 6A2 Tòa nhà Viettel, 285 Cách Mạng Tháng 8, Phường 12, Quận 10, Thành phố Hồ Chí Minh, Việt Nam</p>
                 </div>
 
                 {/* footer-middle */}
-                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 text-sm">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-7 text-sm">
                     {/* footer-column 1 */}
-                    <div className="flex flex-col items-center lg:items-start gap-3">
-                        <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><FontAwesomeIcon icon={faPhone} className="w-4" /><span>/Ovaltine Vietnam</span></a>
-                        <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><FontAwesomeIcon icon={faEnvelope} className="w-4" /><span>/Ovaltine Vietnam</span></a>
-                        <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><FontAwesomeIcon icon={faFacebook} className="w-4" /><span>Thể lệ chương trình</span></a>
+                    <div className="  flex flex-col items-center lg:items-start gap-3">
+                        <a href="#" className="text-left w-[100%] flex items-center gap-3 hover:text-orange-400 transition-colors"><FontAwesomeIcon icon={faPhone} className="w-4" /><span>/Ovaltine Vietnam</span></a>
+                        <a href="#" className="text-left w-[100%] flex items-center gap-3 hover:text-orange-400 transition-colors"><FontAwesomeIcon icon={faEnvelope} className="w-4" /><span>/Ovaltine Vietnam</span></a>
+                        <a href="#" className="text-left w-[100%] flex items-center gap-3 hover:text-orange-400 transition-colors"><FontAwesomeIcon icon={faFacebook} className="w-4" /><span>Thể lệ chương trình</span></a>
                     </div>
                     {/* footer-column 2 */}
                     <div className="flex flex-col items-center lg:items-start gap-3">
-                        <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><FontAwesomeIcon icon={faFileContract} className="w-4" /><span>/Ovaltine Vietnam</span></a>
-                        <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><FontAwesomeIcon icon={faShieldHalved} className="w-4" /><span>/Ovaltine Vietnam</span></a>
-                        <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><FontAwesomeIcon icon={faCircleQuestion} className="w-4" /><span>Chính sách bảo mật</span></a>
+                        <a href="#" className="text-left w-[100%] flex items-center gap-3 hover:text-orange-400 transition-colors"><FontAwesomeIcon icon={faFileContract} className="w-4" /><span>/Ovaltine Vietnam</span></a>
+                        <a href="#" className="text-left w-[100%] flex items-center gap-3 hover:text-orange-400 transition-colors"><FontAwesomeIcon icon={faShieldHalved} className="w-4" /><span>/Ovaltine Vietnam</span></a>
+                        <a href="#" className="text-left w-[100%] flex items-center gap-3 hover:text-orange-400 transition-colors"><FontAwesomeIcon icon={faCircleQuestion} className="w-4" /><span>Chính sách bảo mật</span></a>
                     </div>
                     {/* footer-column 3 */}
                     <div className="flex flex-col items-center lg:items-start gap-3">
-                        <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><FontAwesomeIcon icon={faCertificate} className="w-4" /><span>/19005306</span></a>
-                        <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><FontAwesomeIcon icon={faGavel} className="w-4" /><span>/Ovaltine Vietnam</span></a>
+                        <a href="#" className="text-left w-[100%] flex items-center gap-3 hover:text-orange-400 transition-colors"><FontAwesomeIcon icon={faCertificate} className="w-4" /><span>/19005306</span></a>
+                        <a href="#" className="text-left w-[100%] flex items-center gap-3 hover:text-orange-400 transition-colors"><FontAwesomeIcon icon={faGavel} className="w-4" /><span>/Ovaltine Vietnam</span></a>
                     </div>
                 </div>
+
                 {/* footer-bottoms */}
                 <div className="text-center pt-1 mt-5 pb-10 ">
                     <p>Ovaltine Vietnam © 2025</p>

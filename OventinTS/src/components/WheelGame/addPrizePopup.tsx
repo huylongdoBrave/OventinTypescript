@@ -39,6 +39,7 @@ const AddPrizePopup: React.FC<AddPrizePopupProps> = ({
     }
   }, [isOpen]);
 
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -49,6 +50,7 @@ const AddPrizePopup: React.FC<AddPrizePopupProps> = ({
     return imageRegex.test(value) ? "image" : "text";
   };
 
+  
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -66,10 +68,7 @@ const AddPrizePopup: React.FC<AddPrizePopupProps> = ({
       return;
     }
 
-    const currentTotalProbability = prizes.reduce(
-      (sum, prize) => sum + prize.probability * 100,
-      0
-    );
+    const currentTotalProbability = prizes.reduce((sum, prize) => sum + prize.probability * 100, 0);
     const newTotalProbability = currentTotalProbability + probability;
 
     if (newTotalProbability > 100.01) {
