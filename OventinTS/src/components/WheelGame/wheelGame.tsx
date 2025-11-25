@@ -246,9 +246,9 @@ function WheelGame() {
               src="/static/lucky-draw.png"
               alt="Lucky Draw"
               className="h-auto 
-                         w-[70%] max-w-[300px]
-                         md:w-[80%] md:max-w-[400px] 
-                         lg:w-[90%]"
+                        w-[70%] max-w-[300px]
+                        md:w-[80%] md:max-w-[400px] 
+                        lg:w-[90%]"
             />
           </div>
           <div>
@@ -268,16 +268,16 @@ function WheelGame() {
               Thêm lượt
             </ButtonOrange>
           </div>
-          <div className="relative flex justify-center items-center w-[100%] mt-[20px] 
+          <div className=" filter-[drop-shadow(rgb(255,255,255)_0px_0px_15px)] relative flex justify-center items-center w-[100%] mt-[20px] 
             min-h-[var(--wheel-wrapper-size)]"
           >
             <img
               src="/static/dolphine.png"
               alt="Dolphine"
               className="absolute z-[5] h-auto transition-all duration-300 ease-in-out
-                             w-[90px] bottom-[30px] left-[calc(50%-var(--wheel-wrapper-size)/2-10px)]
+                             w-[90px] left-[calc(50%-var(--wheel-wrapper-size)/2-10px)]
                              md:w-[150px] md:bottom-auto md:mt-0 md:left-[10%]
-                             lg:w-[200px] lg:left-[calc(50%-var(--wheel-wrapper-size)/2-250px)]"
+                             lg:bottom-[60px] lg:w-[200px] lg:left-[calc(50%-var(--wheel-wrapper-size)/2-250px)]"
             />
             {/* <div className="absolute mb-5 flex h-[var(--wheel-wrapper-size)] w-[var(--wheel-wrapper-size)] 
                               items-center justify-center rounded-full border-[5px] border-[#004a8d] bg-[#002d6f] 
@@ -289,15 +289,13 @@ function WheelGame() {
                               absolute flex items-center justify-center 
                               shadow-[0_0_20px_rgba(0,0,0,0.5),inset_0_0_15px_rgba(0,0,0,0.3)] "
             > 
-
-
-              {/* Mũi tên xám (làm bóng) */}
+                {/* Mũi tên xám (làm bóng) */}
               <div
                 className=" h-[var(--arrow-top-height)] w-[var(--arrow-top-width)]
                                 bg-gray-300 absolute [clip-path:polygon(50%_100%,_0_0,_100%_0)]
                                 top-[-1px] z-10"
               ></div>
-              {/* Mũi tên vàng */}
+                {/* Mũi tên vàng */}
               <div
                 className="h-[var(--arrow-top-height)] w-[var(--arrow-top-width)]
                                 bg-[#ffd600] absolute [clip-path:polygon(50%_100%,_0_0,_100%_0)]
@@ -333,15 +331,15 @@ function WheelGame() {
               src="/static/boy.png"
               alt="Boy"
               className="absolute z-[5] h-auto transition-all duration-300 ease-in-out
-                            w-[90px] bottom-[30px] right-[calc(50%-var(--wheel-wrapper-size)/2-10px)]
+                            w-[90px] right-[calc(50%-var(--wheel-wrapper-size)/2-10px)]
                             md:w-[150px] md:bottom-auto md:mt-0 md:right-[10%]
-                            lg:w-[200px] lg:right-[calc(50%-var(--wheel-wrapper-size)/2-250px)]"
+                            lg:bottom-[60px] lg:w-[200px] lg:right-[calc(50%-var(--wheel-wrapper-size)/2-250px)]"
             />
           </div>
         </div>
       </main>
       <p className="text-[#f5f5f5] text-[18px] lg:text-[20px] mt-[20px] text-center font-[1000] ">
-        Bấm vào Vòng Quay May Mắn để bắt đầu quay
+        Bấm vào Vòng Quay May Mắn để bắt đầu quay bạn nhé!
       </p>
 
       {/* POPUPS */}

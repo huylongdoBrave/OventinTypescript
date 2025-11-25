@@ -31,17 +31,18 @@ const ResultPopup: React.FC<ResultPopupProps> = ({
         className="absolute h-auto z-[5] transition-all duration-300 ease-in-out 
                       w-[100px] mt-[120px] left-[calc(50%-var(--wheel-wrapper-size)/2-10px)] 
                       md:w-[120px] md:mt-[90px] md:left-[calc(50%-var(--wheel-wrapper-size)/2-80px)] 
-                      lg:w-[200px] lg:mt-[50px] lg:left-[calc(50%-var(--wheel-wrapper-size)/2-180px)]"
+                      lg:w-[180px] lg:mt-[50px] lg:left-[calc(50%-var(--wheel-wrapper-size)/2-110px)]"
       />
       <div
-        className="relative w-[350px] h-[180px] bg-[url('/static/modal.png')] bg-cover bg-center bg-no-repeat 
-                      rounded-[15px] border-4 border-white p-10 text-center text-white flex justify-center items-center 
-                      shadow-[0_5px_20px_rgba(0,0,0,0.4)]"
+        className=" filter-[drop-shadow(rgb(255,252,110)_0px_0px_5px)]
+                  relative w-[350px] h-[230px] bg-[url('/static/modal.png')] bg-cover bg-center bg-no-repeat 
+                  rounded-[15px] border-4 border-white p-10 text-center text-white flex justify-center items-center 
+                  shadow-[0_5px_20px_rgba(0,0,0,0.4)]"
       >
         <img
-          src="/static/favicon_oven.png"
+          src="https://ovaltine-website-dev.estuary.solutions/img/brand/logo.png"
           alt="Oventin Logo"
-          className="absolute top-[-190px] left-1/2 -translate-x-1/2 w-[150px] h-auto rounded-full p-1.5 [filter:drop-shadow(rgb(255,255,255)_0px_0px_12px)]"
+          className="absolute top-[-190px] left-1/2 -translate-x-1/2 w-[150px] h-auto rounded-full p-1.5 filter-[drop-shadow(rgb(255,255,255)_0px_0px_5px)]"
         />
         <img
           src="/static/noti.png"
@@ -56,7 +57,7 @@ const ResultPopup: React.FC<ResultPopupProps> = ({
         </small>
         <button
           className="absolute bottom-[-70px] left-1/2 -translate-x-1/2 bg-[#f85a00] text-white border-2 border-white 
-                          py-2.5 px-[30px] rounded-[20px] font-bold cursor-pointer text-lg transition-all duration-200 
+                          py-2.5 w-[200px] rounded-[20px] font-bold cursor-pointer text-lg transition-all duration-200 
                           hover:bg-white hover:text-[#f85a00]"
           onClick={onClose}
         >
@@ -69,7 +70,7 @@ const ResultPopup: React.FC<ResultPopupProps> = ({
         className="absolute h-auto z-[5] transition-all duration-300 ease-in-out
                       w-[100px] mt-[120px] right-[calc(50%-var(--wheel-wrapper-size)/2-10px)]
                       md:w-[120px] md:mt-[90px] md:right-[calc(50%-var(--wheel-wrapper-size)/2-80px)]
-                      lg:w-[200px] lg:mt-[50px] lg:right-[calc(50%-var(--wheel-wrapper-size)/2-180px)]"
+                      lg:w-[160px] lg:mt-[50px] lg:right-[calc(50%-var(--wheel-wrapper-size)/2-100px)]"
       />
     </div>
   );

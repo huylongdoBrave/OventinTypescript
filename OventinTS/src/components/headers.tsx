@@ -1,5 +1,5 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faTicket } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faStar, faTicket } from "@fortawesome/free-solid-svg-icons";
 import { Link, NavLink } from "react-router-dom";
 
 function Header() {
@@ -115,19 +115,32 @@ function Header() {
           </div>
           <div className="flex items-center gap-5">
             <div className="flex items-center gap-2 text-base font-medium">
-              <FontAwesomeIcon
+             {/* <FontAwesomeIcon
                 icon={faStar}
                 className="text-xl text-yellow-400"
-              />{" "}
-              <span>1,000</span>
+              />{" "}  */}
+              <img className="w-[30px] h-[30px]" src="https://ovaltine-website-dev.estuary.solutions/img/icon/coin.png" alt="" />
+              <span className="m-0
+                              text-sm
+                              font-normal
+                              leading-normal
+                              font-[var(--font-rowdies)]
+                              text-white
+                              [-webkit-text-stroke:1px_rgb(246,151,44)]
+                              ">x1,000
+              </span>
             </div>
             <div className="flex items-center gap-2 text-base font-medium">
-              <FontAwesomeIcon
-                icon={faTicket}
-                className="text-xl text-red-500"
-              />{" "}
-              <span>10</span>
-            </div>
+              <img src="https://ovaltine-website-dev.estuary.solutions/img/icon/spin.png" alt="" />{" "}
+                <span className="m-0
+                                  text-sm
+                                  font-normal
+                                  leading-normal
+                                  font-[var(--font-rowdies)]
+                                  text-white
+                                  [-webkit-text-stroke:1px_rgb(246,151,44)]"
+                                  >x101</span>
+            </div> 
             <button
               className="bg-[#233da3] text-white border-2 border-white rounded-full py-2 px-4 font-bold cursor-pointer 
               transition-colors shadow-[0_2px_2px_black] hover:bg-white hover:text-[#233da3]"
@@ -159,18 +172,26 @@ function Header() {
           </div>
           <div className="flex items-center gap-2 md:gap-5">
             <div className="flex items-center gap-1 md:gap-2 text-xs md:text-base font-medium">
-              <FontAwesomeIcon
-                icon={faStar}
-                className="text-base md:text-xl text-yellow-400"
-              />{" "}
-              <span>1,000</span>
+              <img className="w-[30px] h-[30px]" src="https://ovaltine-website-dev.estuary.solutions/img/icon/coin.png" alt="" />
+              <span className="m-0
+                              text-sm
+                              font-normal
+                              leading-normal
+                              font-[var(--font-rowdies)]
+                              text-white
+                              [-webkit-text-stroke:1px_rgb(246,151,44)]
+                              ">x1,000
+              </span>
             </div>
             <div className="flex items-center gap-1 md:gap-2 text-xs md:text-base font-medium">
-              <FontAwesomeIcon
-                icon={faTicket}
-                className="text-base md:text-xl text-red-500"
-              />{" "}
-              <span>10</span>
+              <img src="https://ovaltine-website-dev.estuary.solutions/img/icon/spin.png" alt="" />{" "}
+                <span className="m-0 text-sm
+                                  font-normal
+                                  leading-normal
+                                  font-[var(--font-rowdies)]
+                                  text-white
+                                  [-webkit-text-stroke:1px_rgb(246,151,44)]"
+                                  >x101</span>
             </div>
             <button
               className="bg-[#233da3] text-white border-2 border-white rounded-full py-1 px-2 md:py-2 md:px-4 text-xs md:text-sm font-bold cursor-pointer 
