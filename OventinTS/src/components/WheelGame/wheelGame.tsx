@@ -37,8 +37,10 @@ function WheelGame() {
   const [isAddPrizePopupOpen, setIsAddPrizePopupOpen] = useState(false);
   // attention popup (khởi tạo là true để luôn hiện khi tải trang)
   const [isAttentionPopupOpen, setIsAttentionPopupOpen] = useState(true);
-  // State cho popup kéo thả
-  const [isStickyPopupVisible, setIsStickyPopupVisible] = useState(true);
+  // State cho popup left kéo thả
+  const [isStickyPopupLeft, setIsStickyPopupLeft] = useState(true);
+    // State cho popup right kéo thả
+  const [isStickyPopupRight, setIsStickyPopupRight] = useState(true);
 
   // === DATA LOADING (useEffect) ===
   useEffect(() => {
@@ -432,14 +434,14 @@ function WheelGame() {
         {/* popup handle sticky */}
           {/* img sticky left */}
         <div className="flex justify-center gap-[20px] ">
-          {isStickyPopupVisible && (
+          {isStickyPopupLeft && (
             <div
               className="fixed z-[1000] cursor-pointer 
                             bottom-4 left-4">
               <Draggable nodeRef={dragRef}>
                 <div ref={dragRef} className="relative w-fit">
                   <button
-                    onClick={() => setIsStickyPopupVisible(false)}
+                    onClick={() => setIsStickyPopupLeft(false)}
                     className="absolute top-[-10px] -right-2.5 z-10 w-6 h-6
                      bg-orange-400 text-white rounded-full flex items-center
                       justify-center text-lg font-bold leading-none hover:bg-orange-500
@@ -461,14 +463,14 @@ function WheelGame() {
         </div>
           {/* img sticky right */}
         <div className="flex justify-center gap-[20px] ">
-          {isStickyPopupVisible && (
+          {isStickyPopupRight && (
             <div
               className="fixed z-[1000] cursor-pointer 
                             bottom-4 right-4">
               <Draggable nodeRef={dragRef}>
                 <div ref={dragRef} className="relative w-fit">
                   <button
-                    onClick={() => setIsStickyPopupVisible(false)}
+                    onClick={() => setIsStickyPopupRight(false)}
                     className="absolute top-[-20px] -right-2.5 z-10 w-6 h-6
                      bg-orange-400 text-white rounded-full flex items-center
                       justify-center text-lg font-bold leading-none hover:bg-orange-500
