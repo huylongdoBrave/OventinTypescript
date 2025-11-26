@@ -25,7 +25,7 @@ function WheelGame() {
   const [currentSpins, setCurrentSpins] = useState(5);
   const [isSpinning, setIsSpinning] = useState(false);
   const wheelRef = useRef<HTMLDivElement>(null); // Ref để tham chiếu đến DOM của vòng quay
-  const dragRef = useRef(null);
+  const dragRef = useRef(null); // Tham chiếu rỗng cho draggable
 
   // State các popup
   const [winningPrize, setWinningPrize] = useState<Prize | null>(null);
@@ -472,9 +472,9 @@ function WheelGame() {
                   <button
                     onClick={() => setIsStickyPopupRight(false)}
                     className="absolute top-[-20px] -right-2.5 z-10 w-6 h-6
-                     bg-orange-400 text-white rounded-full flex items-center
+                    bg-orange-400 text-white rounded-full flex items-center
                       justify-center text-lg font-bold leading-none hover:bg-orange-500
-                       transition-colors"
+                      transition-colors"
                     aria-label="Đóng popup"
                   >
                     &times;
