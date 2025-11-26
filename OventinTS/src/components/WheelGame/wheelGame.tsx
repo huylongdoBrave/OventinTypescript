@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from "react";
-import ButtonOrange from "../Button/buttonOrange.tsx"; // Sửa tên import
+import Draggable from "react-draggable";
+import ButtonOrange from "../Button/buttonOrange.tsx";
 
 import Wheel from "./wheel.tsx";
 import ResultPopup from "./resultPopup.tsx";
 import RateTablePopup from "./rateTablePopup.tsx";
 import AddPrizePopup from "./addPrizePopup.tsx";
+import AttentionWheelPopup from "./attentionWheelPopup.tsx";
 
 // --- TYPE DEFINITIONS ---
 
@@ -17,17 +19,13 @@ export interface Prize {
   color: string;
 }
 
-// Định nghĩa props cho các component con (trừ Wheel đã tự định nghĩa)
-// interface ResultPopupProps { isOpen: boolean; prize: Prize | null; onClose: () => void; }
-// interface RateTablePopupProps { isOpen: boolean; prizes: Prize[]; onClose: () => void; onApplyChanges: (updatedPrizes: Prize[]) => void; }
-// interface AddPrizePopupProps { isOpen: boolean; prizes: Prize[]; onClose: () => void; onAddPrize: (newPrize: Prize) => void; }
-
 function WheelGame() {
   // === STATE MANAGEMENT ===
   const [prizes, setPrizes] = useState<Prize[]>([]); // một mảng chứa các đối tượng Prize, ban đầu nó rỗng
   const [currentSpins, setCurrentSpins] = useState(5);
   const [isSpinning, setIsSpinning] = useState(false);
   const wheelRef = useRef<HTMLDivElement>(null); // Ref để tham chiếu đến DOM của vòng quay
+  const dragRef = useRef(null);
 
   // State các popup
   const [winningPrize, setWinningPrize] = useState<Prize | null>(null);
@@ -37,6 +35,10 @@ function WheelGame() {
   const [isRatePopupOpen, setIsRatePopupOpen] = useState(false);
   // addprize table popup
   const [isAddPrizePopupOpen, setIsAddPrizePopupOpen] = useState(false);
+  // attention popup (khởi tạo là true để luôn hiện khi tải trang)
+  const [isAttentionPopupOpen, setIsAttentionPopupOpen] = useState(true);
+  // State cho popup kéo thả
+  const [isStickyPopupVisible, setIsStickyPopupVisible] = useState(true);
 
   // === DATA LOADING (useEffect) ===
   useEffect(() => {
@@ -149,14 +151,24 @@ function WheelGame() {
 
   // Effect quản lý class 'body-no-scroll' khi popup mở/đóng
   useEffect(() => {
-    if (isResultPopupOpen || isRatePopupOpen || isAddPrizePopupOpen) {
+    if (
+      isResultPopupOpen ||
+      isRatePopupOpen ||
+      isAddPrizePopupOpen ||
+      isAttentionPopupOpen
+    ) {
       document.body.classList.add("body-no-scroll");
     } else {
       document.body.classList.remove("body-no-scroll");
     }
     // Cleanup function để đảm bảo class được xóa khi component unmount
     return () => document.body.classList.remove("body-no-scroll");
-  }, [isResultPopupOpen, isRatePopupOpen, isAddPrizePopupOpen]);
+  }, [
+    isResultPopupOpen,
+    isRatePopupOpen,
+    isAddPrizePopupOpen,
+    isAttentionPopupOpen,
+  ]);
 
   // === Sự kiện quay ===
   const handleSpin = () => {
@@ -254,7 +266,11 @@ function WheelGame() {
           <div>
             {/* Spin */}
             <p className="text-xl font-black text-[rgb(35,61,163)] mt-[20px] text-center">
-              Bạn còn <span id="spin-count" style={{ color: "white" }}>{currentSpins}</span> lượt quay!
+              Bạn còn{" "}
+              <span id="spin-count" style={{ color: "white" }}>
+                {currentSpins}
+              </span>{" "}
+              lượt quay!
             </p>
           </div>
           <div className="add-spin-container">
@@ -275,7 +291,7 @@ function WheelGame() {
               src="/static/dolphine.png"
               alt="Dolphine"
               className="absolute z-[5] h-auto transition-all duration-300 ease-in-out
-                             w-[90px] left-[calc(50%-var(--wheel-wrapper-size)/2-10px)]
+                             w-[90px] bottom-[50px] left-[calc(50%-var(--wheel-wrapper-size)/2-10px)]
                              md:w-[150px] md:bottom-auto md:mt-0 md:left-[10%]
                              lg:bottom-[60px] lg:w-[200px] lg:left-[calc(50%-var(--wheel-wrapper-size)/2-250px)]"
             />
@@ -331,7 +347,7 @@ function WheelGame() {
               src="/static/boy.png"
               alt="Boy"
               className="absolute z-[5] h-auto transition-all duration-300 ease-in-out
-                            w-[90px] right-[calc(50%-var(--wheel-wrapper-size)/2-10px)]
+                            w-[90px] bottom-[30px] right-[calc(50%-var(--wheel-wrapper-size)/2-10px)]
                             md:w-[150px] md:bottom-auto md:mt-0 md:right-[10%]
                             lg:bottom-[60px] lg:w-[200px] lg:right-[calc(50%-var(--wheel-wrapper-size)/2-250px)]"
             />
@@ -343,6 +359,11 @@ function WheelGame() {
       </p>
 
       {/* POPUPS */}
+      <AttentionWheelPopup
+        isOpen={isAttentionPopupOpen}
+        onClose={() => setIsAttentionPopupOpen(false)}
+      />
+
       <ResultPopup
         isOpen={isResultPopupOpen}
         prize={winningPrize}
@@ -389,6 +410,7 @@ function WheelGame() {
             Thêm quà
           </ButtonOrange>
         </div>
+
         <div className="button-group-top">
           <button
             id="restart-btn"
@@ -406,9 +428,77 @@ function WheelGame() {
             Khởi động lại
           </button>
         </div>
+
+        {/* popup handle sticky */}
+          {/* img sticky left */}
+        <div className="flex justify-center gap-[20px] ">
+          {isStickyPopupVisible && (
+            <div
+              className="fixed z-[1000] cursor-pointer 
+                            bottom-4 left-4">
+              <Draggable nodeRef={dragRef}>
+                <div ref={dragRef} className="relative w-fit">
+                  <button
+                    onClick={() => setIsStickyPopupVisible(false)}
+                    className="absolute top-[-10px] -right-2.5 z-10 w-6 h-6
+                     bg-orange-400 text-white rounded-full flex items-center
+                      justify-center text-lg font-bold leading-none hover:bg-orange-500
+                       transition-colors"
+                    aria-label="Đóng popup"
+                  >
+                    &times;
+                  </button>
+                  <img
+                    src="./static/moi-ban-be-nhan-ngay-10-ovocoins.webp"
+                    alt="Mời bạn bè nhận Ovocoins"
+                    className="w-[120px] h-[120px] object-contain
+                [-webkit-user-drag:none]"
+                  />
+                </div>
+              </Draggable>
+            </div>
+          )}
+        </div>
+          {/* img sticky right */}
+        <div className="flex justify-center gap-[20px] ">
+          {isStickyPopupVisible && (
+            <div
+              className="fixed z-[1000] cursor-pointer 
+                            bottom-4 right-4">
+              <Draggable nodeRef={dragRef}>
+                <div ref={dragRef} className="relative w-fit">
+                  <button
+                    onClick={() => setIsStickyPopupVisible(false)}
+                    className="absolute top-[-20px] -right-2.5 z-10 w-6 h-6
+                     bg-orange-400 text-white rounded-full flex items-center
+                      justify-center text-lg font-bold leading-none hover:bg-orange-500
+                       transition-colors"
+                    aria-label="Đóng popup"
+                  >
+                    &times;
+                  </button>
+                  <img
+                    src="./static/survey.png"
+                    alt="Mời bạn bè nhận Ovocoins"
+                    className="w-[120px] h-[120px] object-contain
+                [-webkit-user-drag:none]"
+                  />
+                </div>
+              </Draggable>
+            </div>
+          )}
+        </div>
+
+
       </div>
     </>
   );
 }
 
 export default WheelGame;
+
+
+// Định nghĩa props cho các component con (trừ Wheel đã tự định nghĩa)
+// interface ResultPopupProps { isOpen: boolean; prize: Prize | null; onClose: () => void; }
+// interface RateTablePopupProps { isOpen: boolean; prizes: Prize[]; onClose: () => void; onApplyChanges: (updatedPrizes: Prize[]) => void; }
+// interface AddPrizePopupProps { isOpen: boolean; prizes: Prize[]; onClose: () => void; onAddPrize: (newPrize: Prize) => void; }

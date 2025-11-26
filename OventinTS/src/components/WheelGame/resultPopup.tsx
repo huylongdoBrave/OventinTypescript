@@ -20,7 +20,7 @@ const ResultPopup: React.FC<ResultPopupProps> = ({
 }) => {
   if (!isOpen) return null;
 
-  return (
+return (
     <div
       className="fixed inset-0 bg-black/60 flex justify-center items-center z-[1001]
     transition-opacity duration-300 ease-in-out"

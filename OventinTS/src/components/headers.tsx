@@ -160,13 +160,14 @@ function Header() {
 
       {/* Header for Tablet and Mobile */}
       <header className="lg:hidden h-[70px] mb-2.5">
-        <nav className="sticky h-full flex justify-between items-center bg-[#233da3] text-white px-2 md:px-4">
+        <nav className="sticky h-[70px] md:h-[70px] flex justify-between items-center bg-[#233da3] text-white px-2 md:px-4">
           <div className="flex items-center h-full">
             <Link to="/" className="flex items-center">
               <img
                 src="https://ovaltine-website-dev.estuary.solutions/img/brand/logo.png"
                 alt="Oventin Logo"
-                className="h-[60px]"
+                className="h-[70px] absolute bottom-[-30px] [overflow-clip-margin:content-box]
+                          overflow-clip before:box-[inherit] cursor-pointer"
               />
             </Link>
           </div>
