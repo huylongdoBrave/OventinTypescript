@@ -5,7 +5,9 @@ interface WheelProps {
   prizes: Prize[];
 }
 
-const Wheel: FC<WheelProps> = ({ prizes }) => {
+const Wheel: FC<WheelProps> = ({ 
+  prizes
+ }) => {
   const sliceCount = prizes.length > 0 ? prizes.length : 1;
   const sliceAngle = 360 / sliceCount;
   const cssOffsetAngle = -(sliceAngle / 2);

@@ -59,7 +59,7 @@ function WheelGame() {
       try {
         const response = await fetch(API_URL);
         if (!response.ok) {
-          throw new Error(`API call failed with status: ${response.status}`);
+          throw new Error(`API call failed với status: ${response.status}`);
         }
         const apiPrizes = (await response.json()) as Prize[];
         setPrizes(apiPrizes);
@@ -166,10 +166,7 @@ function WheelGame() {
     // Cleanup function để đảm bảo class được xóa khi component unmount
     return () => document.body.classList.remove("body-no-scroll");
   }, [
-    isResultPopupOpen,
-    isRatePopupOpen,
-    isAddPrizePopupOpen,
-    isAttentionPopupOpen,
+    isResultPopupOpen,isRatePopupOpen,isAddPrizePopupOpen,isAttentionPopupOpen,
   ]);
 
   // === Sự kiện quay ===

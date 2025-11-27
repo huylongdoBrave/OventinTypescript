@@ -18,7 +18,8 @@ const ResultPopup: React.FC<ResultPopupProps> = ({
   prize,
   onClose,
 }) => {
-  if (!isOpen) return null;
+
+if (!isOpen) return null;
 
 return (
     <div

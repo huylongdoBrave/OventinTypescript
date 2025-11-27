@@ -29,6 +29,7 @@ const AddPrizePopup: React.FC<AddPrizePopupProps> = ({
   onClose,
   onAddPrize,
 }) => {
+  
   const [formData, setFormData] = useState<FormDataState>(INITIAL_FORM_STATE);
 
   // Reset form khi popup đóng

@@ -15,6 +15,7 @@ const RateTablePopup: React.FC<RateTablePopupProps> = ({
   onClose,
   onApplyChanges,
 }) => {
+  
   const [tempPrizes, setTempPrizes] = useState<Prize[]>(prizes);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
