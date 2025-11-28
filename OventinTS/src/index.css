@@ -343,7 +343,7 @@ main {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 0;
+    padding: 0;
 }
 
 #spin:hover{
@@ -353,6 +353,7 @@ main {
 #spin img {
 	width: var(--spin-button-img-size);
 	height: auto;
+    margin-top: 5px;
 }
 
 .arrow-top{

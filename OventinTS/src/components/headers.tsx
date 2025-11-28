@@ -6,10 +6,10 @@ function Header() {
   return (
     <>
       {/* Header had responsives */}
-      <header className="hidden lg:block h-[115px] mb-5">
+      <header className="sticky top-0 z-[1001]  hidden lg:block h-[115px] mb-5">
         <nav
-          className="sticky h-[70px] flex justify-between items-center px-4
-         relative text-white bg-[linear-gradient(rgb(35,61,163)_0%,rgb(35,61,163)_65px,transparent_65px)] "
+          className=" h-[70px] flex justify-between items-center px-4 
+         text-white bg-[linear-gradient(rgb(35,61,163)_0%,rgb(35,61,163)_65px,transparent_65px)]"
         >
           <div className="flex items-center h-full">
             <Link to="/">
@@ -159,14 +159,15 @@ function Header() {
       </header>
 
       {/* Header for Tablet and Mobile */}
-      <header className="lg:hidden h-[70px] mb-2.5">
-        <nav className="sticky h-[70px] md:h-[70px] flex justify-between items-center bg-[#233da3] text-white px-2 md:px-4">
+      <header className="sticky top-0 z-[1001] lg:hidden h-[70px] mb-2.5">
+        <nav className="h-[70px] md:h-[70px] flex justify-between items-center
+         bg-[#233da3] text-white px-2 md:px-4">
           <div className="flex items-center h-full">
             <Link to="/" className="flex items-center">
               <img
                 src="https://ovaltine-website-dev.estuary.solutions/img/brand/logo.png"
                 alt="Oventin Logo"
-                className="h-[70px] absolute bottom-[-30px] [overflow-clip-margin:content-box]
+                className="h-[70px] md:h-[70px] absolute bottom-[-20px] md:bottom-[0px] [overflow-clip-margin:content-box]
                           overflow-clip before:box-[inherit] cursor-pointer"
               />
             </Link>

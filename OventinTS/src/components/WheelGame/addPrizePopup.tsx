@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, memo } from "react";
 import type { Prize } from "./wheelGame"; // Import kiểu Prize
 
 interface AddPrizePopupProps {
@@ -23,7 +23,7 @@ const INITIAL_FORM_STATE: FormDataState = {
   color: "#ffffff",
 };
 
-const AddPrizePopup: React.FC<AddPrizePopupProps> = ({
+const AddPrizePopupComponent: React.FC<AddPrizePopupProps> = ({
   isOpen,
   prizes,
   onClose,
@@ -40,6 +40,15 @@ const AddPrizePopup: React.FC<AddPrizePopupProps> = ({
     }
   }, [isOpen]);
 
+  //Tính tổng tỉ lệ
+  const totalProbability = useMemo(() => {
+      return (
+        prizes.reduce(
+          (sum, prize) => sum + (Number(prize.probability) || 0),
+          0
+        ) * 100
+      );
+    }, [prizes]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -54,24 +63,19 @@ const AddPrizePopup: React.FC<AddPrizePopupProps> = ({
   
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const name = formData.name.trim();
     const value = formData.value.trim();
     const probability = Number(formData.probability);
-
     if (!name || !value) {
       alert("Vui lòng điền đầy đủ thông tin quà!");
       return;
     }
-
     if (isNaN(probability) || probability < 0) {
       alert("Tỉ lệ không hợp lệ!");
       return;
     }
-
     const currentTotalProbability = prizes.reduce((sum, prize) => sum + prize.probability * 100, 0);
     const newTotalProbability = currentTotalProbability + probability;
-
     if (newTotalProbability > 100.01) {
       alert(
         `Không thể thêm. Tổng tỉ lệ hiện tại là ${newTotalProbability.toFixed(
@@ -102,7 +106,7 @@ const AddPrizePopup: React.FC<AddPrizePopupProps> = ({
   }
 
   return (
-    <div className="fixed inset-0 z-[1002] flex items-center justify-center bg-black bg-opacity-70">
+    <div className="fixed inset-0 z-[1002] flex items-center justify-center bg-[black]/60 opacity-100">
       <div className="relative w-11/12 max-w-lg rounded-2xl border-4 border-white bg-[#f85a00] p-5 pt-10 text-white shadow-lg">
         <button
           className="absolute top-1 right-4 cursor-pointer border-none bg-transparent text-5xl font-light leading-none text-white"
@@ -166,6 +170,16 @@ const AddPrizePopup: React.FC<AddPrizePopupProps> = ({
               className="h-10 w-full cursor-pointer appearance-none border-none bg-transparent p-0"
             />
           </div>
+            <p
+              id="probabilities-total"
+              style={{
+              color:
+              Math.abs(totalProbability - 100) > 0.01 ? "#ffeb3b" : "white",
+              }}
+              className="w-full text-left font-bold mt-3 mb-3"
+              >
+              Tổng tỉ lệ: {totalProbability.toFixed(2)}%
+            </p>
           <button
             type="submit"
             className="mt-4 w-full rounded-full border-2 border-white bg-[#ff6702] py-3 px-6 font-bold text-white shadow-md transition-all hover:bg-gray-200 hover:text-[#ff6702]"
@@ -175,7 +189,8 @@ const AddPrizePopup: React.FC<AddPrizePopupProps> = ({
         </form>
       </div>
     </div>
+    
   );
 };
 
-export default AddPrizePopup;
+export default memo(AddPrizePopupComponent);

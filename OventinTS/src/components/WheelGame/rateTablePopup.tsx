@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, memo, useCallback } from "react";
 import { ReactSortable } from "react-sortablejs";
 import type { Prize } from "./wheelGame"; // Import kiểu Prize
 
@@ -9,7 +9,7 @@ interface RateTablePopupProps {
   onApplyChanges: (updatedPrizes: Prize[]) => void;
 }
 
-const RateTablePopup: React.FC<RateTablePopupProps> = ({
+const RateTablePopupComponent: React.FC<RateTablePopupProps> = ({
   isOpen,
   prizes,
   onClose,
@@ -36,7 +36,8 @@ const RateTablePopup: React.FC<RateTablePopupProps> = ({
   }, [tempPrizes]);
 
   // Cập nhật tỉ lệ của quà
-  const handlePrizeChange = (id: number, field: keyof Prize, value: string) => {
+  const handlePrizeChange = useCallback(
+    (id: number, field: keyof Prize, value: string) => {
     setTempPrizes((currentPrizes) =>
       currentPrizes.map((p) => {
         if (p.id === id) {
@@ -47,17 +48,18 @@ const RateTablePopup: React.FC<RateTablePopupProps> = ({
         }
         return p;
       })
-    );
-  };
+      );
+    }, []);
 
   // Xóa quà
-  const handleDeletePrize = (id: number, name: string) => {
+  const handleDeletePrize = useCallback((id: number, name: string) => {
     if (window.confirm(`Xóa quà "${name}" ?`)) {
       setTempPrizes((currentPrizes) =>
         currentPrizes.filter((p) => p.id !== id)
       );
-    }
-  };
+      }
+  }, []);
+
 
   // Cảnh báo sửa bị tràn tỉ lệ
   const handleApply = () => {
@@ -202,4 +204,4 @@ const RateTablePopup: React.FC<RateTablePopupProps> = ({
   );
 };
 
-export default RateTablePopup;
+export default memo(RateTablePopupComponent);

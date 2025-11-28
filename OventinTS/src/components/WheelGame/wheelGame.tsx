@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Draggable from "react-draggable";
 import ButtonOrange from "../Button/buttonOrange.tsx";
 
@@ -25,7 +25,8 @@ function WheelGame() {
   const [currentSpins, setCurrentSpins] = useState(5);
   const [isSpinning, setIsSpinning] = useState(false);
   const wheelRef = useRef<HTMLDivElement>(null); // Ref để tham chiếu đến DOM của vòng quay
-  const dragRef = useRef(null); // Tham chiếu rỗng cho draggable
+  const dragRefLeft = useRef(null); // Ref cho popup kéo thả BÊN TRÁI
+  const dragRefRight = useRef(null); // Ref cho popup kéo thả BÊN PHẢI
 
   // State các popup
   const [winningPrize, setWinningPrize] = useState<Prize | null>(null);
@@ -36,11 +37,11 @@ function WheelGame() {
   // addprize table popup
   const [isAddPrizePopupOpen, setIsAddPrizePopupOpen] = useState(false);
   // attention popup (khởi tạo là true để luôn hiện khi tải trang)
-  const [isAttentionPopupOpen, setIsAttentionPopupOpen] = useState(true);
+  const [isAttentionPopupOpen, setIsAttentionPopupOpen] = useState(false);
   // State cho popup left kéo thả
-  const [isStickyPopupLeft, setIsStickyPopupLeft] = useState(true);
+  const [isStickyPopupLeft, setIsStickyPopupLeft] = useState(false);
     // State cho popup right kéo thả
-  const [isStickyPopupRight, setIsStickyPopupRight] = useState(true);
+  const [isStickyPopupRight, setIsStickyPopupRight] = useState(false);
 
   // === DATA LOADING (useEffect) ===
   useEffect(() => {
@@ -232,19 +233,27 @@ function WheelGame() {
   };
 
   //Cập nhật quà
-  const handleApplyPrizeChanges = (updatedPrizes: Prize[]) => {
-    setPrizes(updatedPrizes);
-    localStorage.setItem("oventinPrizes", JSON.stringify(updatedPrizes));
-    alert("Đã cập nhật thành công!");
-  };
+  const handleApplyPrizeChanges = useCallback((updatedPrizes: Prize[]) => {
+      setPrizes(updatedPrizes);
+      localStorage.setItem("oventinPrizes", JSON.stringify(updatedPrizes));
+      alert("Đã cập nhật thành công!");
+    }, []); // Dependency rỗng vì hàm này không phụ thuộc vào state/props nào từ bên ngoài
 
   //Thêm quà
-  const handleAddPrize = (newPrize: Prize) => {
-    const updatedPrizes = [...prizes, newPrize]; //Cập nhật newPrize vào prizes
-    setPrizes(updatedPrizes);
-    localStorage.setItem("oventinPrizes", JSON.stringify(updatedPrizes));
-    alert(`Đã thêm quà "${newPrize.name}"!`);
-  };
+  const handleAddPrize = useCallback((newPrize: Prize) => {
+      setPrizes((currentPrizes) => {
+        const updatedPrizes = [...currentPrizes, newPrize];
+        localStorage.setItem("oventinPrizes", JSON.stringify(updatedPrizes));
+        alert(`Đã thêm quà "${newPrize.name}"!`);
+        return updatedPrizes;
+      });
+    }, []); // Dependency rỗng, dùng functional update cho setPrizes
+
+  // Các hàm đóng popup
+  const closeAttentionPopup = useCallback(() => setIsAttentionPopupOpen(false), []);
+  const closeResultPopup = useCallback(() => setIsResultPopupOpen(false), []);
+  const closeRatePopup = useCallback(() => setIsRatePopupOpen(false), []);
+  const closeAddPrizePopup = useCallback(() => setIsAddPrizePopupOpen(false), []);
 
   const translateY = -195;
   const lights = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
@@ -272,9 +281,10 @@ function WheelGame() {
               lượt quay!
             </p>
           </div>
-          <div className="add-spin-container">
+          <div className="add-spin-container" >
             <ButtonOrange
               id="add-spins-btn"
+               disabled={isSpinning}
               onClick={() => setCurrentSpins(currentSpins + 10)}
               className="w-[120px] h-[40px] text-[16px] mt-2.5 mb-[50px] 
                         md:w-[135px] md:h-[45px] md:text-[18px] md:mb-[30px]
@@ -338,9 +348,10 @@ function WheelGame() {
               <div ref={wheelRef}>
                 <Wheel prizes={prizes} />
               </div>
-              <button id="spin" onClick={handleSpin} disabled={isSpinning}>
-                <img src="/static/favicon_oven.png" alt="Spin" />
-              </button>
+                {/* Nút quay */}
+                <button id="spin" onClick={handleSpin} disabled={isSpinning}>
+                  <img className="" src="/static/favicon_oven.png" alt="Spin" />
+                </button>
             </div>
             <img
               src="/static/boy.png"
@@ -360,26 +371,26 @@ function WheelGame() {
       {/* POPUPS */}
       <AttentionWheelPopup
         isOpen={isAttentionPopupOpen}
-        onClose={() => setIsAttentionPopupOpen(false)}
+        onClose={closeAttentionPopup}
       />
 
       <ResultPopup
         isOpen={isResultPopupOpen}
         prize={winningPrize}
-        onClose={() => setIsResultPopupOpen(false)}
+        onClose={closeResultPopup}
       />
 
       <RateTablePopup
         isOpen={isRatePopupOpen}
         prizes={prizes}
-        onClose={() => setIsRatePopupOpen(false)}
+        onClose={closeRatePopup}
         onApplyChanges={handleApplyPrizeChanges}
       />
 
       <AddPrizePopup
         isOpen={isAddPrizePopupOpen}
         prizes={prizes}
-        onClose={() => setIsAddPrizePopupOpen(false)}
+        onClose={closeAddPrizePopup}
         onAddPrize={handleAddPrize}
       />
 
@@ -434,9 +445,10 @@ function WheelGame() {
           {isStickyPopupLeft && (
             <div
               className="fixed z-[1000] cursor-pointer 
-                            bottom-4 left-4">
-              <Draggable nodeRef={dragRef}>
-                <div ref={dragRef} className="relative w-fit">
+                            bottom-4 left-4"
+            >
+              <Draggable nodeRef={dragRefLeft}>
+                <div ref={dragRefLeft} className="relative w-fit">
                   <button
                     onClick={() => setIsStickyPopupLeft(false)}
                     className="absolute top-[-10px] -right-2.5 z-10 w-6 h-6
@@ -463,9 +475,10 @@ function WheelGame() {
           {isStickyPopupRight && (
             <div
               className="fixed z-[1000] cursor-pointer 
-                            bottom-4 right-4">
-              <Draggable nodeRef={dragRef}>
-                <div ref={dragRef} className="relative w-fit">
+                            bottom-4 right-4"
+            >
+              <Draggable nodeRef={dragRefRight}>
+                <div ref={dragRefRight} className="relative w-fit">
                   <button
                     onClick={() => setIsStickyPopupRight(false)}
                     className="absolute top-[-20px] -right-2.5 z-10 w-6 h-6

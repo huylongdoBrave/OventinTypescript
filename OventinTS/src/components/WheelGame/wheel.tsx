@@ -1,11 +1,11 @@
-import { useMemo, type FC } from "react";
+import { useMemo, memo } from "react";
 import type { Prize } from "./wheelGame"; // Import kiểu Prize từ file wheelgame
 
 interface WheelProps {
   prizes: Prize[];
 }
 
-const Wheel: FC<WheelProps> = ({ 
+const WheelComponent: React.FC<WheelProps> = ({ 
   prizes
  }) => {
   const sliceCount = prizes.length > 0 ? prizes.length : 1;
@@ -67,4 +67,5 @@ const Wheel: FC<WheelProps> = ({
   );
 };
 
-export default Wheel;
+// Bọc component bằng React.memo để ngăn re-render không cần thiết
+export default memo(WheelComponent);

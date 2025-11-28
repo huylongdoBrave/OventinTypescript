@@ -1,11 +1,11 @@
-import React from "react";
+import React, { memo } from "react";
 
 interface AttentionWheelPopupProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const AttentionWheelPopup: React.FC<AttentionWheelPopupProps> = ({
+const AttentionWheelPopupComponent: React.FC<AttentionWheelPopupProps> = ({
   isOpen,
   onClose,
 }) => {
@@ -130,4 +130,4 @@ const AttentionWheelPopup: React.FC<AttentionWheelPopupProps> = ({
   );
 };
 
-export default AttentionWheelPopup;
+export default memo(AttentionWheelPopupComponent);

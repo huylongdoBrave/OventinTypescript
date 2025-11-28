@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 // React.ButtonHTMLAttributes<HTMLButtonElement> cho phép components nhận tất cả các thuộc tính của thẻ <button> HTML (onClick, disabled, type,...)
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -9,7 +9,6 @@ const ButtonAdd: React.FC<ButtonProps> = ({ children, className, ...props }) => 
   const baseClasses = `
     bg-[#ff6702] text-white font-black tracking-wider border-[3px] border-white 
     cursor-pointer shadow-lg transition-all duration-200 rounded-full inline-block
-    font-['Times_New_Roman',_Times,_serif]
     hover:bg-white hover:text-[#ff6702]
     disabled:bg-gray-400 disabled:cursor-not-allowed
   `;
@@ -25,4 +24,4 @@ const ButtonAdd: React.FC<ButtonProps> = ({ children, className, ...props }) => 
   );
 }
 
-export default ButtonAdd;
+export default memo(ButtonAdd);
