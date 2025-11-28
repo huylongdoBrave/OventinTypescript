@@ -167,7 +167,7 @@ function Header() {
               <img
                 src="https://ovaltine-website-dev.estuary.solutions/img/brand/logo.png"
                 alt="Oventin Logo"
-                className="h-[70px] md:h-[70px] absolute bottom-[-20px] md:bottom-[0px] [overflow-clip-margin:content-box]
+                className="h-[50px] md:h-[70px] absolute md:bottom-[0px] [overflow-clip-margin:content-box]
                           overflow-clip before:box-[inherit] cursor-pointer"
               />
             </Link>
