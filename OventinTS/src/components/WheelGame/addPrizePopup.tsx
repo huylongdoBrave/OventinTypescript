@@ -45,7 +45,7 @@ const AddPrizePopupComponent: React.FC<AddPrizePopupProps> = ({
       return (
         prizes.reduce(
           (sum, prize) => sum + (Number(prize.probability) || 0),
-          0
+          0 
         ) * 100
       );
     }, [prizes]);

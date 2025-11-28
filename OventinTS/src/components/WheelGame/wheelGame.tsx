@@ -261,7 +261,7 @@ function WheelGame() {
     <>
       <main>
         <div className="flex flex-col items-center w-full">
-          <div className="flex justify-center items-center mt-5 w-full h-full relative z-0">
+          <div className="flex justify-center items-center  w-full h-full relative z-0">
             <img
               src="/static/lucky-draw.png"
               alt="Lucky Draw"
@@ -286,7 +286,7 @@ function WheelGame() {
               id="add-spins-btn"
                disabled={isSpinning}
               onClick={() => setCurrentSpins(currentSpins + 10)}
-              className="w-[120px] h-[40px] text-[16px] mt-2.5 mb-[50px] 
+              className="w-[120px] h-[40px] text-[16px] mt-2.5 mb-[20px] 
                         md:w-[135px] md:h-[45px] md:text-[18px] md:mb-[30px]
                         lg:w-[150px] lg:h-[50px] lg:text-[20px]"
             >
