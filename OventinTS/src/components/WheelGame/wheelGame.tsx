@@ -36,12 +36,12 @@ function WheelGame() {
   const [isRatePopupOpen, setIsRatePopupOpen] = useState(false);
   // addprize table popup
   const [isAddPrizePopupOpen, setIsAddPrizePopupOpen] = useState(false);
-  // attention popup (khởi tạo là true để luôn hiện khi tải trang)
-  const [isAttentionPopupOpen, setIsAttentionPopupOpen] = useState(false);
+  // attention popup
+  const [isAttentionPopupOpen, setIsAttentionPopupOpen] = useState(true);
   // State cho popup left kéo thả
-  const [isStickyPopupLeft, setIsStickyPopupLeft] = useState(false);
+  const [isStickyPopupLeft, setIsStickyPopupLeft] = useState(true);
     // State cho popup right kéo thả
-  const [isStickyPopupRight, setIsStickyPopupRight] = useState(false);
+  const [isStickyPopupRight, setIsStickyPopupRight] = useState(true);
 
   // === DATA LOADING (useEffect) ===
   useEffect(() => {
