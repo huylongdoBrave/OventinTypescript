@@ -40,7 +40,7 @@ const ResultPopupComponent: React.FC<ResultPopupProps> = ({
                     shadow-[0_5px_20px_rgba(0,0,0,0.4)]"
         >
           <img
-            src="https://ovaltine-website-dev.estuary.solutions/img/brand/logo.png"
+            src="./static/favicon_oven.png"
             alt="Oventin Logo"
             className="absolute top-[-190px] left-1/2 -translate-x-1/2 w-[150px] h-auto rounded-full p-1.5 filter-[drop-shadow(rgb(255,255,255)_0px_0px_5px)]"
           />

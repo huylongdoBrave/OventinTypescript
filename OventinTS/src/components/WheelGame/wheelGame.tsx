@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import Draggable from "react-draggable";
+// import Draggable from "react-draggable";
 import ButtonOrange from "../Button/buttonOrange.tsx";
 
 import Wheel from "./wheel.tsx";
@@ -25,8 +25,8 @@ function WheelGame() {
   const [currentSpins, setCurrentSpins] = useState(5);
   const [isSpinning, setIsSpinning] = useState(false);
   const wheelRef = useRef<HTMLDivElement>(null); // Ref để tham chiếu đến DOM của vòng quay
-  const dragRefLeft = useRef(null); // Ref cho popup kéo thả BÊN TRÁI
-  const dragRefRight = useRef(null); // Ref cho popup kéo thả BÊN PHẢI
+  // const dragRefLeft = useRef(null); // Ref cho popup kéo thả BÊN TRÁI
+  // const dragRefRight = useRef(null); // Ref cho popup kéo thả BÊN PHẢI
 
   // State các popup
   const [winningPrize, setWinningPrize] = useState<Prize | null>(null);
@@ -38,10 +38,10 @@ function WheelGame() {
   const [isAddPrizePopupOpen, setIsAddPrizePopupOpen] = useState(false);
   // attention popup
   const [isAttentionPopupOpen, setIsAttentionPopupOpen] = useState(true);
-  // State cho popup left kéo thả
-  const [isStickyPopupLeft, setIsStickyPopupLeft] = useState(true);
-    // State cho popup right kéo thả
-  const [isStickyPopupRight, setIsStickyPopupRight] = useState(true);
+  // // State cho popup left kéo thả
+  // const [isStickyPopupLeft, setIsStickyPopupLeft] = useState(true);
+  //   // State cho popup right kéo thả
+  // const [isStickyPopupRight, setIsStickyPopupRight] = useState(true);
 
   // === DATA LOADING (useEffect) ===
   useEffect(() => {
@@ -441,7 +441,7 @@ function WheelGame() {
 
         {/* popup handle sticky */}
           {/* img sticky left */}
-        <div className="flex justify-center gap-[20px] ">
+        {/* <div className="flex justify-center gap-[20px] ">
           {isStickyPopupLeft && (
             <div
               className="fixed z-[1000] cursor-pointer 
@@ -469,9 +469,10 @@ function WheelGame() {
               </Draggable>
             </div>
           )}
-        </div>
+        </div> */}
+
           {/* img sticky right */}
-        <div className="flex justify-center gap-[20px] ">
+        {/* <div className="flex justify-center gap-[20px] ">
           {isStickyPopupRight && (
             <div
               className="fixed z-[1000] cursor-pointer 
@@ -499,7 +500,7 @@ function WheelGame() {
               </Draggable>
             </div>
           )}
-        </div>
+        </div> */}
 
 
       </div>

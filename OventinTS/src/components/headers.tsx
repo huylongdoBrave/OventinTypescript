@@ -14,7 +14,7 @@ function Header() {
           <div className="flex items-center h-full">
             <Link to="/">
               <img
-                src="https://ovaltine-website-dev.estuary.solutions/img/brand/logo.png"
+                src="./static/favicon_oven.png"
                 alt="Oventin Logo"
                 className="h-[120px] mr-[30px] mt-[80px]"
               />
