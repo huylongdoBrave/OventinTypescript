@@ -77,8 +77,8 @@ const RateTablePopupComponent: React.FC<RateTablePopupProps> = ({
   };
 
   return (
-    <div className={`fixed inset-0 flex items-center justify-center bg-black/60 z-[1002] transition-opacity duration-300 ${
-      isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+    <div className={`fixed inset-0 flex items-center justify-center bg-black/60 z-[1002] transition-opacity duration-300 
+      ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
     }`}>
       <div
         className="flex justify-center items-center flex-col 
