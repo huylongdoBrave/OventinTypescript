@@ -23,14 +23,14 @@ const AttentionWheelPopupComponent: React.FC<AttentionWheelPopupProps> = ({
         src="/static/dolphine.png"
         alt="Dolphine"
         className="absolute h-auto z-[5] transition-all duration-300 ease-in-out 
-                      w-[100px] mt-[120px] left-[calc(50%-var(--wheel-wrapper-size)/2-40px)] 
+                      w-[100px] mt-[120px] left-[calc(50%-var(--wheel-wrapper-size)/2-20px)] 
                       md:w-[120px] md:mt-[180px] md:left-[calc(50%-var(--wheel-wrapper-size)/2-80px)] 
                       lg:w-[140px] lg:mt-[200px] lg:left-[calc(50%-var(--wheel-wrapper-size)/2-90px)]"
       />
       {/* Khung lớn popup */}
       <div
         className=" filter-[drop-shadow(rgb(255,252,110)_0px_0px_5px)]
-                  relative w-[400px] h-[350px] bg-[url('/static/modal.png')] bg-cover bg-center bg-no-repeat 
+                  relative w-[350px] h-[350px] bg-[url('/static/modal.png')] bg-cover bg-center bg-no-repeat 
                   rounded-[15px] border-4 border-white p-10 text-center text-white flex justify-center items-center 
                   shadow-[0_5px_20px_rgba(0,0,0,0.4)]"
       >
@@ -104,7 +104,7 @@ const AttentionWheelPopupComponent: React.FC<AttentionWheelPopupProps> = ({
         src="/static/boy.png"
         alt="Boy"
         className="absolute h-auto z-[5] transition-all duration-300 ease-in-out
-                    w-[100px] mt-[120px] right-[calc(50%-var(--wheel-wrapper-size)/2-40px)]
+                    w-[100px] mt-[120px] right-[calc(50%-var(--wheel-wrapper-size)/2-20px)]
                     md:w-[120px] md:mt-[180px] md:right-[calc(50%-var(--wheel-wrapper-size)/2-80px)]
                     lg:w-[140px] lg:mt-[200px] lg:right-[calc(50%-var(--wheel-wrapper-size)/2-90px)]"
       />

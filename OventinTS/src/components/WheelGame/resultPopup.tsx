@@ -53,7 +53,7 @@ const ResultPopupComponent: React.FC<ResultPopupProps> = ({
             {prize?.name || "Chúc bạn may mắn lần sau"}
           </p>
           <small className="text-lg md:text-[1.5rem] font-black m-0 min-h-[50px] text-[#233da3]">
-            {prize ? `_ ID: ${prize.id}` : ""}
+            {prize ? `_ ID: ${prize.name}` : ""}
           </small>
           <button
             className="absolute bottom-[-70px] left-1/2 -translate-x-1/2 bg-[#f85a00] text-white border-2 border-white 

@@ -76,12 +76,10 @@ const RateTablePopupComponent: React.FC<RateTablePopupProps> = ({
     onClose(); // Đóng popup
   };
 
-  if (!isOpen) {
-    return null;
-  }
-
   return (
-    <div className="fixed top-0 left-0 w-[100%] h-[100%] bg-[black]/60 flex justify-center items-center z-[1002]">
+    <div className={`fixed inset-0 flex items-center justify-center bg-black/60 z-[1002] transition-opacity duration-300 ${
+      isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+    }`}>
       <div
         className="flex justify-center items-center flex-col 
                 relative w-[90%] max-w-[500px] bg-[#f85a00] border-4 border-white border-solid rounded-[15px] p-[20px] text-white

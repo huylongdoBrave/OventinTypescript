@@ -160,14 +160,14 @@ function Header() {
 
       {/* Header for Tablet and Mobile */}
       <header className="sticky top-0 z-[1001] lg:hidden h-[70px] mb-2.5">
-        <nav className="h-[70px] md:h-[70px] flex justify-between items-center
+        <nav className="h-[70px] md:h-[60px] flex justify-between items-center
          bg-[#233da3] text-white px-2 md:px-4">
           <div className="flex items-center h-full">
             <Link to="/" className="flex items-center">
               <img
-                src="https://ovaltine-website-dev.estuary.solutions/img/brand/logo.png"
+                src="./static/favicon_oven.png"
                 alt="Oventin Logo"
-                className="h-[50px] md:h-[70px] absolute md:bottom-[0px] [overflow-clip-margin:content-box]
+                className="h-[50px] md:h-[80px] absolute md:top-[20px] [overflow-clip-margin:content-box]
                           overflow-clip before:box-[inherit] cursor-pointer"
               />
             </Link>
@@ -227,7 +227,7 @@ function Header() {
             >
               {({ isActive }) => (
                 <div
-                  className={`bottom-[35px] relative w-[80px] h-[70px] bg-[#233da3] text-white rounded-lg 
+                  className={`bottom-[35px] relative w-[70px] h-[70px] bg-[#233da3] text-white rounded-lg 
                     flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[#1a2b7a] ${
                       isActive ? "bg-[#ff4109]" : ""
                     }`}
@@ -250,7 +250,7 @@ function Header() {
               className="flex items-center w-full h-full no-underline box-border"
             >
               <div
-                className="bottom-[35px] relative w-[80px] h-[70px] bg-[#233da3] text-white rounded-lg 
+                className="bottom-[35px] relative w-[70px] h-[70px] bg-[#233da3] text-white rounded-lg 
                     flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[#1a2b7a]"
               >
                 <img
@@ -270,7 +270,7 @@ function Header() {
             >
               {({ isActive }) => (
                 <div
-                  className={`bottom-[35px] relative w-[80px] h-[70px] bg-[#233da3] text-white rounded-lg 
+                  className={`bottom-[35px] relative w-[70px] h-[70px] bg-[#233da3] text-white rounded-lg 
                         flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[#1a2b7a] ${
                           isActive ? "bg-[#ff4109]" : ""
                         }`}
@@ -291,7 +291,7 @@ function Header() {
               className="flex items-center w-full h-full no-underline box-border"
             >
               <div
-                className="bottom-[35px] relative w-[80px] h-[70px] bg-[#233da3] text-white rounded-lg 
+                className="bottom-[35px] relative w-[70px] h-[70px] bg-[#233da3] text-white rounded-lg 
                     flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[#1a2b7a]"
               >
                 <img

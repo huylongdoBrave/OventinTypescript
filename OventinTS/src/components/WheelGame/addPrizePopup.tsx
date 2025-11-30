@@ -85,8 +85,17 @@ const AddPrizePopupComponent: React.FC<AddPrizePopupProps> = ({
       return;
     }
 
-    const newId =
-      prizes.length > 0 ? Math.max(...prizes.map((p) => p.id)) + 1 : 1;
+    // Tìm ID nhỏ nhất còn trống để tái sử dụng
+    const existingIds = new Set(prizes.map((p) => p.id));
+    let newId = 1;
+    // Bắt đầu từ 1, tìm số nguyên đầu tiên không có trong danh sách ID hiện có
+    while (existingIds.has(newId)) {
+      newId++;
+    }
+    // Nếu không có "lỗ hổng" nào, ID mới sẽ là `prizes.length + 1`.
+    // Vòng lặp trên đã tự động xử lý trường hợp này.
+    // Ví dụ: prizes có id [1, 2, 3], existingIds.size là 3. Vòng lặp sẽ chạy đến khi newId = 4.
+
 
     const newPrize: Prize = {
       id: newId,
@@ -101,12 +110,13 @@ const AddPrizePopupComponent: React.FC<AddPrizePopupProps> = ({
     onClose(); // Đóng popup
   };
 
-  if (!isOpen) {
-    return null;
-  }
-
   return (
-    <div className="fixed inset-0 z-[1002] flex items-center justify-center bg-[black]/60 opacity-100">
+    // Cũ
+    // <div className="fixed inset-0 z-[1002] flex items-center justify-center bg-[black]/60 opacity-100">
+
+    <div className={`fixed inset-0 z-[1002] flex items-center justify-center bg-black/60 transition-opacity duration-300 ${
+      isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+    }`}>
       <div className="relative w-11/12 max-w-lg rounded-2xl border-4 border-white bg-[#f85a00] p-5 pt-10 text-white shadow-lg">
         <button
           className="absolute top-1 right-4 cursor-pointer border-none bg-transparent text-5xl font-light leading-none text-white"

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 // import Draggable from "react-draggable";
+// import { AnimatePresence } from "framer-motion";
 import ButtonOrange from "../Button/buttonOrange.tsx";
 
 import Wheel from "./wheel.tsx";
@@ -152,6 +153,22 @@ function WheelGame() {
     loadPrizes();
   }, []);
 
+  // Effect để đặt góc xoay ban đầu cho vòng quay
+  useEffect(() => {
+    if (prizes.length > 0 && wheelRef.current) {
+      const sliceCount = prizes.length;
+      const sliceAngle = 360 / sliceCount;
+      // Góc bù để mũi tên trỏ vào giữa ô đầu tiên thay vì viền
+      const initialRotation = sliceAngle / 2;
+
+      // Tắt transition, xoay về vị trí ban đầu, rồi bật lại transition
+      wheelRef.current.style.transition = "none";
+      wheelRef.current.style.transform = `rotate(${initialRotation}deg)`;
+      // Dùng setTimeout để đảm bảo trình duyệt đã áp dụng transform trước khi bật lại transition
+      setTimeout(() => { if(wheelRef.current) wheelRef.current.style.transition = ""; }, 50);
+    }
+  }, [prizes]); // Chạy lại khi 'prizes' được tải
+  
   // Effect quản lý class 'body-no-scroll' khi popup mở/đóng
   useEffect(() => {
     if (
@@ -276,7 +293,7 @@ function WheelGame() {
             <p className="text-xl font-black text-[rgb(35,61,163)] mt-[20px] text-center">
               Bạn còn{" "}
               <span id="spin-count" style={{ color: "white" }}>
-                {currentSpins}
+                {currentSpins.toLocaleString()}
               </span>{" "}
               lượt quay!
             </p>
@@ -394,6 +411,18 @@ function WheelGame() {
         onAddPrize={handleAddPrize}
       />
 
+      {/* Nút animation */}
+      {/* <AnimatePresence initial={false} mode="wait">
+        {isAddPrizePopupOpen && (
+          <AddPrizePopup
+            isOpen={isAddPrizePopupOpen}
+            prizes={prizes}
+            onClose={closeAddPrizePopup}
+            onAddPrize={handleAddPrize}
+          />
+        )}
+      </AnimatePresence> */}
+      
       {/* SETUP BUTTONS */}
       <div className="show-button-container">
         <div className="button-group-top">
