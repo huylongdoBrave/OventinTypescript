@@ -1,6 +1,9 @@
 import React, { useState, useMemo, useEffect, memo, useCallback } from "react";
 import { ReactSortable } from "react-sortablejs";
-import type { Prize } from "./wheelGame"; // Import kiểu Prize
+import type { Prize } from "./wheelGame";
+
+
+//    ====== UI POPUP BẢNG TỈ LỆ TRANG OVALTINE ======
 
 interface RateTablePopupProps {
   isOpen: boolean;
@@ -15,7 +18,6 @@ const RateTablePopupComponent: React.FC<RateTablePopupProps> = ({
   onClose,
   onApplyChanges,
 }) => {
-  
   const [tempPrizes, setTempPrizes] = useState<Prize[]>(prizes);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -35,6 +37,7 @@ const RateTablePopupComponent: React.FC<RateTablePopupProps> = ({
     );
   }, [tempPrizes]);
 
+
   // Cập nhật tỉ lệ của quà
   const handlePrizeChange = useCallback(
     (id: number, field: keyof Prize, value: string) => {
@@ -50,6 +53,7 @@ const RateTablePopupComponent: React.FC<RateTablePopupProps> = ({
       })
       );
     }, []);
+
 
   // Xóa quà
   const handleDeletePrize = useCallback((id: number, name: string) => {
@@ -76,6 +80,7 @@ const RateTablePopupComponent: React.FC<RateTablePopupProps> = ({
     onClose(); // Đóng popup
   };
 
+
   return (
     <div className={`fixed inset-0 flex items-center justify-center bg-black/60 z-[1002] transition-opacity duration-300 
       ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -84,7 +89,8 @@ const RateTablePopupComponent: React.FC<RateTablePopupProps> = ({
         className="flex justify-center items-center flex-col 
                 relative w-[90%] max-w-[500px] bg-[#f85a00] border-4 border-white border-solid rounded-[15px] p-[20px] text-white
                 shadow-[0_5px_20px_rgba(0,0,0,0.4)]"
-      >
+      > 
+        {/* Nút đóng */}
         <button
           id="probabilities-close-btn"
           className="absolute top-[5px] right-[15px] bg-none border-none 
@@ -93,10 +99,11 @@ const RateTablePopupComponent: React.FC<RateTablePopupProps> = ({
         >
           &times;
         </button>
+        {/* Bảng tỉ lệ */}
         <h3 className="text-center text-2xl font-bold mb-4">Bảng Tỉ Lệ Trúng Thưởng</h3>
         <div className="w-full">
           <div id="max-h-[50vh] overflow-y-auto pr-2">
-            {/* Dùng ReactSortables để bọc các item có thể kéo thả */}
+            {/* Dùng ReactSortables để bọc các item để kéo thả */}
             <ReactSortable
               list={tempPrizes}
               setList={setTempPrizes}
@@ -176,6 +183,7 @@ const RateTablePopupComponent: React.FC<RateTablePopupProps> = ({
             </ReactSortable>
           </div>
         </div>
+        {/* Tổng tỉ lệ */}
         <p
           id="probabilities-total"
           style={{
@@ -186,6 +194,7 @@ const RateTablePopupComponent: React.FC<RateTablePopupProps> = ({
         >
           Tổng tỉ lệ: {totalProbability.toFixed(2)}%
         </p>
+        {/* Nút cập nhật */}
         <center>
           <button
             id="apply-probabilities-btn"

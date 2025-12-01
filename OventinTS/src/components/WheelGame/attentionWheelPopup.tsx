@@ -1,5 +1,7 @@
 import React, { memo } from "react";
 
+//    ====== UI POPUP THÔNG BÁO KHI VÀO TRANG OVALTINE ======
+
 interface AttentionWheelPopupProps {
   isOpen: boolean;
   onClose: () => void;

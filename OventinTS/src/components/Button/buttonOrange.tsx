@@ -1,5 +1,9 @@
 import React, { memo } from 'react';
 
+
+//    ====== UI BUTTON MÀU CAM TRANG OVALTINE ======
+
+
 // React.ButtonHTMLAttributes<HTMLButtonElement> cho phép components nhận tất cả các thuộc tính của thẻ <button> HTML (onClick, disabled, type,...)
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode; // 'children' là nội dung nằm giữa thẻ <Button>...</Button>

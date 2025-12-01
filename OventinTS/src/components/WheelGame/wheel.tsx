@@ -1,5 +1,8 @@
 import { useMemo, memo } from "react";
-import type { Prize } from "./wheelGame"; // Import kiểu Prize từ file wheelgame
+import type { Prize } from "./wheelGame"; 
+
+
+//    ====== UI MẢNH TỰ TẠO CỦA VÒNG XOAY TRANG OVALTINE ======
 
 interface WheelProps {
   prizes: Prize[];
@@ -17,7 +20,8 @@ const WheelComponent: React.FC<WheelProps> = ({
   // useMemo để chỉ tính toán lại khi sliceAngle thay đổi.
   const dynamicWidth = useMemo(() => {
 
-    // Công thức cũ    const containerWheelSize = 360; // Giả sử kích thước vòng quay là 360px như trong CSS
+    // Công thức cũ  
+    // const containerWheelSize = 360; // Giả sử kích thước vòng quay là 360px như trong CSS
     // // Công thức: đường kính * sin(góc ở tâm / 2).
     // // Nhân với 1.05 để bù vào lỗi làm tròn của trình duyệt, giúp các ô khít vào nhau.
     // return (
@@ -27,8 +31,8 @@ const WheelComponent: React.FC<WheelProps> = ({
     const containerWheelSize = 360; // Kích thước vòng quay (đường kính) là 360px như trong CSS
     const radius = containerWheelSize / 2;
     const angleInRadians = (sliceAngle / 2) * (Math.PI / 180);
-    // Công thức lượng giác chính xác: width = 2 * radius * tan(angle/2)
-    // Điều này đảm bảo các cạnh của các ô tam giác sẽ khít vào nhau.
+    // Công thức lượng giác: width = 2 * radius * tan(angle/2)
+    // Để các cạnh của các ô tam giác sẽ sát vào nhau.
     return 2 * radius * Math.tan(angleInRadians);
   }, [sliceAngle]);
 
@@ -92,5 +96,5 @@ const WheelComponent: React.FC<WheelProps> = ({
   );
 };
 
-// Bọc component bằng React.memo để ngăn re-render không cần thiết
+// Bọc component bằng React.memo để ngăn re-render 
 export default memo(WheelComponent);

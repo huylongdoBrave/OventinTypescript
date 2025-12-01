@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useMemo, memo } from "react";
 import type { Prize } from "./wheelGame"; // Import kiểu Prize
 
+
+//     ====== UI POPUP BẢNG THÊM 1 MÓN PRIZE TRANG OVALTINE ======
+
 interface AddPrizePopupProps {
   isOpen: boolean;
   prizes: Prize[];
@@ -29,7 +32,6 @@ const AddPrizePopupComponent: React.FC<AddPrizePopupProps> = ({
   onClose,
   onAddPrize,
 }) => {
-  
   const [formData, setFormData] = useState<FormDataState>(INITIAL_FORM_STATE);
 
   // Reset form khi popup đóng
@@ -39,6 +41,7 @@ const AddPrizePopupComponent: React.FC<AddPrizePopupProps> = ({
       setFormData(INITIAL_FORM_STATE);
     }
   }, [isOpen]);
+
 
   //Tính tổng tỉ lệ
   const totalProbability = useMemo(() => {
@@ -50,17 +53,19 @@ const AddPrizePopupComponent: React.FC<AddPrizePopupProps> = ({
       );
     }, [prizes]);
 
+  // Xử lý thay đổi trong form
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Hàm xác định loại quà dựa trên giá trị nhập vào
   const detectPrizeType = (value: string): "image" | "text" => {
     const imageRegex = /\.(jpeg|jpg|gif|png|svg|webp)$/i;
     return imageRegex.test(value) ? "image" : "text";
   };
 
-  
+  // Xử lý submit form
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const name = formData.name.trim();
@@ -92,8 +97,7 @@ const AddPrizePopupComponent: React.FC<AddPrizePopupProps> = ({
     while (existingIds.has(newId)) {
       newId++;
     }
-    // Nếu không có "lỗ hổng" nào, ID mới sẽ là `prizes.length + 1`.
-    // Vòng lặp trên đã tự động xử lý trường hợp này.
+    // Nếu không có "lỗ hổng" nào, ID mới sẽ là `prizes.length + 1`..
     // Ví dụ: prizes có id [1, 2, 3], existingIds.size là 3. Vòng lặp sẽ chạy đến khi newId = 4.
 
 
@@ -110,6 +114,7 @@ const AddPrizePopupComponent: React.FC<AddPrizePopupProps> = ({
     onClose(); // Đóng popup
   };
 
+  
   return (
     // Cũ
     // <div className="fixed inset-0 z-[1002] flex items-center justify-center bg-[black]/60 opacity-100">

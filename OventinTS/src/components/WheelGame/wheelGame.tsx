@@ -9,7 +9,9 @@ import RateTablePopup from "./rateTablePopup.tsx";
 import AddPrizePopup from "./addPrizePopup.tsx";
 import AttentionWheelPopup from "./attentionWheelPopup.tsx";
 
-// --- TYPE DEFINITIONS ---
+
+//    ====== UI VÒNG XOAY TỔNG THỂ TRANG OVALTINE ======
+
 
 export interface Prize {
   id: number;
@@ -44,7 +46,8 @@ function WheelGame() {
   //   // State cho popup right kéo thả
   // const [isStickyPopupRight, setIsStickyPopupRight] = useState(true);
 
-  // === DATA LOADING (useEffect) ===
+
+  // === Khởi tạo dữ liệu, lấy dữ liệu mock || dữ liệu api ===
   useEffect(() => {
     const loadPrizes = async () => {
       const LOCAL_STORAGE_KEY = "oventinPrizes";
@@ -153,6 +156,7 @@ function WheelGame() {
     loadPrizes();
   }, []);
 
+
   // Effect để đặt góc xoay ban đầu cho vòng quay
   useEffect(() => {
     if (prizes.length > 0 && wheelRef.current) {
@@ -169,6 +173,7 @@ function WheelGame() {
     }
   }, [prizes]); // Chạy lại khi 'prizes' được tải
   
+
   // Effect quản lý class 'body-no-scroll' khi popup mở/đóng
   useEffect(() => {
     if (
@@ -186,6 +191,7 @@ function WheelGame() {
   }, [
     isResultPopupOpen,isRatePopupOpen,isAddPrizePopupOpen,isAttentionPopupOpen,
   ]);
+
 
   // === Sự kiện quay ===
   const handleSpin = () => {
@@ -223,6 +229,7 @@ function WheelGame() {
     }, spinDuration * 1000);
   };
 
+
   // === Tính bảo hiểm khi quay ===
   const getWeightedRandomIndex = () => {
     const probabilities = prizes.map((p) => p.probability);
@@ -249,12 +256,14 @@ function WheelGame() {
     return prizes.length - 1;
   };
 
+
   //Cập nhật quà
   const handleApplyPrizeChanges = useCallback((updatedPrizes: Prize[]) => {
       setPrizes(updatedPrizes);
       localStorage.setItem("oventinPrizes", JSON.stringify(updatedPrizes));
       alert("Đã cập nhật thành công!");
     }, []); // Dependency rỗng vì hàm này không phụ thuộc vào state/props nào từ bên ngoài
+
 
   //Thêm quà
   const handleAddPrize = useCallback((newPrize: Prize) => {
@@ -266,14 +275,18 @@ function WheelGame() {
       });
     }, []); // Dependency rỗng, dùng functional update cho setPrizes
 
+
   // Các hàm đóng popup
   const closeAttentionPopup = useCallback(() => setIsAttentionPopupOpen(false), []);
   const closeResultPopup = useCallback(() => setIsResultPopupOpen(false), []);
   const closeRatePopup = useCallback(() => setIsRatePopupOpen(false), []);
   const closeAddPrizePopup = useCallback(() => setIsAddPrizePopupOpen(false), []);
 
+  // Data chấm sáng vòng xoay
   const translateY = -195;
   const lights = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
+
+
   return (
     <>
       <main>
@@ -361,7 +374,7 @@ function WheelGame() {
                   />
                 ))}
               </div>
-
+                {/* Vòng xoay */}
               <div ref={wheelRef}>
                 <Wheel prizes={prizes} />
               </div>
@@ -423,10 +436,11 @@ function WheelGame() {
         )}
       </AnimatePresence> */}
       
-      {/* SETUP BUTTONS */}
+      {/* Các thiết lập nút */}
       <div className="show-button-container">
         <div className="button-group-top">
-          {/* DẠNG CŨ x <button id="show-probabilities-btn" className="btn-action" onClick={() => setIsRatePopupOpen(true)}
+          {/* DẠNG CŨ x
+           <button id="show-probabilities-btn" className="btn-action" onClick={() => setIsRatePopupOpen(true)}
            disabled={isSpinning} style={{ cursor: isSpinning ? 'not-allowed' : 'pointer' }}>Tỉ lệ</button>
           <button id="add-prize-btn" className="btn-action" onClick={() => setIsAddPrizePopupOpen(true)}
            disabled={isSpinning} style={{ cursor: isSpinning ? 'not-allowed' : 'pointer' }}>Thêm quà</button> */}
@@ -468,8 +482,8 @@ function WheelGame() {
           </button>
         </div>
 
-        {/* popup handle sticky */}
-          {/* img sticky left */}
+        {/* Popup thông báo treo */}
+        {/* img sticky left */}
         {/* <div className="flex justify-center gap-[20px] ">
           {isStickyPopupLeft && (
             <div
@@ -500,7 +514,7 @@ function WheelGame() {
           )}
         </div> */}
 
-          {/* img sticky right */}
+        {/* img sticky right */}
         {/* <div className="flex justify-center gap-[20px] ">
           {isStickyPopupRight && (
             <div
