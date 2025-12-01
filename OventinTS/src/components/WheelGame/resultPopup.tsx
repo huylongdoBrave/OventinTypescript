@@ -7,6 +7,8 @@ import React, { memo } from "react";
 interface Prize {
   id: string | number;
   name: string;
+  type: "text" | "image";
+  value: string;
 }
 
 interface ResultPopupProps {
@@ -54,9 +56,20 @@ const ResultPopupComponent: React.FC<ResultPopupProps> = ({
           <p className="text-lg md:text-[1.5rem] font-black m-0 min-h-[50px] text-[#233da3]">
             {prize?.name || "Chúc bạn may mắn lần sau"}
           </p>
-          <small className="text-lg md:text-[1.5rem] font-black m-0 min-h-[50px] text-[#233da3]">
+          <div className=" w-auto h-auto flex justify-center items-center">
+            {prize?.type === "image" ? (
+              <img
+                src={prize?.value}
+                className="w-10 h-10 object-contain"
+                alt="Preview"
+              />
+            ) : (
+              <span className="text-xs truncate">{prize?.value}</span>
+            )}
+          </div>
+          {/* <small className="text-lg md:text-[1.5rem] font-black m-0 min-h-[50px] text-[#233da3]">
             {prize?.name}
-          </small>
+          </small> */}
           <button
             className="absolute bottom-[-70px] left-1/2 -translate-x-1/2 bg-[#f85a00] text-white border-2 border-white 
                             py-2.5 w-[200px] rounded-[20px] font-bold cursor-pointer text-lg transition-all duration-200 

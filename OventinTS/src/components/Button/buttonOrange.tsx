@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
 
-//    ====== UI BUTTON MÀU CAM TRANG OVALTINE ======
+//    ====== CSS BUTTON MÀU CAM TRANG OVALTINE ======
 
 
 // React.ButtonHTMLAttributes<HTMLButtonElement> cho phép components nhận tất cả các thuộc tính của thẻ <button> HTML (onClick, disabled, type,...)

@@ -20,12 +20,14 @@ const RateTablePopupComponent: React.FC<RateTablePopupProps> = ({
 }) => {
   const [tempPrizes, setTempPrizes] = useState<Prize[]>(prizes);
 
+  
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (isOpen) {
       setTempPrizes(JSON.parse(JSON.stringify(prizes)));
     }
   }, [isOpen, prizes]);
+
 
   // Tính tổng tỉ lệ mỗi khi tempPrizes thay đổi
   const totalProbability = useMemo(() => {

@@ -53,17 +53,20 @@ const AddPrizePopupComponent: React.FC<AddPrizePopupProps> = ({
       );
     }, [prizes]);
 
+    
   // Xử lý thay đổi trong form
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+
   // Hàm xác định loại quà dựa trên giá trị nhập vào
   const detectPrizeType = (value: string): "image" | "text" => {
     const imageRegex = /\.(jpeg|jpg|gif|png|svg|webp)$/i;
     return imageRegex.test(value) ? "image" : "text";
   };
+
 
   // Xử lý submit form
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

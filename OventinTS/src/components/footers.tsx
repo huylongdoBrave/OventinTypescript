@@ -6,7 +6,7 @@
 function Footer(){
   return (
     <footer className="bg-[#ff4109] text-white pt-5 w-[100%]">
-                {/* CŨ <div className="container mx-auto px-1 w-[90%] sm:w-[50%] lg:w-[50%]"></div> */}
+      {/* CŨ <div className="container mx-auto px-1 w-[90%] sm:w-[50%] lg:w-[50%]"></div> */}
       {/* === Footer cho Desktop (hiển thị từ size lg trở lên) === */}
       <div className="hidden lg:block">
         <div className="container mx-auto px-4 w-full max-w-4xl">
@@ -60,9 +60,9 @@ function Footer(){
             <div className="grid grid-cols-2 gap-x-4 gap-y-6 text-sm">
               {/* Social links */}
               <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/fb.png" className='w-4' alt="" /><span>/Ovaltine Vietnam</span></a>
-              <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/tiktok.png" className='w-5 h-5' alt="" /><span>/Ovaltine Vietnam</span></a>
+              <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/tiktok.png" className='w-4 h-5' alt="" /><span>/Ovaltine Vietnam</span></a>
               <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/shopee.png" className='w-4' alt="" /><span>/Ovaltine Vietnam</span></a>
-              <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/tiktok-shop.png" className='w-5 h-5' alt="" /><span>/Ovaltine Vietnam</span></a>
+              <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/tiktok-shop.png" className='w-4 h-5' alt="" /><span>/Ovaltine Vietnam</span></a>
               <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/lazada.png" className="w-4" alt="" /><span>/Ovaltine Vietnam</span></a>
               <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/phone.png" className="w-4" alt="" /><span>/19005306</span></a>
               

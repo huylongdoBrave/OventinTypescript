@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-// import Draggable from "react-draggable";
+import Draggable from "react-draggable";
 // import { AnimatePresence } from "framer-motion";
 import ButtonOrange from "../Button/buttonOrange.tsx";
 
@@ -28,8 +28,8 @@ function WheelGame() {
   const [currentSpins, setCurrentSpins] = useState(5);
   const [isSpinning, setIsSpinning] = useState(false);
   const wheelRef = useRef<HTMLDivElement>(null); // Ref để tham chiếu đến DOM của vòng quay
-  // const dragRefLeft = useRef(null); // Ref cho popup kéo thả BÊN TRÁI
-  // const dragRefRight = useRef(null); // Ref cho popup kéo thả BÊN PHẢI
+  const dragRefLeft = useRef(null); // Ref cho popup kéo thả BÊN TRÁI
+  const dragRefRight = useRef(null); // Ref cho popup kéo thả BÊN PHẢI
 
   // State các popup
   const [winningPrize, setWinningPrize] = useState<Prize | null>(null);
@@ -42,9 +42,9 @@ function WheelGame() {
   // attention popup
   const [isAttentionPopupOpen, setIsAttentionPopupOpen] = useState(true);
   // // State cho popup left kéo thả
-  // const [isStickyPopupLeft, setIsStickyPopupLeft] = useState(true);
+  const [isStickyPopupLeft, setIsStickyPopupLeft] = useState(true);
   //   // State cho popup right kéo thả
-  // const [isStickyPopupRight, setIsStickyPopupRight] = useState(true);
+  const [isStickyPopupRight, setIsStickyPopupRight] = useState(true);
 
 
   // === Khởi tạo dữ liệu, lấy dữ liệu mock || dữ liệu api ===
@@ -484,7 +484,7 @@ function WheelGame() {
 
         {/* Popup thông báo treo */}
         {/* img sticky left */}
-        {/* <div className="flex justify-center gap-[20px] ">
+        <div className="flex justify-center gap-[20px] ">
           {isStickyPopupLeft && (
             <div
               className="fixed z-[1000] cursor-pointer 
@@ -512,10 +512,10 @@ function WheelGame() {
               </Draggable>
             </div>
           )}
-        </div> */}
+        </div>
 
         {/* img sticky right */}
-        {/* <div className="flex justify-center gap-[20px] ">
+        <div className="flex justify-center gap-[20px] ">
           {isStickyPopupRight && (
             <div
               className="fixed z-[1000] cursor-pointer 
@@ -543,7 +543,7 @@ function WheelGame() {
               </Draggable>
             </div>
           )}
-        </div> */}
+        </div>
 
 
       </div>
@@ -558,3 +558,5 @@ export default WheelGame;
 // interface ResultPopupProps { isOpen: boolean; prize: Prize | null; onClose: () => void; }
 // interface RateTablePopupProps { isOpen: boolean; prizes: Prize[]; onClose: () => void; onApplyChanges: (updatedPrizes: Prize[]) => void; }
 // interface AddPrizePopupProps { isOpen: boolean; prizes: Prize[]; onClose: () => void; onAddPrize: (newPrize: Prize) => void; }
+
+

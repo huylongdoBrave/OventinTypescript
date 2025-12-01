@@ -133,3 +133,4 @@ const AttentionWheelPopupComponent: React.FC<AttentionWheelPopupProps> = ({
 };
 
 export default memo(AttentionWheelPopupComponent);
+
