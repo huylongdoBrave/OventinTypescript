@@ -94,12 +94,11 @@ const AddPrizePopupComponent: React.FC<AddPrizePopupProps> = ({
     const existingIds = new Set(prizes.map((p) => p.id));
     let newId = 1;
     // Bắt đầu từ 1, tìm số nguyên đầu tiên không có trong danh sách ID hiện có
+    // Nếu không có chỗ trống nào, ID mới sẽ là `prizes.length + 1`..
+    // Ví dụ: prizes có id [1, 2, 3], existingIds.size là 3. Vòng lặp sẽ chạy đến khi newId = 4.
     while (existingIds.has(newId)) {
       newId++;
     }
-    // Nếu không có "lỗ hổng" nào, ID mới sẽ là `prizes.length + 1`..
-    // Ví dụ: prizes có id [1, 2, 3], existingIds.size là 3. Vòng lặp sẽ chạy đến khi newId = 4.
-
 
     const newPrize: Prize = {
       id: newId,
@@ -114,7 +113,7 @@ const AddPrizePopupComponent: React.FC<AddPrizePopupProps> = ({
     onClose(); // Đóng popup
   };
 
-  
+
   return (
     // Cũ
     // <div className="fixed inset-0 z-[1002] flex items-center justify-center bg-[black]/60 opacity-100">
