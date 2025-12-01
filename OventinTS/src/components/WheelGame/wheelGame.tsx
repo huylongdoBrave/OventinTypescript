@@ -8,8 +8,8 @@ import ResultPopup from "./ResultPopup.tsx";
 import RateTablePopup from "./RateTable/RateTablePopup.tsx";
 import AddPrizePopup from "./AddPrizePopup.tsx";
 import AttentionWheelPopup from "./AttentionWheelPopup.tsx";
-import ImgLeftPopup from "../StickyHandlePopup/ImgLeftPopup.tsx";
-import ImgRightPopup from "../StickyHandlePopup/ImgRightPopup.tsx";
+import ImgLeftPopup from "./StickyHandlePopup/ImgLeftPopup.tsx";
+import ImgRightPopup from "./StickyHandlePopup/ImgRightPopup.tsx";
 
 
 //    ====== UI VÒNG XOAY TỔNG THỂ TRANG OVALTINE ======
@@ -344,9 +344,9 @@ function WheelGame() {
               src="/static/dolphine.png"
               alt="Dolphine"
               className="absolute z-[5] h-auto transition-all duration-300 ease-in-out
-                             w-[90px] bottom-[50px] left-[calc(50%-var(--wheel-wrapper-size)/2-10px)]
-                             md:w-[150px] md:bottom-auto md:mt-0 md:left-[10%]
-                             lg:bottom-[60px] lg:w-[200px] lg:left-[calc(50%-var(--wheel-wrapper-size)/2-250px)]"
+                            w-[90px] bottom-[50px] left-[calc(50%-var(--wheel-wrapper-size)/2-10px)]
+                            md:w-[150px] md:bottom-auto md:mt-0 md:left-[10%]
+                            lg:bottom-[60px] lg:w-[200px] lg:left-[calc(50%-var(--wheel-wrapper-size)/2-250px)]"
             />
             {/* <div className="absolute mb-5 flex h-[var(--wheel-wrapper-size)] w-[var(--wheel-wrapper-size)] 
                               items-center justify-center rounded-full border-[5px] border-[#004a8d] bg-[#002d6f] 
