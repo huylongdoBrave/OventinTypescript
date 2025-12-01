@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import Draggable from "react-draggable";
+// import Draggable from "react-draggable";
 // import { AnimatePresence } from "framer-motion";
 import ButtonOrange from "../Button/buttonOrange.tsx";
 
@@ -8,6 +8,8 @@ import ResultPopup from "./resultPopup.tsx";
 import RateTablePopup from "./RateTable/rateTablePopup.tsx";
 import AddPrizePopup from "./addPrizePopup.tsx";
 import AttentionWheelPopup from "./attentionWheelPopup.tsx";
+import ImgLeftPopup from "../StickyHandlePopup/imgLeftPopup.tsx";
+import ImgRightPopup from "../StickyHandlePopup/imgRightPopup.tsx";
 
 
 //    ====== UI VÒNG XOAY TỔNG THỂ TRANG OVALTINE ======
@@ -28,8 +30,8 @@ function WheelGame() {
   const [currentSpins, setCurrentSpins] = useState(5);
   const [isSpinning, setIsSpinning] = useState(false);
   const wheelRef = useRef<HTMLDivElement>(null); // Ref để tham chiếu đến DOM của vòng quay
-  const dragRefLeft = useRef(null); // Ref cho popup kéo thả BÊN TRÁI
-  const dragRefRight = useRef(null); // Ref cho popup kéo thả BÊN PHẢI
+  const dragRefLeft = useRef<HTMLDivElement>(null); // Ref cho popup kéo thả BÊN TRÁI
+  const dragRefRight = useRef<HTMLDivElement>(null); // Ref cho popup kéo thả BÊN PHẢI
 
   // State các popup
   const [winningPrize, setWinningPrize] = useState<Prize | null>(null);
@@ -282,6 +284,14 @@ function WheelGame() {
   const closeRatePopup = useCallback(() => setIsRatePopupOpen(false), []);
   const closeAddPrizePopup = useCallback(() => setIsAddPrizePopupOpen(false), []);
 
+    // Callbacks cho các nút đóng của popup kéo thả
+  const closeStickyPopupLeft = useCallback(() => setIsStickyPopupLeft(false), []);
+  const closeStickyPopupRight = useCallback(() => setIsStickyPopupRight(false), []);
+  // Callbacks for action buttons
+  const openRatePopup = useCallback(() => setIsRatePopupOpen(true), []);
+  const openAddPrizePopup = useCallback(() => setIsAddPrizePopupOpen(true), []);
+  const addSpins = useCallback(() => setCurrentSpins(currentSpins + 10), [currentSpins]);
+
   // Data chấm sáng vòng xoay
   const translateY = -195;
   const lights = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
@@ -312,10 +322,13 @@ function WheelGame() {
             </p>
           </div>
           <div className="add-spin-container" >
+            {/* Thêm lượt */}
             <ButtonOrange
               id="add-spins-btn"
                disabled={isSpinning}
-              onClick={() => setCurrentSpins(currentSpins + 10)}
+              // Dạng viết cũ gây rerender khi chưa truyền callback
+              //  onClick={() => setCurrentSpins(currentSpins + 10)}
+              onClick={addSpins}
               className="w-[120px] h-[40px] text-[16px] mt-2.5 mb-[20px] 
                         md:w-[135px] md:h-[45px] md:text-[18px] md:mb-[30px]
                         lg:w-[150px] lg:h-[50px] lg:text-[20px]"
@@ -447,7 +460,7 @@ function WheelGame() {
 
           <ButtonOrange
             id="show-probabilities-btn"
-            onClick={() => setIsRatePopupOpen(true)}
+            onClick={openRatePopup}
             disabled={isSpinning}
             className="h-[50px] w-[150px] text-base"
           >
@@ -456,7 +469,7 @@ function WheelGame() {
 
           <ButtonOrange
             id="add-prize-btn"
-            onClick={() => setIsAddPrizePopupOpen(true)}
+            onClick={openAddPrizePopup}
             disabled={isSpinning}
             className="h-[50px] w-[150px] text-base"
           >
@@ -482,68 +495,17 @@ function WheelGame() {
           </button>
         </div>
 
-        {/* Popup thông báo treo */}
-        {/* img sticky left */}
-        <div className="flex justify-center gap-[20px] ">
-          {isStickyPopupLeft && (
-            <div
-              className="fixed z-[1000] cursor-pointer 
-                            bottom-4 left-4"
-            >
-              <Draggable nodeRef={dragRefLeft}>
-                <div ref={dragRefLeft} className="relative w-fit">
-                  <button
-                    onClick={() => setIsStickyPopupLeft(false)}
-                    className="absolute top-[-10px] -right-2.5 z-10 w-6 h-6
-                     bg-orange-400 text-white rounded-full flex items-center
-                      justify-center text-lg font-bold leading-none hover:bg-orange-500
-                       transition-colors"
-                    aria-label="Đóng popup"
-                  >
-                    &times;
-                  </button>
-                  <img
-                    src="./static/moi-ban-be-nhan-ngay-10-ovocoins.webp"
-                    alt="Mời bạn bè nhận Ovocoins"
-                    className="w-[120px] h-[120px] object-contain
-                [-webkit-user-drag:none]"
-                  />
-                </div>
-              </Draggable>
-            </div>
-          )}
-        </div>
-
-        {/* img sticky right */}
-        <div className="flex justify-center gap-[20px] ">
-          {isStickyPopupRight && (
-            <div
-              className="fixed z-[1000] cursor-pointer 
-                            bottom-4 right-4"
-            >
-              <Draggable nodeRef={dragRefRight}>
-                <div ref={dragRefRight} className="relative w-fit">
-                  <button
-                    onClick={() => setIsStickyPopupRight(false)}
-                    className="absolute top-[-20px] -right-2.5 z-10 w-6 h-6
-                    bg-orange-400 text-white rounded-full flex items-center
-                      justify-center text-lg font-bold leading-none hover:bg-orange-500
-                      transition-colors"
-                    aria-label="Đóng popup"
-                  >
-                    &times;
-                  </button>
-                  <img
-                    src="./static/survey.png"
-                    alt="Mời bạn bè nhận Ovocoins"
-                    className="w-[120px] h-[120px] object-contain
-                [-webkit-user-drag:none]"
-                  />
-                </div>
-              </Draggable>
-            </div>
-          )}
-        </div>
+        {/* Popup thông báo kéo thả */}
+        <ImgLeftPopup
+          isOpen={isStickyPopupLeft}
+          onClose={closeStickyPopupLeft}
+          dragRef={dragRefLeft}
+        />
+        <ImgRightPopup
+          isOpen={isStickyPopupRight}
+          onClose={closeStickyPopupRight}
+          dragRef={dragRefRight}
+        />
 
 
       </div>
@@ -560,3 +522,65 @@ export default WheelGame;
 // interface AddPrizePopupProps { isOpen: boolean; prizes: Prize[]; onClose: () => void; onAddPrize: (newPrize: Prize) => void; }
 
 
+
+// {/* img sticky left */}
+//         <div className="flex justify-center gap-[20px] ">
+//           {isStickyPopupLeft && (
+//             <div
+//               className="fixed z-[1000] cursor-pointer 
+//                             bottom-4 left-4"
+//             >
+//               <Draggable nodeRef={dragRefLeft}>
+//                 <div ref={dragRefLeft} className="relative w-fit">
+//                   <button
+//                     onClick={() => setIsStickyPopupLeft(false)}
+//                     className="absolute top-[-10px] -right-2.5 z-10 w-6 h-6
+//                      bg-orange-400 text-white rounded-full flex items-center
+//                       justify-center text-lg font-bold leading-none hover:bg-orange-500
+//                        transition-colors"
+//                     aria-label="Đóng popup"
+//                   >
+//                     &times;
+//                   </button>
+//                   <img
+//                     src="./static/moi-ban-be-nhan-ngay-10-ovocoins.webp"
+//                     alt="Mời bạn bè nhận Ovocoins"
+//                     className="w-[120px] h-[120px] object-contain
+//                 [-webkit-user-drag:none]"
+//                   />
+//                 </div>
+//               </Draggable>
+//             </div>
+//           )}
+//         </div>
+
+//         {/* img sticky right */}
+//         <div className="flex justify-center gap-[20px] ">
+//           {isStickyPopupRight && (
+//             <div
+//               className="fixed z-[1000] cursor-pointer 
+//                             bottom-4 right-4"
+//             >
+//               <Draggable nodeRef={dragRefRight}>
+//                 <div ref={dragRefRight} className="relative w-fit">
+//                   <button
+//                     onClick={() => setIsStickyPopupRight(false)}
+//                     className="absolute top-[-20px] -right-2.5 z-10 w-6 h-6
+//                     bg-orange-400 text-white rounded-full flex items-center
+//                       justify-center text-lg font-bold leading-none hover:bg-orange-500
+//                       transition-colors"
+//                     aria-label="Đóng popup"
+//                   >
+//                     &times;
+//                   </button>
+//                   <img
+//                     src="./static/survey.png"
+//                     alt="Mời bạn bè nhận Ovocoins"
+//                     className="w-[120px] h-[120px] object-contain
+//                 [-webkit-user-drag:none]"
+//                   />
+//                 </div>
+//               </Draggable>
+//             </div>
+//           )}
+//         </div>
