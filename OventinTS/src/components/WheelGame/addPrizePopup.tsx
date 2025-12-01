@@ -53,7 +53,7 @@ const AddPrizePopupComponent: React.FC<AddPrizePopupProps> = ({
       );
     }, [prizes]);
 
-    
+  
   // Xử lý thay đổi trong form
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

@@ -112,7 +112,7 @@ const AttentionWheelPopupComponent: React.FC<AttentionWheelPopupProps> = ({
       />
     </div>
 
-    /* DẠNG CŨ */
+    /* DẠNG THÔNG BÁO CŨ */
     // <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-[1003]">
     //   <div className="relative w-11/12 max-w-md bg-white rounded-2xl p-8 text-center shadow-2xl animate-fade-in-down">
     //     <h2 className="text-2xl font-bold text-[#f85a00] mb-4">

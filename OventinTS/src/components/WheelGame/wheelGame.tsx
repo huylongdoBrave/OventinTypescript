@@ -5,7 +5,7 @@ import ButtonOrange from "../Button/buttonOrange.tsx";
 
 import Wheel from "./wheel.tsx";
 import ResultPopup from "./resultPopup.tsx";
-import RateTablePopup from "./rateTablePopup.tsx";
+import RateTablePopup from "./RateTable/rateTablePopup.tsx";
 import AddPrizePopup from "./addPrizePopup.tsx";
 import AttentionWheelPopup from "./attentionWheelPopup.tsx";
 
@@ -43,7 +43,7 @@ function WheelGame() {
   const [isAttentionPopupOpen, setIsAttentionPopupOpen] = useState(true);
   // // State cho popup left kéo thả
   const [isStickyPopupLeft, setIsStickyPopupLeft] = useState(true);
-  //   // State cho popup right kéo thả
+  // State cho popup right kéo thả
   const [isStickyPopupRight, setIsStickyPopupRight] = useState(true);
 
 

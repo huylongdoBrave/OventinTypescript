@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect, memo, useCallback } from "react";
 import { ReactSortable } from "react-sortablejs";
-import type { Prize } from "./wheelGame";
+import type { Prize } from "../wheelGame";
+import {PrizeRow} from "../RateTable/prizeRow.tsx";
 
 
 //    ====== UI POPUP BẢNG TỈ LỆ TRANG OVALTINE ======
@@ -68,19 +69,19 @@ const RateTablePopupComponent: React.FC<RateTablePopupProps> = ({
 
 
   // Cảnh báo sửa bị tràn tỉ lệ
-  const handleApply = () => {
-    if (totalProbability > 100.01) {
-      alert(
-        `Cảnh báo tỉ lệ đang ${totalProbability.toFixed(2)}% . Vui lòng chỉnh tổng dưới 100%`
-      );
-      return;
-    } else if (totalProbability == 0) {
-      alert("Tổng tỉ lệ không thể bằng 0%. Hãy nhập lớn 0.");
-      return;
-    }
-    onApplyChanges(tempPrizes); // Gửi dữ liệu đã thay đổi ra component cha
-    onClose(); // Đóng popup
-  };
+  const handleApply = useCallback(() => {
+        if (totalProbability > 100.01) {
+          alert(
+            `Cảnh báo tỉ lệ đang ${totalProbability.toFixed(2)}% . Vui lòng chỉnh tổng dưới 100%`
+          );
+          return;
+        } else if (totalProbability == 0) {
+          alert("Tổng tỉ lệ không thể bằng 0%. Hãy nhập lớn 0.");
+          return;
+        }
+        onApplyChanges(tempPrizes); // Gửi dữ liệu đã thay đổi ra component cha
+        onClose(); // Đóng popup
+    }, [totalProbability, tempPrizes, onApplyChanges, onClose]);
 
 
   return (
@@ -114,73 +115,12 @@ const RateTablePopupComponent: React.FC<RateTablePopupProps> = ({
               ghostClass="dragging"
             >
               {tempPrizes.map((prize) => (
-                <div
+                <PrizeRow
                   key={prize.id}
-                  className="flex items-center gap-2 p-2 mb-2 bg-white/10 rounded"
-                  data-prize-id={prize.id}
-                >
-                  <div className="w-8 text-center flex-shrink-0 font-mono">{prize.id}</div>
-                  <div className="prize-name-cell basis-[25%] flex-1 font-semibold truncate" style={{ cursor: "grab" }}>
-                    <i
-                      className="fa-solid fa-grip-vertical"
-                      style={{ marginRight: "8px", cursor: "grab" }}
-                    ></i>
-                    {prize.name}
-                  </div>
-                  <div className=" w-16 flex justify-center items-center" title={prize.value}>
-                    {prize.type === "image" ? (
-                      <img
-                        src={prize.value}
-                        className="w-10 h-10 object-contain"
-                        alt="Preview"
-                      />
-                    ) : (
-                      <span className="text-xs truncate">{prize.value}</span>
-                    )}
-                  </div>
-                  <div className="w-10">
-                    <input
-                      type="color"
-                      className="w-full h-8 p-0 border-none rounded cursor-pointer bg-transparent"
-                      value={prize.color}
-                      onChange={(e) =>
-                        handlePrizeChange(prize.id, "color", e.target.value)
-                      }
-                    />
-                  </div>
-                  <div className="w-24 relative flex items-center">
-                    <input
-                      type="number"
-                      className="w-full bg-white/20 text-white text-center rounded p-1 pr-5 appearance-none"
-                      value={(prize.probability * 100).toFixed(2)}
-                      onChange={(e) =>
-                        handlePrizeChange(
-                          prize.id,
-                          "probability",
-                          e.target.value
-                        )
-                      }
-                      min="0"
-                      max="100"
-                      step="0.01"
-                    />
-                    <span className="absolute right-1 text-white pointer-events-none">
-                      %
-                    </span>
-                  </div>
-                  <div
-                    style={{ marginLeft: "10px" }}
-                    className="w-8 flex-shrink-0"
-                  >
-                    <button
-                      className="w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center text-lg font-bold leading-none hover:bg-red-700 transition-colors"
-                      title="Xóa"
-                      onClick={() => handleDeletePrize(prize.id, prize.name)}
-                    >
-                      &times;
-                    </button>
-                  </div>
-                </div>
+                  prize={prize}
+                  onPrizeChange={handlePrizeChange}
+                  onDeletePrize={handleDeletePrize}
+                />
               ))}
             </ReactSortable>
           </div>
