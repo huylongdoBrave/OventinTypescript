@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 
 
-//    ====== UI POPUP KẾT QUẢ PRIZE KHI QUAY TRANG OVALTINE ======
+//    ====== UI POPUP KẾT QUẢ PRIZES KHI QUAY TRANG OVALTINE ======
 
 
 interface Prize {

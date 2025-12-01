@@ -49,7 +49,7 @@ const AttentionWheelPopupComponent: React.FC<AttentionWheelPopupProps> = ({
           className="absolute top-[-40px] left-1/2 -translate-x-1/2 w-[300px] h-auto p-1.5"
         />
 
-        {/* Nội dung popup */}
+        {/* Nội dung popups */}
         <div
           className="flex-col justify-center items-center 
         text-center relative [-webkit-box-align:center] [-webkit-box-pack:center]"

@@ -15,7 +15,7 @@ const WheelComponent: React.FC<WheelProps> = ({
   const sliceAngle = 360 / sliceCount;
   const cssOffsetAngle = -(sliceAngle / 2);
 
-  // Lấy kích thước của vòng quay từ biến CSS --container-wheel-size
+  // Lấy kích thước của vòng quay từ biến CSS --container-wheel-sizes
   // và tính toán chiều rộng động cho mỗi ô quà.
   // useMemo để chỉ tính toán lại khi sliceAngle thay đổi.
   const dynamicWidth = useMemo(() => {

@@ -14,7 +14,7 @@ const PrizeRowComponent: React.FC<PrizeRowProps> = ({
   onPrizeChange,
   onDeletePrize,
 }) => {
-  // Component này chỉ render một hàng và chỉ re-render nếu props của nó (prize, onPrizeChange, onDeletePrize) thay đổi.
+  // Components này chỉ render một hàng và chỉ re-render nếu props của nó (prize, onPrizeChange, onDeletePrize) thay đổi.
   return (
     <div
       className="flex items-center gap-2 p-2 mb-2 bg-white/10 rounded"

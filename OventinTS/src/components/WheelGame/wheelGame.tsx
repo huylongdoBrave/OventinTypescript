@@ -293,7 +293,7 @@ function WheelGame() {
   const openAddPrizePopup = useCallback(() => setIsAddPrizePopupOpen(true), []);
   const addSpins = useCallback(() => setCurrentSpins(currentSpins + 10), [currentSpins]);
 
-  // Data chấm sáng vòng xoay
+  // Data chấm sáng vòng xoays
   const translateY = -195;
   const lights = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
 

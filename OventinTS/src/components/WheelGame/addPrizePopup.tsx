@@ -108,7 +108,7 @@ const AddPrizePopupComponent: React.FC<AddPrizePopupProps> = ({
       name: name,
       type: detectPrizeType(value),
       value: value,
-      probability: probability / 100, // Chuyển từ % (0-100) sang dạng thập phân (0-1)
+      probability: probability / 100, // Chuyển từ % (0-100) sang dạng thập phân (0-1)s
       color: formData.color,
     };
 

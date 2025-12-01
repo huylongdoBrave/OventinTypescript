@@ -1,6 +1,8 @@
 import React, { memo } from "react";
 import Draggable from "react-draggable";
 
+//     ====== UI POPUP IMGRIGHT TRANG OVALTINE ======
+
 interface ImgRightPopupProps {
   isOpen: boolean;
   onClose: () => void;

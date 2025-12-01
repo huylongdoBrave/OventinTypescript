@@ -4,7 +4,7 @@ import type { Prize } from "../WheelGame.tsx";
 import {PrizeRow} from "./PrizeRow.tsx";
 
 
-//    ====== UI POPUP BẢNG TỈ LỆ TRANG OVALTINE ======
+//    ====== UI POPUPS BẢNG TỈ LỆ TRANG OVALTINE ======
 
 interface RateTablePopupProps {
   isOpen: boolean;
