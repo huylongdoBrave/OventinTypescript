@@ -8,8 +8,8 @@ import ResultPopup from "./ResultPopup.tsx";
 import RateTablePopup from "./RateTable/RateTablePopup.tsx";
 import AddPrizePopup from "./AddPrizePopup.tsx";
 import AttentionWheelPopup from "./AttentionWheelPopup.tsx";
-// import ImgLeftPopup from "../StickyHandlePopup/ImgLeftPopup.tsx";
-// import ImgRightPopup from "../StickyHandlePopup/ImgRightPopup.tsx";
+import ImgLeftPopup from "../StickyHandlePopup/ImgLeftPopup.tsx";
+import ImgRightPopup from "../StickyHandlePopup/ImgRightPopup.tsx";
 
 
 //    ====== UI VÒNG XOAY TỔNG THỂ TRANG OVALTINE ======
@@ -30,8 +30,8 @@ function WheelGame() {
   const [currentSpins, setCurrentSpins] = useState(5);
   const [isSpinning, setIsSpinning] = useState(false);
   const wheelRef = useRef<HTMLDivElement>(null); // Ref để tham chiếu đến DOM của vòng quay
-  // const dragRefLeft = useRef<HTMLDivElement>(null); // Ref cho popup kéo thả BÊN TRÁI
-  // const dragRefRight = useRef<HTMLDivElement>(null); // Ref cho popup kéo thả BÊN PHẢI
+  const dragRefLeft = useRef<HTMLDivElement>(null); // Ref cho popup kéo thả BÊN TRÁI
+  const dragRefRight = useRef<HTMLDivElement>(null); // Ref cho popup kéo thả BÊN PHẢI
 
   // State các popup
   const [winningPrize, setWinningPrize] = useState<Prize | null>(null);
@@ -43,10 +43,10 @@ function WheelGame() {
   const [isAddPrizePopupOpen, setIsAddPrizePopupOpen] = useState(false);
   // attention popup
   const [isAttentionPopupOpen, setIsAttentionPopupOpen] = useState(true);
-  // // State cho popup left kéo thả
-  // const [isStickyPopupLeft, setIsStickyPopupLeft] = useState(true);
-  // // State cho popup right kéo thả
-  // const [isStickyPopupRight, setIsStickyPopupRight] = useState(true);
+  // State cho popup left kéo thả
+  const [isStickyPopupLeft, setIsStickyPopupLeft] = useState(true);
+  // State cho popup right kéo thả
+  const [isStickyPopupRight, setIsStickyPopupRight] = useState(true);
 
 
   // === Khởi tạo dữ liệu, lấy dữ liệu mock || dữ liệu api ===
@@ -285,8 +285,8 @@ function WheelGame() {
   const closeAddPrizePopup = useCallback(() => setIsAddPrizePopupOpen(false), []);
 
     // Callbacks cho các nút đóng của popup kéo thả
-  // const closeStickyPopupLeft = useCallback(() => setIsStickyPopupLeft(false), []);
-  // const closeStickyPopupRight = useCallback(() => setIsStickyPopupRight(false), []);
+  const closeStickyPopupLeft = useCallback(() => setIsStickyPopupLeft(false), []);
+  const closeStickyPopupRight = useCallback(() => setIsStickyPopupRight(false), []);
   
   // Callbacks for action buttons
   const openRatePopup = useCallback(() => setIsRatePopupOpen(true), []);
@@ -497,16 +497,16 @@ function WheelGame() {
         </div>
 
         {/* Popup thông báo kéo thả */}
-        {/* <ImgLeftPopup
+        <ImgLeftPopup
           isOpen={isStickyPopupLeft}
           onClose={closeStickyPopupLeft}
           dragRef={dragRefLeft}
-        /> */}
-        {/* <ImgRightPopup
+        />
+        <ImgRightPopup
           isOpen={isStickyPopupRight}
           onClose={closeStickyPopupRight}
           dragRef={dragRefRight}
-        /> */}
+        />
 
 
       </div>
