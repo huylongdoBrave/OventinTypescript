@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect, memo, useCallback } from "react";
 import { ReactSortable } from "react-sortablejs";
-import type { Prize } from "../wheelGame";
-import {PrizeRow} from "../RateTable/prizeRow.tsx";
+import type { Prize } from "../WheelGame.tsx";
+import {PrizeRow} from "./PrizeRow.tsx";
 
 
 //    ====== UI POPUP BẢNG TỈ LỆ TRANG OVALTINE ======

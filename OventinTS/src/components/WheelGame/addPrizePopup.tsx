@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, memo } from "react";
-import type { Prize } from "./wheelGame"; // Import kiểu Prize
+import type { Prize } from "./WheelGame"; // Import kiểu Prize
 
 
 //     ====== UI POPUP BẢNG THÊM 1 MÓN PRIZE TRANG OVALTINE ======

@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import type { Prize } from "../wheelGame";
+import type { Prize } from "../WheelGame";
 
 // Component 1 hàng quà đang sửa trong bảng tỉ lệ
 

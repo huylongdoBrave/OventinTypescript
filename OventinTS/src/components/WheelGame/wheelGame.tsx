@@ -1,15 +1,15 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 // import Draggable from "react-draggable";
 // import { AnimatePresence } from "framer-motion";
-import ButtonOrange from "../Button/buttonOrange.tsx";
+import ButtonOrange from "../Button/ButtonOrange.tsx";
 
-import Wheel from "./wheel.tsx";
-import ResultPopup from "./resultPopup.tsx";
-import RateTablePopup from "./RateTable/rateTablePopup.tsx";
-import AddPrizePopup from "./addPrizePopup.tsx";
-import AttentionWheelPopup from "./attentionWheelPopup.tsx";
-import ImgLeftPopup from "../StickyHandlePopup/imgLeftPopup.tsx";
-import ImgRightPopup from "../StickyHandlePopup/imgRightPopup.tsx";
+import Wheel from "./Wheel.tsx";
+import ResultPopup from "./ResultPopup.tsx";
+import RateTablePopup from "./RateTable/RateTablePopup.tsx";
+import AddPrizePopup from "./AddPrizePopup.tsx";
+import AttentionWheelPopup from "./AttentionWheelPopup.tsx";
+import ImgLeftPopup from "../StickyHandlePopup/ImgLeftPopup.tsx";
+import ImgRightPopup from "../StickyHandlePopup/ImgRightPopup.tsx";
 
 
 //    ====== UI VÒNG XOAY TỔNG THỂ TRANG OVALTINE ======
@@ -287,6 +287,7 @@ function WheelGame() {
     // Callbacks cho các nút đóng của popup kéo thả
   const closeStickyPopupLeft = useCallback(() => setIsStickyPopupLeft(false), []);
   const closeStickyPopupRight = useCallback(() => setIsStickyPopupRight(false), []);
+  
   // Callbacks for action buttons
   const openRatePopup = useCallback(() => setIsRatePopupOpen(true), []);
   const openAddPrizePopup = useCallback(() => setIsAddPrizePopupOpen(true), []);
