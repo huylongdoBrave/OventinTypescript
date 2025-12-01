@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect, memo, useCallback } from "react";
 import { ReactSortable } from "react-sortablejs";
-import type { Prize } from "../WheelGame.tsx";
+import type { Prize } from "../WheelGames.tsx";
 import {PrizeRow} from "./PrizeRow.tsx";
 
 

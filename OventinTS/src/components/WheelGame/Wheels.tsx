@@ -1,5 +1,5 @@
 import { useMemo, memo } from "react";
-import type { Prize } from "./WheelGame"; 
+import type { Prize } from "./WheelGames"; 
 
 
 //    ====== UI MẢNH TỰ TẠO CỦA VÒNG XOAY TRANG OVALTINE ======
