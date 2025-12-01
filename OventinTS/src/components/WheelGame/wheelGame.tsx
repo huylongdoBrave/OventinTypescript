@@ -8,8 +8,8 @@ import ResultPopup from "./ResultPopup.tsx";
 import RateTablePopup from "./RateTable/RateTablePopup.tsx";
 import AddPrizePopup from "./AddPrizePopup.tsx";
 import AttentionWheelPopup from "./AttentionWheelPopup.tsx";
-import ImgLeftPopup from "./StickyHandlePopup/ImgLeftPopup.tsx";
-import ImgRightPopup from "./StickyHandlePopup/ImgRightPopup.tsx";
+import ImgLeftPopup from "../StickyHandlePopup/ImgLeftPopup.tsx";
+import ImgRightPopup from "../StickyHandlePopup/ImgRightPopup.tsx";
 
 
 //    ====== UI VÒNG XOAY TỔNG THỂ TRANG OVALTINE ======
