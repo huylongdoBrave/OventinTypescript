@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-// import Draggable from "react-draggable";
 // import { AnimatePresence } from "framer-motion";
 import ButtonOrange from "../Button/ButtonOranges.tsx";
 
@@ -10,10 +9,10 @@ import AddPrizePopup from "./AddPrizePopups.tsx";
 import AttentionWheelPopup from "./AttentionWheelPopups.tsx";
 import ImgLeftPopup from "../StickyHandlePopup/ImgLeftPopups.tsx";
 import ImgRightPopup from "../StickyHandlePopup/ImgRightPopups.tsx";
+// import Header from "../Header.tsx";
 
 
 //    ====== UI VÒNG XOAY TỔNG THỂ TRANG OVALTINE ======
-
 
 export interface Prize {
   id: number;
@@ -30,8 +29,8 @@ function WheelGame() {
   const [currentSpins, setCurrentSpins] = useState(1000);
   const [isSpinning, setIsSpinning] = useState(false);
   const wheelRef = useRef<HTMLDivElement>(null); // Ref để tham chiếu đến DOM của vòng quay
-  const dragRefLeft = useRef<HTMLDivElement>(null); // Ref cho popup kéo thả BÊN TRÁI
-  const dragRefRight = useRef<HTMLDivElement>(null); // Ref cho popup kéo thả BÊN PHẢI
+  const dragRef = useRef<HTMLDivElement>(null); // Ref cho popup kéo thả BÊN TRÁI
+
 
   // State các popup
   const [winningPrize, setWinningPrize] = useState<Prize | null>(null);
@@ -284,7 +283,7 @@ function WheelGame() {
   const closeRatePopup = useCallback(() => setIsRatePopupOpen(false), []);
   const closeAddPrizePopup = useCallback(() => setIsAddPrizePopupOpen(false), []);
 
-    // Callbacks cho các nút đóng của popup kéo thả
+  // Callbacks cho các nút đóng của popup kéo thả
   const closeStickyPopupLeft = useCallback(() => setIsStickyPopupLeft(false), []);
   const closeStickyPopupRight = useCallback(() => setIsStickyPopupRight(false), []);
   
@@ -300,6 +299,7 @@ function WheelGame() {
 
   return (
     <>
+
       <main>
         <div className="flex flex-col items-center w-full">
           <div className="flex justify-center items-center  w-full h-full relative z-0">
@@ -501,14 +501,13 @@ function WheelGame() {
         <ImgLeftPopup
           isOpen={isStickyPopupLeft}
           onClose={closeStickyPopupLeft}
-          dragRef={dragRefLeft}
+          dragRef={dragRef}
         />
         <ImgRightPopup
           isOpen={isStickyPopupRight}
           onClose={closeStickyPopupRight}
-          dragRef={dragRefRight}
+          dragRef={dragRef}
         />
-
 
       </div>
     </>

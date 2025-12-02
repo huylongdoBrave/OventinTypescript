@@ -10,7 +10,7 @@ interface ImgLeftPopupProps {
   dragRef: React.RefObject<HTMLDivElement>;
 }
 
-const ImgLeftPopupComponent: React.FC<ImgLeftPopupProps> = ({
+const ImgLeftPopup: React.FC<ImgLeftPopupProps> = ({
   isOpen,
   onClose,
   dragRef,
@@ -42,4 +42,4 @@ const ImgLeftPopupComponent: React.FC<ImgLeftPopupProps> = ({
   );
 };
 
-export default memo(ImgLeftPopupComponent);
+export default memo(ImgLeftPopup);

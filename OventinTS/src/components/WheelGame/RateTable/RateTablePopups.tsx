@@ -6,6 +6,7 @@ import {PrizeRow} from "./PrizeRows.tsx";
 
 //    ====== UI POPUPS BẢNG TỈ LỆ TRANG OVALTINE ======
 
+
 interface RateTablePopupProps {
   isOpen: boolean;
   prizes: Prize[];
@@ -13,7 +14,7 @@ interface RateTablePopupProps {
   onApplyChanges: (updatedPrizes: Prize[]) => void;
 }
 
-const RateTablePopupComponent: React.FC<RateTablePopupProps> = ({
+const RateTablePopup: React.FC<RateTablePopupProps> = ({
   isOpen,
   prizes,
   onClose,
@@ -153,4 +154,4 @@ const RateTablePopupComponent: React.FC<RateTablePopupProps> = ({
   );
 };
 
-export default memo(RateTablePopupComponent);
+export default memo(RateTablePopup);

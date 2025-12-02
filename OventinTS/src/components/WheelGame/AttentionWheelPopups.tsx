@@ -112,6 +112,12 @@ const AttentionWheelPopupComponent: React.FC<AttentionWheelPopupProps> = ({
       />
     </div>
 
+  );
+};
+
+export default memo(AttentionWheelPopupComponent);
+
+
     /* DẠNG THÔNG BÁO CŨ */
     // <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-[1003]">
     //   <div className="relative w-11/12 max-w-md bg-white rounded-2xl p-8 text-center shadow-2xl animate-fade-in-down">
@@ -129,8 +135,4 @@ const AttentionWheelPopupComponent: React.FC<AttentionWheelPopupProps> = ({
     //     </button>
     //   </div>
     // </div>
-  );
-};
-
-export default memo(AttentionWheelPopupComponent);
 

@@ -1,7 +1,9 @@
 import React, { memo } from "react";
 import Draggable from "react-draggable";
 
+
 //     ====== UI POPUP IMGRIGHT TRANG OVALTINE ======
+
 
 interface ImgRightPopupProps {
   isOpen: boolean;
@@ -9,7 +11,7 @@ interface ImgRightPopupProps {
   dragRef: React.RefObject<HTMLDivElement>;
 }
 
-const ImgRightPopupComponent: React.FC<ImgRightPopupProps> = ({
+const ImgRightPopup: React.FC<ImgRightPopupProps> = ({
   isOpen,
   onClose,
   dragRef,
@@ -41,4 +43,4 @@ const ImgRightPopupComponent: React.FC<ImgRightPopupProps> = ({
   );
 };
 
-export default memo(ImgRightPopupComponent);
+export default memo(ImgRightPopup);

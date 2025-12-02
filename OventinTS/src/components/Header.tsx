@@ -1,16 +1,24 @@
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faStar, faTicket } from "@fortawesome/free-solid-svg-icons";
 import { Link, NavLink } from "react-router-dom";
+import React from "react";
 
-function Header() {
-  return (
+interface HeaderProps {
+  isLoggedIn: boolean;
+  onLoginClick: () => void;
+  onRegisterClick: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterClick }) => {
+    return (
     <>
-      {/* Header had responsives */}
+      {/* Header desktop */}
       <header className="sticky top-0 z-[1001]  hidden lg:block h-[115px] mb-5">
         <nav
           className=" h-[70px] flex justify-between items-center px-4 
          text-white bg-[linear-gradient(rgb(35,61,163)_0%,rgb(35,61,163)_65px,transparent_65px)]"
         >
+          {/* Mục trái desktop header */}
           <div className="flex items-center h-full">
             <Link to="/">
               <img
@@ -19,7 +27,7 @@ function Header() {
                 className="h-[120px] mr-[30px] mt-[80px]"
               />
             </Link>
-            {/* Desktop Menu */}
+            {/* Mục menu */}
             <ul className="flex list-none m-0 p-0 h-full">
               {/* Menu Item Structure */}
               <li className="relative w-[100px] h-full flex justify-center group">
@@ -113,55 +121,72 @@ function Header() {
               </li>
             </ul>
           </div>
-          <div className="flex items-center gap-5">
-            <div className="flex items-center gap-2 text-base font-medium">
-             {/* <FontAwesomeIcon
-                icon={faStar}
-                className="text-xl text-yellow-400"
-              />{" "}  */}
-              <img className="w-[30px] h-[30px]" src="https://ovaltine-website-dev.estuary.solutions/img/icon/coin.png" alt="" />
-              <span className="m-0
-                              text-sm
-                              font-normal
-                              leading-normal
-                              font-[var(--font-rowdies)]
-                              text-white
-                              [-webkit-text-stroke:1px_rgb(246,151,44)]
-                              ">x1,000
-              </span>
-            </div>
-            <div className="flex items-center gap-2 text-base font-medium">
-              <img src="https://ovaltine-website-dev.estuary.solutions/img/icon/spin.png" alt="" />{" "}
+
+          {/* Mục phải menu */}
+          {isLoggedIn ? (
+            <div className="flex items-center gap-5">
+              <div className="flex items-center gap-2 text-base font-medium">
+                <img className="w-[30px] h-[30px]" src="https://ovaltine-website-dev.estuary.solutions/img/icon/coin.png" alt="" />
                 <span className="m-0
-                                  text-sm
-                                  font-normal
-                                  leading-normal
-                                  font-[var(--font-rowdies)]
-                                  text-white
-                                  [-webkit-text-stroke:1px_rgb(246,151,44)]"
-                                  >x101</span>
-            </div> 
-            <button
-              className="bg-[#233da3] text-white border-2 border-white rounded-full py-2 px-4 font-bold cursor-pointer 
-              transition-colors shadow-[0_2px_2px_black] hover:bg-white hover:text-[#233da3]"
-            >
-              Nhập mã
-            </button>
-            <div className="flex items-center">
-              <img
-                className="h-10 rounded-full"
-                src="https://s3dev.estuary.solutions/ovaltine2024dev/76b6ed4d-02ed-4393-810a-967b3586b1dc"
-                alt="User Avatar"
-              />
+                                text-sm
+                                font-normal
+                                leading-normal
+                                font-[var(--font-rowdies)]
+                                text-white
+                                [-webkit-text-stroke:1px_rgb(246,151,44)]
+                                ">x1,000
+                </span>
+              </div>
+              <div className="flex items-center gap-2 text-base font-medium">
+                <img src="https://ovaltine-website-dev.estuary.solutions/img/icon/spin.png" alt="" />{" "}
+                  <span className="m-0
+                                    text-sm
+                                    font-normal
+                                    leading-normal
+                                    font-[var(--font-rowdies)]
+                                    text-white
+                                    [-webkit-text-stroke:1px_rgb(246,151,44)]"
+                                    >x101</span>
+              </div> 
+              <button
+                className="bg-[#233da3] text-white border-2 border-white rounded-full py-2 px-4 font-bold cursor-pointer 
+                transition-colors shadow-[0_2px_2px_black] hover:bg-white hover:text-[#233da3]"
+              >
+                Nhập mã
+              </button>
+              <div className="flex items-center">
+                <img
+                  className="h-10 rounded-full"
+                  src="https://s3dev.estuary.solutions/ovaltine2024dev/76b6ed4d-02ed-4393-810a-967b3586b1dc"
+                  alt="User Avatar"
+                />
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="flex items-center gap-6">
+              <button
+                onClick={onLoginClick}
+                className="text-white font-bold hover:text-yellow-300 transition-colors"
+              >
+                Đăng nhập
+              </button>
+              <button
+                onClick={onRegisterClick}
+                className="text-white font-bold hover:text-yellow-300 transition-colors"
+              >
+                Đăng ký
+              </button>
+            </div>
+          )}
         </nav>
       </header>
 
-      {/* Header for Tablet and Mobile */}
+      {/* Header cho Tablet và Mobile */}
       <header className="sticky top-0 z-[1001] lg:hidden h-[70px] mb-2.5">
         <nav className="h-[70px] md:h-[60px] flex justify-between items-center
          bg-[#233da3] text-white px-2 md:px-4">
+
+          {/* Mục phải menu */}
           <div className="flex items-center h-full">
             <Link to="/" className="flex items-center">
               <img
@@ -172,47 +197,64 @@ function Header() {
               />
             </Link>
           </div>
-          <div className="flex items-center gap-2 md:gap-5">
-            <div className="flex items-center gap-1 md:gap-2 text-xs md:text-base font-medium">
-              <img className="w-[30px] h-[30px]" src="https://ovaltine-website-dev.estuary.solutions/img/icon/coin.png" alt="" />
-              <span className="m-0
-                              text-sm
-                              font-normal
-                              leading-normal
-                              font-[var(--font-rowdies)]
-                              text-white
-                              [-webkit-text-stroke:1px_rgb(246,151,44)]
-                              ">x1,000
-              </span>
+          {isLoggedIn ? (
+            <div className="flex items-center gap-2 md:gap-5">
+              <div className="flex items-center gap-1 md:gap-2 text-xs md:text-base font-medium">
+                <img className="w-[30px] h-[30px]" src="https://ovaltine-website-dev.estuary.solutions/img/icon/coin.png" alt="" />
+                <span className="m-0
+                                text-sm
+                                font-normal
+                                leading-normal
+                                font-[var(--font-rowdies)]
+                                text-white
+                                [-webkit-text-stroke:1px_rgb(246,151,44)]
+                                ">x1,000
+                </span>
+              </div>
+              <div className="flex items-center gap-1 md:gap-2 text-xs md:text-base font-medium">
+                <img src="https://ovaltine-website-dev.estuary.solutions/img/icon/spin.png" alt="" />{" "}
+                  <span className="m-0 text-sm
+                                    font-normal
+                                    leading-normal
+                                    font-[var(--font-rowdies)]
+                                    text-white
+                                    [-webkit-text-stroke:1px_rgb(246,151,44)]"
+                                    >x101</span>
+              </div>
+              <button
+                className="bg-[#233da3] text-white border-2 border-white rounded-full py-1 px-2 md:py-2 md:px-4 text-xs md:text-sm font-bold cursor-pointer 
+                transition-colors shadow-[0_2px_2px_black] hover:bg-white hover:text-[#233da3]"
+              >
+                Nhập mã
+              </button>
+              <div className="flex items-center">
+                <img
+                  className="h-8 md:h-10 rounded-full"
+                  src="https://s3dev.estuary.solutions/ovaltine2024dev/76b6ed4d-02ed-4393-810a-967b3586b1dc"
+                  alt="User Avatar"
+                />
+              </div>
             </div>
-            <div className="flex items-center gap-1 md:gap-2 text-xs md:text-base font-medium">
-              <img src="https://ovaltine-website-dev.estuary.solutions/img/icon/spin.png" alt="" />{" "}
-                <span className="m-0 text-sm
-                                  font-normal
-                                  leading-normal
-                                  font-[var(--font-rowdies)]
-                                  text-white
-                                  [-webkit-text-stroke:1px_rgb(246,151,44)]"
-                                  >x101</span>
+          ) : (
+            <div className="flex items-center gap-4 md:gap-6">
+              <button
+                onClick={onLoginClick}
+                className="text-white font-bold hover:text-yellow-300 transition-colors text-sm"
+              >
+                Đăng nhập
+              </button>
+              <button
+                onClick={onRegisterClick}
+                className="text-white font-bold hover:text-yellow-300 transition-colors text-sm"
+              >
+                Đăng ký
+              </button>
             </div>
-            <button
-              className="bg-[#233da3] text-white border-2 border-white rounded-full py-1 px-2 md:py-2 md:px-4 text-xs md:text-sm font-bold cursor-pointer 
-              transition-colors shadow-[0_2px_2px_black] hover:bg-white hover:text-[#233da3]"
-            >
-              Nhập mã
-            </button>
-            <div className="flex items-center">
-              <img
-                className="h-8 md:h-10 rounded-full"
-                src="https://s3dev.estuary.solutions/ovaltine2024dev/76b6ed4d-02ed-4393-810a-967b3586b1dc"
-                alt="User Avatar"
-              />
-            </div>
-          </div>
+          )}
         </nav>
       </header>
 
-      {/* Bottom Nav for Tablet and Mobile */}
+      {/* Bottom Nav cho Tablet và Mobile */}
       <div
         className="lg:hidden fixed bottom-0 left-0 w-full
        bg-white rounded-t-2xl shadow-[0_-5px_15px_rgba(0,0,0,0.1)] z-[1000] py-1.5"

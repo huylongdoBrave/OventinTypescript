@@ -1,7 +1,9 @@
 import React, { memo } from "react";
 import type { Prize } from "../WheelGames";
 
+
 // Component 1 hàng quà đang sửa trong bảng tỉ lệ
+
 
 interface PrizeRowProps {
   prize: Prize;
@@ -9,7 +11,7 @@ interface PrizeRowProps {
   onDeletePrize: (id: number, name: string) => void;
 }
 
-const PrizeRowComponent: React.FC<PrizeRowProps> = ({
+const PrizeRows: React.FC<PrizeRowProps> = ({
   prize,
   onPrizeChange,
   onDeletePrize,
@@ -82,4 +84,4 @@ const PrizeRowComponent: React.FC<PrizeRowProps> = ({
   );
 };
 
-export const PrizeRow = memo(PrizeRowComponent);
+export const PrizeRow = memo(PrizeRows);
