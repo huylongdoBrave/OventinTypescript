@@ -28,31 +28,36 @@ const WheelComponent: React.FC<WheelProps> = ({
     //   containerWheelSize * Math.sin((sliceAngle / 2) * (Math.PI / 180)) * 1.4
     // );
 
-    const containerWheelSize = 360; // Kích thước vòng quay (đường kính) là 360px như trong CSS
+    const containerWheelSize = 330; // Khớp với --container-wheel-size trong CSS
     const radius = containerWheelSize / 2;
+
+    // Xử lý trường hợp đặc biệt khi có 1 hoặc 2 quà
+    // Khi có 2 quà, tan(90) = Infinity -> lỗi
+    // Khi có 1 quà, tan(180) = 0 -> lỗi
+    if (sliceCount <= 2) {
+      // Đặt chiều rộng bằng đường kính để div tam giác đủ lớn để che phủ khu vực
+      return containerWheelSize;
+    }
+
     const angleInRadians = (sliceAngle / 2) * (Math.PI / 180);
     // Công thức lượng giác: width = 2 * radius * tan(angle/2)
     // Để các cạnh của các ô tam giác sẽ sát vào nhau.
     return 2 * radius * Math.tan(angleInRadians);
-  }, [sliceAngle]);
+  }, [sliceAngle, sliceCount]);
 
+  
   // Tính toán kích thước động cho hình ảnh bên trong ô quà
   const imageSize = useMemo(() => {
     const containerWheelSize = 360;
     const radius = containerWheelSize / 2;
-    const angleInRadians = sliceAngle * (Math.PI / 180);
-
-    // Tính toán không gian có sẵn, lấy một phần của bán kính để đặt hình ảnh.
-    // Ví dụ: sử dụng 40% không gian từ tâm ra ngoài.
+    // Chiều cao có sẵn cho ảnh là khoảng 40% bán kính
     const availableHeight = radius * 0.4;
-    // Chiều rộng tương ứng tại điểm đó của hình tam giác
-    const availableWidth = 2 * (radius * 0.6) * Math.tan(angleInRadians / 2);
-    return Math.min(availableWidth, availableHeight, 60); // Giới hạn kích thước tối đa là 60px
-  }, [sliceAngle]);
+    return Math.min(availableHeight, 60); // Giới hạn kích thước tối đa là 60px
+  }, []); // Chỉ phụ thuộc vào kích thước, không cần sliceAngle
 
   return (
     <div
-      className="relative h-[var(--container-wheel-size)] w-[var(--container-wheel-size)] bg-white 
+      className="relative h-[var(--container-wheel-size)] w-[var(--container-wheel-size)] bg-transparent 
                   rounded-full overflow-hidden shadow-[0_0_10px_gray] transition-all duration-3000"
     >
       {prizes.map((prize, index) => {
@@ -61,7 +66,7 @@ const WheelComponent: React.FC<WheelProps> = ({
           <div
             key={prize.id}
             className="absolute left-1/2 h-[calc(50%+1px)] box-border pt-5 flex flex-col items-center justify-start 
-                      font-mono font-black text-red-600 origin-bottom [clip-path:polygon(100%_0,50%_100%,0_0)]"
+                       font-black text-red-600 origin-bottom [clip-path:polygon(100%_0,50%_100%,0_0)]"
             style={{
               transform: `translateX(-50%) rotate(${rotation}deg)`,
               background: prize.color,

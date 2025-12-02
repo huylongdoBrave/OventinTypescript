@@ -32,7 +32,7 @@ const AttentionWheelPopupComponent: React.FC<AttentionWheelPopupProps> = ({
       {/* Khung lớn popup */}
       <div
         className=" filter-[drop-shadow(rgb(255,252,110)_0px_0px_5px)]
-                  relative w-[350px] h-[350px] bg-[url('/static/modal.png')] bg-cover bg-center bg-no-repeat 
+                   w-[340px] h-[360px] bg-[url('/static/modal.png')] bg-cover bg-center bg-no-repeat 
                   rounded-[15px] border-4 border-white p-10 text-center text-white flex justify-center items-center 
                   shadow-[0_5px_20px_rgba(0,0,0,0.4)]"
       >

@@ -15,14 +15,14 @@
     --menu-item-size: 80px;
 
     /* New variables for wheel sizing */
-    --wheel-wrapper-size: 400px; /* Main size for the wheel area */
-    --container-wheel-size: 360px; /* Inner spinning wheel */
-    --spin-button-size: 60px;
-    --spin-button-img-size: 40px;
+    --wheel-wrapper-size: 370px;
+    --container-wheel-size: 330px;
+    --spin-button-size: 40px;
+    --spin-button-img-size: 30px;
     --arrow-top-height: 48px;
     --arrow-top-width: 40px;
     --arrow-top-offset: -12px;
-    --light-translateY: -195px;
+    --light-translateY: -180px;
     --side-image-default-width: 200px;
 }
 

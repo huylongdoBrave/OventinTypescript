@@ -19,12 +19,13 @@ const ImgRightPopupComponent: React.FC<ImgRightPopupProps> = ({
   }
 
   return (
-    <div className="fixed z-[1000] cursor-pointer bottom-4 right-4">
+    <div className="fixed z-[1000] bottom-[15%] cursor-pointer right-2">
       <Draggable nodeRef={dragRef}>
         <div ref={dragRef} className="relative w-fit">
           <button
             onClick={onClose}
-            className="absolute top-[-20px] -right-2.5 z-10 w-6 h-6 bg-orange-400 text-white rounded-full flex items-center justify-center text-lg font-bold leading-none hover:bg-orange-500 transition-colors"
+            className="absolute top-[-20px] -right-2.5 z-10 w-6 h-6 bg-orange-400 text-white rounded-full 
+            flex items-center justify-center text-lg font-bold leading-none hover:bg-orange-500 transition-colors"
             aria-label="Đóng popup"
           >
             &times;

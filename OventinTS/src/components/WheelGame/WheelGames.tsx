@@ -1,15 +1,15 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 // import Draggable from "react-draggable";
 // import { AnimatePresence } from "framer-motion";
-import ButtonOrange from "../Button/ButtonOrange.tsx";
+import ButtonOrange from "../Button/ButtonOranges.tsx";
 
-import Wheel from "./Wheel.tsx";
-import ResultPopup from "./ResultPopup.tsx";
-import RateTablePopup from "./RateTable/RateTablePopup.tsx";
-import AddPrizePopup from "./AddPrizePopup.tsx";
-import AttentionWheelPopup from "./AttentionWheelPopup.tsx";
-import ImgLeftPopup from "../StickyHandlePopup/ImgLeftPopup.tsx";
-import ImgRightPopup from "../StickyHandlePopup/ImgRightPopup.tsx";
+import Wheel from "./Wheels.tsx";
+import ResultPopup from "./ResultPopups.tsx";
+import RateTablePopup from "./RateTable/RateTablePopups.tsx";
+import AddPrizePopup from "./AddPrizePopups.tsx";
+import AttentionWheelPopup from "./AttentionWheelPopups.tsx";
+import ImgLeftPopup from "../StickyHandlePopup/ImgLeftPopups.tsx";
+import ImgRightPopup from "../StickyHandlePopup/ImgRightPopups.tsx";
 
 
 //    ====== UI VÒNG XOAY TỔNG THỂ TRANG OVALTINE ======
@@ -27,7 +27,7 @@ export interface Prize {
 function WheelGame() {
   // === STATE MANAGEMENT ===
   const [prizes, setPrizes] = useState<Prize[]>([]); // một mảng chứa các đối tượng Prize, ban đầu nó rỗng
-  const [currentSpins, setCurrentSpins] = useState(5);
+  const [currentSpins, setCurrentSpins] = useState(1000);
   const [isSpinning, setIsSpinning] = useState(false);
   const wheelRef = useRef<HTMLDivElement>(null); // Ref để tham chiếu đến DOM của vòng quay
   const dragRefLeft = useRef<HTMLDivElement>(null); // Ref cho popup kéo thả BÊN TRÁI
@@ -278,7 +278,7 @@ function WheelGame() {
     }, []); // Dependency rỗng, dùng functional update cho setPrizes
 
 
-  // Các hàm đóng popup
+  // Callback cho các hàm đóng popup
   const closeAttentionPopup = useCallback(() => setIsAttentionPopupOpen(false), []);
   const closeResultPopup = useCallback(() => setIsResultPopupOpen(false), []);
   const closeRatePopup = useCallback(() => setIsRatePopupOpen(false), []);
@@ -288,13 +288,13 @@ function WheelGame() {
   const closeStickyPopupLeft = useCallback(() => setIsStickyPopupLeft(false), []);
   const closeStickyPopupRight = useCallback(() => setIsStickyPopupRight(false), []);
   
-  // Callbacks for action buttons
+  // Callbacks cho button hành động
   const openRatePopup = useCallback(() => setIsRatePopupOpen(true), []);
   const openAddPrizePopup = useCallback(() => setIsAddPrizePopupOpen(true), []);
   const addSpins = useCallback(() => setCurrentSpins(currentSpins + 10), [currentSpins]);
 
   // Data chấm sáng vòng xoays
-  const translateY = -195;
+  const translateY = -180;
   const lights = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
 
 
@@ -317,7 +317,7 @@ function WheelGame() {
             <p className="text-xl font-black text-[rgb(35,61,163)] mt-[20px] text-center">
               Bạn còn{" "}
               <span id="spin-count" style={{ color: "white" }}>
-                {currentSpins.toLocaleString()}
+                {currentSpins.toLocaleString("vi-VN")}
               </span>{" "}
               lượt quay!
             </p>
@@ -438,7 +438,7 @@ function WheelGame() {
         onAddPrize={handleAddPrize}
       />
 
-      {/* Nút animation */}
+      {/* Dạng Nút animation */}
       {/* <AnimatePresence initial={false} mode="wait">
         {isAddPrizePopupOpen && (
           <AddPrizePopup
@@ -496,7 +496,8 @@ function WheelGame() {
           </button>
         </div>
 
-        {/* Popup thông báo kéo thả */}
+
+        {/* Popup thông báo img kéo thả */}
         <ImgLeftPopup
           isOpen={isStickyPopupLeft}
           onClose={closeStickyPopupLeft}
@@ -524,64 +525,3 @@ export default WheelGame;
 
 
 
-// {/* img sticky left */}
-//         <div className="flex justify-center gap-[20px] ">
-//           {isStickyPopupLeft && (
-//             <div
-//               className="fixed z-[1000] cursor-pointer 
-//                             bottom-4 left-4"
-//             >
-//               <Draggable nodeRef={dragRefLeft}>
-//                 <div ref={dragRefLeft} className="relative w-fit">
-//                   <button
-//                     onClick={() => setIsStickyPopupLeft(false)}
-//                     className="absolute top-[-10px] -right-2.5 z-10 w-6 h-6
-//                      bg-orange-400 text-white rounded-full flex items-center
-//                       justify-center text-lg font-bold leading-none hover:bg-orange-500
-//                        transition-colors"
-//                     aria-label="Đóng popup"
-//                   >
-//                     &times;
-//                   </button>
-//                   <img
-//                     src="./static/moi-ban-be-nhan-ngay-10-ovocoins.webp"
-//                     alt="Mời bạn bè nhận Ovocoins"
-//                     className="w-[120px] h-[120px] object-contain
-//                 [-webkit-user-drag:none]"
-//                   />
-//                 </div>
-//               </Draggable>
-//             </div>
-//           )}
-//         </div>
-
-//         {/* img sticky right */}
-//         <div className="flex justify-center gap-[20px] ">
-//           {isStickyPopupRight && (
-//             <div
-//               className="fixed z-[1000] cursor-pointer 
-//                             bottom-4 right-4"
-//             >
-//               <Draggable nodeRef={dragRefRight}>
-//                 <div ref={dragRefRight} className="relative w-fit">
-//                   <button
-//                     onClick={() => setIsStickyPopupRight(false)}
-//                     className="absolute top-[-20px] -right-2.5 z-10 w-6 h-6
-//                     bg-orange-400 text-white rounded-full flex items-center
-//                       justify-center text-lg font-bold leading-none hover:bg-orange-500
-//                       transition-colors"
-//                     aria-label="Đóng popup"
-//                   >
-//                     &times;
-//                   </button>
-//                   <img
-//                     src="./static/survey.png"
-//                     alt="Mời bạn bè nhận Ovocoins"
-//                     className="w-[120px] h-[120px] object-contain
-//                 [-webkit-user-drag:none]"
-//                   />
-//                 </div>
-//               </Draggable>
-//             </div>
-//           )}
-//         </div>

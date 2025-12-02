@@ -523,33 +523,64 @@
 
 
 
-//         {/* DẠNG CŨ img sticky right */}
-//         // <div className="flex justify-center gap-[20px] ">
-//         //   {isStickyPopupRight && (
-//         //     <div
-//         //       className="fixed z-[1000] cursor-pointer 
-//         //                     bottom-4 right-4"
-//         //     >
-//         //       <Draggable nodeRef={dragRefRight}>
-//         //         <div ref={dragRefRight} className="relative w-fit">
-//         //           <button
-//         //             onClick={() => setIsStickyPopupRight(false)}
-//         //             className="absolute top-[-20px] -right-2.5 z-10 w-6 h-6
-//         //             bg-orange-400 text-white rounded-full flex items-center
-//         //               justify-center text-lg font-bold leading-none hover:bg-orange-500
-//         //               transition-colors"
-//         //             aria-label="Đóng popup"
-//         //           >
-//         //             &times;
-//         //           </button>
-//         //           <img
-//         //             src="./static/survey.png"
-//         //             alt="Mời bạn bè nhận Ovocoins"
-//         //             className="w-[120px] h-[120px] object-contain
-//         //         [-webkit-user-drag:none]"
-//         //           />
-//         //         </div>
-//         //       </Draggable>
-//         //     </div>
-//         //   )}
-//         // </div>
+// {/* img sticky left */}
+//         <div className="flex justify-center gap-[20px] ">
+//           {isStickyPopupLeft && (
+//             <div
+//               className="fixed z-[1000] cursor-pointer 
+//                             bottom-4 left-4"
+//             >
+//               <Draggable nodeRef={dragRefLeft}>
+//                 <div ref={dragRefLeft} className="relative w-fit">
+//                   <button
+//                     onClick={() => setIsStickyPopupLeft(false)}
+//                     className="absolute top-[-10px] -right-2.5 z-10 w-6 h-6
+//                      bg-orange-400 text-white rounded-full flex items-center
+//                       justify-center text-lg font-bold leading-none hover:bg-orange-500
+//                        transition-colors"
+//                     aria-label="Đóng popup"
+//                   >
+//                     &times;
+//                   </button>
+//                   <img
+//                     src="./static/moi-ban-be-nhan-ngay-10-ovocoins.webp"
+//                     alt="Mời bạn bè nhận Ovocoins"
+//                     className="w-[120px] h-[120px] object-contain
+//                 [-webkit-user-drag:none]"
+//                   />
+//                 </div>
+//               </Draggable>
+//             </div>
+//           )}
+//         </div>
+
+//         {/* img sticky right */}
+//         <div className="flex justify-center gap-[20px] ">
+//           {isStickyPopupRight && (
+//             <div
+//               className="fixed z-[1000] cursor-pointer 
+//                             bottom-4 right-4"
+//             >
+//               <Draggable nodeRef={dragRefRight}>
+//                 <div ref={dragRefRight} className="relative w-fit">
+//                   <button
+//                     onClick={() => setIsStickyPopupRight(false)}
+//                     className="absolute top-[-20px] -right-2.5 z-10 w-6 h-6
+//                     bg-orange-400 text-white rounded-full flex items-center
+//                       justify-center text-lg font-bold leading-none hover:bg-orange-500
+//                       transition-colors"
+//                     aria-label="Đóng popup"
+//                   >
+//                     &times;
+//                   </button>
+//                   <img
+//                     src="./static/survey.png"
+//                     alt="Mời bạn bè nhận Ovocoins"
+//                     className="w-[120px] h-[120px] object-contain
+//                 [-webkit-user-drag:none]"
+//                   />
+//                 </div>
+//               </Draggable>
+//             </div>
+//           )}
+//         </div>

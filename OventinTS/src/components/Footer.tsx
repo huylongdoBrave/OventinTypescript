@@ -59,11 +59,11 @@ function Footer(){
             {/* footer-middle: Luôn là 2 cột */}
             <div className="grid grid-cols-2 gap-x-4 gap-y-6 text-sm">
               {/* Social links */}
-              <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/fb.png" className='w-4' alt="" /><span>/Ovaltine Vietnam</span></a>
-              <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/tiktok.png" className='w-4 h-5' alt="" /><span>/Ovaltine Vietnam</span></a>
-              <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/shopee.png" className='w-4' alt="" /><span>/Ovaltine Vietnam</span></a>
-              <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/tiktok-shop.png" className='w-4 h-5' alt="" /><span>/Ovaltine Vietnam</span></a>
-              <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/lazada.png" className="w-4" alt="" /><span>/Ovaltine Vietnam</span></a>
+              <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/fb.png" className='w-4' alt="" /><span>/Ovolmatine VN</span></a>
+              <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/tiktok.png" className='w-4 h-5' alt="" /><span>/Ovolmatine VN</span></a>
+              <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/shopee.png" className='w-4' alt="" /><span>/Ovolmatine VN</span></a>
+              <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/tiktok-shop.png" className='w-4 h-5' alt="" /><span>/Ovolmatine VN</span></a>
+              <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/lazada.png" className="w-4" alt="" /><span>/Ovolmatine VN</span></a>
               <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/phone.png" className="w-4" alt="" /><span>/19005306</span></a>
               
               {/* Policy links: Luôn nằm ở hàng dưới cùng */}
@@ -73,7 +73,7 @@ function Footer(){
 
             {/* footer-bottoms */}
             <div className="text-center pt-1 mt-5 pb-10">
-              <p>Ovaltine Vietnam © 2025</p>
+              <p>Ovolmatine VN © 2025</p>
             </div>
           </div>
         </div>
