@@ -69,7 +69,7 @@ const AddPrizePopupComponent: React.FC<AddPrizePopupProps> = ({
   };
 
 
-  // Xử lý submit form
+  // Xử lý submit 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const name = formData.name.trim();
