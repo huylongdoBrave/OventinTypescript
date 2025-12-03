@@ -61,6 +61,13 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
       return;
     }
 
+    // Kiểm tra định dạng số điện thoại (10 số)
+    const phoneRegex = /^\d{10}$/;
+    if (!phoneRegex.test(phoneNumber)) {
+      alert("Số điện thoại không hợp lệ. Vui lòng nhập đúng 10 chữ số.");
+      return;
+    }
+
     // Kiểm tra mật khẩu trùng khớp
     if (password !== confirmPassword) {
       alert("Mật khẩu và xác nhận mật khẩu không khớp!");
