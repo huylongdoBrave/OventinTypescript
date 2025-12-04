@@ -154,13 +154,14 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
               >
                 Nhập mã
               </button>
-              <div className="flex items-center">
-                <img
-                  className="h-10 rounded-full"
-                  src="https://s3dev.estuary.solutions/ovaltine2024dev/76b6ed4d-02ed-4393-810a-967b3586b1dc"
-                  alt="User Avatar"
-                />
-              </div>
+              <Link to="/Profile" className="flex items-center cursor-pointer">
+                  {/* Hình robot */}
+                  <img
+                    className="h-8 md:h-10 rounded-full"
+                    src="https://s3dev.estuary.solutions/ovaltine2024dev/76b6ed4d-02ed-4393-810a-967b3586b1dc"
+                    alt="User Avatar"
+                  />
+              </Link>
             </div>
           ) : (
             <div className="flex items-center gap-6">
@@ -227,12 +228,15 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
               >
                 Nhập mã
               </button>
-              <div className="flex items-center">
-                <img
-                  className="h-8 md:h-10 rounded-full"
-                  src="https://s3dev.estuary.solutions/ovaltine2024dev/76b6ed4d-02ed-4393-810a-967b3586b1dc"
-                  alt="User Avatar"
-                />
+              <div >
+                <Link to="/Profile" className="flex items-center cursor-pointer">
+                  {/* Hình robot */}
+                  <img
+                    className="h-8 md:h-10 rounded-full"
+                    src="https://s3dev.estuary.solutions/ovaltine2024dev/76b6ed4d-02ed-4393-810a-967b3586b1dc"
+                    alt="User Avatar"
+                  />
+                </Link>
               </div>
             </div>
           ) : (

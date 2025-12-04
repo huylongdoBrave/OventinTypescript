@@ -27,7 +27,7 @@ const INITIAL_FORM_STATE: FormDataState = {
   color: "#ffffff",
 };
 
-const AddPrizePopupComponent: React.FC<AddPrizePopupProps> = ({
+const AddPrizePopup: React.FC<AddPrizePopupProps> = ({
   isOpen,
   prizes,
   onClose,
@@ -211,4 +211,4 @@ const AddPrizePopupComponent: React.FC<AddPrizePopupProps> = ({
   );
 };
 
-export default memo(AddPrizePopupComponent);
+export default memo(AddPrizePopup);

@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import { useState, useCallback, useEffect } from 'react';
 import Footer from './components/Footer.tsx'
 import WheelGame from './components/WheelGame/WheelGames.tsx';
+import Profile from './components/Profile/Profile.tsx';
 import Header from './components/Header.tsx';
 import LoginPopup from "./components/LoginPopup/LoginPopup.tsx";
 import RuleRegisterPopup from "./components/RegisterPopup/RuleRegisterPopup.tsx";
@@ -10,7 +11,7 @@ import RegisterPopup from "./components/RegisterPopup/RegisterPopup.tsx";
 function App() {
 
   //State quản lý đăng nhập
-  const isLoggedIn = false;
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   //state login popup
   const [isLoginPopup, setIsLoginPopupOpen] = useState(false);
@@ -34,6 +35,11 @@ function App() {
     setIsRegisterPopupOpen(true); // Mở popup đăng ký
   }, [closeRulePopup]);
 
+  const handleLoginSuccess = () =>{
+    setIsLoggedIn(true);
+    closeLoginPopup();
+  };
+
   // Effect quản lý class 'body-no-scroll' khi popup mở/đóng
   useEffect(() => {
     if (isLoginPopup || isRegisterPopup || isRulePopupOpen) {
@@ -44,6 +50,7 @@ function App() {
     // Cleanup function để đảm bảo class được xóa khi component unmount
     return () => document.body.classList.remove("body-no-scroll");
   }, [isLoginPopup, isRegisterPopup, isRulePopupOpen]);
+
 
 
   return (
@@ -57,6 +64,7 @@ function App() {
         <LoginPopup 
           isOpen={isLoginPopup} 
           onClose={closeLoginPopup} 
+          onLoginSuccess={handleLoginSuccess}
         />
 
         <RuleRegisterPopup
@@ -70,16 +78,18 @@ function App() {
           onClose={closeRegisterPopup} 
         />
 
-      <div>
       <Routes>
-        {/* Route cho trang chủ (vòng quays) */}
-        <Route path="/" element={<WheelGame />} />
+        {/* Trang chủ (vòng quays) */}
+        <Route path="/" element={<WheelGame isLoggedIn={isLoggedIn}/>} />
+        <Route path="/WheelGame" element={<WheelGame isLoggedIn={isLoggedIn}/>} />
 
-        {/* Route cho trang sản phẩm */}
-{/*         <Route path="/prizewheel/products" element={<ShowPrize />} /> */}
+        {/* Trang sản phẩm */}
+        {/* <Route path="/prizewheel/products" element={<ShowPrize />} /> */}
+
+        {/* Profile */}
+        <Route path="/Profile" element={<Profile onLogout={() => setIsLoggedIn(false)} />} />
 
       </Routes>
-      </div>
 
       <Footer />
 

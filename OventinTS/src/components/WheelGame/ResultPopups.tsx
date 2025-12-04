@@ -17,7 +17,7 @@ interface ResultPopupProps {
   onClose: () => void;
 }
 
-const ResultPopupComponent: React.FC<ResultPopupProps> = ({
+const ResultPopup: React.FC<ResultPopupProps> = ({
   isOpen,
   prize,
   onClose,
@@ -53,14 +53,17 @@ const ResultPopupComponent: React.FC<ResultPopupProps> = ({
             alt="Thông báo"
             className="absolute top-[-50px] left-1/2 -translate-x-1/2 w-[300px] h-auto p-1.5"
           />
-          <p className="text-lg md:text-[1.5rem] font-black m-0 min-h-[50px] text-[#233da3]">
-            {prize?.name || "Chúc bạn may mắn lần sau"}
-          </p>
-          <div className=" w-auto h-auto flex justify-center items-center">
+          {/* <p className="text-lg md:text-[1.5rem] font-black m-0 min-h-[50px] text-[#233da3]">
+            {prize?.name}
+          </p> */}
+          <div className=" w-auto h-auto flex flex-col justify-center items-center">
+            <div className="text-lg md:text-[1.5rem] font-black m-0 min-h-[50px] text-[#233da3]">
+              {prize?.name}
+            </div>
             {prize?.type === "image" ? (
               <img
                 src={prize?.value}
-                className="w-10 h-10 object-contain"
+                className="w-50 h-20 object-contain"
                 alt="Preview"
               />
             ) : (
@@ -91,4 +94,4 @@ const ResultPopupComponent: React.FC<ResultPopupProps> = ({
     );
 };
 
-export default memo(ResultPopupComponent);
+export default memo(ResultPopup);

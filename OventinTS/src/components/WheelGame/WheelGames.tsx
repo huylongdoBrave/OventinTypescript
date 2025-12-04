@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, memo } from "react";
 // import { AnimatePresence } from "framer-motion";
 import ButtonOrange from "../Button/ButtonOranges.tsx";
 
@@ -9,7 +9,6 @@ import AddPrizePopup from "./AddPrizePopups.tsx";
 import AttentionWheelPopup from "./AttentionWheelPopups.tsx";
 import ImgLeftPopup from "../StickyHandlePopup/ImgLeftPopups.tsx";
 import ImgRightPopup from "../StickyHandlePopup/ImgRightPopups.tsx";
-// import Header from "../Header.tsx";
 
 
 //    ====== UI VÒNG XOAY TỔNG THỂ TRANG OVALTINE ======
@@ -22,14 +21,18 @@ export interface Prize {
   color: string;
 }
 
-function WheelGame() {
+interface WheelGameProps {
+  isLoggedIn: boolean;
+}
+
+const WheelGame: React.FC<WheelGameProps> = ({ isLoggedIn }) => {
   // === STATE MANAGEMENT ===
   const [prizes, setPrizes] = useState<Prize[]>([]); // một mảng chứa các đối tượng Prize, ban đầu nó rỗng
   const [currentSpins, setCurrentSpins] = useState(1000);
   const [isSpinning, setIsSpinning] = useState(false);
   const wheelRef = useRef<HTMLDivElement>(null); // Ref để tham chiếu đến DOM của vòng quay
-  const dragRef = useRef<HTMLDivElement>(null); // Ref cho popup kéo thả BÊN TRÁI
-
+  const dragRefLeft = useRef<HTMLDivElement>(null); // Ref cho popup kéo thả BÊN TRÁI
+  const dragRefRight = useRef<HTMLDivElement>(null); // Ref cho popup kéo thả BÊN PHẢI
 
   // State các popup
   const [winningPrize, setWinningPrize] = useState<Prize | null>(null);
@@ -325,7 +328,7 @@ function WheelGame() {
             {/* Thêm lượt */}
             <ButtonOrange
               id="add-spins-btn"
-               disabled={isSpinning}
+               disabled={isSpinning || !isLoggedIn}
               // Dạng viết cũ gây rerender khi chưa truyền callback
               //  onClick={() => setCurrentSpins(currentSpins + 10)}
               onClick={addSpins}
@@ -392,7 +395,12 @@ function WheelGame() {
                 <Wheel prizes={prizes} />
               </div>
                 {/* Nút quay */}
-                <button id="spin" onClick={handleSpin} disabled={isSpinning}>
+                <button
+                  id="spin"
+                  onClick={handleSpin}
+                  disabled={isSpinning || !isLoggedIn}
+                  // title={!isLoggedIn ? "Vui lòng đăng nhập để quay" : "Quay"} 
+                  >
                   <img className="" src="/static/favicon_oven.png" alt="Spin" />
                 </button>
             </div>
@@ -461,7 +469,7 @@ function WheelGame() {
           <ButtonOrange
             id="show-probabilities-btn"
             onClick={openRatePopup}
-            disabled={isSpinning}
+            disabled={isSpinning || !isLoggedIn}
             className="h-[50px] w-[150px] text-base"
           >
             Tỉ lệ
@@ -470,7 +478,7 @@ function WheelGame() {
           <ButtonOrange
             id="add-prize-btn"
             onClick={openAddPrizePopup}
-            disabled={isSpinning}
+            disabled={isSpinning || !isLoggedIn}
             className="h-[50px] w-[150px] text-base"
           >
             Thêm quà
@@ -500,12 +508,12 @@ function WheelGame() {
         <ImgLeftPopup
           isOpen={isStickyPopupLeft}
           onClose={closeStickyPopupLeft}
-          dragRef={dragRef}
+          dragRef={dragRefLeft}
         />
         <ImgRightPopup
           isOpen={isStickyPopupRight}
           onClose={closeStickyPopupRight}
-          dragRef={dragRef}
+          dragRef={dragRefRight}
         />
 
       </div>
@@ -513,13 +521,10 @@ function WheelGame() {
   );
 }
 
-export default WheelGame;
+export default memo(WheelGame);
 
 
 // Định nghĩa props cho các component con (trừ Wheel đã tự định nghĩa)
 // interface ResultPopupProps { isOpen: boolean; prize: Prize | null; onClose: () => void; }
 // interface RateTablePopupProps { isOpen: boolean; prizes: Prize[]; onClose: () => void; onApplyChanges: (updatedPrizes: Prize[]) => void; }
 // interface AddPrizePopupProps { isOpen: boolean; prizes: Prize[]; onClose: () => void; onAddPrize: (newPrize: Prize) => void; }
-
-
-

@@ -7,7 +7,7 @@ interface AttentionWheelPopupProps {
   onClose: () => void;
 }
 
-const AttentionWheelPopupComponent: React.FC<AttentionWheelPopupProps> = ({
+const AttentionWheelPopup: React.FC<AttentionWheelPopupProps> = ({
   isOpen,
   onClose,
 }) => {
@@ -115,7 +115,7 @@ const AttentionWheelPopupComponent: React.FC<AttentionWheelPopupProps> = ({
   );
 };
 
-export default memo(AttentionWheelPopupComponent);
+export default memo(AttentionWheelPopup);
 
 
     /* DẠNG THÔNG BÁO CŨ */
