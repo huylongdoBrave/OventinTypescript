@@ -67,7 +67,7 @@ const ResultPopup: React.FC<ResultPopupProps> = ({
                 alt="Preview"
               />
             ) : (
-              <span className="text-xs truncate">{prize?.value}</span>
+              <span className="text-lg truncate">{prize?.value}</span>
             )}
           </div>
           {/* <small className="text-lg md:text-[1.5rem] font-black m-0 min-h-[50px] text-[#233da3]">

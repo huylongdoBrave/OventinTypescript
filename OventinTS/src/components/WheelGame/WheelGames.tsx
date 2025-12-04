@@ -503,7 +503,6 @@ const WheelGame: React.FC<WheelGameProps> = ({ isLoggedIn }) => {
           </button>
         </div>
 
-
         {/* Popup thông báo img kéo thả */}
         <ImgLeftPopup
           isOpen={isStickyPopupLeft}
