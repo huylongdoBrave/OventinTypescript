@@ -1,6 +1,7 @@
 import React ,{useState, useEffect, memo, useCallback} from "react";
 import ButtonOrange from "../Button/ButtonOranges";
 import ForgotPasswordPopup from "../ForgotPassword/ForgotPasswordPopup";
+import RegisterPopup from "../RegisterPopup/RegisterPopup";
 
 //    ====== UI Login ======
 
@@ -24,6 +25,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
   const [formData, setFormData] = useState<UserLogin>(INITIAL_FORM_STATE);
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isForgotPwPopup, setIsForgotPwPopup] = useState(false);
+  const [isRegisterPopup, setIsRegisterPopup] = useState(false);
 
   const openForgotPasswordPopup = useCallback(() => {
     setIsForgotPwPopup(true);
@@ -32,6 +34,15 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
 
   const closeForgotPasswordPopup = useCallback(() => {
     setIsForgotPwPopup(false);
+  }, []);
+
+  const openRegisterPopup = useCallback(() => {
+    setIsRegisterPopup(true);
+    onClose(); 
+  }, [onClose]);
+
+  const closeRegisterPopup = useCallback(() => {
+    setIsRegisterPopup(false);
   }, []);
 
 
@@ -86,10 +97,6 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
 
   return (
   <>
-    <ForgotPasswordPopup 
-      isOpen={isForgotPwPopup}
-      onClose={closeForgotPasswordPopup}
-    />
 
     {isOpen && (
     <div
@@ -195,7 +202,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
                 focus:outline-none hover:text-red-800" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>
                   Quên mật khẩu
                 </button>
-                <button type="button" className="font-medium text-[var(--normal-blue)] cursor-pointer 
+                <button onClick={openRegisterPopup} type="button" className="font-medium text-[var(--normal-blue)] cursor-pointer 
                 focus:outline-none hover:text-blue-800"
                 style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>
                   Đăng ký
@@ -208,6 +215,18 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
       </div>
     </div>
     )}
+
+    <ForgotPasswordPopup 
+      isOpen={isForgotPwPopup}
+      onClose={closeForgotPasswordPopup}
+    />
+
+    <RegisterPopup 
+      isOpen={isRegisterPopup}
+      onClose={closeRegisterPopup}
+    />
+
+
   </>
 
   );
