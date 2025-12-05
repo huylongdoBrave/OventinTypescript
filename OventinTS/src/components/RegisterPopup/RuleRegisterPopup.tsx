@@ -38,7 +38,7 @@ const RuleRegisterPopup: React.FC<RuleRegisterPopupProps> = ({
         />
         {/* Title */}
         <img
-          src="/static/term.png"
+          src="./static/term.png"
           alt="Chính sách quyền riêng tư"
           className="absolute top-[150px] left-1/2 -translate-x-1/2 w-[300px] h-auto p-1.5"
         />

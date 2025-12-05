@@ -100,7 +100,6 @@ const ForgotPasswordPopup: React.FC<ForgotPasswordProps> = ({ isOpen, onClose })
                 <div className="absolute -bottom-30 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 w-full">
                   {/* Button chính */}
                   <ButtonOrange
-                    type="submit"
                     form="login-form"
                     onClick={onClose}
                     className={`w-[200px] h-12 text-lg transition-colors duration-300`}
