@@ -1,6 +1,7 @@
 import React ,{useState, useEffect, memo, useCallback} from "react";
 import ButtonOrange from "../Button/ButtonOranges";
 import ForgotPasswordPopup from "../ForgotPassword/ForgotPasswordPopup";
+import RuleRegisterPopup from "../RegisterPopup/RuleRegisterPopup";
 import RegisterPopup from "../RegisterPopup/RegisterPopup";
 
 //    ====== UI Login ======
@@ -25,26 +26,30 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
   const [formData, setFormData] = useState<UserLogin>(INITIAL_FORM_STATE);
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isForgotPwPopup, setIsForgotPwPopup] = useState(false);
+  const [isRuleRegisterPopup, setIsRuleRegisterPopup] = useState(false);
   const [isRegisterPopup, setIsRegisterPopup] = useState(false);
+
+  const closeForgotPasswordPopup = useCallback(() => {setIsForgotPwPopup(false);}, []);
+  const closeRuleRegisterPopup = useCallback(() => setIsRuleRegisterPopup(false), []);
+  const closeRegisterPopup = useCallback(() => setIsRegisterPopup(false), []);
+
+  // Hàm xử lý popup quên mật khẩu
 
   const openForgotPasswordPopup = useCallback(() => {
     setIsForgotPwPopup(true);
     onClose(); 
   }, [onClose]);
 
-  const closeForgotPasswordPopup = useCallback(() => {
-    setIsForgotPwPopup(false);
-  }, []);
+    // Hàm xử lý popup điều khoản
+  const handleAgreeToRules = useCallback(() => {
+    closeRuleRegisterPopup(); // Đóng popup điều khoản
+    setIsRegisterPopup(true); // Mở popup đăng ký
+  }, [closeRuleRegisterPopup]);
 
-  const openRegisterPopup = useCallback(() => {
-    setIsRegisterPopup(true);
+  const openRuleRegisterPopup = useCallback(() => {
+    setIsRuleRegisterPopup(true);
     onClose(); 
   }, [onClose]);
-
-  const closeRegisterPopup = useCallback(() => {
-    setIsRegisterPopup(false);
-  }, []);
-
 
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -53,8 +58,6 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
       setFormData(INITIAL_FORM_STATE);
     }
   }, [isOpen]);
-
-
 
 
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) =>{
@@ -202,7 +205,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
                 focus:outline-none hover:text-red-800" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>
                   Quên mật khẩu
                 </button>
-                <button onClick={openRegisterPopup} type="button" className="font-medium text-[var(--normal-blue)] cursor-pointer 
+                <button onClick={openRuleRegisterPopup} type="button" className="font-medium text-[var(--normal-blue)] cursor-pointer 
                 focus:outline-none hover:text-blue-800"
                 style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>
                   Đăng ký
@@ -221,11 +224,16 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
       onClose={closeForgotPasswordPopup}
     />
 
+    <RuleRegisterPopup 
+      isOpen={isRuleRegisterPopup}
+      onClose={closeRuleRegisterPopup}
+      onAgree={handleAgreeToRules}
+    />
+
     <RegisterPopup 
       isOpen={isRegisterPopup}
       onClose={closeRegisterPopup}
     />
-
 
   </>
 

@@ -38,10 +38,10 @@ const ForgotPasswordPopup: React.FC<ForgotPasswordProps> = ({ isOpen, onClose })
   }, []);
 
 
-    const handleForgotPwSubmit = () => {
-      navigate('/');
-      onClose();
-    };
+  const handleForgotPwSubmit = () => {
+    navigate('/');
+    onClose();
+  };
   
   if (!isOpen) {
     return null;
