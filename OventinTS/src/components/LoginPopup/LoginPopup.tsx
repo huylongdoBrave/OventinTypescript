@@ -105,7 +105,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
             {/* Nội dung popups */}
             <div className="relative flex-col flex justify-center text-left m-0 p-6 pt-[40px]">
 
-              <form id="login-form" onSubmit={handleLogin} className="flex flex-col gap-3 text-black/40">
+              <form id="login-form" onSubmit={handleLogin} className="flex flex-col gap-3 text-[#233da3]">
 
                 <div>
                   <label htmlFor="phoneNumber" className="block text-sm font-medium text-white/100 mb-1">
