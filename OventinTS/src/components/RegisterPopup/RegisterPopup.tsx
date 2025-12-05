@@ -160,6 +160,7 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
             {/* Nội dung popups */}
             <div className="relative flex-col flex justify-center text-left m-0 p-6 pt-[20px]">
               <form id="register-form" onSubmit={handleSubmit} className="flex flex-col gap-3 text-[#233da3]">
+                
                 {/* Họ và tên */}
                 <div>
                   <label htmlFor="fullName" className="block text-sm font-medium text-white/100 mb-1">
@@ -175,6 +176,7 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
                     // CSS hover viền vàng className="w-full bg-white border border-white/30 rounded-[20px] p-2 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition"
                   />
                 </div>
+
                 {/* Số điện thoại */}
                 <div>
                   <label htmlFor="phoneNumber" className="block text-sm font-medium text-white/100 mb-1">
@@ -189,6 +191,7 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
                     className="w-full bg-white border border-white/30 rounded-[30px] p-2 focus:ring-2 outline-none transition"
                   />
                 </div>
+
                 {/* Ngày sinh */}
                 <div>
                   <label htmlFor="dateOfBirth" className="block text-sm font-medium text-white/100 mb-1">
@@ -202,6 +205,7 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
                     className="w-full bg-white border border-white/30 rounded-[30px] p-2 focus:ring-2 outline-none transition"
                   />
                 </div>
+
                 {/* Mật khẩu */}
                 <div className="relative">
                   <label htmlFor="password" className="block text-sm font-medium text-white/100 mb-1">
@@ -233,6 +237,7 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
                     )}
                   </button>
                 </div>
+
                 {/* Xác nhận mật khẩu */}
                 <div className="relative">
                   <label htmlFor="confirmPassword" className="block text-sm font-medium text-white/100 mb-1">
