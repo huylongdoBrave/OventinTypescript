@@ -126,7 +126,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
                     type={isShowPassword ? "text" : "password"}
                     value={formData.password}
                     onChange={handleInputChange}
-                    placeholder="••••••••"
+                    placeholder="Mật Khẩu"
                     className="w-full bg-white/10 border border-white/30 rounded-md p-2 pr-10 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition"
                   />
                   <button

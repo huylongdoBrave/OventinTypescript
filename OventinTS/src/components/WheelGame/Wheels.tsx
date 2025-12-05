@@ -28,7 +28,7 @@ const WheelComponent: React.FC<WheelProps> = ({
     //   containerWheelSize * Math.sin((sliceAngle / 2) * (Math.PI / 180)) * 1.4
     // );
 
-    const containerWheelSize = 330; // Khớp với --container-wheel-size trong CSS
+    const containerWheelSize = 330; // Đặt theo --container-wheel-size trong CSS
     const radius = containerWheelSize / 2;
 
     // Xử lý trường hợp đặc biệt khi có 1 hoặc 2 quà

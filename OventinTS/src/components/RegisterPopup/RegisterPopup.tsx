@@ -203,7 +203,7 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
                     type={showPassword ? "text" : "password"}
                     value={formData.password}
                     onChange={handleChangeInput}
-                    placeholder="••••••••"
+                    placeholder="Mật Khẩu"
                     className="w-full bg-white/10 border border-white/30 rounded-md p-2 pr-10 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition"
                   />
                   <button
@@ -232,7 +232,7 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
                     type={showConfirmPassword ? "text" : "password"}
                     value={formData.confirmPassword}
                     onChange={handleChangeInput}
-                    placeholder="••••••••"
+                    placeholder="Xác nhận mật khẩu"
                     className="w-full bg-white/10 border border-white/30 rounded-md p-2 pr-10 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition"
                   />
                   <button

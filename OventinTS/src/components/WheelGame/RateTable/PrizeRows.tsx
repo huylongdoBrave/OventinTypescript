@@ -60,9 +60,7 @@ const PrizeRows: React.FC<PrizeRowProps> = ({
           type="number"
           className="w-full bg-white/20 text-white text-center rounded p-1 pr-5 appearance-none"
           value={(prize.probability * 100).toFixed(2)}
-          onChange={(e) =>
-            onPrizeChange(prize.id, "probability", e.target.value)
-          }
+          onChange={(e) => onPrizeChange(prize.id, "probability", e.target.value)}
           min="0"
           max="100"
           step="0.01"

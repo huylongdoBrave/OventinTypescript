@@ -25,7 +25,7 @@ const RuleRegisterPopup: React.FC<RuleRegisterPopupProps> = ({
   return (
     <div
       className="fixed inset-0 bg-black/60 z-[1003] flex justify-center overflow-y-auto py-10 px-4
-                 transition-opacity duration-300 ease-in-out "
+                transition-opacity duration-300 ease-in-out "
     >
       {/* Container popup max width */}
       {/* =>Bỏ items-center, thêm pt-[250px] tạo không gian cho logo và title ở trên fix được vấn đề */}

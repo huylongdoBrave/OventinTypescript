@@ -35,6 +35,7 @@ function App() {
     setIsRegisterPopupOpen(true); // Mở popup đăng ký
   }, [closeRulePopup]);
 
+  // Hàm xử lý đã đăng nhập
   const handleLoginSuccess = () =>{
     setIsLoggedIn(true);
     closeLoginPopup();

@@ -12,6 +12,7 @@ import ImgRightPopup from "../StickyHandlePopup/ImgRightPopups.tsx";
 
 
 //    ====== UI VÒNG XOAY TỔNG THỂ TRANG OVALTINE ======
+
 export interface Prize {
   id: number;
   name: string;

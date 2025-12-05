@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
 
-//    ====== CSS BUTTONS MÀU CAM TRANG OVALTINE ======
+//    ====== CSS TW BUTTONS MÀU CAM TRANG OVALTINE ======
 
 
 // React.ButtonHTMLAttributes<HTMLButtonElement> cho phép components nhận tất cả các thuộc tính của thẻ <button> HTML (onClick, disabled, type,...)
@@ -18,13 +18,15 @@ const ButtonAdd: React.FC<ButtonProps> = ({ children, className, ...props }) => 
   `;
 
   return (
+    <button className={`${baseClasses} ${className || ''}`} {...props}>
+      {children}
+    </button>
+
+    // Dạng viết cũ
     // <button className="bg-[#ff6702] w-[120px] h-[40px] text-[16px] rounded-[50px] inline-block transition-[0.2s_all] shadow-[0_5px_10px_gray] cursor-pointer border-[3px_solid_white] font-[1000] tracking-[1px] text-[white] text-[20px] font-['Times_New_Roman',Times,serif] 
     // md:h-[45px] md:w-[135px] md:text-[18px] md:mb-[30px]
     // lg:h-[50px] lg:w-[150px] lg:mb-[50px] lg:mt-[10px] ">
 
-    <button className={`${baseClasses} ${className || ''}`} {...props}>
-      {children}
-    </button>
   );
 }
 
