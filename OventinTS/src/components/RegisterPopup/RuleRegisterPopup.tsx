@@ -173,12 +173,12 @@ const RuleRegisterPopup: React.FC<RuleRegisterPopupProps> = ({
               {/* Span rút ngắn nội dung */}
               <span
                 onClick={() => setIsExpandedRuleText(!isExpandedRuleText)}
-                className="font-bold text-sm leading-[1.66] text-blue-700 cursor-pointer
+                className="font-bold text-sm leading-[1.66] text-[var(--normal-blue)] cursor-pointer
                m-0 mt-2 ml-2 flex text-left gap-1 hover:underline"
               >
                 {isExpandedRuleText ? "Rút gọn" : "Xem thêm"}
                 {/* Mũi tên */}
-                <svg
+                {/* <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                   fill="currentColor"
@@ -191,40 +191,54 @@ const RuleRegisterPopup: React.FC<RuleRegisterPopupProps> = ({
                     d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
                     clipRule="evenodd"
                   />
-                </svg>
+                </svg> */}
               </span>
               {/* Checkbox Đồng ý? */}
               <label className="mt-[16px] text-[rgb(35,61,163)] inline-flex items-center cursor-pointer 
               align-middle text-white mr-4">
+                <div className="bg-white rounded">
                 <span className="inline-flex items-center justify-center relative box-border bg-transparent outline-none border-none m-0 cursor-pointer
-                              select-none align-middle appearance-none no-underline p-[9px] rounded-full [-webkit-tap-highlight-color:transparent]">
+                              select-none align-middle appearance-none no-underline p-[3px]  rounded-full [-webkit-tap-highlight-color:transparent]">
                   <input
                     type="checkbox"
                     checked={isAgeConfirmed}
                     onChange={() => setIsAgeConfirmed(!isAgeConfirmed)}
-                    className="w-5 h-5 cursor-pointer"
+                    className="w-5 h-5 cursor-pointer border-2"
                   />
                 </span>
-                <span className="font-normal text-base leading-normal m-0 text-left cursor-pointer">
+                </div>
+                <span className="text-[var(--normal-blue)] font-normal text-base leading-normal m-2 text-left cursor-pointer">
                  Tôi xác nhận tôi đủ 18 tuổi trở lên
                 </span>
               </label>
 
-              
+            </div>
+                          
                 {/* Button xác thực */}
-                <div className="absolute -bottom-28 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 w-full">
+                <div className="absolute mt-5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 w-full">
                   {/* Button chính */}
                   <ButtonOrange
                     onClick={onAgree}
                     disabled={!isAgeConfirmed}
-                    className={`w-[200px] h-12 text-lg transition-colors duration-300 ${
+                    className={`w-[300px] h-12 text-lg transition-colors duration-300 ${
                       !isAgeConfirmed
                         ? "bg-gray-400 cursor-not-allowed hover:bg-gray-400"
                         : ""
                     }`}
                   >
-                    Đồng ý và Tiếp tục
+                    Đồng ý
                   </ButtonOrange>
+                  <ButtonOrange
+                    onClick={onClose}
+                    className={`w-[300px] h-12 text-lg transition-colors duration-300    
+                    bg-[var(--normal-blue)] text-white font-black tracking-wider border-[3px] border-white 
+                      cursor-pointer shadow-lg transition-all duration-200 rounded-full inline-block
+                      hover:bg-white hover:text-[var(--normal-blue)]
+                      disabled:bg-gray-400 disabled:cursor-not-allowed`}
+                  >
+                    Trở lại
+                  </ButtonOrange>
+
                   {/* Nút đóng 'x' */}
                   <button
                     onClick={onClose}
@@ -235,8 +249,6 @@ const RuleRegisterPopup: React.FC<RuleRegisterPopupProps> = ({
                     &times;
                   </button>
                 </div>
-
-            </div>
 
           </div>
         </div>
