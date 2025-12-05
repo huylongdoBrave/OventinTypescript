@@ -1,5 +1,6 @@
 import React ,{useState, useEffect, memo, useCallback} from "react";
 import ButtonOrange from "../Button/ButtonOranges";
+import ForgotPasswordPopup from "../ForgotPassword/ForgotPasswordPopup";
 
 //    ====== UI Login ======
 
@@ -22,6 +23,18 @@ const INITIAL_FORM_STATE: UserLogin = {
 const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess }) => {
   const [formData, setFormData] = useState<UserLogin>(INITIAL_FORM_STATE);
   const [isShowPassword, setIsShowPassword] = useState(false);
+  const [isForgotPwPopup, setIsForgotPwPopup] = useState(false);
+
+  const openForgotPasswordPopup = useCallback(() => {
+    setIsForgotPwPopup(true);
+    onClose(); 
+  }, [onClose]);
+
+  const closeForgotPasswordPopup = useCallback(() => {
+    setIsForgotPwPopup(false);
+  }, []);
+
+
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -29,6 +42,8 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
       setFormData(INITIAL_FORM_STATE);
     }
   }, [isOpen]);
+
+
 
 
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) =>{
@@ -69,12 +84,14 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
 
   }, [formData.password, formData.phoneNumber, onClose, onLoginSuccess]);
 
-  
-  if (!isOpen) {
-    return null;
-  }
-
   return (
+  <>
+    <ForgotPasswordPopup 
+      isOpen={isForgotPwPopup}
+      onClose={closeForgotPasswordPopup}
+    />
+
+    {isOpen && (
     <div
       className="fixed inset-0 bg-black/60 z-[1003] flex justify-center overflow-y-auto py-10 px-4
                 transition-opacity duration-300 ease-in-out "
@@ -174,7 +191,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
               
               {/* Quên mật khẩu */}
               <div className="mt-13 text-[18px] flex justify-between items-center text-sm w-full">
-                <button type="button" className="font-medium text-[#97171b] cursor-pointer
+                <button onClick={openForgotPasswordPopup} type="button" className="font-medium text-[#97171b] cursor-pointer
                 focus:outline-none hover:text-red-800" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>
                   Quên mật khẩu
                 </button>
@@ -190,6 +207,9 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
         </div>
       </div>
     </div>
+    )}
+  </>
+
   );
 };
 

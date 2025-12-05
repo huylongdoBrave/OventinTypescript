@@ -56,15 +56,15 @@ const ForgotPasswordPopup: React.FC<ForgotPasswordProps> = ({ isOpen, onClose })
       <div className="relative flex justify-center w-full max-w-[800px] pt-[200px]">
         {/* logo */}
         <img
-          src="./static/forgot-pass.png"
+          src="./static/favicon_oven.png"
           alt="Oventin Logo"
           className="absolute top-[20px] left-1/2 -translate-x-1/2 w-[150px] h-auto rounded-full p-1.5 filter-[drop-shadow(rgb(255,255,255)_0px_0px_5px)]"
         />
         {/* Title */}
         <img
-          src="/static/login.png"
-          alt="Đăng Nhập"
-          className="absolute z-[1004] top-[160px] left-1/2 -translate-x-1/2 w-[300px] h-auto p-1.5"
+          src="/static/forgot-pass.png"
+          alt="Quên mật khẩu"
+          className="absolute z-[1004] top-[170px] left-1/2 -translate-x-1/2 w-[300px] h-auto p-1.5"
         />
         {/* Khung lớn popup */}
         <div
@@ -72,7 +72,7 @@ const ForgotPasswordPopup: React.FC<ForgotPasswordProps> = ({ isOpen, onClose })
                   w-[300px] md:w-[300px] lg:w-[350px]  max-w-[800px] text-center text-black "
         >
           <div
-            className="items-center h-[280px] inset-0 bg-[url('/static/modal.png')] bg-cover bg-center bg-no-repeat 
+            className="items-center h-[200px] inset-0 bg-[url('/static/modal.png')] bg-cover bg-center bg-no-repeat 
                         rounded-[20px] border-4 border-white"
           >
             {/* Nội dung popups */}
@@ -92,7 +92,7 @@ const ForgotPasswordPopup: React.FC<ForgotPasswordProps> = ({ isOpen, onClose })
                     className="w-full bg-white border border-white/30 rounded-[30px] p-2 focus:ring-2 outline-none transition"
                   />
                 </div>
-                <div>
+                <div className="text-white">
                   Điền số điện thoại dùng để đăng ký tài khoản của bạn
                 </div>
 
@@ -102,6 +102,7 @@ const ForgotPasswordPopup: React.FC<ForgotPasswordProps> = ({ isOpen, onClose })
                   <ButtonOrange
                     type="submit"
                     form="login-form"
+                    onClick={onClose}
                     className={`w-[200px] h-12 text-lg transition-colors duration-300`}
                   >
                     Tiếp tục
