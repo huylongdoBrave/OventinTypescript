@@ -96,60 +96,62 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
         {/* Khung lớn popup */}
         <div
           className=" relative filter-[drop-shadow(rgb(255,252,110)_0px_0px_5px)]
-                  w-[300px] md:w-[300px] lg:w-[550px] max-w-[800px] text-center text-white "
+                  w-[300px] md:w-[300px] lg:w-[350px]  max-w-[800px] text-center text-black "
         >
           <div
-            className="items-center inset-0 bg-[url('/static/modal.png')] bg-cover bg-center bg-no-repeat 
+            className="items-center h-[280px] inset-0 bg-[url('/static/modal.png')] bg-cover bg-center bg-no-repeat 
                         rounded-[20px] border-4 border-white"
           >
             {/* Nội dung popups */}
-            <div className="relative flex-col flex justify-center text-left m-0 p-6 pt-[20px]">
+            <div className="relative flex-col flex justify-center text-left m-0 p-6 pt-[40px]">
 
-              <form id="login-form" onSubmit={handleLogin} className="flex flex-col gap-3 text-white">
+              <form id="login-form" onSubmit={handleLogin} className="flex flex-col gap-3 text-black/40">
 
                 <div>
-                  <label htmlFor="phoneNumber" className="block text-sm font-medium text-white/100 mb-1">Số điện thoại</label>
+                  <label htmlFor="phoneNumber" className="block text-sm font-medium text-white/100 mb-1">
+                  Số điện thoại<span aria-hidden="true" className="text-[rgb(239,0,18)]">&thinsp;*</span></label>
                   <input
                     id="phoneNumber"
                     type="tel"
                     value={formData.phoneNumber}
                     onChange={handleInputChange}
-                    placeholder="09xxxxxxxx"
-                    className="w-full bg-white/10 border border-white/30 rounded-md p-2 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition"
+                    placeholder="Số điện thoại"
+                    className="w-full bg-white border border-white/30 rounded-[30px] p-2 focus:ring-2 outline-none transition"
                   />
                 </div>
 
                 <div className="relative">
-                  <label htmlFor="password" className="block text-sm font-medium text-white/100 mb-1">Mật khẩu</label>
+                  <label htmlFor="password" className="block text-sm font-medium text-white/100 mb-1">
+                  Mật khẩu<span aria-hidden="true" className="text-[rgb(239,0,18)]">&thinsp;*</span></label>
                   <input
                     id="password"
                     type={isShowPassword ? "text" : "password"}
                     value={formData.password}
                     onChange={handleInputChange}
                     placeholder="Mật Khẩu"
-                    className="w-full bg-white/10 border border-white/30 rounded-md p-2 pr-10 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition"
+                    className="w-full bg-white border border-white/30 rounded-[30px] p-2 focus:ring-2 outline-none transition"
                   />
                   <button
                     type="button"
-                    onClick={()=> setIsShowPassword(!isShowPassword)}
-                    className="absolute inset-y-0 right-0 top-7 pr-3 flex items-center text-white/70 hover:text-white"
+                    onClick={() => setIsShowPassword(!isShowPassword)}
+                    className="absolute inset-y-0 right-0 top-7 pr-3 flex items-center text-black/40 hover:text-black"
                     aria-label={isShowPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
                   >
                     {isShowPassword ? (
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                       </svg>
                     ) : (
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
                       </svg>
                     )}
                   </button>
                 </div>
 
                 {/* Button xác thực */}
-                <div className="absolute -bottom-28 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 w-full">
+                <div className="absolute -bottom-30 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 w-full">
                   {/* Button chính */}
                   <ButtonOrange
                     type="submit"
@@ -168,8 +170,20 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
                     &times;
                   </button>
                 </div>
-
               </form>
+              
+              {/* Quên mật khẩu */}
+              <div className="mt-13 text-[18px] flex justify-between items-center text-sm w-full">
+                <button type="button" className="font-medium text-[#97171b] cursor-pointer
+                focus:outline-none hover:text-red-800" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>
+                  Quên mật khẩu
+                </button>
+                <button type="button" className="font-medium text-[var(--normal-blue)] cursor-pointer 
+                focus:outline-none hover:text-blue-800"
+                style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>
+                  Đăng ký
+                </button>
+              </div>
 
             </div>
           </div>
