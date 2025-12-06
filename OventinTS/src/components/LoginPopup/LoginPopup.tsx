@@ -126,7 +126,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
                   w-[300px] md:w-[300px] lg:w-[350px]  max-w-[800px] text-center text-black "
         >
           <div
-            className="items-center h-[280px] inset-0 bg-[url('/static/modal.png')] bg-cover bg-center bg-no-repeat 
+            className="items-center h-[250px] inset-0 bg-[url('/static/modal.png')] bg-cover bg-center bg-no-repeat 
                         rounded-[20px] border-4 border-white"
           >
             {/* Nội dung popups */}
@@ -200,7 +200,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
               </form>
               
               {/* Quên mật khẩu */}
-              <div className="mt-13 text-[18px] flex justify-between items-center text-sm w-full">
+              <div className="mt-6 text-[15px] flex justify-between items-center text-sm w-full">
                 <button onClick={openForgotPasswordPopup} type="button" className="font-medium text-[#97171b] cursor-pointer
                 focus:outline-none hover:text-red-800" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>
                   Quên mật khẩu
