@@ -1,9 +1,11 @@
 import React ,{useState, useEffect, memo, useCallback} from "react";
+import {useForm} from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import ButtonOrange from "../Button/ButtonOranges";
 import ForgotPasswordPopup from "../ForgotPassword/ForgotPasswordPopup";
 import RuleRegisterPopup from "../RegisterPopup/RuleRegisterPopup";
 import RegisterPopup from "../RegisterPopup/RegisterPopup";
-
 //    ====== UI Login ======
 
 interface LoginPopupProps {
@@ -12,29 +14,46 @@ interface LoginPopupProps {
   onLoginSuccess:() => void;
 }
 
+
 interface UserLogin{
   phoneNumber: string;
   password: string;
 }
 
-const INITIAL_FORM_STATE: UserLogin = {
-  phoneNumber: "",
-  password: "",
-};
+// const INITIAL_FORM_STATE: UserLogin = {
+//   phoneNumber: "",
+//   password: "",
+// };
+
+const validationSchema = yup.object().shape({
+  phoneNumber: yup
+    .string()
+    .required("Vui lòng nhập số điện thoại")
+    .matches(/^\d{10}$/, "Số điện thoại phải có đúng 10 chữ số."),
+  password: yup
+    .string()
+    .required("Vui lòng nhập mật khẩu")
+    .min(6, "Mật khẩu phải có ít nhất 6 ký tự."),
+});
 
 const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess }) => {
-  const [formData, setFormData] = useState<UserLogin>(INITIAL_FORM_STATE);
+  // const [formData, setFormData] = useState<UserLogin>(INITIAL_FORM_STATE);
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<UserLogin>({
+    resolver: yupResolver(validationSchema),
+    defaultValues: {
+      phoneNumber: "",
+      password: "",
+    }
+  });
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isForgotPwPopup, setIsForgotPwPopup] = useState(false);
   const [isRuleRegisterPopup, setIsRuleRegisterPopup] = useState(false);
   const [isRegisterPopup, setIsRegisterPopup] = useState(false);
-
-  const closeForgotPasswordPopup = useCallback(() => {setIsForgotPwPopup(false);}, []);
+  const closeForgotPasswordPopup = useCallback(() => setIsForgotPwPopup(false), []);
   const closeRuleRegisterPopup = useCallback(() => setIsRuleRegisterPopup(false), []);
   const closeRegisterPopup = useCallback(() => setIsRegisterPopup(false), []);
 
   // Hàm xử lý popup quên mật khẩu
-
   const openForgotPasswordPopup = useCallback(() => {
     setIsForgotPwPopup(true);
     onClose(); 
@@ -55,39 +74,45 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!isOpen) {
-      setFormData(INITIAL_FORM_STATE);
+      // setFormData(INITIAL_FORM_STATE);
+      reset();
     }
-  }, [isOpen]);
+  }, [isOpen, reset]);
 
 
-  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) =>{
-    const { id, value} = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [id]: value,
-    }));
-  }, []);
+  // const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) =>{
+  //   const { id, value} = e.target;
+  //   setFormData((prevFormData) => ({
+  //     ...prevFormData,
+  //     [id]: value,
+  //   }));
+  // }, []);
 
-  const handleLogin = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const phoneNumber = formData.phoneNumber.trim();
-    const password = formData.password.trim();
-    const phoneRegex = /^\d{10}$/;
-    if (!phoneNumber || !password){
-      alert("Vui lòng nhập đầy đủ thông tin!");
-      return;
-    }
-    if (!phoneRegex.test(phoneNumber)) {
-      alert("Số điện thoại không hợp lệ. Vui lòng nhập đúng 10 chữ số.");
-      return;
-    }
-    if (password.length < 6) {
-      alert("Mật khẩu phải có ít nhất 6 ký tự.");
-      return
-    }
+  // const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   const phoneNumber = formData.phoneNumber.trim();
+  //   const password = formData.password.trim();
+  //   const phoneRegex = /^\d{10}$/;
+  //   if (!phoneNumber || !password){
+  //     alert("Vui lòng nhập đầy đủ thông tin!");
+  //     return;
+  //   }
+  //   if (!phoneRegex.test(phoneNumber)) {
+  //     alert("Số điện thoại không hợp lệ. Vui lòng nhập đúng 10 chữ số.");
+  //     return;
+  //   }
+  //   if (password.length < 6) {
+  //     alert("Mật khẩu phải có ít nhất 6 ký tự.");
+  //     return
+  //   }
+  const onSubmit = (data: UserLogin) => {
+    const { phoneNumber, password } = data;
     const existingUsersRaw = localStorage.getItem("registeredUsers");
     const existingUsers: UserLogin[] = existingUsersRaw ? JSON.parse(existingUsersRaw) : [];
+
+    // react-hook-form handles trimming if you want, but manual trim is safer here.
     const UserExist = existingUsers.find((user) => user.phoneNumber === phoneNumber && user.password === password);
+
     if (UserExist) {
       alert("Đăng nhập thành công!");
       onLoginSuccess();
@@ -95,13 +120,13 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
     } else {
       alert("Số ĐT hoặc password nhập chưa đúng.");
     }
-
-  }, [formData.password, formData.phoneNumber, onClose, onLoginSuccess]);
+  }
+  // };
 
   return (
   <>
 
-    {isOpen && (
+  {isOpen && (
     <div
       className="fixed inset-0 bg-black/60 z-[1003] flex justify-center overflow-y-auto py-10 px-4
                 transition-opacity duration-300 ease-in-out "
@@ -132,19 +157,18 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
             {/* Nội dung popups */}
             <div className="relative flex-col flex justify-center text-left m-0 p-6 pt-[40px]">
 
-              <form id="login-form" onSubmit={handleLogin} className="flex flex-col gap-3 text-[#233da3]">
+              <form id="login-form" onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3 text-[#233da3]">
 
                 <div>
                   <label htmlFor="phoneNumber" className="block text-sm font-medium text-white/100 mb-1">
                   Số điện thoại<span aria-hidden="true" className="text-[rgb(239,0,18)]">&thinsp;*</span></label>
                   <input
-                    id="phoneNumber"
                     type="tel"
-                    value={formData.phoneNumber}
-                    onChange={handleInputChange}
+                    {...register("phoneNumber")}
                     placeholder="Số điện thoại"
-                    className="w-full bg-white border border-white/30 rounded-[30px] p-2 focus:ring-2 outline-none transition"
+                    className={`w-full bg-white border rounded-[30px] p-2 focus:ring-2 outline-none transition ${errors.phoneNumber ? 'border-red-500' : 'border-white/30'}`}
                   />
+                  {errors.phoneNumber && <p className="text-red-500 text-xs mt-1 ml-2">{errors.phoneNumber.message}</p>}
                 </div>
 
                 <div className="relative">
@@ -153,10 +177,9 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
                   <input
                     id="password"
                     type={isShowPassword ? "text" : "password"}
-                    value={formData.password}
-                    onChange={handleInputChange}
+                    {...register("password")}
                     placeholder="Mật Khẩu"
-                    className="w-full bg-white border border-white/30 rounded-[30px] p-2 focus:ring-2 outline-none transition"
+                    className={`w-full bg-white border rounded-[30px] p-2 focus:ring-2 outline-none transition ${errors.password ? 'border-red-500' : 'border-white/30'}`}
                   />
                   <button
                     type="button"
@@ -175,6 +198,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
                       </svg>
                     )}
                   </button>
+                    {errors.password && <p className="text-red-500 text-xs mt-1 ml-2">{errors.password.message}</p>}
                 </div>
 
                 {/* Button xác thực */}
@@ -217,7 +241,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
         </div>
       </div>
     </div>
-    )}
+  )}
 
     <ForgotPasswordPopup 
       isOpen={isForgotPwPopup}

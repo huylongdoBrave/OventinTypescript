@@ -7,8 +7,8 @@ import ResultPopup from "./ResultPopups.tsx";
 import RateTablePopup from "./RateTable/RateTablePopups.tsx";
 import AddPrizePopup from "./AddPrizePopups.tsx";
 import AttentionWheelPopup from "./AttentionWheelPopups.tsx";
-import ImgLeftPopup from "../StickyHandlePopup/ImgLeftPopups.tsx";
-import ImgRightPopup from "../StickyHandlePopup/ImgRightPopups.tsx";
+import ImgLeftPopup from "../StickyDragPopup/ImgLeftPopups.tsx";
+import ImgRightPopup from "../StickyDragPopup/ImgRightPopups.tsx";
 
 
 //    ====== UI VÒNG XOAY TỔNG THỂ TRANG OVALTINE ======
@@ -298,7 +298,6 @@ const WheelGame: React.FC<WheelGameProps> = ({ isLoggedIn }) => {
   // Data chấm sáng vòng xoays
   const translateY = -180;
   const lights = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
-
 
   return (
     <>

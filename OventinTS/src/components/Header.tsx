@@ -27,7 +27,6 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
                 className="h-[120px] mr-[30px] mt-[80px]"
               />
             </Link>
-            {/* Mục menu */}
             <ul className="flex list-none m-0 p-0 h-full">
               {/* Menu Item Structure */}
               <li className="relative w-[100px] h-full flex justify-center group">
@@ -40,10 +39,9 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
                   {({ isActive }) => (
                     <div
                       className={`absolute bottom-[-45px] w-[90px] h-[80px] bg-[#233da3] text-white rounded-lg
-                            flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 ${
-                              isActive
-                                ? "bg-[#ff4109]"
-                                : "group-hover:bg-[#1a2b7a]"
+                            flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 
+                            ${
+                              isActive ? "bg-[#ff4109]" : "group-hover:bg-[#1a2b7a]"
                             } `}
                     >
                       <img
@@ -81,7 +79,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
                   to="/"
                   end
                   className="flex items-center w-full h-full text-white no-underline box-border"
-                >
+                > 
                   {({ isActive }) => (
                     <div
                       className={`absolute bottom-[-45px] w-[90px] h-[80px] bg-[#233da3] text-white rounded-lg 
