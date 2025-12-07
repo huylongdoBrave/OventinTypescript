@@ -38,13 +38,16 @@ const validationSchema = yup.object().shape({
 
 const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess }) => {
   // const [formData, setFormData] = useState<UserLogin>(INITIAL_FORM_STATE);
+  // Cấu hình yup
   const { register, handleSubmit, formState: { errors }, reset } = useForm<UserLogin>({
     resolver: yupResolver(validationSchema),
     defaultValues: {
       phoneNumber: "",
       password: "",
     }
+    
   });
+
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isForgotPwPopup, setIsForgotPwPopup] = useState(false);
   const [isRuleRegisterPopup, setIsRuleRegisterPopup] = useState(false);
@@ -105,13 +108,14 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
   //     alert("Mật khẩu phải có ít nhất 6 ký tự.");
   //     return
   //   }
-  const onSubmit = (data: UserLogin) => {
-    const { phoneNumber, password } = data;
+  const onSubmit = (dataUser: UserLogin) => {
+    const { phoneNumber, password } = dataUser;
     const existingUsersRaw = localStorage.getItem("registeredUsers");
     const existingUsers: UserLogin[] = existingUsersRaw ? JSON.parse(existingUsersRaw) : [];
 
     // react-hook-form handles trimming if you want, but manual trim is safer here.
-    const UserExist = existingUsers.find((user) => user.phoneNumber === phoneNumber && user.password === password);
+    const UserExist = existingUsers.find(
+      (user) => user.phoneNumber === phoneNumber && user.password === password);
 
     if (UserExist) {
       alert("Đăng nhập thành công!");
@@ -129,7 +133,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
   {isOpen && (
     <div
       className="fixed inset-0 bg-black/60 z-[1003] flex justify-center overflow-y-auto py-10 px-4
-                transition-opacity duration-300 ease-in-out "
+                transition-opacity duration-300 ease-in-out"
     >
       {/* Container popup max width */}
       <div className="relative flex justify-center w-full max-w-[800px] pt-[200px]">
@@ -141,7 +145,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
         />
         {/* Title */}
         <img
-          src="/static/login.png"
+          src="./static/login.png"
           alt="Đăng Nhập"
           className="absolute z-[1004] top-[160px] left-1/2 -translate-x-1/2 w-[300px] h-auto p-1.5"
         />
@@ -151,27 +155,29 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
                   w-[300px] md:w-[300px] lg:w-[350px]  max-w-[800px] text-center text-black "
         >
           <div
-            className="items-center h-[250px] inset-0 bg-[url('/static/modal.png')] bg-cover bg-center bg-no-repeat 
+            className="items-center h-[300px] inset-0 bg-[url('/static/modal.png')] bg-cover bg-center bg-no-repeat 
                         rounded-[20px] border-4 border-white"
           >
             {/* Nội dung popups */}
             <div className="relative flex-col flex justify-center text-left m-0 p-6 pt-[40px]">
-
               <form id="login-form" onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3 text-[#233da3]">
-
-                <div>
+                {/* SDT */}
+                <div className="relative pb-5">
                   <label htmlFor="phoneNumber" className="block text-sm font-medium text-white/100 mb-1">
                   Số điện thoại<span aria-hidden="true" className="text-[rgb(239,0,18)]">&thinsp;*</span></label>
                   <input
+                    id="phoneNumber"
                     type="tel"
+                    // Cách viết khác ref={register("phoneNumber")}
                     {...register("phoneNumber")}
                     placeholder="Số điện thoại"
-                    className={`w-full bg-white border rounded-[30px] p-2 focus:ring-2 outline-none transition ${errors.phoneNumber ? 'border-red-500' : 'border-white/30'}`}
+                    className={`w-full bg-white border rounded-[30px] p-2 focus:ring-2 outline-none 
+                      transition ${errors.phoneNumber ? 'border-red-500 focus:ring-red-500' : 'border-white/30 focus:ring-[#233da3]'}`}
                   />
-                  {errors.phoneNumber && <p className="text-red-500 text-xs mt-1 ml-2">{errors.phoneNumber.message}</p>}
+                  {/* Check */} {errors.phoneNumber && <p className="absolute bottom-0 left-0 text-red-500 text-xs ml-2">{errors.phoneNumber.message}</p>}
                 </div>
-
-                <div className="relative">
+                {/* Password */}
+                <div className="relative pb-5">
                   <label htmlFor="password" className="block text-sm font-medium text-white/100 mb-1">
                   Mật khẩu<span aria-hidden="true" className="text-[rgb(239,0,18)]">&thinsp;*</span></label>
                   <input
@@ -179,12 +185,13 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
                     type={isShowPassword ? "text" : "password"}
                     {...register("password")}
                     placeholder="Mật Khẩu"
-                    className={`w-full bg-white border rounded-[30px] p-2 focus:ring-2 outline-none transition ${errors.password ? 'border-red-500' : 'border-white/30'}`}
+                    className={`w-full bg-white border rounded-[30px] p-2 focus:ring-2 
+                      outline-none transition ${errors.password ? 'border-red-500 focus:ring-red-500' : 'border-white/30 focus:ring-blue-500'}`}
                   />
                   <button
                     type="button"
                     onClick={() => setIsShowPassword(!isShowPassword)}
-                    className="absolute inset-y-0 right-0 top-7 pr-3 flex items-center text-black/40 hover:text-black"
+                    className="absolute inset-y-0 right-0 top-1 pr-3 flex items-center text-black/40 hover:text-black"
                     aria-label={isShowPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
                   >
                     {isShowPassword ? (
@@ -198,7 +205,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
                       </svg>
                     )}
                   </button>
-                    {errors.password && <p className="text-red-500 text-xs mt-1 ml-2">{errors.password.message}</p>}
+                    {errors.password && <p className="absolute bottom-0 left-0 text-red-500 text-xs ml-2">{errors.password.message}</p>}
                 </div>
 
                 {/* Button xác thực */}
@@ -224,7 +231,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
               </form>
               
               {/* Quên mật khẩu */}
-              <div className="mt-6 text-[15px] flex justify-between items-center text-sm w-full">
+              <div className="mt-8 text-[15px] flex justify-between items-center text-sm w-full">
                 <button onClick={openForgotPasswordPopup} type="button" className="font-medium text-[#97171b] cursor-pointer
                 focus:outline-none hover:text-red-800" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>
                   Quên mật khẩu
