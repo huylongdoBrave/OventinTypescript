@@ -7,7 +7,7 @@ function RuleEvent() {
   return (
     <>
     <div
-      className=" fixed inset-0 flex justify-center py-50 px-4 z-0 relative"
+      className=" fixed inset-0 flex justify-center py-10 mb-100 my-5 px-4 z-0 relative"
     >  
       {/* Container popup max width */}
       {/* =>Bỏ items-center, thêm pt-[250px] tạo không gian cho logo và title ở trên */}
@@ -17,12 +17,12 @@ function RuleEvent() {
         <img
           src="./static/rule-text.png"
           alt="Thể lệ"
-          className="absolute top-[10px] left-1/2 -translate-x-1/2 w-[300px] h-auto p-1.5"
+          className="absolute z-10 top-[10px] left-1/2 -translate-x-1/2 w-[300px] h-auto p-1.5"
         />
         {/* Khung lớn popup */}
         <div
           className=" relative filter-[drop-shadow(rgb(255,252,110)_0px_0px_5px)]
-                  w-full md:w-full lg:w-[550px] max-w-[800px] text-center text-white 
+                  w-full md:w-full md:pr-20 md:pl-20 lg:p-0 lg:w-[800px] max-w-[800px] text-center text-white 
              "
         >
           <div
@@ -30,7 +30,7 @@ function RuleEvent() {
                         rounded-[20px] border-4 border-white"
           >
             {/* Nội dung popups */}
-            <div className="relative flex-col flex justify-center text-left m-0 p-6 pt-[20px]">
+            <div className="relative flex-col flex justify-center text-left m-0 p-6 pt-[10px]">
               <h6 className="text-[20px] mb-2 text-xl leading-[1.6] font-bold">
                 ĐIỀU 1. PHẠM VI ÁP DỤNG
               </h6>
