@@ -162,16 +162,16 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
               </Link>
             </div>
           ) : (
-            <div className="flex items-center gap-6">
+            <div className=" flex items-center gap-6">
               <button
                 onClick={onLoginClick}
-                className="text-white font-bold hover:text-yellow-300 transition-colors"
+                className="text-white font-bold hover:text-yellow-300 transition-colors cursor-pointer"
               >
                 Đăng nhập
               </button>
               <button
                 onClick={onRegisterClick}
-                className="text-white font-bold hover:text-yellow-300 transition-colors"
+                className="text-white font-bold hover:text-yellow-300 transition-colors cursor-pointer"
               >
                 Đăng ký
               </button>
@@ -238,16 +238,16 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
               </div>
             </div>
           ) : (
-            <div className="flex items-center gap-4 md:gap-6">
+            <div className=" flex items-center gap-4 md:gap-6">
               <button
                 onClick={onLoginClick}
-                className="text-white font-bold hover:text-yellow-300 transition-colors text-sm"
+                className="text-white font-bold hover:text-yellow-300 transition-colors cursor-pointer text-sm"
               >
                 Đăng nhập
               </button>
               <button
                 onClick={onRegisterClick}
-                className="text-white font-bold hover:text-yellow-300 transition-colors text-sm"
+                className="text-white font-bold hover:text-yellow-300 transition-colors cursor-pointer text-sm"
               >
                 Đăng ký
               </button>

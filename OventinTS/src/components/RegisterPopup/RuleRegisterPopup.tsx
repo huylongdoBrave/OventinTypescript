@@ -58,7 +58,9 @@ const RuleRegisterPopup: React.FC<RuleRegisterPopupProps> = ({
                 ĐIỀU 1. PHẠM VI ÁP DỤNG
               </h6>
               <div
-                className={`transition-all duration-800 ease-in-out overflow-hidden 
+                // Scroll Animate className={`transition-all duration-800 ease-in-out overflow-hidden 
+                //   ${isExpandedRuleText ? "max-h-[2000px]" : "max-h-[400px]"}  `}
+                className={`overflow-hidden 
                   ${isExpandedRuleText ? "max-h-[2000px]" : "max-h-[400px]"}`}
               >
                 <p className="text-[16px] font-normal leading-normal text-white pt-2 text-left text-xl lg:px-1 px-4">
@@ -177,7 +179,7 @@ const RuleRegisterPopup: React.FC<RuleRegisterPopupProps> = ({
                m-0 mt-2 ml-2 flex text-left gap-1 hover:underline"
               >
                 {isExpandedRuleText ? "Rút gọn" : "Xem thêm"}
-                {/* Mũi tên */}
+                {/* Icon mũi tên trỏ xuống */}
                 {/* <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
@@ -193,6 +195,7 @@ const RuleRegisterPopup: React.FC<RuleRegisterPopupProps> = ({
                   />
                 </svg> */}
               </span>
+
               {/* Checkbox Đồng ý? */}
               <label className="mt-[16px] text-[rgb(35,61,163)] inline-flex items-center cursor-pointer 
               align-middle text-white mr-4">

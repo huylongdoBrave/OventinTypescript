@@ -7,6 +7,7 @@ import Header from './components/Header.tsx';
 import LoginPopup from "./components/LoginPopup/LoginPopup.tsx";
 import RuleRegisterPopup from "./components/RegisterPopup/RuleRegisterPopup.tsx";
 import RegisterPopup from "./components/RegisterPopup/RegisterPopup.tsx";
+import RuleEvent from './components/RuleEvent.tsx';
 
 function App() {
 
@@ -90,6 +91,8 @@ function App() {
         {/* Profile */}
         <Route path="/Profile" element={<Profile onLogout={() => setIsLoggedIn(false)} />} />
 
+        {/* Thể lệ */}
+        <Route path="/RuleEvent" element={<RuleEvent />} />
       </Routes>
 
       <Footer />

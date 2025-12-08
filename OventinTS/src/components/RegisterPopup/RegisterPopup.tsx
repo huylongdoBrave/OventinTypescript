@@ -4,6 +4,7 @@ import {useForm} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import ButtonOrange from "../Button/ButtonOranges";
+import { Link } from "react-router-dom";
 
 //    ====== UI Register ======
 
@@ -85,13 +86,19 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
     }
   });
 
+  // tính ngày tối đa được cho chọn (cách 4 năm) để disable trên datepicker
+  const getMaxDate = () => {
+    const today = new Date();
+    today.setFullYear(today.getFullYear() - 4);
+    return today.toISOString().split("T")[0]; 
+  };
+  
+
   const [isConfirmRegister, setIsConfirmRegister] = useState(false);
   // const [formData, setFormData] = useState<User>(INITIAL_FORM_STATE);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-
-  //Reset form đóng popup
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!isOpen) {
@@ -183,6 +190,11 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
   }
 
   return (
+    <>
+    {/* <RuleEvent
+      isOpen={isRuleEventOpen}
+      onClose={closeRuleEventPage}
+    /> */}
     <div
       className="fixed inset-0 bg-black/60 z-[1003] flex justify-center overflow-y-auto py-10 px-4
                 transition-opacity duration-300 ease-in-out "
@@ -260,10 +272,11 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
                   <input
                     id="dateOfBirth"
                     type="date"
+                    max ={getMaxDate()}
                     // value={formData.dateOfBirth}
                     // onChange={handleChangeInput}
                     {...register("dateOfBirth")}
-                    className={`w-full bg-white border rounded-[30px] p-2 focus:ring-2 outline-none 
+                    className={`w-full bg-white text-gray-500/70 border rounded-[30px] p-2 focus:ring-2 outline-none 
                     transition ${errors.dateOfBirth ? 'border-red-500 focus:ring-red-500' : 'border-white/30 focus:ring-[#233da3]'}`}
                   />
                   {errors.dateOfBirth && <p className="absolute bottom-0 left-0 text-red-500 text-xs ml-2">{errors.dateOfBirth.message}</p>}
@@ -281,7 +294,7 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
                     // onChange={handleChangeInput}
                     {...register("password")}
                     placeholder="Mật Khẩu"
-                    className={`w-full bg-white border rounded-[30px] p-2 focus:ring-2 outline-none 
+                    className={`w-full bg-white  border rounded-[30px] p-2 focus:ring-2 outline-none 
                     transition ${errors.password ? 'border-red-500 focus:ring-red-500' : 'border-white/30 focus:ring-[#233da3]'}`}
                   />
                   <button
@@ -356,8 +369,9 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
                     className="w-5 h-5 cursor-pointer"
                   />
                 </span>
-                <span className=" text-[var(--normal-blue)] font-normal text-base leading-normal m-0 text-left cursor-pointer">
-                  Tôi đồng ý với <a href="" ><u>thể lệ</u></a> chương trình khuyến mãi này
+                <span className=" text-[var(--normal-blue)] font-normal text-base leading-normal m-0 text-left">
+                  Tôi đồng ý với <Link onClick={onClose} className="underline cursor-pointer" to="/RuleEvent"> thể lệ </Link> 
+                  chương trình khuyến mãi này
                 </span>
               </label>
 
@@ -391,6 +405,7 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
         </div>
       </div>
     </div>
+    </>
   );
 };
 
