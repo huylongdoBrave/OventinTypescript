@@ -113,7 +113,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
     const existingUsersRaw = localStorage.getItem("registeredUsers");
     const existingUsers: UserLogin[] = existingUsersRaw ? JSON.parse(existingUsersRaw) : [];
 
-    // react-hook-form handles trimming if you want, but manual trim is safer here.
+    // can use react-hook-form handles trimming, but manual trim is safer here.
     const UserExist = existingUsers.find(
       (user) => user.phoneNumber === phoneNumber && user.password === password);
 
@@ -160,7 +160,9 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
           >
             {/* Nội dung popups */}
             <div className="relative flex-col flex justify-center text-left m-0 p-6 pt-[40px]">
+
               <form id="login-form" onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3 text-[#233da3]">
+                
                 {/* SDT */}
                 <div className="relative pb-5">
                   <label htmlFor="phoneNumber" className="block text-sm font-medium text-white/100 mb-1">
@@ -176,6 +178,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
                   />
                   {/* Check */} {errors.phoneNumber && <p className="absolute bottom-0 left-0 text-red-500 text-xs ml-2">{errors.phoneNumber.message}</p>}
                 </div>
+
                 {/* Password */}
                 <div className="relative pb-5">
                   <label htmlFor="password" className="block text-sm font-medium text-white/100 mb-1">

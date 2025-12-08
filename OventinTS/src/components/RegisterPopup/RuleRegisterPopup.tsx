@@ -28,7 +28,7 @@ const RuleRegisterPopup: React.FC<RuleRegisterPopupProps> = ({
                 transition-opacity duration-300 ease-in-out "
     >
       {/* Container popup max width */}
-      {/* =>Bỏ items-center, thêm pt-[250px] tạo không gian cho logo và title ở trên fix được vấn đề */}
+      {/* =>Bỏ items-center, thêm pt-[250px] tạo không gian cho logo và title ở trên */}
       <div className="relative flex justify-center w-full max-w-[800px] pt-[250px]">
         {/* logo */}
         <img
@@ -49,7 +49,7 @@ const RuleRegisterPopup: React.FC<RuleRegisterPopupProps> = ({
              "
         >
           <div
-            className="items-center inset-0 bg-[url('/static/modal.png')] bg-cover bg-center bg-no-repeat 
+            className="items-center inset-0 bg-[url('/static/modal.png')] bg-[#ff9a24]  bg-top bg-no-repeat
                         rounded-[20px] border-4 border-white"
           >
             {/* Nội dung popups */}

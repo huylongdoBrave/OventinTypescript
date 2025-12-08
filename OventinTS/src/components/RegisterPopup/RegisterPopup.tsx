@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+
+import {useForm} from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import ButtonOrange from "../Button/ButtonOranges";
 
 //    ====== UI Register ======
@@ -11,81 +15,39 @@ export interface User {
   confirmPassword: string;
 }
 
-const INITIAL_FORM_STATE: User = {
-  fullName: "",
-  phoneNumber: "",
-  dateOfBirth: "",
-  password: "",
-  confirmPassword: "",
-};
+// const INITIAL_FORM_STATE: User = {
+//   fullName: "",
+//   phoneNumber: "",
+//   dateOfBirth: "",
+//   password: "",
+//   confirmPassword: "",
+// };
 
 interface RegisterPopupProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const RegisterPopup: React.FC<RegisterPopupProps> = ({
-  isOpen,
-  onClose,
-}) => {
-  const [isConfirmRegister, setIsConfirmRegister] = useState(false);
-  const [formData, setFormData] = useState<User>(INITIAL_FORM_STATE);
-  
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+const validationSchema = yup.object().shape({
+  fullName: yup
+    .string()
+    .required("Vui lòng nhập họ và tên")
+    .matches(/^[^0-9]+$/, "Họ và tên không được chứa số.")
+    .min(4, "Họ và tên phải có nhiều hơn 3 ký tự."),
 
-  //Reset form đóng popup
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    if (!isOpen) {
-      setFormData(INITIAL_FORM_STATE);
-    }
-  }, [isOpen]);
+  phoneNumber: yup
+    .string()
+    .required("Vui lòng nhập số điện thoại")
+    .matches(/^\d{10}$/, "Số điện thoại phải có đúng 10 chữ số, không nhập chữ."),
 
-
-  // Xử lý thay đổi form
-  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target;
-    setFormData((prevData) => ({...prevData, [id]: value}));
-  };
-
-
-  // Xử lý submit
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const fullName = formData.fullName.trim();
-    const dateOfBirth = formData.dateOfBirth.trim();
-    const phoneNumber = formData.phoneNumber.trim();
-    const password = formData.password.trim();
-    const confirmPassword = formData.confirmPassword.trim();
-    if(!fullName || !dateOfBirth || !phoneNumber || !password || !confirmPassword){
-      alert("Vui lòng điền đủ thông tin!");
-      return;
-    }
-
-    // Kiểm tra định dạng số điện thoại (10 số)
-    const phoneRegex = /^\d{10}$/;
-    if (!phoneRegex.test(phoneNumber)) {
-      alert("Số điện thoại không hợp lệ. Vui lòng nhập đúng 10 chữ số.");
-      return;
-    }
-
-    // Kiểm tra mật khẩu trùng khớp, cần đủ 6 ký tự
-    if (password !== confirmPassword) {
-      alert("Mật khẩu và xác nhận mật khẩu không khớp!");
-      return;
-    }
-    if (password.length < 6) {
-      alert("Mật khẩu phải có ít nhất 6 ký tự.");
-      return
-    }
-
-    // Kiểm tra tuổi
-    if (dateOfBirth) {
-      const birthDate = new Date(dateOfBirth);
+  dateOfBirth: yup
+    .string()
+    .required("Vui lòng nhập ngày sinh")
+    .test("is-over-four", "Bạn phải lớn hơn 4 tuổi.", (value) => {
+      if (!value) return false;
+      const birthDate = new Date(value);
       const today = new Date();
-
       let age = today.getFullYear() - birthDate.getFullYear();
       const monthDifference = today.getMonth() - birthDate.getMonth();
       if (
@@ -94,16 +56,107 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
       ) {
         age--;
       }
+      return age >= 4;
+    }),
 
-      if (age < 4) {
-        alert("Ngày sinh không hợp lệ, bạn phải lớn hơn 4 tuổi.");
-        return;
-      }
+  password: yup
+    .string()
+    .min(6, "Mật khẩu phải có ít nhất 6 ký tự.")
+    .required("Vui lòng nhập mật khẩu"),
 
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password"), ""], "Mật khẩu không khớp.")
+    .required("Vui lòng xác nhận mật khẩu"),
+});
+
+const RegisterPopup: React.FC<RegisterPopupProps> = ({
+  isOpen,
+  onClose,
+}) => {
+  const { register, handleSubmit: handleRegisterSubmit, formState: { errors }, reset } = useForm<User>({
+    resolver: yupResolver(validationSchema),
+    defaultValues: {
+      fullName: "",
+      phoneNumber: "",
+      dateOfBirth: "",
+      password: "",
+      confirmPassword: "",
+    }
+  });
+
+  const [isConfirmRegister, setIsConfirmRegister] = useState(false);
+  // const [formData, setFormData] = useState<User>(INITIAL_FORM_STATE);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+
+  //Reset form đóng popup
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (!isOpen) {
+      // setFormData(INITIAL_FORM_STATE);
+      reset();
+      setIsConfirmRegister(false);
+    }
+  }, [isOpen, reset]);
+
+
+  // Xử lý thay đổi form
+  // const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { id, value } = e.target;
+  //   setFormData((prevData) => ({...prevData, [id]: value}));
+  // };
+
+
+  // Xử lý submit
+    // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    // e.preventDefault();
+    // const fullName = formData.fullName.trim();
+    // const dateOfBirth = formData.dateOfBirth.trim();
+    // const phoneNumber = formData.phoneNumber.trim();
+    // const password = formData.password.trim();
+    // const confirmPassword = formData.confirmPassword.trim();
+    // if(!fullName || !dateOfBirth || !phoneNumber || !password || !confirmPassword){
+    //   alert("Vui lòng điền đủ thông tin!");
+    //   return;
+    // }
+    // // Kiểm tra định dạng số điện thoại (10 số)
+    // const phoneRegex = /^\d{10}$/;
+    // if (!phoneRegex.test(phoneNumber)) {
+    //   alert("Số điện thoại không hợp lệ. Vui lòng nhập đúng 10 chữ số.");
+    //   return;
+    // }
+    // // Kiểm tra mật khẩu trùng khớp, cần đủ 6 ký tự
+    // if (password !== confirmPassword) {
+    //   alert("Mật khẩu và xác nhận mật khẩu không khớp!");
+    //   return;
+    // }
+    // if (password.length < 6) {
+    //   alert("Mật khẩu phải có ít nhất 6 ký tự.");
+    //   return
+    // }
+    // // Kiểm tra tuổi
+    // if (dateOfBirth) {
+    //   const birthDate = new Date(dateOfBirth);
+    //   const today = new Date();
+    //   let age = today.getFullYear() - birthDate.getFullYear();
+    //   const monthDifference = today.getMonth() - birthDate.getMonth();
+    //   if (
+    //     monthDifference < 0 ||
+    //     (monthDifference === 0 && today.getDate() < birthDate.getDate())
+    //   ) {
+    //     age--;
+    //   }
+    //   if (age < 4) {
+    //     alert("Ngày sinh không hợp lệ, bạn phải lớn hơn 4 tuổi.");
+    //     return;
+    //   }
+  const onSubmit = (data: User) => {
       // Lấy danh sách user đã có và kiểm tra SĐT tồn tại
       const existingUsersRaw = localStorage.getItem("registeredUsers");
       const existingUsers: User[] = existingUsersRaw ? JSON.parse(existingUsersRaw) : [];
-      const userExists = existingUsers.some(user => user.phoneNumber === phoneNumber);
+      const userExists = existingUsers.some(user => user.phoneNumber === data.phoneNumber);
       if (userExists) {
         alert("Số điện thoại này đã được đăng ký. Vui lòng sử dụng số khác.");
         return;
@@ -111,10 +164,10 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
 
       // Tạo user mới và lưu vào localStorage
       const newUser: Omit<User, 'confirmPassword'> = {
-        fullName,
-        phoneNumber,
-        dateOfBirth,
-        password,
+        fullName: data.fullName,
+        phoneNumber: data.phoneNumber,
+        dateOfBirth: data.dateOfBirth,
+        password: data.password,
       };
 
       const updatedUsers = [...existingUsers, newUser];
@@ -122,8 +175,8 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
 
       alert("Đăng ký thành công!");
       onClose();
-    }
-  }
+  };
+
 
   if (!isOpen) {
     return null;
@@ -132,7 +185,7 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
   return (
     <div
       className="fixed inset-0 bg-black/60 z-[1003] flex justify-center overflow-y-auto py-10 px-4
-                 transition-opacity duration-300 ease-in-out "
+                transition-opacity duration-300 ease-in-out "
     >
       {/* Container popup max width */}
       <div className="relative flex justify-center w-full max-w-[800px] pt-[200px]">
@@ -159,70 +212,82 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
           >
             {/* Nội dung popups */}
             <div className="relative flex-col flex justify-center text-left m-0 p-6 pt-[20px]">
-              <form id="register-form" onSubmit={handleSubmit} className="flex flex-col gap-3 text-[#233da3]">
+
+              <form id="register-form" onSubmit={handleRegisterSubmit(onSubmit)} className="flex flex-col gap-3 text-[#233da3]">
                 
                 {/* Họ và tên */}
-                <div>
+                <div className=" relative pb-5">
                   <label htmlFor="fullName" className="block text-sm font-medium text-white/100 mb-1">
                   Họ và tên<span aria-hidden="true" className="text-[rgb(239,0,18)]">&thinsp;*</span>
                   </label>
                   <input
                     id="fullName"
                     type="text"
-                    value={formData.fullName}
-                    onChange={handleChangeInput}
+                    // value={formData.fullName}
+                    // onChange={handleChangeInput}
+                    {...register("fullName")}
                     placeholder="Họ và tên"
-                    className="w-full bg-white border border-white/30 rounded-[30px] p-2 focus:ring-2 outline-none transition"
                     // CSS hover viền vàng className="w-full bg-white border border-white/30 rounded-[20px] p-2 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition"
+                    className={`w-full bg-white border rounded-[30px] p-2 focus:ring-2 outline-none 
+                    transition ${errors.fullName ? 'border-red-500 focus:ring-red-500' : 'border-white/30 focus:ring-[#233da3]'}`}
                   />
+                  {/* Check */} {errors.fullName && <p className="absolute bottom-0 left-0 text-red-500 text-xs ml-2">{errors.fullName.message}</p>}
                 </div>
 
                 {/* Số điện thoại */}
-                <div>
+                <div className="relative pb-5">
                   <label htmlFor="phoneNumber" className="block text-sm font-medium text-white/100 mb-1">
                   Số điện thoại<span aria-hidden="true" className="text-[rgb(239,0,18)]">&thinsp;*</span>
                   </label>
                   <input
                     id="phoneNumber"
                     type="tel"
-                    value={formData.phoneNumber}
-                    onChange={handleChangeInput}
+                    // value={formData.phoneNumber}
+                    // onChange={handleChangeInput}
+                    {...register("phoneNumber")}
                     placeholder="Số điện thoại"
-                    className="w-full bg-white border border-white/30 rounded-[30px] p-2 focus:ring-2 outline-none transition"
+                    className={`w-full bg-white border rounded-[30px] p-2 focus:ring-2 outline-none 
+                    transition ${errors.phoneNumber ? 'border-red-500 focus:ring-red-500' : 'border-white/30 focus:ring-[#233da3]'}`}
                   />
+                  {errors.phoneNumber && <p className="absolute bottom-0 left-0 text-red-500 text-xs ml-2">{errors.phoneNumber.message}</p>}
                 </div>
 
                 {/* Ngày sinh */}
-                <div>
+                <div className=" relative pb-5">
                   <label htmlFor="dateOfBirth" className="block text-sm font-medium text-white/100 mb-1">
                   Ngày sinh<span aria-hidden="true" className="text-[rgb(239,0,18)]">&thinsp;*</span>
                   </label>
                   <input
                     id="dateOfBirth"
                     type="date"
-                    value={formData.dateOfBirth}
-                    onChange={handleChangeInput}
-                    className="w-full bg-white border border-white/30 rounded-[30px] p-2 focus:ring-2 outline-none transition"
+                    // value={formData.dateOfBirth}
+                    // onChange={handleChangeInput}
+                    {...register("dateOfBirth")}
+                    className={`w-full bg-white border rounded-[30px] p-2 focus:ring-2 outline-none 
+                    transition ${errors.dateOfBirth ? 'border-red-500 focus:ring-red-500' : 'border-white/30 focus:ring-[#233da3]'}`}
                   />
+                  {errors.dateOfBirth && <p className="absolute bottom-0 left-0 text-red-500 text-xs ml-2">{errors.dateOfBirth.message}</p>}
                 </div>
 
                 {/* Mật khẩu */}
-                <div className="relative">
+                <div className=" relative pb-5">
                   <label htmlFor="password" className="block text-sm font-medium text-white/100 mb-1">
                   Mật khẩu<span aria-hidden="true" className="text-[rgb(239,0,18)]">&thinsp;*</span>
                   </label>
                   <input
                     id="password"
                     type={showPassword ? "text" : "password"}
-                    value={formData.password}
-                    onChange={handleChangeInput}
+                    // value={formData.password}
+                    // onChange={handleChangeInput}
+                    {...register("password")}
                     placeholder="Mật Khẩu"
-                    className="w-full bg-white border border-white/30 rounded-[30px] p-2 focus:ring-2 outline-none transition"
+                    className={`w-full bg-white border rounded-[30px] p-2 focus:ring-2 outline-none 
+                    transition ${errors.password ? 'border-red-500 focus:ring-red-500' : 'border-white/30 focus:ring-[#233da3]'}`}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 top-7 pr-3 flex items-center text-black/40 hover:text-black"
+                    className="absolute inset-y-0 right-0 top-1 pr-3 flex items-center text-black/40 hover:text-black"
                     aria-label={showPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
                   >
                     {showPassword ? (
@@ -236,25 +301,28 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
                       </svg>
                     )}
                   </button>
+                  {errors.password && <p className="absolute bottom-0 left-0 text-red-500 text-xs ml-2">{errors.password.message}</p>}
                 </div>
 
                 {/* Xác nhận mật khẩu */}
-                <div className="relative">
+                <div className=" relative pb-5">
                   <label htmlFor="confirmPassword" className="block text-sm font-medium text-white/100 mb-1">
                   Xác nhận mật khẩu<span aria-hidden="true" className="text-[rgb(239,0,18)]">&thinsp;*</span>
                   </label>
                   <input
                     id="confirmPassword"
                     type={showConfirmPassword ? "text" : "password"}
-                    value={formData.confirmPassword}
-                    onChange={handleChangeInput}
+                    // value={formData.confirmPassword}
+                    // onChange={handleChangeInput}
+                    {...register("confirmPassword")}
                     placeholder="Xác nhận mật khẩu"
-                    className="w-full bg-white border border-white/30 rounded-[30px] p-2 focus:ring-2 outline-none transition"
+                    className={`w-full bg-white border rounded-[30px] p-2 focus:ring-2 outline-none 
+                    transition ${errors.confirmPassword ? 'border-red-500 focus:ring-red-500' : 'border-white/30 focus:ring-[#233da3]'}`}
                   />
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute inset-y-0 right-0 top-7 pr-3 flex items-center text-black/40 hover:text-black"
+                    className="absolute inset-y-0 right-0 top-1 pr-3 flex items-center text-black/40 hover:text-black"
                     aria-label={showConfirmPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
                   >
                     {showConfirmPassword ? (
@@ -268,6 +336,7 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
                       </svg>
                     )}
                   </button>
+                  {errors.confirmPassword && <p className="absolute bottom-0 left-0 text-red-500 text-xs ml-2">{errors.confirmPassword.message}</p>}
                 </div>
               </form>
 
