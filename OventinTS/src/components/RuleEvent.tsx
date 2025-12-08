@@ -1,26 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const RuleEvent = () => {
+function RuleEvent() {
+
+    const [isExpandedRuleText, setIsExpandedRuleText] = useState(false);
 
   return (
+    <>
     <div
-      className="fixed inset-0 bg-black/60 z-[1003] flex justify-center overflow-y-auto py-10 px-4
-                transition-opacity duration-300 ease-in-out "
-    >
+      className=" fixed inset-0 flex justify-center py-50 px-4 z-0 relative"
+    >  
       {/* Container popup max width */}
       {/* =>Bỏ items-center, thêm pt-[250px] tạo không gian cho logo và title ở trên */}
-      <div className="relative flex justify-center w-full max-w-[800px] pt-[250px]">
-        {/* logo */}
-        <img
-          src="./static/favicon_oven.png"
-          alt="Oventin Logo"
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[150px] h-auto rounded-full p-1.5 filter-[drop-shadow(rgb(255,255,255)_0px_0px_5px)]"
-        />
+      <div className="flex justify-center w-full max-w-[800px] pt-[10px]">
+
         {/* Title */}
         <img
-          src="./static/term.png"
-          alt="Chính sách quyền riêng tư"
-          className="absolute top-[150px] left-1/2 -translate-x-1/2 w-[300px] h-auto p-1.5"
+          src="./static/rule-text.png"
+          alt="Thể lệ"
+          className="absolute top-[10px] left-1/2 -translate-x-1/2 w-[300px] h-auto p-1.5"
         />
         {/* Khung lớn popup */}
         <div
@@ -62,6 +59,8 @@ const RuleEvent = () => {
         </div>
       </div>
     </div>
+
+    </>
   )
 }
 
