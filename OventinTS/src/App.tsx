@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { useState, useCallback, useEffect } from 'react';
+import LoginAccess from './components/LoginAcess.tsx';
 import Footer from './components/Footer.tsx'
 import WheelGame from './components/WheelGame/WheelGames.tsx';
 import Profile from './components/Profile/Profile.tsx';
@@ -53,7 +54,11 @@ function App() {
     return () => document.body.classList.remove("body-no-scroll");
   }, [isLoginPopup, isRegisterPopup, isRulePopupOpen]);
 
-
+  // Quyền xem trang
+  const [isLogginAccess, setIsLoggedInAccess] = useState(false);
+  if(!isLogginAccess) {
+    return <LoginAccess onLoginSuccess={() => setIsLoggedInAccess(true)} />
+  }
 
   return (
     <div className="pb-[5px] lg:pb-0">    
