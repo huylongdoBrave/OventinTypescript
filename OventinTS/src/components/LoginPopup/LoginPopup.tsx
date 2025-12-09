@@ -6,6 +6,7 @@ import ButtonOrange from "../Button/ButtonOranges";
 import ForgotPasswordPopup from "../ForgotPassword/ForgotPasswordPopup";
 import RuleRegisterPopup from "../RegisterPopup/RuleRegisterPopup";
 import RegisterPopup from "../RegisterPopup/RegisterPopup";
+import AlertTitle, { type AlertType } from "../AlertTitle/AlertTitle";
 //    ====== UI Login ======
 
 interface LoginPopupProps {
@@ -13,7 +14,6 @@ interface LoginPopupProps {
   onClose: () => void;
   onLoginSuccess:() => void;
 }
-
 
 interface UserLogin{
   phoneNumber: string;
@@ -45,7 +45,6 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
       phoneNumber: "",
       password: "",
     }
-    
   });
 
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -53,6 +52,13 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
   const [isRuleRegisterPopup, setIsRuleRegisterPopup] = useState(false);
   const [isRegisterPopup, setIsRegisterPopup] = useState(false);
   const closeForgotPasswordPopup = useCallback(() => setIsForgotPwPopup(false), []);
+
+  // State cho AlertTitle
+  const [alertState, setAlertState] = useState<{isOpen: boolean; type: AlertType; title: string; description?: string}>({
+    isOpen: false,
+    type: 'success',
+    title: ''
+  });
   const closeRuleRegisterPopup = useCallback(() => setIsRuleRegisterPopup(false), []);
   const closeRegisterPopup = useCallback(() => setIsRegisterPopup(false), []);
 
@@ -118,18 +124,30 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
       (user) => user.phoneNumber === phoneNumber && user.password === password);
 
     if (UserExist) {
-      alert("Đăng nhập thành công!");
-      onLoginSuccess();
-      onClose();
+      // alert("Đăng nhập thành công!");
+      // onLoginSuccess();
+      // onClose();
+      setAlertState({
+        isOpen: true,
+        type: 'success',
+        title: 'Đăng nhập thành công!',
+        description: 'Xin chào'
+      });
+      // Đóng popup login và thực hiện onLoginSuccess sau khi alert được đóng
     } else {
-      alert("Số ĐT hoặc password nhập chưa đúng.");
+      // alert("Số ĐT hoặc password nhập chưa đúng.");
+      setAlertState({
+        isOpen: true,
+        type: 'error',
+        title: 'Đăng nhập thất bại',
+        description: 'Có gì đó không đúng.Vui lòng thử lại.'
+      });
     }
   }
   // };
 
   return (
   <>
-
   {isOpen && (
     <div
       className="fixed inset-0 bg-black/60 z-[1003] flex justify-center overflow-y-auto py-10 px-4
@@ -224,7 +242,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
                   {/* Nút đóng 'x' */}
                   <button
                     onClick={onClose}
-                    className="w-8 h-8 flex items-center justify-center rounded-full border-2
+                    className="w-8 h-8 flex items-center justify-center rounded-full border-2 cursor-pointer
                     border-white text-white text-2xl font-light bg-transparent hover:bg-white/20 transition-colors"
                     aria-label="Đóng"
                   >
@@ -268,6 +286,21 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
       isOpen={isRegisterPopup}
       onClose={closeRegisterPopup}
     />
+
+    <AlertTitle
+      isOpen={alertState.isOpen}
+      type={alertState.type}
+      title={alertState.title}
+      description={alertState.description}
+      onClose={() => {
+        setAlertState({ ...alertState, isOpen: false });
+        if (alertState.type === 'success') {
+          onLoginSuccess();
+          onClose(); // Đóng popup login
+        }
+      }}
+    />
+
 
   </>
 

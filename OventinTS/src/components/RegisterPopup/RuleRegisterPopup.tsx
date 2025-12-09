@@ -19,6 +19,7 @@ const RuleRegisterPopup: React.FC<RuleRegisterPopupProps> = ({
 
 
   if (!isOpen) {
+    if(isAgeConfirmed) setIsAgeConfirmed(!isAgeConfirmed);
     return null;
   }
 
@@ -173,7 +174,7 @@ const RuleRegisterPopup: React.FC<RuleRegisterPopupProps> = ({
               </div>
 
               {/* Span rút ngắn nội dung */}
-              <span
+              <span 
                 onClick={() => setIsExpandedRuleText(!isExpandedRuleText)}
                 className="font-bold text-sm leading-[1.66] text-[var(--normal-blue)] cursor-pointer
                m-0 mt-2 ml-2 flex text-left gap-1 hover:underline"
@@ -214,7 +215,6 @@ const RuleRegisterPopup: React.FC<RuleRegisterPopupProps> = ({
                  Tôi xác nhận tôi đủ 18 tuổi trở lên
                 </span>
               </label>
-
             </div>
                           
                 {/* Button xác thực */}
@@ -245,7 +245,7 @@ const RuleRegisterPopup: React.FC<RuleRegisterPopupProps> = ({
                   {/* Nút đóng 'x' */}
                   <button
                     onClick={onClose}
-                    className="w-8 h-8 flex items-center justify-center rounded-full border-2
+                    className="w-8 h-8 flex items-center justify-center rounded-full border-2 cursor-pointer
                   border-white text-white text-2xl font-light bg-transparent hover:bg-white/20 transition-colors"
                     aria-label="Đóng"
                   >

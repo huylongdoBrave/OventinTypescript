@@ -96,7 +96,7 @@ const AttentionWheelPopup: React.FC<AttentionWheelPopupProps> = ({
           {/* Nút đóng 'x' */}
           <button
             onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-full border-2
+            className="w-8 h-8 flex items-center justify-center rounded-full border-2 cursor-pointer
              border-white text-white text-2xl font-light bg-transparent hover:bg-white/20 transition-colors"
             aria-label="Đóng"
           >&times;</button>

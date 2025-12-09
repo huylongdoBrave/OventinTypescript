@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
+import AttentionWheelPopup from "./WheelGame/AttentionWheelPopups";
 
 function RuleEvent() {
   const [isExpandedRuleText, setIsExpandedRuleText] = useState(false);
+  const [isAttentionPopupOpen, setIsAttentionPopupOpen] = useState(true);
+  const closeAttentionPopup = useCallback(() => setIsAttentionPopupOpen(false), []);
 
   return (
     <>
+      <AttentionWheelPopup 
+        isOpen={isAttentionPopupOpen}
+        onClose={closeAttentionPopup}
+      />
+
       <div className=" fixed inset-0 flex justify-center py-10 mb-10 my-5 px-4 z-0 relative">
         {/* Container max width */}
         <div className="flex justify-center w-full max-w-[800px] pt-[10px]">

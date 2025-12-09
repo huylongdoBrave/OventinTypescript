@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import {useForm} from 'react-hook-form';
+import { useForm} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import ButtonOrange from "../Button/ButtonOranges";
+import AlertTitle, { type AlertType } from "../AlertTitle/AlertTitle";
 import { Link } from "react-router-dom";
 
 //    ====== UI Register ======
@@ -28,7 +29,6 @@ interface RegisterPopupProps {
   isOpen: boolean;
   onClose: () => void;
 }
-
 
 const validationSchema = yup.object().shape({
   fullName: yup
@@ -84,6 +84,12 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
       password: "",
       confirmPassword: "",
     }
+  });
+
+  const [alertState, setAlertState] = useState<{isOpen: boolean; type: AlertType; title: string; description?: string}>({
+    isOpen: false,
+    type: 'success',
+    title: ''
   });
 
   // tính ngày tối đa được cho chọn (cách 4 năm) để disable trên datepicker
@@ -165,7 +171,13 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
       const existingUsers: User[] = existingUsersRaw ? JSON.parse(existingUsersRaw) : [];
       const userExists = existingUsers.some(user => user.phoneNumber === data.phoneNumber);
       if (userExists) {
-        alert("Số điện thoại này đã được đăng ký. Vui lòng sử dụng số khác.");
+        // alert("Số điện thoại này đã được đăng ký. Vui lòng sử dụng số khác.");
+        setAlertState({
+          isOpen: true,
+          type: 'error',
+          title: 'Số điện thoại này đã được đăng ký. Vui lòng sử dụng số khác.',
+          description: 'Hãy nhập lại số điện thoại khác.'
+        });
         return;
       }
 
@@ -180,8 +192,14 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
       const updatedUsers = [...existingUsers, newUser];
       localStorage.setItem("registeredUsers", JSON.stringify(updatedUsers));
 
-      alert("Đăng ký thành công!");
-      onClose();
+      // alert("Đăng ký thành công!");
+      setAlertState({
+        isOpen: true,
+        type: 'success',
+        title: 'Đăng ký thành công!',
+        description: 'Hãy đăng nhập lại để tiếp tục.'
+      });
+      // onClose();
   };
 
 
@@ -195,6 +213,19 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
       isOpen={isRuleEventOpen}
       onClose={closeRuleEventPage}
     /> */}
+
+    <AlertTitle
+      isOpen={alertState.isOpen}
+      type={alertState.type}
+      title={alertState.title}
+      description={alertState.description}
+      onClose={() => {
+        setAlertState({ ...alertState, isOpen: false });
+        if (alertState.type === 'success') {
+          onClose(); 
+        }
+      }}
+    />
     <div
       className="fixed inset-0 bg-black/60 z-[1003] flex justify-center overflow-y-auto py-10 px-4
                 transition-opacity duration-300 ease-in-out "
@@ -390,10 +421,11 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
                 >
                   Tiếp tục
                 </ButtonOrange>
+
                 {/* Nút đóng 'x' */}
                 <button
                   onClick={onClose}
-                  className="w-8 h-8 flex items-center justify-center rounded-full border-2
+                  className="w-8 h-8 flex items-center justify-center rounded-full border-2 cursor-pointer
                   border-white text-white text-2xl font-light bg-transparent hover:bg-white/20 transition-colors"
                   aria-label="Đóng"
                 >

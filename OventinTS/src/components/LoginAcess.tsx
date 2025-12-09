@@ -12,7 +12,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   const [error, setError] = useState("");
 
   const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault(); 
+    e.preventDefault(); // Ngăn form submit và tải lại trang
 
     if (password === CORRECT_PASSWORD) {
       setError("");
