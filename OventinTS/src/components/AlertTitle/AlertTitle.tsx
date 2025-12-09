@@ -44,7 +44,7 @@ const AlertTitle: React.FC<AlertTitleProps> = ({
   title,
   description,
   type,
-  duration = 5000,
+  duration = 2000,
 }) => {
     
   useEffect(() => {
