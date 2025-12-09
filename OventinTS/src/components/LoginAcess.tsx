@@ -25,12 +25,6 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   return (
     <div className="fixed inset-0 bg-gradient-to-b from-[#ff9a24] to-[#ffc93c] z-[1000] flex flex-col items-center justify-center p-4">
       <div className="relative w-full max-w-md text-center">
-        {/* Logo */}
-        <img
-          src="./static/frog.png"
-          alt="Oventin Logo"
-          className="mx-auto w-[150px] h-auto rounded-full filter-[drop-shadow(rgb(0,0,0,0.2)_0px_5px_5px)]"
-        />
 
         {/* Form đăng nhập */}
         <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-2xl border-2 border-white">
