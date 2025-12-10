@@ -40,7 +40,7 @@ function Footer(){
 
             {/* footer-bottoms */}
             <div className="text-center pt-1 mt-5 pb-10">
-              <p>Ovolmatine VN © 2025</p>
+              <p>Zootopia VN © 2025</p>
             </div>
           </div>
         </div>
@@ -73,7 +73,7 @@ function Footer(){
 
             {/* footer-bottoms */}
             <div className="text-center pt-1 mt-5 pb-10">
-              <p>Ovolmatine VN © 2025</p>
+              <p>Zootopia VN © 2025</p>
             </div>
           </div>
         </div>

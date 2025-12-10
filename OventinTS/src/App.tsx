@@ -70,8 +70,9 @@ function App() {
     return () => document.body.classList.remove("body-no-scroll");
   }, [isLoginPopup, isRegisterPopup, isRulePopupOpen]);
 
-  // Quyền xem trang
-  const [isLogginAccess, setIsLoggedInAccess] = useState(false);
+  // Quyền xem trang với 3 trạng thái: đang kiểm tra, đã xác thực, chưa xác thực
+  const [authStatus, setAuthStatus] = useState<'checking' | 'authenticated' | 'unauthenticated'>('checking');
+
   // Kiểm tra phiên đăng nhập 
   useEffect(() => {
     const checkAccessSession = () => {
@@ -83,21 +84,30 @@ function App() {
           const sessionDuration = 50 * 60 * 1000; // Phiên truy cập hợp lệ trong 50 phút
 
           if (session.isLoggedIn && (now - session.timestamp < sessionDuration)) {
-            setIsLoggedInAccess(true); 
+            setAuthStatus('authenticated'); 
           } else {
             localStorage.removeItem("accessSession"); 
+            setAuthStatus('unauthenticated');
           }
         } catch (error) {
           localStorage.removeItem("accessSession"); 
+          setAuthStatus('unauthenticated');
           console.error("Error parsing session data:", error);
         }
+      } else {
+        setAuthStatus('unauthenticated');
       }
     };
     checkAccessSession();
   }, []); // Chạy một lần khi component được mount
 
-  if(!isLogginAccess) {
-    return <LoginAccess onLoginSuccess={() => setIsLoggedInAccess(true)} />
+  // Chờ cho đến khi kiểm tra phiên hoàn tất
+  if (authStatus === 'checking') {
+    return null; // Hoặc một component loading toàn màn hình
+  }
+
+  if (authStatus === 'unauthenticated') {
+    return <LoginAccess onLoginSuccess={() => setAuthStatus('authenticated')} />
   }
 
   return (
