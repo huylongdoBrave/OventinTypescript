@@ -18,6 +18,7 @@ interface ForgotPw{
 }
 
 const ForgotPasswordPopup: React.FC<ForgotPasswordProps> = ({ isOpen, onClose }) => {
+  
   const [isConfirmOtpOpen, setIsConfirmOtpOpen] = useState(false);
   const [phoneForOtp, setPhoneForOtp] = useState(''); // State to store phone number for OTP
   const [alertState, setAlertState] = useState<{isOpen: boolean; type: AlertType; title: string; description?: string}>({
