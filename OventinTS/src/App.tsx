@@ -56,6 +56,30 @@ function App() {
 
   // Quyền xem trang
   const [isLogginAccess, setIsLoggedInAccess] = useState(false);
+  // Kiểm tra phiên đăng nhập 
+  useEffect(() => {
+    const checkAccessSession = () => {
+      const sessionData = localStorage.getItem("accessSession");
+      if (sessionData) {
+        try {
+          const session = JSON.parse(sessionData);
+          const now = new Date().getTime();
+          const sessionDuration = 8 * 60 * 60 * 1000; 
+
+          if (session.isLoggedIn && (now - session.timestamp < sessionDuration)) {
+            setIsLoggedInAccess(true); 
+          } else {
+            localStorage.removeItem("accessSession"); 
+          }
+        } catch (error) {
+          localStorage.removeItem("accessSession"); 
+          console.error("Error parsing session data:", error);
+        }
+      }
+    };
+    checkAccessSession();
+  }, []); // Chạy một lần khi component được mount
+
   if(!isLogginAccess) {
     return <LoginAccess onLoginSuccess={() => setIsLoggedInAccess(true)} />
   }

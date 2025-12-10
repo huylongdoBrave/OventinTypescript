@@ -401,7 +401,7 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
                   />
                 </span>
                 <span className=" text-[var(--normal-blue)] font-normal text-base leading-normal m-0 text-left">
-                  Tôi đồng ý với <Link onClick={onClose} className="underline cursor-pointer" to="/RuleEvent"> thể lệ </Link> 
+                  Tôi đồng ý với <Link to="/RuleEvent" target="_blank" rel="noopener noreferrer" className="underline cursor-pointer"> thể lệ </Link> 
                   chương trình khuyến mãi này
                 </span>
               </label>

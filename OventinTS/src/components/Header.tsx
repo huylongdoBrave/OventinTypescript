@@ -16,7 +16,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
       <header className="sticky top-0 z-[1001]  hidden lg:block h-[115px] mb-5">
         <nav
           className=" h-[70px] flex justify-between items-center px-4 
-         text-white bg-[linear-gradient(rgb(35,61,163)_0%,rgb(35,61,163)_65px,transparent_65px)]"
+         text-white bg-[linear-gradient(#0349b4_0%,#0349b4_65px,transparent_65px)]"
         >
           {/* Mục trái desktop header */}
           <div className="flex items-center h-full">
@@ -41,7 +41,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
                       className={`absolute bottom-[-45px] w-[90px] h-[80px] bg-[#ff962b] text-white rounded-lg
                             flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 
                             ${
-                              isActive ? "bg-[#09ff32]" : "group-hover:bg-[#1a2b7a]"
+                              isActive ? "bg-[#ff5a00]" : "group-hover:bg-[#1a2b7a]"
                             } `}
                     >
                       <img
@@ -85,7 +85,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
                       className={`absolute bottom-[-45px] w-[90px] h-[80px] bg-[#ff962b] text-white rounded-lg 
                             flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 ${
                               isActive
-                                ? "bg-[rgb(76,209,14)]"
+                                ? "bg-[rgb(255,90,0)]"
                                 : "group-hover:bg-[#1a2b7a]"
                             }`}
                     >
@@ -124,7 +124,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
           {isLoggedIn ? (
             <div className="flex items-center gap-5">
               <div className="flex items-center gap-2 text-base font-medium">
-                <img className="w-[30px] h-[30px]" src="https://ovaltine-website-dev.estuary.solutions/img/icon/coin.png" alt="" />
+                <img className="w-[30px] h-[30px]" src="./static/Zootopia.png" alt="" />
                 <span className="m-0
                                 text-sm
                                 font-normal
@@ -183,7 +183,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
       {/* Header cho Tablet và Mobile */}
       <header className="sticky top-0 z-[1001] lg:hidden h-[70px] mb-2.5">
         <nav className="h-[70px] md:h-[60px] flex justify-between items-center
-         bg-[#ff962b] text-white px-2 md:px-4">
+         bg-[#0349b4] text-white px-2 md:px-4">
 
           {/* Mục phải menu */}
           <div className="flex items-center h-full">
@@ -199,7 +199,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
           {isLoggedIn ? (
             <div className="flex items-center gap-2 md:gap-5">
               <div className="flex items-center gap-1 md:gap-2 text-xs md:text-base font-medium">
-                <img className="w-[30px] h-[30px]" src="https://ovaltine-website-dev.estuary.solutions/img/icon/coin.png" alt="" />
+                <img className="w-[30px] h-[30px]" src="./static/Zootopia.png" alt="" />
                 <span className="m-0
                                 text-sm
                                 font-normal
@@ -273,7 +273,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
                 <div
                   className={`bottom-[35px] relative w-[70px] h-[70px] bg-[#ff962b] text-white rounded-lg 
                     flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[#1a2b7a] ${
-                      isActive ? "bg-[rgb(76,209,14)]" : ""
+                      isActive ? "bg-[#ff5a00]" : ""
                     }`}
                 >
                   <img
@@ -316,7 +316,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
                 <div
                   className={`bottom-[35px] relative w-[70px] h-[70px] bg-[#ff962b] text-white rounded-lg 
                         flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[#1a2b7a] ${
-                          isActive ? "bg-[rgb(76,209,14)]" : ""
+                          isActive ? "bg-[rgb(255,90,0)]" : ""
                         }`}
                 >
                   <img

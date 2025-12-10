@@ -16,6 +16,12 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
 
     if (password === CORRECT_PASSWORD) {
       setError("");
+      const session = { // Lưu thông tin phiên đăng nhập vào localStorage
+        isLoggedIn: true,
+        timestamp: new Date().getTime(), // Lưu thời điểm đăng nhập
+      };
+      localStorage.setItem("accessSession", JSON.stringify(session));
+
       onLoginSuccess();
     } else {
       setError("Mật khẩu không đúng. Who are you? Get out!");
@@ -23,7 +29,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-b from-[#e0f805] to-[#8bff07] z-[1000] flex flex-col items-center justify-center p-4">
+    <div className="fixed inset-0 bg-gradient-to-b from-[rgb(175,194,11)] to-[rgb(255,156,7)] z-[1000] flex flex-col items-center justify-center p-4">
       <div className="relative w-full max-w-md text-center">
 
         {/* Form đăng nhập */}

@@ -49,7 +49,7 @@ const ResultPopup: React.FC<ResultPopupProps> = ({
             className="absolute top-[-190px] left-1/2 -translate-x-1/2 w-[150px] h-auto rounded-full p-1.5 filter-[drop-shadow(rgb(255,255,255)_0px_0px_5px)]"
           />
           <img
-            src="/static/noti.png"
+            src="./static/noti.png"
             alt="Thông báo"
             className="absolute top-[-50px] left-1/2 -translate-x-1/2 w-[300px] h-auto p-1.5"
           />
