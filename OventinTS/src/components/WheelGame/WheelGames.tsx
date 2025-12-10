@@ -412,7 +412,7 @@ const WheelGame: React.FC<WheelGameProps> = ({ isLoggedIn }) => {
             <img
               src="/static/rabbit.png"
               alt="rabbit"
-              className="absolute z-[5] h-auto transition-all duration-300 ease-in-out
+              className="absolute rotate-350 z-[5] h-auto transition-all duration-300 ease-in-out
                             w-[90px] bottom-[30px] right-[calc(50%-var(--wheel-wrapper-size)/2-10px)]
                             md:w-[150px] md:bottom-auto md:mt-0 md:right-[10%]
                             lg:bottom-[60px] lg:w-[200px] lg:right-[calc(50%-var(--wheel-wrapper-size)/2-250px)]"

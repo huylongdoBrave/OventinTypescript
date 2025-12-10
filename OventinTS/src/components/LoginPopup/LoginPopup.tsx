@@ -51,7 +51,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
   const [isForgotPwPopup, setIsForgotPwPopup] = useState(false);
   const [isRuleRegisterPopup, setIsRuleRegisterPopup] = useState(false);
   const [isRegisterPopup, setIsRegisterPopup] = useState(false);
-  const closeForgotPasswordPopup = useCallback(() => setIsForgotPwPopup(false), []);
+
 
   // State cho AlertTitle
   const [alertState, setAlertState] = useState<{isOpen: boolean; type: AlertType; title: string; description?: string}>({
@@ -61,7 +61,8 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
   });
   const closeRuleRegisterPopup = useCallback(() => setIsRuleRegisterPopup(false), []);
   const closeRegisterPopup = useCallback(() => setIsRegisterPopup(false), []);
-
+  const closeForgotPasswordPopup = useCallback(() => setIsForgotPwPopup(false), []);
+  
   // Hàm xử lý popup quên mật khẩu
   const openForgotPasswordPopup = useCallback(() => {
     setIsForgotPwPopup(true);
