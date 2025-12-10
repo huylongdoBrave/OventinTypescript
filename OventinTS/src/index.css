@@ -41,9 +41,9 @@ body {
        2. Lớp giữa: Ảnh nền chính, cover toàn bộ màn hình, không lặp.
        3. Lớp dưới cùng: Màu gradient làm fallback.
     */
-    background-image: url(''), url(''), radial-gradient(circle, #dbbe7a 0%, #d19439 20%, #f85a00 100%);
+    background-image: url(''), url('/static/fire.png'), radial-gradient(circle, #dbbe7a 0%, #d19439 20%, #f85a00 100%);
     background-repeat: no-repeat, no-repeat, no-repeat;
-    background-position: center top, top, center;
+    background-position: center bottom, top, center;
     /* Kích thước:
        - coin.png: 250px để họa tiết nhỏ hơn.
        - bgzoo.jpg: contain để ảnh luôn nằm trọn trong khung nhìn, không bị cắt. */
