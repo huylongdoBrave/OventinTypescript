@@ -101,7 +101,7 @@ function App() {
     checkAccessSession();
   }, []); // Chạy một lần khi component được mount
 
-  // Chờ cho đến khi kiểm tra phiên hoàn tất
+  // Chờ kiểm tra phiên hoàn tất
   if (authStatus === 'checking') {
     return null; // Hoặc một component loading toàn màn hình
   }
