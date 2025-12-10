@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback, memo } from "react";
+import { useLocation } from 'react-router-dom'; // Import useLocation
 // import { AnimatePresence } from "framer-motion";
 import ButtonOrange from "../Button/ButtonOranges.tsx";
 
@@ -34,6 +35,9 @@ const WheelGame: React.FC<WheelGameProps> = ({ isLoggedIn }) => {
   const wheelRef = useRef<HTMLDivElement>(null); // Ref để tham chiếu đến DOM của vòng quay
   const dragRefLeft = useRef<HTMLDivElement>(null); // Ref cho popup kéo thả BÊN TRÁI
   const dragRefRight = useRef<HTMLDivElement>(null); // Ref cho popup kéo thả BÊN PHẢI
+  const location = useLocation(); // Lấy thông tin về route hiện tại
+  const fromLogout = location.state?.fromLogout; // Kiểm tra state 'fromLogout'
+
 
   // State các popup
   const [winningPrize, setWinningPrize] = useState<Prize | null>(null);
@@ -44,7 +48,7 @@ const WheelGame: React.FC<WheelGameProps> = ({ isLoggedIn }) => {
   // addprize table popup
   const [isAddPrizePopupOpen, setIsAddPrizePopupOpen] = useState(false);
   // attention popup
-  const [isAttentionPopupOpen, setIsAttentionPopupOpen] = useState(true);
+  const [isAttentionPopupOpen, setIsAttentionPopupOpen] = useState(isLoggedIn && !fromLogout);
   // State cho popup left kéo thả
   const [isStickyPopupLeft, setIsStickyPopupLeft] = useState(true);
   // State cho popup right kéo thả
@@ -281,7 +285,7 @@ const WheelGame: React.FC<WheelGameProps> = ({ isLoggedIn }) => {
 
 
   // Callback cho các hàm đóng popup
-  const closeAttentionPopup = useCallback(() => setIsAttentionPopupOpen(false), []);
+  // const closeAttentionPopup = useCallback(() => setIsAttentionPopupOpen(false), []);
   const closeResultPopup = useCallback(() => setIsResultPopupOpen(false), []);
   const closeRatePopup = useCallback(() => setIsRatePopupOpen(false), []);
   const closeAddPrizePopup = useCallback(() => setIsAddPrizePopupOpen(false), []);
@@ -422,7 +426,7 @@ const WheelGame: React.FC<WheelGameProps> = ({ isLoggedIn }) => {
       {/* POPUPS */}
       <AttentionWheelPopup
         isOpen={isAttentionPopupOpen}
-        onClose={closeAttentionPopup}
+       onClose={() => setIsAttentionPopupOpen(false)}
       />
 
       <ResultPopup

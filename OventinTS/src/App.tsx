@@ -43,6 +43,22 @@ function App() {
     closeLoginPopup();
   };
 
+  
+  // State để báo hiệu cần đóng attentionWheelPopup khi đăng xuất
+  // const [shouldCloseAttentionPopup, setShouldCloseAttentionPopup] = useState(false);
+
+  // const handleAppLogout = () => {
+  //   setIsLoggedIn(false);
+  //   setShouldCloseAttentionPopup(true); // Kích hoạt tín hiệu đóng popup
+  //   localStorage.removeItem("accessSession"); // Xóa phiên truy cập khi đăng xuất
+  // };
+
+  const handleAppLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem("accessSession"); // Xóa phiên truy cập khi đăng xuất
+  };
+
+
   // Effect quản lý class 'body-no-scroll' khi popup mở/đóng
   useEffect(() => {
     if (isLoginPopup || isRegisterPopup || isRulePopupOpen) {
@@ -64,7 +80,7 @@ function App() {
         try {
           const session = JSON.parse(sessionData);
           const now = new Date().getTime();
-          const sessionDuration = 8 * 60 * 60 * 1000; 
+          const sessionDuration = 50 * 60 * 1000; // Phiên truy cập hợp lệ trong 50 phút
 
           if (session.isLoggedIn && (now - session.timestamp < sessionDuration)) {
             setIsLoggedInAccess(true); 
@@ -118,7 +134,7 @@ function App() {
         {/* <Route path="/prizewheel/products" element={<ShowPrize />} /> */}
 
         {/* Profile */}
-        <Route path="/Profile" element={<Profile onLogout={() => setIsLoggedIn(false)} />} />
+        <Route path="/Profile" element={<Profile onLogout={handleAppLogout} />} />
 
         {/* Thể lệ */}
         <Route path="/RuleEvent" element={<RuleEvent />} />

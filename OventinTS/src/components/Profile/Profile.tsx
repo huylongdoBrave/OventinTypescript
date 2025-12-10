@@ -13,7 +13,7 @@ const Profile: React.FC<ProfileProps> = ({ onLogout }) => {
   const handleLogout = () => {
     // Gọi hàm onLogout được truyền từ App.tsx để cập nhật state isLoggedIn
     onLogout();
-    navigate('/');
+    navigate('/', { state: { fromLogout: true } });     // Điều hướng về trang chủ và gửi kèm state để báo hiệu là từ logout
   };
 
   return (
