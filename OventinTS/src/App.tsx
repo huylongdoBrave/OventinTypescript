@@ -74,41 +74,41 @@ function App() {
   const [authStatus, setAuthStatus] = useState<'checking' | 'authenticated' | 'unauthenticated'>('checking');
 
   // Kiểm tra phiên đăng nhập 
-  // useEffect(() => {
-  //   const checkAccessSession = () => {
-  //     const sessionData = localStorage.getItem("accessSession");
-  //     if (sessionData) {
-  //       try {
-  //         const session = JSON.parse(sessionData);
-  //         const now = new Date().getTime();
-  //         const sessionDuration = 50 * 60 * 1000; // Phiên truy cập hợp lệ trong 50 phút
+  useEffect(() => {
+    const checkAccessSession = () => {
+      const sessionData = localStorage.getItem("accessSession");
+      if (sessionData) {
+        try {
+          const session = JSON.parse(sessionData);
+          const now = new Date().getTime();
+          const sessionDuration = 50 * 60 * 1000; // Phiên truy cập hợp lệ trong 50 phút
 
-  //         if (session.isLoggedIn && (now - session.timestamp < sessionDuration)) {
-  //           setAuthStatus('authenticated'); 
-  //         } else {
-  //           localStorage.removeItem("accessSession"); 
-  //           setAuthStatus('unauthenticated');
-  //         }
-  //       } catch (error) {
-  //         localStorage.removeItem("accessSession"); 
-  //         setAuthStatus('unauthenticated');
-  //         console.error("Error parsing session data:", error);
-  //       }
-  //     } else {
-  //       setAuthStatus('unauthenticated');
-  //     }
-  //   };
-  //   checkAccessSession();
-  // }, []); // Chạy một lần khi component được mount
+          if (session.isLoggedIn && (now - session.timestamp < sessionDuration)) {
+            setAuthStatus('authenticated'); 
+          } else {
+            localStorage.removeItem("accessSession"); 
+            setAuthStatus('unauthenticated');
+          }
+        } catch (error) {
+          localStorage.removeItem("accessSession"); 
+          setAuthStatus('unauthenticated');
+          console.error("Error parsing session data:", error);
+        }
+      } else {
+        setAuthStatus('unauthenticated');
+      }
+    };
+    checkAccessSession();
+  }, []); // Chạy một lần khi component được mount
 
-  // // Chờ cho đến khi kiểm tra phiên hoàn tất
-  // if (authStatus === 'checking') {
-  //   return null; // Hoặc một component loading toàn màn hình
-  // }
+  // Chờ cho đến khi kiểm tra phiên hoàn tất
+  if (authStatus === 'checking') {
+    return null; // Hoặc một component loading toàn màn hình
+  }
 
-  // if (authStatus === 'unauthenticated') {
-  //   return <LoginAccess onLoginSuccess={() => setAuthStatus('authenticated')} />
-  // }
+  if (authStatus === 'unauthenticated') {
+    return <LoginAccess onLoginSuccess={() => setAuthStatus('authenticated')} />
+  }
 
   return (
     <div className="pb-[5px] lg:pb-0">    
