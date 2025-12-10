@@ -343,8 +343,8 @@ const WheelGame: React.FC<WheelGameProps> = ({ isLoggedIn }) => {
             min-h-[var(--wheel-wrapper-size)]"
           >
             <img
-              src="/static/dolphine.png"
-              alt="Dolphine"
+              src="/static/fox.png"
+              alt="fox"
               className="absolute z-[5] h-auto transition-all duration-300 ease-in-out
                             w-[90px] bottom-[50px] left-[calc(50%-var(--wheel-wrapper-size)/2-10px)]
                             md:w-[150px] md:bottom-auto md:mt-0 md:left-[10%]
@@ -401,12 +401,12 @@ const WheelGame: React.FC<WheelGameProps> = ({ isLoggedIn }) => {
                   disabled={isSpinning || !isLoggedIn}
                   // title={!isLoggedIn ? "Vui lòng đăng nhập để quay" : "Quay"} 
                   >
-                  <img className="" src="/static/favicon_oven.png" alt="Spin" />
+                  <img className="" src="/static/Zootopia.png" alt="Spin" />
                 </button>
             </div>
             <img
-              src="/static/boy.png"
-              alt="Boy"
+              src="/static/rabbit.png"
+              alt="rabbit"
               className="absolute z-[5] h-auto transition-all duration-300 ease-in-out
                             w-[90px] bottom-[30px] right-[calc(50%-var(--wheel-wrapper-size)/2-10px)]
                             md:w-[150px] md:bottom-auto md:mt-0 md:right-[10%]

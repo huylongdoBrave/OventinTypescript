@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import Draggable from "react-draggable";
 
 
-//     ====== UI POPUP IMGRIGHT TRANG OVALTINE ======
+//     ====== UI POPUP IMGRIGHT TRANG Zootopia  ======
 
 
 interface ImgRightPopupProps {
@@ -34,7 +34,7 @@ const ImgRightPopup: React.FC<ImgRightPopupProps> = ({
             &times;
           </button>
           <img
-            src="/static/survey.png"
+            src="/static/adv_1.jpg"
             alt="Khảo sát"
             className="w-[120px] h-[120px] object-contain [-webkit-user-drag:none]"
           />

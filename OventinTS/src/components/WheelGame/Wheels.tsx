@@ -2,7 +2,7 @@ import { useMemo, memo } from "react";
 import type { Prize } from "./WheelGames"; 
 
 
-//    ====== UI MẢNH TỰ TẠO CỦA VÒNG XOAY TRANG OVALTINE ======
+//    ====== UI MẢNH TỰ TẠO CỦA VÒNG XOAY TRANG Zootopia  ======
 
 interface WheelProps {
   prizes: Prize[];

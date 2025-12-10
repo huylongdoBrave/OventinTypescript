@@ -23,13 +23,13 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-b from-[#ff9a24] to-[#ffc93c] z-[1000] flex flex-col items-center justify-center p-4">
+    <div className="fixed inset-0 bg-gradient-to-b from-[#e0f805] to-[#8bff07] z-[1000] flex flex-col items-center justify-center p-4">
       <div className="relative w-full max-w-md text-center">
 
         {/* Form đăng nhập */}
         <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-2xl border-2 border-white">
-          <h1 className="text-2xl font-bold text-[#233DA3] mb-2">
-            Form đăng nhập Ovomaltine 
+          <h1 className="text-2xl font-bold text-[#45d10e] mb-2">
+            Form đăng nhập Zootopia 
           </h1>
 
           <form onSubmit={handleLogin}>
@@ -38,7 +38,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Nhập mật khẩu..."
-              className="w-full px-4 py-3 mb-4 text-lg border-2 border-gray-300 rounded-full focus:ring-2 focus:ring-[#ff9a24] focus:border-transparent outline-none transition"
+              className="w-full px-4 py-3 mb-4 text-lg border-2 border-gray-300 rounded-full focus:ring-2 focus:ring-[#c3ee7f] focus:border-transparent outline-none transition"
             />
 
             {error && (

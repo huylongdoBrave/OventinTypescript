@@ -56,7 +56,7 @@ const ForgotPasswordPopup: React.FC<ForgotPasswordProps> = ({ isOpen, onClose })
       <div className="relative flex justify-center w-full max-w-[800px] pt-[200px]">
         {/* logo */}
         <img
-          src="./static/favicon_oven.png"
+          src="./static/Zootopia.png"
           alt="Oventin Logo"
           className="absolute top-[20px] left-1/2 -translate-x-1/2 w-[150px] h-auto rounded-full p-1.5 filter-[drop-shadow(rgb(255,255,255)_0px_0px_5px)]"
         />

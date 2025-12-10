@@ -33,7 +33,7 @@ const RuleRegisterPopup: React.FC<RuleRegisterPopupProps> = ({
       <div className="relative flex justify-center w-full max-w-[800px] pt-[250px]">
         {/* logo */}
         <img
-          src="./static/favicon_oven.png"
+          src="./static/Zootopia.png"
           alt="Oventin Logo"
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[150px] h-auto rounded-full p-1.5 filter-[drop-shadow(rgb(255,255,255)_0px_0px_5px)]"
         />

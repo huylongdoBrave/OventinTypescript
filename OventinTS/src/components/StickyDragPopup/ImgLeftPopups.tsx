@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import Draggable from "react-draggable";
 
 
-//     ====== UI POPUP IMGLEFT TRANG OVALTINE ======
+//     ====== UI POPUP IMGLEFT TRANG Zootopia  ======
 
 interface ImgLeftPopupProps {
   isOpen: boolean;
@@ -33,7 +33,7 @@ const ImgLeftPopup: React.FC<ImgLeftPopupProps> = ({
             &times;
           </button>
           <img
-            src="/static/moi-ban-be-nhan-ngay-10-ovocoins.webp"
+            src="/static/adv_2.png"
             alt="Mời bạn bè nhận Ovocoins"
             className="w-[120px] h-[120px] object-contain [-webkit-user-drag:none]"
           />

@@ -22,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
           <div className="flex items-center h-full">
             <Link to="/">
               <img
-                src="./static/favicon_oven.png"
+                src="./static/Zootopia.png"
                 alt="Oventin Logo"
                 className="h-[120px] mr-[30px] mt-[80px]"
               />
@@ -38,10 +38,10 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
                 >
                   {({ isActive }) => (
                     <div
-                      className={`absolute bottom-[-45px] w-[90px] h-[80px] bg-[#233da3] text-white rounded-lg
+                      className={`absolute bottom-[-45px] w-[90px] h-[80px] bg-[#ff962b] text-white rounded-lg
                             flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 
                             ${
-                              isActive ? "bg-[#ff4109]" : "group-hover:bg-[#1a2b7a]"
+                              isActive ? "bg-[#09ff32]" : "group-hover:bg-[#1a2b7a]"
                             } `}
                     >
                       <img
@@ -62,7 +62,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
                   className="flex items-center w-full h-full text-white no-underline box-border"
                 >
                   <div
-                    className="absolute bottom-[-45px] w-[90px] h-[80px] bg-[#233da3] text-white rounded-lg 
+                    className="absolute bottom-[-45px] w-[90px] h-[80px] bg-[#ff962b] text-white rounded-lg 
                           flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 group-hover:bg-[#1a2b7a]"
                   >
                     <img
@@ -82,10 +82,10 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
                 > 
                   {({ isActive }) => (
                     <div
-                      className={`absolute bottom-[-45px] w-[90px] h-[80px] bg-[#233da3] text-white rounded-lg 
+                      className={`absolute bottom-[-45px] w-[90px] h-[80px] bg-[#ff962b] text-white rounded-lg 
                             flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 ${
                               isActive
-                                ? "bg-[#ff4109]"
+                                ? "bg-[rgb(76,209,14)]"
                                 : "group-hover:bg-[#1a2b7a]"
                             }`}
                     >
@@ -105,7 +105,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
                   className="flex items-center w-full h-full text-white no-underline box-border"
                 >
                   <div
-                    className="absolute bottom-[-45px] w-[90px] h-[80px] bg-[#233da3] text-white rounded-lg 
+                    className="absolute bottom-[-45px] w-[90px] h-[80px] bg-[#ff962b] text-white rounded-lg 
                           flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 group-hover:bg-[#1a2b7a]"
                   >
                     <img
@@ -147,8 +147,8 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
                                     >x101</span>
               </div> 
               <button
-                className="bg-[#233da3] text-white border-2 border-white rounded-full py-2 px-4 font-bold cursor-pointer 
-                transition-colors shadow-[0_2px_2px_black] hover:bg-white hover:text-[#233da3]"
+                className="bg-[#ff962b] text-white border-2 border-white rounded-full py-2 px-4 font-bold cursor-pointer 
+                transition-colors shadow-[0_2px_2px_black] hover:bg-white hover:text-[#ff962b]"
               >
                 Nhập mã
               </button>
@@ -183,13 +183,13 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
       {/* Header cho Tablet và Mobile */}
       <header className="sticky top-0 z-[1001] lg:hidden h-[70px] mb-2.5">
         <nav className="h-[70px] md:h-[60px] flex justify-between items-center
-         bg-[#233da3] text-white px-2 md:px-4">
+         bg-[#ff962b] text-white px-2 md:px-4">
 
           {/* Mục phải menu */}
           <div className="flex items-center h-full">
             <Link to="/" className="flex items-center">
               <img
-                src="./static/favicon_oven.png"
+                src="./static/Zootopia.png"
                 alt="Oventin Logo"
                 className="h-[50px] md:h-[80px] absolute md:top-[20px] [overflow-clip-margin:content-box]
                           overflow-clip before:box-[inherit] cursor-pointer"
@@ -221,8 +221,8 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
                                     >x101</span>
               </div>
               <button
-                className="bg-[#233da3] text-white border-2 border-white rounded-full py-1 px-2 md:py-2 md:px-4 text-xs md:text-sm font-bold cursor-pointer 
-                transition-colors shadow-[0_2px_2px_black] hover:bg-white hover:text-[#233da3]"
+                className="bg-[#ff962b] text-white border-2 border-white rounded-full py-1 px-2 md:py-2 md:px-4 text-xs md:text-sm font-bold cursor-pointer 
+                transition-colors shadow-[0_2px_2px_black] hover:bg-white hover:text-[#ff962b]"
               >
                 Nhập mã
               </button>
@@ -271,9 +271,9 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
             >
               {({ isActive }) => (
                 <div
-                  className={`bottom-[35px] relative w-[70px] h-[70px] bg-[#233da3] text-white rounded-lg 
+                  className={`bottom-[35px] relative w-[70px] h-[70px] bg-[#ff962b] text-white rounded-lg 
                     flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[#1a2b7a] ${
-                      isActive ? "bg-[#ff4109]" : ""
+                      isActive ? "bg-[rgb(76,209,14)]" : ""
                     }`}
                 >
                   <img
@@ -294,7 +294,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
               className="flex items-center w-full h-full no-underline box-border"
             >
               <div
-                className="bottom-[35px] relative w-[70px] h-[70px] bg-[#233da3] text-white rounded-lg 
+                className="bottom-[35px] relative w-[70px] h-[70px] bg-[#ff962b] text-white rounded-lg 
                     flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[#1a2b7a]"
               >
                 <img
@@ -314,9 +314,9 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
             >
               {({ isActive }) => (
                 <div
-                  className={`bottom-[35px] relative w-[70px] h-[70px] bg-[#233da3] text-white rounded-lg 
+                  className={`bottom-[35px] relative w-[70px] h-[70px] bg-[#ff962b] text-white rounded-lg 
                         flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[#1a2b7a] ${
-                          isActive ? "bg-[#ff4109]" : ""
+                          isActive ? "bg-[rgb(76,209,14)]" : ""
                         }`}
                 >
                   <img
@@ -335,7 +335,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
               className="flex items-center w-full h-full no-underline box-border"
             >
               <div
-                className="bottom-[35px] relative w-[70px] h-[70px] bg-[#233da3] text-white rounded-lg 
+                className="bottom-[35px] relative w-[70px] h-[70px] bg-[#ff962b] text-white rounded-lg 
                     flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[#1a2b7a]"
               >
                 <img

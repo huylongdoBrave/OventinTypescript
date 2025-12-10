@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 
-//    ====== UI POPUP THÔNG BÁO KHI VÀO TRANG OVALTINE ======
+//    ====== UI POPUP THÔNG BÁO KHI VÀO TRANG Zootopia  ======
 
 interface AttentionWheelPopupProps {
   isOpen: boolean;
@@ -22,8 +22,8 @@ const AttentionWheelPopup: React.FC<AttentionWheelPopupProps> = ({
     transition-opacity duration-300 ease-in-out"
     >
       <img
-        src="/static/dolphine.png"
-        alt="Dolphine"
+        src="/static/fox.png"
+        alt="fox"
         className="absolute h-auto z-[5] transition-all duration-300 ease-in-out 
                       w-[100px] mt-[120px] left-[calc(50%-var(--wheel-wrapper-size)/2-20px)] 
                       md:w-[120px] md:mt-[180px] md:left-[calc(50%-var(--wheel-wrapper-size)/2-80px)] 
@@ -38,7 +38,7 @@ const AttentionWheelPopup: React.FC<AttentionWheelPopupProps> = ({
       >
         {/* logo */}
         <img
-          src="./static/favicon_oven.png"
+          src="./static/Zootopia.png"
           alt="Oventin Logo"
           className="absolute top-[-190px] left-1/2 -translate-x-1/2 w-[150px] h-auto rounded-full p-1.5 filter-[drop-shadow(rgb(255,255,255)_0px_0px_5px)]"
         />
@@ -103,8 +103,8 @@ const AttentionWheelPopup: React.FC<AttentionWheelPopupProps> = ({
         </div>
       </div>
       <img
-        src="/static/boy.png"
-        alt="Boy"
+        src="/static/rabbit.png"
+        alt="rabbit"
         className="absolute h-auto z-[5] transition-all duration-300 ease-in-out
                     w-[100px] mt-[120px] right-[calc(50%-var(--wheel-wrapper-size)/2-20px)]
                     md:w-[120px] md:mt-[180px] md:right-[calc(50%-var(--wheel-wrapper-size)/2-80px)]

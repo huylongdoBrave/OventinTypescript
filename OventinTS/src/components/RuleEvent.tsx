@@ -45,20 +45,20 @@ function RuleEvent() {
                     <p className="text-[#233DA3]">
                       1. Tên chương trình khuyến mãi:{" "}
                       <span className="text-white">
-                        “Tích điểm Ovaltine săn ngay quà xịn”
+                        “Tích điểm Zootopia  săn ngay quà xịn”
                       </span>{" "}
                     </p>
                     <p className="text-[#233DA3]">
                       2. Hàng hóa, dịch vụ khuyến mãi:
                     </p>
                     <p className="text-black">
-                      Lốc sữa nước Ovaltine 180ml (mỗi lốc gồm 4 hộp sữa nước
-                      Ovaltine 180ml), và Lốc sữa nước Ovaltine 110ml (mỗi lốc
-                      gồm 4 hộp sữa nước Ovaltine 110ml), Lốc sữa nước Ovaltine
-                      DHA 180ml (mỗi lốc gồm 4 hộp sữa nước Ovaltine DHA 180ml).{" "}
+                      Lốc sữa nước Zootopia  180ml (mỗi lốc gồm 4 hộp sữa nước
+                      Zootopia  180ml), và Lốc sữa nước Zootopia  110ml (mỗi lốc
+                      gồm 4 hộp sữa nước Zootopia  110ml), Lốc sữa nước Zootopia 
+                      DHA 180ml (mỗi lốc gồm 4 hộp sữa nước Zootopia  DHA 180ml).{" "}
                       <br />
                       Sữa phù hợp cho đối tượng từ 2 tuổi trở lên. Từ 4 tuổi trở
-                      lên, khuyến nghị sử dụng 1 hộp Ovaltine (180ml) mỗi ngày.
+                      lên, khuyến nghị sử dụng 1 hộp Zootopia  (180ml) mỗi ngày.
                     </p>
                     <br />
                     <table className="min-w-full mb-5 ">
@@ -72,14 +72,14 @@ function RuleEvent() {
                       <tbody className="border-1 border-[white] text-[#233DA3]">
                         <tr className="border-b border-[white]">
                           <td className="py-2 pl-2">1</td>
-                          <td className="py-2">Thức uống sữa lúa mạch bổ sung Canxi, vị sô cô la Ovaltine 180ml</td>
+                          <td className="py-2">Thức uống sữa lúa mạch bổ sung Canxi, vị sô cô la Zootopia  180ml</td>
                           <td className="py-2"> 4 hộp /1 lốc. 180ml/hộp</td>
                         </tr>
                         <tr className="border-b border-[white]">
                           <td className="py-2 pl-2">2</td>
                           <td className="py-2">
                             Thức uống sữa lúa mạch bổ sung Canxi, vị sô cô la
-                            Ovaltine 110ml
+                            Zootopia  110ml
                           </td>
                           <td className="py-2">4 hộp /1 lốc. 110ml/hộp</td>
                         </tr>
@@ -87,7 +87,7 @@ function RuleEvent() {
                           <td className="py-2 pl-2">3</td>
                           <td className="py-2">
                             Thực phẩm bổ sung thức uống lúa mạch sô-cô-la bổ
-                            sung DHA – Ovaltine DHA+ 180ml
+                            sung DHA – Zootopia  DHA+ 180ml
                           </td>
                           <td className="py-2">4 hộp /1 lốc. 180ml/hộp</td>
                         </tr>
@@ -105,7 +105,7 @@ function RuleEvent() {
                       thời gian diễn ra chương trình khuyến mại. <br />
                       Các đối tượng không được tham gia: Chương trình không áp
                       dụng cho các đối tượng là nhân viên của nhãn hàng
-                      Ovaltine, Công ty TNHH DKSH Việt Nam, Công ty Cổ phần
+                      Zootopia , Công ty TNHH DKSH Việt Nam, Công ty Cổ phần
                       Smollan (Việt Nam ), Công ty TNHH AB Agri Việt Nam, nhà
                       quảng cáo, in ấn Sản phẩm khuyến mại. <br />
                       7. Cơ cấu giải thưởng: <br />
@@ -181,14 +181,14 @@ function RuleEvent() {
           </div>
 
           <img
-            src="/static/dolphine.png"
-            alt="Dolphine"
+            src="/static/fox.png"
+            alt="fox"
             className="absolute z-[5] h-auto transition-all duration-300 ease-in-out hidden
                 lg:block lg:w-[150px] lg:bottom-[40px] lg:left-[0px]"
           />
           <img
-            src="/static/boy.png"
-            alt="Boy"
+            src="/static/rabbit.png"
+            alt="rabbit"
             className="absolute z-[5] h-auto transition-all duration-300 ease-in-out hidden
                 lg:block lg:w-[150px] lg:bottom-[40px] lg:right-[0px]"
           />

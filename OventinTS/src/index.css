@@ -10,7 +10,7 @@
     --primary-blue: #005aab; /* Màu xanh dương chính */
     --dark-blue: #004a8d;
     --light-blue: #e6f3ff;
-    --normal-blue: #233da3;
+    --normal-blue: #1900c9;
     --text-color: #ffffff;
     --menu-bar-height: 70px; /* Tăng chiều cao để có không gian */
     --menu-item-size: 80px;
@@ -35,18 +35,18 @@ body {
     margin: 0;
     padding: 0;
     font-family: rowdies, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* CŨ background: url('/static/coin.png'), radial-gradient(circle, #dbbe7a 0%, #d19439 20%, #f85a00 100%); */
+    /* CŨ background: url('/static/coin.png'), radial-gradient(circle, #dbbe7a 0%, #d19439 20%, #ffcd2b 100%); */
     /* Cấu hình nhiều lớp nền:
        1. Lớp trên cùng: Họa tiết coin lặp lại.
        2. Lớp giữa: Ảnh nền chính, cover toàn bộ màn hình, không lặp.
        3. Lớp dưới cùng: Màu gradient làm fallback.
     */
-    background-image: url('/static/coin.png'), url('/static/ovaltinebg.jpg'), radial-gradient(circle, #dbbe7a 0%, #d19439 20%, #f85a00 100%);
+    background-image: url(''), url(''), radial-gradient(circle, #dbbe7a 0%, #ffab7c 20%, #f95a02 100%);
     background-repeat: no-repeat, no-repeat, no-repeat;
     background-position: center top, top, center;
     /* Kích thước:
        - coin.png: 250px để họa tiết nhỏ hơn.
-       - ovaltinebg.jpg: contain để ảnh luôn nằm trọn trong khung nhìn, không bị cắt. */
+       - bgzoo.jpg: contain để ảnh luôn nằm trọn trong khung nhìn, không bị cắt. */
     background-size: 90%, cover, auto;
     background-attachment: scroll; /* Thay 'fixed' thành 'scroll' để ảnh nền cuộn theo trang */
     display: flex;
@@ -420,7 +420,7 @@ footer {
     position: relative;
     width: 90%;
     max-width: 500px;
-    background-color: #f85a00; /* Nền cam */
+    background-color: #ffcd2b; /* Nền cam */
     border: 4px solid white; /* Viền trắng */
     border-radius: 15px;
     padding: 20px;
@@ -539,7 +539,7 @@ footer {
     position: relative;
     width: 90%;
     max-width: 500px;
-    background-color: #f85a00; /* Nền cam */
+    background-color: #ffcd2b; /* Nền cam */
     border: 4px solid white; /* Viền trắng */
     border-radius: 15px;
     padding: 20px 40px 40px 40px; /* Tăng padding dưới */
@@ -693,7 +693,7 @@ footer {
     .menu-item-box {
         position: relative; 
         bottom: 30px; 
-        background-color: #233da3;
+        background-color: #ff962b;
         border: 4px solid var(--light-blue);
         width: 70px;
         height: var(--menu-item-size);
@@ -877,7 +877,7 @@ footer {
     width: 90%;
     max-width: 450px;
     background-color: #fff;
-    border: 4px solid #f85a00;
+    border: 4px solid #ffcd2b;
     border-radius: 15px;
     padding: 20px;
     color: #333;
@@ -889,7 +889,7 @@ footer {
     margin-top: 0;
     margin-bottom: 20px;
     font-size: 1.8rem;
-    color: #f85a00;
+    color: #ffcd2b;
 }
 
 .prize-detail-content {

@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 
 
-//    ====== UI POPUP KẾT QUẢ PRIZES KHI QUAY TRANG OVALTINE ======
+//    ====== UI POPUP KẾT QUẢ PRIZES KHI QUAY TRANG Zootopia  ======
 
 
 interface Prize {
@@ -30,8 +30,8 @@ const ResultPopup: React.FC<ResultPopupProps> = ({
       transition-opacity duration-300 ease-in-out"
       >
         <img
-          src="/static/dolphine.png"
-          alt="Dolphine"
+          src="/static/fox.png"
+          alt="fox"
           className="absolute h-auto z-[5] transition-all duration-300 ease-in-out 
                         w-[100px] mt-[120px] left-[calc(50%-var(--wheel-wrapper-size)/2-10px)] 
                         md:w-[120px] md:mt-[90px] md:left-[calc(50%-var(--wheel-wrapper-size)/2-80px)] 
@@ -44,7 +44,7 @@ const ResultPopup: React.FC<ResultPopupProps> = ({
                     shadow-[0_5px_20px_rgba(0,0,0,0.4)]"
         >
           <img
-            src="./static/favicon_oven.png"
+            src="./static/Zootopia.png"
             alt="Oventin Logo"
             className="absolute top-[-190px] left-1/2 -translate-x-1/2 w-[150px] h-auto rounded-full p-1.5 filter-[drop-shadow(rgb(255,255,255)_0px_0px_5px)]"
           />
@@ -83,8 +83,8 @@ const ResultPopup: React.FC<ResultPopupProps> = ({
           </button>
         </div>
         <img
-          src="/static/boy.png"
-          alt="Boy"
+          src="/static/rabbit.png"
+          alt="rabbit"
           className="absolute h-auto z-[5] transition-all duration-300 ease-in-out
                         w-[100px] mt-[120px] right-[calc(50%-var(--wheel-wrapper-size)/2-10px)]
                         md:w-[120px] md:mt-[90px] md:right-[calc(50%-var(--wheel-wrapper-size)/2-80px)]

@@ -157,7 +157,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
       <div className="relative flex justify-center w-full max-w-[800px] pt-[200px]">
         {/* logo */}
         <img
-          src="./static/favicon_oven.png"
+          src="./static/Zootopia.png"
           alt="Oventin Logo"
           className="absolute top-[20px] left-1/2 -translate-x-1/2 w-[150px] h-auto rounded-full p-1.5 filter-[drop-shadow(rgb(255,255,255)_0px_0px_5px)]"
         />
@@ -257,7 +257,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
                 focus:outline-none hover:text-red-800" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>
                   Quên mật khẩu
                 </button>
-                <button onClick={openRuleRegisterPopup} type="button" className="font-medium text-[var(--normal-blue)] cursor-pointer 
+                <button onClick={openRuleRegisterPopup} type="button" className="font-medium text-[#97171b] cursor-pointer 
                 focus:outline-none hover:text-blue-800"
                 style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>
                   Đăng ký

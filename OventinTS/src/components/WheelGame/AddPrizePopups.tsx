@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, memo } from "react";
 import type { Prize } from "./WheelGames"; // Import kiểu Prize
 
 
-//     ====== UI POPUP BẢNG THÊM 1 MÓN PRIZE TRANG OVALTINE ======
+//     ====== UI POPUP BẢNG THÊM 1 MÓN PRIZE TRANG Zootopia  ======
 
 
 interface AddPrizePopupProps {

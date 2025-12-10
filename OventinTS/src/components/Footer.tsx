@@ -21,20 +21,20 @@ function Footer(){
             <div className="grid grid-cols-3 gap-7 text-sm">
               {/* footer-column 1 */}
               <div className="flex flex-col items-start gap-3">
-                <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/fb.png" className='w-4' alt="" /><span>/Ovolmatine Vietnam</span></a>
-                <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/shopee.png" className='w-4' alt="" /><span>/Ovolmatine Vietnam</span></a>
+                <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/fb.png" className='w-4' alt="" /><span>/Zootopia Vietnam</span></a>
+                <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/shopee.png" className='w-4' alt="" /><span>/Zootopia Vietnam</span></a>
                 <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><span>Thể lệ chương trình</span></a>
               </div>
               {/* footer-column 2 */}
               <div className="flex flex-col items-start gap-3">
-                <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/tiktok.png" className='w-5 h-5' alt="" /><span>/Ovolmatine Vietnam</span></a>
-                <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/tiktok-shop.png" className='w-5 h-5' alt="" /><span>/Ovolmatine Vietnam</span></a>
+                <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/tiktok.png" className='w-5 h-5' alt="" /><span>/Zootopia Vietnam</span></a>
+                <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/tiktok-shop.png" className='w-5 h-5' alt="" /><span>/Zootopia Vietnam</span></a>
                 <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><span>Chính sách quyền riêng tư</span></a>
               </div>
               {/* footer-column 3 */}
               <div className="flex flex-col items-start gap-3">
                 <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/phone.png" className="w-4" alt="" /><span>/19005306</span></a>
-                <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/lazada.png" className="w-4" alt="" /><span>/Ovolmatine Vietnam</span></a>
+                <a href="#" className="flex items-center gap-3 hover:text-orange-400 transition-colors"><img src="https://ovaltine-website-dev.estuary.solutions/img/icon/lazada.png" className="w-4" alt="" /><span>/Zootopia Vietnam</span></a>
               </div>
             </div>
 

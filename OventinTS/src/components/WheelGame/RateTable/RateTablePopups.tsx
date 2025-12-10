@@ -4,7 +4,7 @@ import type { Prize } from "../WheelGames.tsx";
 import {PrizeRow} from "./PrizeRows.tsx";
 
 
-//    ====== UI POPUPS BẢNG TỈ LỆ TRANG OVALTINE ======
+//    ====== UI POPUPS BẢNG TỈ LỆ TRANG Zootopia  ======
 
 
 interface RateTablePopupProps {
