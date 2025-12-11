@@ -2,21 +2,23 @@
 // import { faStar, faTicket } from "@fortawesome/free-solid-svg-icons";
 import { Link, NavLink } from "react-router-dom";
 import React from "react";
+import type { User } from "./RegisterPopup/RegisterPopup";
 
 interface HeaderProps {
+  currentUser: User | null;
   isLoggedIn: boolean;
-  onLoginClick: () => void;
-  onRegisterClick: () => void;
+  onLoginClickFeater: () => void;
+  onRegisterClickFeater: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterClick }) => {
+const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegisterClickFeater }) => {
     return (
     <>
       {/* Header desktop */}
       <header className="sticky top-0 z-[1001]  hidden lg:block h-[115px] mb-5">
         <nav
           className=" h-[70px] flex justify-between items-center px-4 
-         text-white bg-[linear-gradient(#0349b4_0%,#0349b4_65px,transparent_65px)]"
+         text-white bg-[linear-gradient(#1D2434_0%,#0F7CCF_65px,transparent_65px)]"
         >
           {/* Mục trái desktop header */}
           <div className="flex items-center h-full">
@@ -164,13 +166,13 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
           ) : (
             <div className=" flex items-center gap-6">
               <button
-                onClick={onLoginClick}
+                onClick={onLoginClickFeater}
                 className="text-white font-bold hover:text-yellow-300 transition-colors cursor-pointer"
               >
                 Đăng nhập
               </button>
               <button
-                onClick={onRegisterClick}
+                onClick={onRegisterClickFeater}
                 className="text-white font-bold hover:text-yellow-300 transition-colors cursor-pointer"
               >
                 Đăng ký
@@ -183,7 +185,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
       {/* Header cho Tablet và Mobile */}
       <header className="sticky top-0 z-[1001] lg:hidden h-[70px] mb-2.5">
         <nav className="h-[70px] md:h-[60px] flex justify-between items-center
-         bg-[#0349b4] text-white px-2 md:px-4">
+         bg-[linear-gradient(#1D2434_0%,#0F7CCF_65px,transparent_65px)] text-white px-2 md:px-4">
 
           {/* Mục phải menu */}
           <div className="flex items-center h-full">
@@ -240,13 +242,13 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClick, onRegisterCli
           ) : (
             <div className=" flex items-center gap-4 md:gap-6">
               <button
-                onClick={onLoginClick}
+                onClick={onLoginClickFeater}
                 className="text-white font-bold hover:text-yellow-300 transition-colors cursor-pointer text-sm"
               >
                 Đăng nhập
               </button>
               <button
-                onClick={onRegisterClick}
+                onClick={onRegisterClickFeater}
                 className="text-white font-bold hover:text-yellow-300 transition-colors cursor-pointer text-sm"
               >
                 Đăng ký

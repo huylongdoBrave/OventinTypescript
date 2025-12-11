@@ -33,8 +33,8 @@ const WheelGame: React.FC<WheelGameProps> = ({ isLoggedIn }) => {
   const [currentSpins, setCurrentSpins] = useState(1000);
   const [isSpinning, setIsSpinning] = useState(false);
   const wheelRef = useRef<HTMLDivElement>(null); // Ref để tham chiếu đến DOM của vòng quay
-  const dragRefLeft = useRef<HTMLDivElement>(null); // Ref cho popup kéo thả BÊN TRÁI
-  const dragRefRight = useRef<HTMLDivElement>(null); // Ref cho popup kéo thả BÊN PHẢI
+  const dragRefLeft = useRef<HTMLDivElement>(null!); // Ref cho popup kéo thả BÊN TRÁI
+  const dragRefRight = useRef<HTMLDivElement>(null!); // Ref cho popup kéo thả BÊN PHẢI
   
   const location = useLocation(); // Lấy thông tin về route hiện tại
   const fromLogout = location.state?.fromLogout; // Kiểm tra state 'fromLogout'

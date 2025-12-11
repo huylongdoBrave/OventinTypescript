@@ -8,14 +8,14 @@ import AlertTitle, { type AlertType } from "../AlertTitle/AlertTitle";
 import { type User } from "../RegisterPopup/RegisterPopup"; 
 
 //    ====== UI Forgot Password popup ======
-interface ResetPasswordProps {
+interface ChangePasswordProfileProps {
   isOpen: boolean;
   onClose: () => void;
   phoneNumber: string; 
-  onResetSuccess: () => void; // Callback khi đặt lại mật khẩu thành công
+  /* onResetSuccess: () => void;  */// Callback khi đặt lại mật khẩu thành công
 }
 
-interface ResetPW{
+interface ChangePWProfile{
   password: string;
   confirmPassword: string;
 }
@@ -34,19 +34,19 @@ const validationSchema = yup.object().shape({
 });
 
 // Component reset password
-const ResetPasswordPopup: React.FC<ResetPasswordProps> = ({ isOpen, onClose, phoneNumber, onResetSuccess }) => {
+const ChangePasswordProfilePopup: React.FC<ChangePasswordProfileProps> = ({ isOpen, onClose, phoneNumber, /* onResetSuccess */ }) => {
   
   const [alertState, setAlertState] = useState<{isOpen: boolean; type: AlertType; title: string; description?: string}>({
     isOpen: false,
     type: 'success',
     title: ''
-    });
+  });
 
 
   const [isShowPassword, setIsShowPassword] = useState(false); // state show pass
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false); // State cho xác nhận mật khẩu
 
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<ResetPW>({
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<ChangePWProfile>({
     resolver: yupResolver(validationSchema), 
     defaultValues: {
       password: "",
@@ -54,7 +54,7 @@ const ResetPasswordPopup: React.FC<ResetPasswordProps> = ({ isOpen, onClose, pho
     }
   });
 
-
+  
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!isOpen) {
@@ -66,7 +66,7 @@ const ResetPasswordPopup: React.FC<ResetPasswordProps> = ({ isOpen, onClose, pho
 
 
     // Submit thay đổi mật khẩu
-    const onSubmitChangePass = (data: ResetPW) => {
+    const onSubmitChangePass = (data: ChangePWProfile) => {
         const existingUsersLocal = localStorage.getItem("registeredUsers");
         const existingUsers: User[] = existingUsersLocal ? JSON.parse(existingUsersLocal) : [];
         // Tìm user theo số điện thoại
@@ -204,7 +204,7 @@ const ResetPasswordPopup: React.FC<ResetPasswordProps> = ({ isOpen, onClose, pho
                         </svg>
                         )}
                     </button>
-                        {errors.confirmPassword && <p className="absolute bottom-0 left-0 text-red-500 text-xs ml-2">{errors.confirmPassword.message}</p>}
+                    {errors.confirmPassword && <p className="absolute bottom-0 left-0 text-red-500 text-xs ml-2">{errors.confirmPassword.message}</p>}
                     </div>
 
                     {/* Button xác thực */}
@@ -246,7 +246,7 @@ const ResetPasswordPopup: React.FC<ResetPasswordProps> = ({ isOpen, onClose, pho
       onClose={() => {
         setAlertState({ ...alertState, isOpen: false });
         if (alertState.type === 'success') {
-          onResetSuccess(); // Đóng hết popup khi xong
+          onClose();
         }
       }}
     />
@@ -254,4 +254,4 @@ const ResetPasswordPopup: React.FC<ResetPasswordProps> = ({ isOpen, onClose, pho
   );
 };
 
-export default memo(ResetPasswordPopup);
+export default memo(ChangePasswordProfilePopup);

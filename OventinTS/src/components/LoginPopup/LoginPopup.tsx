@@ -5,14 +5,15 @@ import * as yup from 'yup';
 import ButtonOrange from "../Button/ButtonOranges";
 import ForgotPasswordPopup from "../ForgotPassword/ForgotPasswordPopup";
 import RuleRegisterPopup from "../RegisterPopup/RuleRegisterPopup";
-import RegisterPopup from "../RegisterPopup/RegisterPopup";
+import RegisterPopup, { type User } from "../RegisterPopup/RegisterPopup";
 import AlertTitle, { type AlertType } from "../AlertTitle/AlertTitle";
 //    ====== UI Login ======
 
 interface LoginPopupProps {
   isOpen: boolean;
   onClose: () => void;
-  onLoginSuccess:() => void;
+  onUserLoginSuccess: (user: User) => void;
+
 }
 
 interface UserLogin{
@@ -36,7 +37,7 @@ const validationSchema = yup.object().shape({
     .min(6, "Mật khẩu phải có ít nhất 6 ký tự."),
 });
 
-const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess }) => {
+const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuccess }) => {
   // const [formData, setFormData] = useState<UserLogin>(INITIAL_FORM_STATE);
   // Cấu hình yup
   const { register, handleSubmit, formState: { errors }, reset } = useForm<UserLogin>({
@@ -74,7 +75,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
     closeRuleRegisterPopup(); // Đóng popup điều khoản
     setIsRegisterPopup(true); // Mở popup đăng ký
   }, [closeRuleRegisterPopup]);
-
+  // Mở popup điều khoản, đóng popup login
   const openRuleRegisterPopup = useCallback(() => {
     setIsRuleRegisterPopup(true);
     onClose(); 
@@ -118,21 +119,21 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
   const onSubmit = (dataUser: UserLogin) => {
     const { phoneNumber, password } = dataUser;
     const existingUsersRaw = localStorage.getItem("registeredUsers");
-    const existingUsers: UserLogin[] = existingUsersRaw ? JSON.parse(existingUsersRaw) : [];
+    const existingUsers: User[] = existingUsersRaw ? JSON.parse(existingUsersRaw) : [];
 
     // can use react-hook-form handles trimming, but manual trim is safer here.
-    const UserExist = existingUsers.find(
+    const userExist = existingUsers.find(
       (user) => user.phoneNumber === phoneNumber && user.password === password);
 
-    if (UserExist) {
+    if (userExist) {
       // alert("Đăng nhập thành công!");
-      // onLoginSuccess();
-      // onClose();
+      // Gọi onLoginSuccess ngay lập tức để cập nhật trạng thái ứng dụng
+      onUserLoginSuccess(userExist);
       setAlertState({
         isOpen: true,
         type: 'success',
         title: 'Đăng nhập thành công!',
-        description: 'Xin chào'
+        description: `Xin chào, ${userExist.fullName}!`
       });
       // Đóng popup login và thực hiện onLoginSuccess sau khi alert được đóng
     } else {
@@ -296,8 +297,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onLoginSuccess
       onClose={() => {
         setAlertState({ ...alertState, isOpen: false });
         if (alertState.type === 'success') {
-          onLoginSuccess();
-          onClose(); // Đóng popup login
+          // onClose() đã được gọi trong App.tsx -> handleLoginSuccess, không cần gọi lại ở đây
         }
       }}
     />

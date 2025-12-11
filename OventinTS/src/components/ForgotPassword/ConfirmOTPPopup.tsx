@@ -61,7 +61,7 @@ const ConfirmOTP: React.FC<ConfirmOTPProps> = ({ isOpen, onClose, phoneNumber, o
     const CORRECT_OTP = "000000";
     if (data.otp === CORRECT_OTP) {
       setError('');
-      console.log("Xác nhận OTP thành công!");
+      console.log("Xác nhận đúng OTP");
       onOtpConfirmed(phoneNumber); // Gọi callback khi OTP đúng
       onClose(); // Đóng popup khi nhập đúng
     } else {
@@ -156,8 +156,7 @@ const ConfirmOTP: React.FC<ConfirmOTPProps> = ({ isOpen, onClose, phoneNumber, o
               {countdown > 0 ? ( 
                 <p>Mã OTP sẽ hết hạn sau <span className="font-bold">{countdown}</span> giây</p>
               ) : (
-                <p>
-                  Mã OTP đã hết hạn.{" "}
+                <p> Mã OTP đã hết hạn.{" "}
                   <button onClick={ ()=> setCountdown(60)} className="underline text-yellow-300 hover:text-yellow-400">
                     Gửi lại mã
                   </button>

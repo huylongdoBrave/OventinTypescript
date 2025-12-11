@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { type User } from '../RegisterPopup/RegisterPopup'; // Import User type
+import ChangePasswordProfilePopup from './ChangePasswordProfilePopup'; // Import popup
 
 //    ====== UI Profile ======
 
 interface ProfileProps {
   onLogout: () => void;
+  currentUser: User | null; // Thêm prop để nhận thông tin user đang đăng nhập
 }
 
-const Profile: React.FC<ProfileProps> = ({ onLogout }) => {
+const Profile: React.FC<ProfileProps> = ({ onLogout, currentUser }) => {
   const navigate = useNavigate();
+  const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
+
+  const handleOpenChangePassword = () => {
+    if (currentUser) 
+      setIsChangePasswordOpen(true);
+  };
 
   const handleLogout = () => {
     // Gọi hàm onLogout được truyền từ App.tsx để cập nhật state isLoggedIn
@@ -17,16 +26,44 @@ const Profile: React.FC<ProfileProps> = ({ onLogout }) => {
   };
 
   return (
+    <>
     <div className='flex flex-col items-center justify-center min-h-[calc(100vh-200px)] pb-8 px-2'>
       <div className='flex flex-col items-center gap-8'>
         <h2 className='text-4xl font-bold text-white [-webkit-text-stroke:1px_#f6972c]'>
-         Profile
+         Xin chào, {currentUser?.fullName || 'bạn'}!
         </h2>
+        
+        <button
+          onClick={handleOpenChangePassword}
+          className="
+          relative bg-orange-500 text-white font-bold uppercase tracking-wider
+          px-20 py-4 [clip-path:polygon(10_0,_calc(80%)_0,_75%_100%,_0_100%)] 
+          drop-shadow-[8px_8px_0px_rgba(0,0,0,0.3)]
+          transition-all duration-200
+          hover:bg-orange-600 hover:scale-105 transition-transform
+          active:translate-x-[4px] active:translate-y-[4px]
+          active:drop-shadow-[4px_4px_0px_rgba(0,0,0,0.3)]
+          focus:outline-none
+        "
+        >
+          Đổi mật khẩu
+        </button>
+
         {/* Nút Đăng xuất */}
         <img onClick={handleLogout} className='text-transparent cursor-pointer w-[270px] 
             h-16 hover:scale-105 transition-transform' src="./static/logout.png" alt="Đăng xuất" />
       </div>
     </div>
+
+    {currentUser && (
+      <ChangePasswordProfilePopup
+        isOpen={isChangePasswordOpen}
+        onClose={ () => setIsChangePasswordOpen(false) }
+        phoneNumber={currentUser.phoneNumber}
+      />
+    )}
+
+    </>
   )
 }
 

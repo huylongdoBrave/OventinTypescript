@@ -7,7 +7,7 @@ import Profile from './components/Profile/Profile.tsx';
 import Header from './components/Header.tsx';
 import LoginPopup from "./components/LoginPopup/LoginPopup.tsx";
 import RuleRegisterPopup from "./components/RegisterPopup/RuleRegisterPopup.tsx";
-import RegisterPopup from "./components/RegisterPopup/RegisterPopup.tsx";
+import RegisterPopup, { type User } from "./components/RegisterPopup/RegisterPopup.tsx";
 import RuleEvent from './components/RuleEvent.tsx';
 
 function App() {
@@ -21,6 +21,8 @@ function App() {
   const [isRegisterPopup, setIsRegisterPopupOpen] = useState(false);
   //state rule register popup
   const [isRulePopupOpen, setIsRulePopupOpen] = useState(false);
+  //state user logged
+  const [userLogged, setUserLogged] = useState<User | null >(null);
 
   // Callbacks để mở popup
   const openLoginPopup = useCallback(() => setIsLoginPopupOpen(true), []);
@@ -38,8 +40,10 @@ function App() {
   }, [closeRulePopup]);
 
   // Hàm xử lý đã đăng nhập
-  const handleLoginSuccess = () =>{
-    setIsLoggedIn(true);
+  const handleLoginSuccess = (user: User) =>{
+    localStorage.setItem('loggedInUser', JSON.stringify(user)); // Lưu user vào localStorage
+    setUserLogged(user); // Cập nhật state userLogged
+    setIsLoggedIn(true); // Cập nhật trạng thái đăng nhập
     closeLoginPopup();
   };
 
@@ -55,7 +59,9 @@ function App() {
 
   const handleAppLogout = () => {
     setIsLoggedIn(false);
+    setUserLogged(null);
     localStorage.removeItem("accessSession"); // Xóa phiên truy cập khi đăng xuất
+    localStorage.removeItem("loggedInUser"); // Xóa thông tin user đăng nhập
   };
 
 
@@ -71,10 +77,27 @@ function App() {
   }, [isLoginPopup, isRegisterPopup, isRulePopupOpen]);
 
 
+  // Kiểm tra user đã đăng nhập từ localStorage khi app được load
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    const loggedInUserJSON = localStorage.getItem('loggedInUser');
+    if (loggedInUserJSON) {
+      try {
+        const user = JSON.parse(loggedInUserJSON);
+        setUserLogged(user);
+        setIsLoggedIn(true);
+      } catch (error) {
+        console.error("Error parsing logged in user data:", error);
+        localStorage.removeItem('loggedInUser');
+      }
+    }
+  }, []);
+
+  //  === TRẠNG THÁI XÁC THỰC QUYỀN XEM TRANG ZOOTOPIA ===
   // Quyền xem trang với 3 trạng thái: đang kiểm tra, đã xác thực, chưa xác thực
   const [authStatus, setAuthStatus] = useState<'checking' | 'authenticated' | 'unauthenticated'>('checking');
 
-  // Kiểm tra phiên đăng nhập 
+  // Kiểm tra đăng nhập quyền xem trang Zootopia
   useEffect(() => {
     const checkAccessSession = () => {
       const sessionData = localStorage.getItem("accessSession");
@@ -110,19 +133,21 @@ function App() {
   if (authStatus === 'unauthenticated') {
     return <LoginAccess onLoginSuccess={() => setAuthStatus('authenticated')} />
   }
+  //  === ENDING XỬ LÝ XÁC THỰC ===
 
   return (
     <div className="pb-[5px] lg:pb-0">    
       <Header 
+      currentUser={userLogged}
       isLoggedIn={isLoggedIn} 
-      onLoginClick={openLoginPopup}
-      onRegisterClick={openRulePopup}
+      onLoginClickFeater={openLoginPopup}
+      onRegisterClickFeater={openRulePopup}
       />
 
         <LoginPopup 
           isOpen={isLoginPopup} 
           onClose={closeLoginPopup} 
-          onLoginSuccess={handleLoginSuccess}
+          onUserLoginSuccess={handleLoginSuccess}
         />
 
         <RuleRegisterPopup
@@ -145,7 +170,7 @@ function App() {
         {/* <Route path="/prizewheel/products" element={<ShowPrize />} /> */}
 
         {/* Profile */}
-        <Route path="/Profile" element={<Profile onLogout={handleAppLogout} />} />
+        <Route path="/Profile" element={<Profile currentUser={userLogged} onLogout={handleAppLogout} />} />
 
         {/* Thể lệ */}
         <Route path="/RuleEvent" element={<RuleEvent />} />
