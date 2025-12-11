@@ -7,6 +7,7 @@ import ButtonOrange from '../Button/ButtonOranges';
 interface ConfirmOTPProps {
   isOpen: boolean;
   onClose: () => void;
+  onOtpConfirmed: (phoneNumber: string) => void;
   phoneNumber: string;
 }
 
@@ -21,10 +22,15 @@ const validationSchema = yup.object().shape({
     .matches(/^\d{6}$/, "Mã OTP phải gồm 6 chữ số."),
 });
 
-const ConfirmOTP: React.FC<ConfirmOTPProps> = ({ isOpen, onClose, phoneNumber }) => {
+//Component Confirm OTP Popup
+const ConfirmOTP: React.FC<ConfirmOTPProps> = ({ isOpen, onClose, phoneNumber, onOtpConfirmed }) => {
   const [countdown, setCountdown] = useState<number>(60);
   const [error, setError] = useState('');
 
+  const { register, handleSubmit, formState: { errors } } = useForm<OTPForm>({
+    resolver: yupResolver(validationSchema),
+    defaultValues: { otp: '' }
+  });
 
   // Đếm ngược và reset khi popup mở/đóng
   useEffect(() => {
@@ -35,7 +41,7 @@ const ConfirmOTP: React.FC<ConfirmOTPProps> = ({ isOpen, onClose, phoneNumber })
     return () => clearInterval(timerId);
   }, [countdown]);
 
-  // Dạng khác
+  // Cách đếm ngược khác
   // eslint-disable-next-line react-hooks/exhaustive-deps
   // useEffect(() => {
   //   let timer: NodeJs.Timeout;
@@ -56,16 +62,13 @@ const ConfirmOTP: React.FC<ConfirmOTPProps> = ({ isOpen, onClose, phoneNumber })
     if (data.otp === CORRECT_OTP) {
       setError('');
       console.log("Xác nhận OTP thành công!");
+      onOtpConfirmed(phoneNumber); // Gọi callback khi OTP đúng
       onClose(); // Đóng popup khi nhập đúng
     } else {
       setError("Mã OTP không chính xác. Vui lòng thử lại.");
     }
   };
 
-  const { register, handleSubmit, formState: { errors } } = useForm<OTPForm>({
-    resolver: yupResolver(validationSchema),
-    defaultValues: { otp: '' }
-  });
 
   if (!isOpen) {
     return null;

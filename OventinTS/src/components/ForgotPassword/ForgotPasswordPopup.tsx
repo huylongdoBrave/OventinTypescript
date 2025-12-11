@@ -5,7 +5,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {useForm} from 'react-hook-form';
 import AlertTitle, { type AlertType } from "../AlertTitle/AlertTitle";
-import ConfirmOTP from "./ConfirmOTP";
+
+import ConfirmOTP from "./ConfirmOTPPopup";
+import ResetPasswordPopup from "./ResetPasswordPopup"; 
 
 //    ====== UI Forgot Password popup ======
 interface ForgotPasswordProps {
@@ -17,15 +19,30 @@ interface ForgotPw{
   phoneNumber: string;
 }
 
+// Component Forgot Password Popup
 const ForgotPasswordPopup: React.FC<ForgotPasswordProps> = ({ isOpen, onClose }) => {
-  
-  const [isConfirmOtpOpen, setIsConfirmOtpOpen] = useState(false);
+  const [isConfirmOtpPopup, setIsConfirmOtpPopup] = useState(false);
+  const [isResetPasswordPopup, setisResetPasswordPopup] = useState(false); // State để điều khiển ResetPasswordPopup
+
   const [phoneForOtp, setPhoneForOtp] = useState(''); // State to store phone number for OTP
   const [alertState, setAlertState] = useState<{isOpen: boolean; type: AlertType; title: string; description?: string}>({
     isOpen: false,
     type: 'success',
     title: ''
-    });
+  });
+
+
+  const handleOtpConfirmed = (phone: string) => {
+    setIsConfirmOtpPopup(false); // Đóng popup xác nhận OTP
+    setPhoneForOtp(phone); // Đảm bảo số điện thoại được lưu để truyền cho popup reset mật khẩu
+    setisResetPasswordPopup(true); // Mở popup đặt lại mật khẩu
+  };
+
+  const handleResetSuccess = () => {
+    setisResetPasswordPopup(false); // Đóng popup đặt lại mật khẩu
+    onClose(); // Đóng popup quên mật khẩu chính
+  };
+
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<ForgotPw>({
     resolver: yupResolver(yup.object().shape({
@@ -39,24 +56,27 @@ const ForgotPasswordPopup: React.FC<ForgotPasswordProps> = ({ isOpen, onClose })
     }
   });
 
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!isOpen) {
       reset();
-      setIsConfirmOtpOpen(false); //  reset OTP popup state
+      setIsConfirmOtpPopup(false); // Reset OTP popup state
+      setisResetPasswordPopup(false); // Reset ResetPasswordPopup state
     }
   }, [isOpen,reset]);
+
 
   const handleForgotPwSubmit = (data: ForgotPw) => {
     const { phoneNumber } = data;
     const getDataPhoneNumber = localStorage.getItem('registeredUsers');
     const existingPhoneNumber: ForgotPw[] = getDataPhoneNumber ? JSON.parse(getDataPhoneNumber) : [];
-    const phoneNumExist = existingPhoneNumber.find(
+    const phoneNumExist = existingPhoneNumber.find(  
       (user) => user.phoneNumber === phoneNumber
     );
     if (phoneNumExist) {
       setPhoneForOtp(phoneNumber); // Save phone number to pass to OTP popup
-      setIsConfirmOtpOpen(true);   // Open OTP confirmation popup
+      setIsConfirmOtpPopup(true);   // Open OTP confirmation popup
     } else {
       setAlertState({
         isOpen: true,
@@ -72,17 +92,17 @@ const ForgotPasswordPopup: React.FC<ForgotPasswordProps> = ({ isOpen, onClose })
     return null;
   }
 
+
   return (
     <>
-    
-        {/* <ConfirmOTP
-      isOpen={isConfirmOtpOpen}
-      onClose={() => {
-        setIsConfirmOtpOpen(false); 
-        onClose();
-      }}
-      phoneNumber={phoneForOtp}
-    /> */}
+      {isResetPasswordPopup && (
+        <ResetPasswordPopup
+          isOpen={isResetPasswordPopup}
+          onClose={handleResetSuccess}
+          phoneNumber={phoneForOtp}
+          onResetSuccess={handleResetSuccess}
+        />
+      )}
 
     <div
       className="fixed inset-0 bg-black/60 z-[1003] flex justify-center overflow-y-auto py-20 px-4
@@ -90,19 +110,19 @@ const ForgotPasswordPopup: React.FC<ForgotPasswordProps> = ({ isOpen, onClose })
     >
       {/* Container popup max width */}
       <div className="relative flex justify-center  w-full max-w-[800px] pt-[200px]">
-        {/* Show OTP form when triggered */}
-        {isConfirmOtpOpen && (
+
+        {/* Show OTP form when triggered and ResetPasswordPopup is not open */}
+        {isConfirmOtpPopup && !isResetPasswordPopup && (
           <ConfirmOTP
-            isOpen={isConfirmOtpOpen}
-            onClose={() => {
-              setIsConfirmOtpOpen(false);
-              onClose();
-            }}
+            isOpen={isConfirmOtpPopup}
+            onClose={() => { setIsConfirmOtpPopup(false); }}
+            onOtpConfirmed={handleOtpConfirmed} // Truyền callback mới
             phoneNumber={phoneForOtp}
           />
         )}
-        {/* Hide the phone number form when the OTP popup is open */}
-        { !isConfirmOtpOpen && (
+        
+        {/* Đóng phoneNumber khi OTP popup is open */}
+        { !isConfirmOtpPopup && !isResetPasswordPopup && ( // Chỉ hiển thị khi cả OTP và ResetPassword đều đóng
           <>
             {/* logo */}
             <img
@@ -187,6 +207,7 @@ const ForgotPasswordPopup: React.FC<ForgotPasswordProps> = ({ isOpen, onClose })
       description={alertState.description}
       onClose={() => setAlertState({ ...alertState, isOpen: false })}
     />
+    
     </>
   );
 };

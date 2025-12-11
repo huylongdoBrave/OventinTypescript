@@ -70,6 +70,7 @@ function App() {
     return () => document.body.classList.remove("body-no-scroll");
   }, [isLoginPopup, isRegisterPopup, isRulePopupOpen]);
 
+
   // Quyền xem trang với 3 trạng thái: đang kiểm tra, đã xác thực, chưa xác thực
   const [authStatus, setAuthStatus] = useState<'checking' | 'authenticated' | 'unauthenticated'>('checking');
 
@@ -103,7 +104,7 @@ function App() {
 
   // Chờ kiểm tra phiên hoàn tất
   if (authStatus === 'checking') {
-    return null; // Hoặc một component loading toàn màn hình
+    return null; // Hoặc 1 component loading toàn màn hình
   }
 
   if (authStatus === 'unauthenticated') {

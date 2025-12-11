@@ -378,8 +378,8 @@ const WheelGame: React.FC<WheelGameProps> = ({ isLoggedIn }) => {
                                 top-[-15px] z-20"
               ></div>
 
-              {/* DẠNG CŨ <div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div>
-               */}
+              {/* DẠNG CŨ <div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div><div className="light"></div> */}
+               
 
               <div>
                 {/* light */}
@@ -395,19 +395,29 @@ const WheelGame: React.FC<WheelGameProps> = ({ isLoggedIn }) => {
                   />
                 ))}
               </div>
+
                 {/* Vòng xoay */}
               <div ref={wheelRef}>
                 <Wheel prizes={prizes} />
               </div>
+
                 {/* Nút quay */}
                 <button
                   id="spin"
-                  onClick={handleSpin}
-                  disabled={isSpinning || !isLoggedIn}
-                  // title={!isLoggedIn ? "Vui lòng đăng nhập để quay" : "Quay"} 
-                  >
+                  onClick={() => {
+                    if (!isLoggedIn) {
+                      alert("Vui lòng đăng nhập để quay!");
+                    } else {
+                      handleSpin();
+                    }
+                  }}
+                  disabled={isSpinning}
+                  title={!isLoggedIn ? "Vui lòng đăng nhập để quay" : "Quay"}>
+                  {/* onClick={handleSpin}
+                  disabled={isSpinning || !isLoggedIn} */}
                   <img className="" src="/static/Zootopia.png" alt="Spin" />
                 </button>
+
             </div>
             <img
               src="/static/rabbit.png"

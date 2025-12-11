@@ -19,7 +19,7 @@ const RuleRegisterPopup: React.FC<RuleRegisterPopupProps> = ({
 
 
   if (!isOpen) {
-    if(isAgeConfirmed) setIsAgeConfirmed(!isAgeConfirmed);
+    if(isAgeConfirmed) setIsAgeConfirmed(!isAgeConfirmed); // reset trạng thái checkbox
     return null;
   }
 
