@@ -40,8 +40,9 @@ body {
        1. Lớp trên cùng: Họa tiết coin lặp lại.
        2. Lớp giữa: Ảnh nền chính, cover toàn bộ màn hình, không lặp.
        3. Lớp dưới cùng: Màu gradient làm fallback.
+       bg-gradient-to-b from-[rgb(175,194,11)] to-[rgb(255,156,7)]
     */
-    background-image: url(''), url('/static/fire.png'), radial-gradient(circle, #dbbe7a 0%, #d19439 20%, #f85a00 100%);
+    background-image: url(''), url('/static/fire.png'), radial-gradient(circle, #dbbe7a 0%, rgb(175,194,11) 20%, rgb(255,156,7) 100%);
     background-repeat: no-repeat, no-repeat, no-repeat;
     background-position: center bottom, top, center;
     /* Kích thước:
