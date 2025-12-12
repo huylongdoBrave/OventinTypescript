@@ -1,6 +1,70 @@
-import React from 'react';
+import React, {useState, useEffect, memo} from 'react';
 
-const ProfileForm = () => {
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import {useForm} from 'react-hook-form';
+import AlertTitle, { type AlertType } from "../AlertTitle/AlertTitle";
+import { type User } from "../RegisterPopup/RegisterPopup"; 
+
+
+interface ProfileFormProps {
+  isOpen: boolean;
+  onClose: () => void;
+  currentUser: User | null;
+  /* onResetSuccess: () => void;  */// Callback khi đặt lại mật khẩu thành công
+}
+
+interface ProfileForm{
+  password: string;
+  confirmPassword: string;
+}
+
+// Schema validation password
+const validationSchema = yup.object().shape({
+  password: yup
+    .string()
+    .min(6, "Mật khẩu phải có ít nhất 6 ký tự.")
+    .required("Vui lòng nhập mật khẩu"),
+
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password"), ""], "Mật khẩu không khớp.")
+    .required("Vui lòng xác nhận mật khẩu"),
+});
+
+
+const ProfileForm: React.FC<ProfileFormProps> = ({currentUser}) => {
+  
+    const [alertState, setAlertState] = useState<{isOpen: boolean; type: AlertType; title: string; description?: string}>({
+      isOpen: false,
+      type: 'success',
+      title: ''
+    });
+  
+  
+    const [isShowPassword, setIsShowPassword] = useState(false); // state show pass
+    const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false); // State cho xác nhận mật khẩu
+  
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<ChangePWProfile>({
+      resolver: yupResolver(validationSchema), 
+      defaultValues: {
+        password: "",
+        confirmPassword: "",
+      }
+    });
+  
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => {
+      if (!isOpen) {
+        reset(); // Reset form field
+        setIsShowPassword(false); // Ẩn mật khẩu
+        setIsShowConfirmPassword(false); // Ẩn xác nhận mật khẩu
+      }
+    }, [isOpen,reset]);
+
+
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 p-4">
