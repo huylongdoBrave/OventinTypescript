@@ -21,10 +21,10 @@ interface ForgotPw{
 
 // Component Forgot Password Popup
 const ForgotPasswordPopup: React.FC<ForgotPasswordProps> = ({ isOpen, onClose }) => {
-  const [isConfirmOtpPopup, setIsConfirmOtpPopup] = useState(false);
+  const [isConfirmOtpPopup, setIsConfirmOtpPopup] = useState(false); // Stae để điều khiển ConfirmOTP popup
   const [isResetPasswordPopup, setisResetPasswordPopup] = useState(false); // State để điều khiển ResetPasswordPopup
-
-  const [phoneForOtp, setPhoneForOtp] = useState(''); // State to store phone number for OTP
+  const [phoneForOtp, setPhoneForOtp] = useState(''); // State lưu trữ số cho OTP
+  
   const [alertState, setAlertState] = useState<{isOpen: boolean; type: AlertType; title: string; description?: string}>({
     isOpen: false,
     type: 'success',
@@ -33,14 +33,14 @@ const ForgotPasswordPopup: React.FC<ForgotPasswordProps> = ({ isOpen, onClose })
 
 
   const handleOtpConfirmed = (phone: string) => {
-    setIsConfirmOtpPopup(false); // Đóng popup xác nhận OTP
-    setPhoneForOtp(phone); // Đảm bảo số điện thoại được lưu để truyền cho popup reset mật khẩu
-    setisResetPasswordPopup(true); // Mở popup đặt lại mật khẩu
+    setIsConfirmOtpPopup(false); // Đóng popup ConfirmOTP
+    setPhoneForOtp(phone); // Lưu số dt để truyền cho popup ResetPassword
+    setisResetPasswordPopup(true); // Mở popup ResetPassword
   };
 
   const handleResetSuccess = () => {
-    setisResetPasswordPopup(false); // Đóng popup đặt lại mật khẩu
-    onClose(); // Đóng popup quên mật khẩu chính
+    setisResetPasswordPopup(false); // Đóng popup ResetPassword
+    onClose(); // Đóng popup ForgotPassword
   };
 
 
@@ -71,9 +71,7 @@ const ForgotPasswordPopup: React.FC<ForgotPasswordProps> = ({ isOpen, onClose })
     const { phoneNumber } = data;
     const getDataPhoneNumber = localStorage.getItem('registeredUsers');
     const existingPhoneNumber: ForgotPw[] = getDataPhoneNumber ? JSON.parse(getDataPhoneNumber) : [];
-    const phoneNumExist = existingPhoneNumber.find(  
-      (user) => user.phoneNumber === phoneNumber
-    );
+    const phoneNumExist = existingPhoneNumber.find(  (user) => user.phoneNumber === phoneNumber );
     if (phoneNumExist) {
       setPhoneForOtp(phoneNumber); // Save phone number to pass to OTP popup
       setIsConfirmOtpPopup(true);   // Open OTP confirmation popup
@@ -100,7 +98,7 @@ const ForgotPasswordPopup: React.FC<ForgotPasswordProps> = ({ isOpen, onClose })
           isOpen={isResetPasswordPopup}
           onClose={handleResetSuccess}
           phoneNumber={phoneForOtp}
-          onResetSuccess={handleResetSuccess}
+          // onResetSuccess={handleResetSuccess}
         />
       )}
 

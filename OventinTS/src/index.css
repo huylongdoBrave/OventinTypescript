@@ -14,6 +14,9 @@
     --text-color: #ffffff;
     --menu-bar-height: 70px; /* Tăng chiều cao để có không gian */
     --menu-item-size: 80px;
+    --menu-red: #FF2212;
+    --menu-red-hover: #CC2316;
+    --menu-blue: #005AAB;
 
     /* New variables for wheel sizing */
     --wheel-wrapper-size: 370px;
@@ -42,7 +45,7 @@ body {
        3. Lớp dưới cùng: Màu gradient làm fallback.
        bg-gradient-to-b from-[rgb(175,194,11)] to-[rgb(255,156,7)]
     */
-    background-image: url(''), url('/static/fire.png'), radial-gradient(circle, #2A7B9B 5%, #57C785 40%,  #A8ED53 100%);
+    background-image: url(''), url(''), radial-gradient(circle, #2A7B9B 5%, #93d9b1 40%,  #9D832E 100%);
     background-repeat: no-repeat, no-repeat, no-repeat;
     background-position: center bottom, top, center;
     /* Kích thước:

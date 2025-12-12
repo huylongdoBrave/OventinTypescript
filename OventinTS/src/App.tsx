@@ -41,21 +41,12 @@ function App() {
   // Hàm xử lý đã đăng nhập
   const handleLoginSuccess = (user: User) =>{
     localStorage.setItem('loggedInUser', JSON.stringify(user)); // Lưu user vào localStorage
-    setUserLogged(user); // Cập nhật state userLogged
+    setUserLogged(user); // Cập nhật user state userLogged
     setIsLoggedIn(true); // Cập nhật trạng thái đăng nhập
     closeLoginPopup();
   };
 
-  
-  // State để báo hiệu cần đóng attentionWheelPopup khi đăng xuất
-  // const [shouldCloseAttentionPopup, setShouldCloseAttentionPopup] = useState(false);
-
-  // const handleAppLogout = () => {
-  //   setIsLoggedIn(false);
-  //   setShouldCloseAttentionPopup(true); // Kích hoạt tín hiệu đóng popup
-  //   localStorage.removeItem("accessSession"); // Xóa phiên truy cập khi đăng xuất
-  // };
-
+  // Hàm xử lý đăng xuất
   const handleAppLogout = () => {
     setIsLoggedIn(false);
     setUserLogged(null);
@@ -93,7 +84,7 @@ function App() {
   }, []);
 
   //  === TRẠNG THÁI XÁC THỰC QUYỀN XEM TRANG ZOOTOPIA ===
-  // Quyền xem trang với 3 trạng thái: đang kiểm tra, đã xác thực, chưa xác thực
+  //      Quyền xem trang với 3 trạng thái: đang kiểm tra, đã xác thực, chưa xác thực
   const [authStatus, setAuthStatus] = useState<'checking' | 'authenticated' | 'unauthenticated'>('checking');
 
   // Kiểm tra đăng nhập quyền xem trang Zootopia
@@ -128,11 +119,11 @@ function App() {
   if (authStatus === 'checking') {
     return null; // Hoặc 1 component loading toàn màn hình
   }
-
   if (authStatus === 'unauthenticated') {
     return <LoginAccess onLoginSuccess={() => setAuthStatus('authenticated')} />
   }
   //  === ENDING XỬ LÝ XÁC THỰC ===
+
 
   return (
     <div className="pb-[5px] lg:pb-0">    

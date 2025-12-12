@@ -161,7 +161,8 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuc
         <img
           src="./static/Zootopia.png"
           alt="Oventin Logo"
-          className="absolute top-[20px] left-1/2 -translate-x-1/2 w-[150px] h-auto rounded-full p-1.5 filter-[drop-shadow(rgb(255,255,255)_0px_0px_5px)]"
+          className="absolute top-[30px] left-1/2 -translate-x-1/2 w-[150px] 
+          h-auto rounded-full p-1.5 filter-[drop-shadow(rgb(255,255,255)_0px_0px_5px)]"
         />
         {/* Title */}
         <img
@@ -175,7 +176,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuc
                   w-[300px] md:w-[300px] lg:w-[350px]  max-w-[800px] text-center text-black "
         >
           <div
-            className="items-center h-[300px] inset-0 bg-[url('/static/modal.png')] bg-cover bg-center bg-no-repeat 
+            className="items-center h-[280px] inset-0 bg-[url('/static/modal.png')] bg-cover bg-center bg-no-repeat 
                         rounded-[20px] border-4 border-white"
           >
             {/* Nội dung popups */}
@@ -184,7 +185,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuc
               <form id="login-form" onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3 text-[#233da3]">
                 
                 {/* SDT */}
-                <div className="relative pb-5">
+                <div className="relative pb-3">
                   <label htmlFor="phoneNumber" className="block text-sm font-medium text-white/100 mb-1">
                   Số điện thoại<span aria-hidden="true" className="text-[rgb(239,0,18)]">&thinsp;*</span></label>
                   <input
@@ -196,11 +197,11 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuc
                     className={`w-full bg-white border rounded-[30px] p-2 focus:ring-2 outline-none 
                       transition ${errors.phoneNumber ? 'border-red-500 focus:ring-red-500' : 'border-white/30 focus:ring-[#233da3]'}`}
                   />
-                  {/* Check */} {errors.phoneNumber && <p className="absolute bottom-0 left-0 text-red-500 text-xs ml-2">{errors.phoneNumber.message}</p>}
+                  {/* Check */} {errors.phoneNumber && <p className="absolute mt-1 left-0 text-red-500 text-xs ml-2">{errors.phoneNumber.message}</p>}
                 </div>
 
                 {/* Password */}
-                <div className="relative pb-5">
+                <div className="relative pb-2">
                   <label htmlFor="password" className="block text-sm font-medium text-white/100 mb-1">
                   Mật khẩu<span aria-hidden="true" className="text-[rgb(239,0,18)]">&thinsp;*</span></label>
                   <input
@@ -228,7 +229,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuc
                       </svg>
                     )}
                   </button>
-                    {errors.password && <p className="absolute bottom-0 left-0 text-red-500 text-xs ml-2">{errors.password.message}</p>}
+                    {errors.password && <p className="absolute mt-1 left-0 text-red-500 text-xs ml-2">{errors.password.message}</p>}
                 </div>
 
                 {/* Button xác thực */}
@@ -255,12 +256,12 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuc
               
               {/* Quên mật khẩu */}
               <div className="mt-8 text-[15px] flex justify-between items-center text-sm w-full">
-                <button onClick={openForgotPasswordPopup} type="button" className="font-medium text-[#97171b] cursor-pointer
+                <button onClick={openForgotPasswordPopup} type="button" className="font-medium text-[#ff0303] cursor-pointer
                 focus:outline-none hover:text-red-800" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>
                   Quên mật khẩu
                 </button>
-                <button onClick={openRuleRegisterPopup} type="button" className="font-medium text-[#97171b] cursor-pointer 
-                focus:outline-none hover:text-blue-800"
+                <button onClick={openRuleRegisterPopup} type="button" className="font-medium text-[#ff0303] cursor-pointer 
+                focus:outline-none hover:text-red-800"
                 style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>
                   Đăng ký
                 </button>

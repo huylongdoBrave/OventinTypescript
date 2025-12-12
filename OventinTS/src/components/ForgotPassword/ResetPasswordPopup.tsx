@@ -12,7 +12,7 @@ interface ResetPasswordProps {
   isOpen: boolean;
   onClose: () => void;
   phoneNumber: string; 
-  onResetSuccess: () => void; // Callback khi đặt lại mật khẩu thành công
+  // onResetSuccess: () => void; // Callback khi đặt lại mật khẩu thành công
 }
 
 interface ResetPW{
@@ -33,7 +33,10 @@ const validationSchema = yup.object().shape({
 });
 
 // Component reset password
-const ResetPasswordPopup: React.FC<ResetPasswordProps> = ({ isOpen, onClose, phoneNumber, onResetSuccess }) => {
+const ResetPasswordPopup: React.FC<ResetPasswordProps> = ({ isOpen, onClose, phoneNumber, /* onResetSuccess */ }) => {
+  const [isShowPassword, setIsShowPassword] = useState(false); // state show pass
+  const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false); // State cho xác nhận mật khẩu
+
   // Yup validation state alert
   const [alertState, setAlertState] = useState<{isOpen: boolean; type: AlertType; title: string; description?: string}>({
     isOpen: false,
@@ -48,9 +51,6 @@ const ResetPasswordPopup: React.FC<ResetPasswordProps> = ({ isOpen, onClose, pho
     }
   });
 
-  const [isShowPassword, setIsShowPassword] = useState(false); // state show pass
-  const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false); // State cho xác nhận mật khẩu
-
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -62,37 +62,37 @@ const ResetPasswordPopup: React.FC<ResetPasswordProps> = ({ isOpen, onClose, pho
   }, [isOpen,reset]);
 
 
-    // Submit thay đổi mật khẩu
-    const onSubmitChangePass = (data: ResetPW) => {
-        const existingUsersLocal = localStorage.getItem("registeredUsers");
-        const existingUsers: User[] = existingUsersLocal ? JSON.parse(existingUsersLocal) : [];
-        // Tìm user theo số điện thoại
-        const userIndex = existingUsers.findIndex(user => user.phoneNumber === phoneNumber);
-        if (userIndex === -1) {
-            setAlertState({
-                isOpen: true,
-                type: 'error',
-                title: 'Lỗi!',
-                description: 'Không tìm thấy số này.'
-            });
-            // return;
-        }
-        else{
-            const updatedUsers = [...existingUsers]; // Tạo clone tránh thay đổi trực tiếp state
-            updatedUsers[userIndex] = {
-            ...updatedUsers[userIndex], // Giữ lại các thông tin khác
-            password: data.password, // Cập nhật mật khẩu mới
-            };
-            localStorage.setItem("registeredUsers", JSON.stringify(updatedUsers));
-            setAlertState({
-                isOpen: true,
-                type: 'success',
-                title: 'Đặt lại mật khẩu thành công!',
-                description: 'Bạn có thể đăng nhập với mật khẩu mới.'
-            });
-            // onResetSuccess();  // đóng popup instant
-        }
-    };
+  // Submit thay đổi mật khẩu
+  const onSubmitChangePass = (data: ResetPW) => {
+      const existingUsersLocal = localStorage.getItem("registeredUsers");
+      const existingUsers: User[] = existingUsersLocal ? JSON.parse(existingUsersLocal) : [];
+      // Tìm user theo số điện thoại
+      const userIndex = existingUsers.findIndex(user => user.phoneNumber === phoneNumber);
+      if (userIndex === -1) {
+          setAlertState({
+              isOpen: true,
+              type: 'error',
+              title: 'Lỗi!',
+              description: 'Không tìm thấy số này.'
+          });
+          // return;
+      }
+      else{
+          const updatedUsers = [...existingUsers]; // Tạo clone tránh thay đổi trực tiếp state
+          updatedUsers[userIndex] = {
+          ...updatedUsers[userIndex], // Giữ lại các thông tin khác
+          password: data.password, // Cập nhật mật khẩu mới
+          };
+          localStorage.setItem("registeredUsers", JSON.stringify(updatedUsers));
+          setAlertState({
+              isOpen: true,
+              type: 'success',
+              title: 'Đặt lại mật khẩu thành công!',
+              description: 'Bạn có thể đăng nhập với mật khẩu mới.'
+          });
+          // onResetSuccess();  // đóng popup instant
+      }
+  };
 
 
     if (!isOpen) {
@@ -238,9 +238,10 @@ const ResetPasswordPopup: React.FC<ResetPasswordProps> = ({ isOpen, onClose, pho
       title={alertState.title}
       description={alertState.description}
       onClose={() => {
-        setAlertState({ ...alertState, isOpen: false });
+        setAlertState({ ...alertState, isOpen: true });
         if (alertState.type === 'success') {
-          onResetSuccess(); // Đóng hết popup khi xong
+            // onResetSuccess(); // Đóng hết popup khi xong
+            onClose();
         }
       }}
     />

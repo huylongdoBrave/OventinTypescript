@@ -15,12 +15,15 @@ interface OTPForm {
   otp: string;
 }
 
+
+// Schema validation
 const validationSchema = yup.object().shape({
   otp: yup
     .string()
     .required("Vui lòng nhập mã OTP")
     .matches(/^\d{6}$/, "Mã OTP phải gồm 6 chữ số."),
 });
+
 
 //Component Confirm OTP Popup
 const ConfirmOTP: React.FC<ConfirmOTPProps> = ({ isOpen, onClose, phoneNumber, onOtpConfirmed }) => {

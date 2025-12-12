@@ -40,10 +40,10 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
                 >
                   {({ isActive }) => (
                     <div
-                      className={`absolute bottom-[-45px] w-[90px] h-[80px] bg-[#FF2212] text-white rounded-lg
+                      className={`absolute bottom-[-45px] w-[90px] h-[80px] bg-[var(--menu-red)] text-white rounded-lg
                             flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 
                             ${
-                              isActive ? "bg-[#FF2212]" : "group-hover:bg-[#1a2b7a]"
+                              isActive ? "bg-[var(--menu-blue)]" : "group-hover:bg-[var(--menu-red-hover)]"
                             } `}
                     >
                       <img
@@ -65,7 +65,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
                 >
                   <div
                     className="absolute bottom-[-45px] w-[90px] h-[80px] bg-[#FF2212] text-white rounded-lg 
-                          flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 group-hover:bg-[#1a2b7a]"
+                          flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 group-hover:bg-[var(--menu-red-hover)]"
                   >
                     <img
                       className="h-7"
@@ -87,8 +87,8 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
                       className={`absolute bottom-[-45px] w-[90px] h-[80px] bg-[#FF2212] text-white rounded-lg 
                             flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 ${
                               isActive
-                                ? "bg-[rgb(255,90,0)]"
-                                : "group-hover:bg-[#1a2b7a]"
+                                ? "bg-[var(--menu-blue)]"
+                                : "group-hover:bg-[var(--menu-red-hover)]"
                             }`}
                     >
                       <img
@@ -108,7 +108,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
                 >
                   <div
                     className="absolute bottom-[-45px] w-[90px] h-[80px] bg-[#FF2212] text-white rounded-lg 
-                          flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 group-hover:bg-[#1a2b7a]"
+                          flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 group-hover:bg-[var(--menu-red-hover)]"
                   >
                     <img
                       src="https://ovaltine-website-dev.estuary.solutions/img/menu/more.png"
@@ -274,7 +274,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
               {({ isActive }) => (
                 <div
                   className={`bottom-[35px] relative w-[70px] h-[70px] bg-[#FF2212] text-white rounded-lg 
-                    flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[#1a2b7a] ${
+                    flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[var(--menu-red-hover)] ${
                       isActive ? "bg-[#ff5a00]" : ""
                     }`}
                 >
@@ -297,7 +297,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
             >
               <div
                 className="bottom-[35px] relative w-[70px] h-[70px] bg-[#FF2212] text-white rounded-lg 
-                    flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[#1a2b7a]"
+                    flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[var(--menu-red-hover)]"
               >
                 <img
                   className="h-6"
@@ -316,9 +316,10 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
             >
               {({ isActive }) => (
                 <div
-                  className={`bottom-[35px] relative w-[70px] h-[70px] bg-[#FF2212] text-white rounded-lg 
-                        flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[#1a2b7a] ${
-                          isActive ? "bg-[rgb(255,90,0)]" : ""
+                  className={`bottom-[35px] relative w-[70px] h-[70px] bg-[var(--menu-blue)] text-white rounded-lg 
+                        flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[var(--menu-red-hover)] ${
+                          isActive ? "bg-[var(--menu-blue)]"
+                                : "group-hover:bg-[var(--menu-red-hover)]"
                         }`}
                 >
                   <img
@@ -338,7 +339,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
             >
               <div
                 className="bottom-[35px] relative w-[70px] h-[70px] bg-[#FF2212] text-white rounded-lg 
-                    flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[#1a2b7a]"
+                    flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[var(--menu-red-hover)]"
               >
                 <img
                   src="https://ovaltine-website-dev.estuary.solutions/img/menu/more.png"

@@ -125,7 +125,7 @@ const ChangePasswordProfilePopup: React.FC<ChangePasswordProfileProps> = ({ isOp
             />
             {/* Title */}
             <img
-              src="/static/forgot-pass.png"
+              src="/static/change-pass.png"
               alt="Quên mật khẩu"
               className="absolute z-[1004] top-[170px] left-1/2 -translate-x-1/2 w-[300px] h-auto p-1.5"
             />
