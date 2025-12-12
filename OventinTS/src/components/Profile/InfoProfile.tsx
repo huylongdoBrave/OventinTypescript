@@ -1,167 +1,170 @@
-import React, {useState, useEffect, memo} from 'react';
+// import React, {useState, useEffect, memo} from 'react';
 
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import {useForm} from 'react-hook-form';
-import AlertTitle, { type AlertType } from "../AlertTitle/AlertTitle";
-import { type User } from "../RegisterPopup/RegisterPopup"; 
-
-
-interface ProfileFormProps {
-  isOpen: boolean;
-  onClose: () => void;
-  currentUser: User | null;
-  /* onResetSuccess: () => void;  */// Callback khi đặt lại mật khẩu thành công
-}
-
-interface ProfileForm{
-  password: string;
-  confirmPassword: string;
-}
-
-// Schema validation password
-const validationSchema = yup.object().shape({
-  password: yup
-    .string()
-    .min(6, "Mật khẩu phải có ít nhất 6 ký tự.")
-    .required("Vui lòng nhập mật khẩu"),
-
-  confirmPassword: yup
-    .string()
-    .oneOf([yup.ref("password"), ""], "Mật khẩu không khớp.")
-    .required("Vui lòng xác nhận mật khẩu"),
-});
+// import { yupResolver } from '@hookform/resolvers/yup';
+// import * as yup from 'yup';
+// import {useForm} from 'react-hook-form';
+// import AlertTitle, { type AlertType } from "../AlertTitle/AlertTitle";
+// import { type User } from "../RegisterPopup/RegisterPopup"; 
 
 
-const ProfileForm: React.FC<ProfileFormProps> = ({currentUser}) => {
+// interface ProfileFormProps {
+//   isOpen: boolean;
+//   onClose: () => void;
+//   currentUser: User | null;
+//   /* onResetSuccess: () => void;  */// Callback khi đặt lại mật khẩu thành công
+// }
+
+// interface ProfileForm{
+//   password: string;
+//   confirmPassword: string;
+// }
+
+// // Schema validation password
+// const validationSchema = yup.object().shape({
+//   fullName: yup
+//     .string()
+//     .required("Vui lòng nhập họ và tên")
+//     .matches(/^[^0-9]+$/, "Họ và tên không được chứa số.")
+//     .min(4, "Họ và tên phải có nhiều hơn 3 ký tự."),
+//   password: yup
+//     .string()
+//     .min(6, "Mật khẩu phải có ít nhất 6 ký tự.")
+//     .required("Vui lòng nhập mật khẩu"),
+//   confirmPassword: yup
+//     .string()
+//     .oneOf([yup.ref("password"), ""], "Mật khẩu không khớp.")
+//     .required("Vui lòng xác nhận mật khẩu"),
+// });
+
+
+// const ProfileForm: React.FC<ProfileFormProps> = ({currentUser}) => {
+//     const [alertState, setAlertState] = useState<{isOpen: boolean; type: AlertType; title: string; description?: string}>({
+//       isOpen: false,
+//       type: 'success',
+//       title: ''
+//     });
   
-    const [alertState, setAlertState] = useState<{isOpen: boolean; type: AlertType; title: string; description?: string}>({
-      isOpen: false,
-      type: 'success',
-      title: ''
-    });
-  
-    const { register, handleSubmit, formState: { errors }, reset } = useForm<ChangePWProfile>({
-      resolver: yupResolver(validationSchema), 
-      defaultValues: {
-        password: "",
-        confirmPassword: "",
-      }
-    });
+//     const { register, handleSubmit, formState: { errors }, reset } = useForm<ProfileFormProps>({
+//       resolver: yupResolver(validationSchema), 
+//       defaultValues: {
+//         password: "",
+//         confirmPassword: "",
+//       } 
+//     });
   
     
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => {
-      if (!isOpen) {
-        reset(); // Reset form field
-        setIsShowPassword(false); // Ẩn mật khẩu
-        setIsShowConfirmPassword(false); // Ẩn xác nhận mật khẩu
-      }
-    }, [isOpen,reset]);
+//     // eslint-disable-next-line react-hooks/exhaustive-deps
+//     // useEffect(() => {
+//     //   if (!isOpen) {
+//     //     reset(); // Reset form field
+//     //     setIsShowPassword(false); // Ẩn mật khẩu
+//     //     setIsShowConfirmPassword(false); // Ẩn xác nhận mật khẩu
+//     //   }
+//     // }, [isOpen,reset]);
 
 
 
 
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 p-4">
-      {/* FORM WRAPPER: Rộng 400px, không border, không nền */}
-      <div className="w-[400px] bg-transparent border-none">
+//   return (
+//     <div className="min-h-screen flex items-center justify-center bg-gray-900 p-4">
+//       {/* FORM WRAPPER: Rộng 400px, không border, không nền */}
+//       <div className="w-[400px] bg-transparent border-none">
         
-        {/* 1. IMAGE TITLE */}
-        <div className="flex justify-center mb-6">
-          <img 
-            src="https://via.placeholder.com/150x50?text=LOGO+HERE" 
-            alt="Title Image" 
-            className="h-auto max-w-full object-contain"
-          />
-        </div>
+//         {/* 1. IMAGE TITLE */}
+//         <div className="flex justify-center mb-6">
+//           <img 
+//             src="https://via.placeholder.com/150x50?text=LOGO+HERE" 
+//             alt="Title Image" 
+//             className="h-auto max-w-full object-contain"
+//           />
+//         </div>
 
-        {/* 2. BUTTON TITLE  */}
-        <div className="flex justify-center mb-4">
-          <span className="
-            inline-block 
-            bg-blue-600 text-white font-bold uppercase tracking-wide
-            py-2 px-6 rounded-full
-            cursor-default select-none /* Không trỏ chuột, không bôi đen */
-          ">
-            Tài khoản cá nhân
-          </span>
-        </div>
+//         {/* 2. BUTTON TITLE  */}
+//         <div className="flex justify-center mb-4">
+//           <span className="
+//             inline-block 
+//             bg-blue-600 text-white font-bold uppercase tracking-wide
+//             py-2 px-6 rounded-full
+//             cursor-default select-none /* Không trỏ chuột, không bôi đen */
+//           ">
+//             Tài khoản cá nhân
+//           </span>
+//         </div>
 
-        {/* 3. HR */}
-        <hr className="border-gray-600 mb-8" />
+//         {/* 3. HR */}
+//         <hr className="border-gray-600 mb-8" />
 
-        {/* 4. Form */}
-        <form className="flex flex-col gap-5">
+//         {/* 4. Form */}
+//         <form className="flex flex-col gap-5">
           
-          {/* Họ tên */}
-          <div>
-            <label className="block text-white mb-2 font-medium ml-1">Họ và tên</label>
-            <input 
-              type="text" 
-              className="w-full h-12 px-5 rounded-full bg-white text-blue-700 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400"
-              placeholder="Nhập họ tên..."
-            />
-          </div>
+//           {/* Họ tên */}
+//           <div>
+//             <label className="block text-white mb-2 font-medium ml-1">Họ và tên</label>
+//             <input 
+//               type="text" 
+//               className="w-full h-12 px-5 rounded-full bg-white text-blue-700 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400"
+//               placeholder="Nhập họ tên..."
+//             />
+//           </div>
 
-          {/* Ngày sinh */}
-          <div>
-            <label className="block text-white mb-2 font-medium ml-1">Email</label>
-            <input 
-              type="email" 
-              className="w-full h-12 px-5 rounded-full bg-white text-blue-700 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400"
-              placeholder="Nhập email..."
-            />
-          </div>
+//           {/* Ngày sinh */}
+//           <div>
+//             <label className="block text-white mb-2 font-medium ml-1">Email</label>
+//             <input 
+//               type="email" 
+//               className="w-full h-12 px-5 rounded-full bg-white text-blue-700 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400"
+//               placeholder="Nhập email..."
+//             />
+//           </div>
 
-          {/* Thành phố */}
-          <div>
-            <label className="block text-white mb-2 font-medium ml-1">Số điện thoại</label>
-            <input 
-              type="tel" 
-              className="w-full h-12 px-5 rounded-full bg-white text-blue-700 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400"
-              placeholder="Nhập số điện thoại..."
-            />
-          </div>
+//           {/* Thành phố */}
+//           <div>
+//             <label className="block text-white mb-2 font-medium ml-1">Số điện thoại</label>
+//             <input 
+//               type="tel" 
+//               className="w-full h-12 px-5 rounded-full bg-white text-blue-700 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400"
+//               placeholder="Nhập số điện thoại..."
+//             />
+//           </div>
 
-          {/* Số đt */}
-          <div>
-            <label className="block text-white mb-2 font-medium ml-1">Tên đăng nhập</label>
-            <input 
-              type="text" 
-              className="w-full h-12 px-5 rounded-full bg-white text-blue-700 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400"
-              placeholder="Nhập username..."
-            />
-          </div>
+//           {/* Số đt */}
+//           <div>
+//             <label className="block text-white mb-2 font-medium ml-1">Tên đăng nhập</label>
+//             <input 
+//               type="text" 
+//               className="w-full h-12 px-5 rounded-full bg-white text-blue-700 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400"
+//               placeholder="Nhập username..."
+//             />
+//           </div>
 
-          {/* Email */}
-          <div>
-            <label className="block text-white mb-2 font-medium ml-1">Mật khẩu</label>
-            <input 
-              type="password" 
-              className="w-full h-12 px-5 rounded-full bg-white text-blue-700 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400"
-              placeholder="Nhập mật khẩu..."
-            />
-          </div>
+//           {/* Email */}
+//           <div>
+//             <label className="block text-white mb-2 font-medium ml-1">Mật khẩu</label>
+//             <input 
+//               type="password" 
+//               className="w-full h-12 px-5 rounded-full bg-white text-blue-700 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400"
+//               placeholder="Nhập mật khẩu..."
+//             />
+//           </div>
 
-          {/* 5. BUTTON LƯU */}
-          <button 
-            type="button"
-            className="
-              mt-4 w-full h-12 
-              bg-blue-600 text-white font-bold text-lg uppercase tracking-wider
-              rounded-full
-              hover:bg-blue-500 hover:shadow-lg hover:scale-[1.02]
-              transition-all duration-200
-            "
-          >
-            Lưu
-          </button>
+//           {/* 5. BUTTON LƯU */}
+//           <button 
+//             type="button"
+//             className="
+//               mt-4 w-full h-12 
+//               bg-blue-600 text-white font-bold text-lg uppercase tracking-wider
+//               rounded-full
+//               hover:bg-blue-500 hover:shadow-lg hover:scale-[1.02]
+//               transition-all duration-200
+//             "
+//           >
+//             Lưu
+//           </button>
 
-        </form>
-      </div>
-    </div>
-  );
-};
+//         </form>
+//       </div>
+//     </div>
+//   );
+// };
 
-export default ProfileForm;
+// export default ProfileForm;
