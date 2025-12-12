@@ -40,10 +40,10 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
                 >
                   {({ isActive }) => (
                     <div
-                      className={`absolute bottom-[-45px] w-[90px] h-[80px] bg-[#ff962b] text-white rounded-lg
+                      className={`absolute bottom-[-45px] w-[90px] h-[80px] bg-[#FF2212] text-white rounded-lg
                             flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 
                             ${
-                              isActive ? "bg-[#ff5a00]" : "group-hover:bg-[#1a2b7a]"
+                              isActive ? "bg-[#FF2212]" : "group-hover:bg-[#1a2b7a]"
                             } `}
                     >
                       <img
@@ -64,7 +64,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
                   className="flex items-center w-full h-full text-white no-underline box-border"
                 >
                   <div
-                    className="absolute bottom-[-45px] w-[90px] h-[80px] bg-[#ff962b] text-white rounded-lg 
+                    className="absolute bottom-[-45px] w-[90px] h-[80px] bg-[#FF2212] text-white rounded-lg 
                           flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 group-hover:bg-[#1a2b7a]"
                   >
                     <img
@@ -84,7 +84,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
                 > 
                   {({ isActive }) => (
                     <div
-                      className={`absolute bottom-[-45px] w-[90px] h-[80px] bg-[#ff962b] text-white rounded-lg 
+                      className={`absolute bottom-[-45px] w-[90px] h-[80px] bg-[#FF2212] text-white rounded-lg 
                             flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 ${
                               isActive
                                 ? "bg-[rgb(255,90,0)]"
@@ -107,7 +107,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
                   className="flex items-center w-full h-full text-white no-underline box-border"
                 >
                   <div
-                    className="absolute bottom-[-45px] w-[90px] h-[80px] bg-[#ff962b] text-white rounded-lg 
+                    className="absolute bottom-[-45px] w-[90px] h-[80px] bg-[#FF2212] text-white rounded-lg 
                           flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 group-hover:bg-[#1a2b7a]"
                   >
                     <img
@@ -273,7 +273,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
             >
               {({ isActive }) => (
                 <div
-                  className={`bottom-[35px] relative w-[70px] h-[70px] bg-[#ff962b] text-white rounded-lg 
+                  className={`bottom-[35px] relative w-[70px] h-[70px] bg-[#FF2212] text-white rounded-lg 
                     flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[#1a2b7a] ${
                       isActive ? "bg-[#ff5a00]" : ""
                     }`}
@@ -296,7 +296,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
               className="flex items-center w-full h-full no-underline box-border"
             >
               <div
-                className="bottom-[35px] relative w-[70px] h-[70px] bg-[#ff962b] text-white rounded-lg 
+                className="bottom-[35px] relative w-[70px] h-[70px] bg-[#FF2212] text-white rounded-lg 
                     flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[#1a2b7a]"
               >
                 <img
@@ -316,7 +316,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
             >
               {({ isActive }) => (
                 <div
-                  className={`bottom-[35px] relative w-[70px] h-[70px] bg-[#ff962b] text-white rounded-lg 
+                  className={`bottom-[35px] relative w-[70px] h-[70px] bg-[#FF2212] text-white rounded-lg 
                         flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[#1a2b7a] ${
                           isActive ? "bg-[rgb(255,90,0)]" : ""
                         }`}
@@ -337,7 +337,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
               className="flex items-center w-full h-full no-underline box-border"
             >
               <div
-                className="bottom-[35px] relative w-[70px] h-[70px] bg-[#ff962b] text-white rounded-lg 
+                className="bottom-[35px] relative w-[70px] h-[70px] bg-[#FF2212] text-white rounded-lg 
                     flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-[#1a2b7a]"
               >
                 <img

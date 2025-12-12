@@ -5,7 +5,7 @@
 
 function Footer(){
   return (
-    <footer className="bg-[#374151]/90 text-white pt-5 w-[100%]">
+    <footer className="bg-[#2E2828]/90 text-white pt-5 w-[100%]">
       {/* CŨ <div className="container mx-auto px-1 w-[90%] sm:w-[50%] lg:w-[50%]"></div> */}
       {/* === Footer cho Desktop (hiển thị từ size lg trở lên) === */}
       <div className="hidden lg:block">

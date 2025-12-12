@@ -14,7 +14,6 @@ function App() {
 
   //State quản lý đăng nhập
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   //state login popup
   const [isLoginPopup, setIsLoginPopupOpen] = useState(false);
   //state register popup
@@ -60,7 +59,7 @@ function App() {
   const handleAppLogout = () => {
     setIsLoggedIn(false);
     setUserLogged(null);
-    localStorage.removeItem("accessSession"); // Xóa phiên truy cập khi đăng xuất
+    // localStorage.removeItem("accessSession"); // Xóa phiên truy cập khi đăng xuất
     localStorage.removeItem("loggedInUser"); // Xóa thông tin user đăng nhập
   };
 

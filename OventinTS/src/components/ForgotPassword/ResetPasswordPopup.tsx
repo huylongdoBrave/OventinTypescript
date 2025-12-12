@@ -26,7 +26,6 @@ const validationSchema = yup.object().shape({
     .string()
     .min(6, "Mật khẩu phải có ít nhất 6 ký tự.")
     .required("Vui lòng nhập mật khẩu"),
-
   confirmPassword: yup
     .string()
     .oneOf([yup.ref("password"), ""], "Mật khẩu không khớp.")
@@ -35,17 +34,12 @@ const validationSchema = yup.object().shape({
 
 // Component reset password
 const ResetPasswordPopup: React.FC<ResetPasswordProps> = ({ isOpen, onClose, phoneNumber, onResetSuccess }) => {
-  
+  // Yup validation state alert
   const [alertState, setAlertState] = useState<{isOpen: boolean; type: AlertType; title: string; description?: string}>({
     isOpen: false,
     type: 'success',
     title: ''
     });
-
-
-  const [isShowPassword, setIsShowPassword] = useState(false); // state show pass
-  const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false); // State cho xác nhận mật khẩu
-
   const { register, handleSubmit, formState: { errors }, reset } = useForm<ResetPW>({
     resolver: yupResolver(validationSchema), 
     defaultValues: {
@@ -53,6 +47,9 @@ const ResetPasswordPopup: React.FC<ResetPasswordProps> = ({ isOpen, onClose, pho
       confirmPassword: "",
     }
   });
+
+  const [isShowPassword, setIsShowPassword] = useState(false); // state show pass
+  const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false); // State cho xác nhận mật khẩu
 
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -87,8 +84,6 @@ const ResetPasswordPopup: React.FC<ResetPasswordProps> = ({ isOpen, onClose, pho
             password: data.password, // Cập nhật mật khẩu mới
             };
             localStorage.setItem("registeredUsers", JSON.stringify(updatedUsers));
-
-            // Hiển thị thông báo thành công
             setAlertState({
                 isOpen: true,
                 type: 'success',
@@ -97,7 +92,6 @@ const ResetPasswordPopup: React.FC<ResetPasswordProps> = ({ isOpen, onClose, pho
             });
             // onResetSuccess();  // đóng popup instant
         }
-
     };
 
 
