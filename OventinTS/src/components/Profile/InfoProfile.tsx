@@ -41,10 +41,6 @@ const ProfileForm: React.FC<ProfileFormProps> = ({currentUser}) => {
       title: ''
     });
   
-  
-    const [isShowPassword, setIsShowPassword] = useState(false); // state show pass
-    const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false); // State cho xác nhận mật khẩu
-  
     const { register, handleSubmit, formState: { errors }, reset } = useForm<ChangePWProfile>({
       resolver: yupResolver(validationSchema), 
       defaultValues: {
