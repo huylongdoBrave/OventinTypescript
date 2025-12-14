@@ -158,7 +158,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
                   {/* Hình robot */}
                   <img
                     className="h-8 md:h-10 rounded-full"
-                    src="https://s3dev.estuary.solutions/ovaltine2024dev/76b6ed4d-02ed-4393-810a-967b3586b1dc"
+                    src="/static/profile_icon.png"
                     alt="User Avatar"
                   />
               </Link>
@@ -233,7 +233,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
                   {/* Hình robot */}
                   <img
                     className="h-8 md:h-10 rounded-full"
-                    src="https://s3dev.estuary.solutions/ovaltine2024dev/76b6ed4d-02ed-4393-810a-967b3586b1dc"
+                    src="/static/profile_icon.png"
                     alt="User Avatar"
                   />
                 </Link>

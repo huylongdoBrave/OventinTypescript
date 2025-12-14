@@ -125,7 +125,8 @@ const AddPrizePopup: React.FC<AddPrizePopupProps> = ({
     <div className={`fixed inset-0 z-[1002] flex items-center justify-center bg-black/60 transition-opacity duration-300 
       ${ isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
     }`}>
-      <div className="relative w-11/12 max-w-lg rounded-2xl border-4 border-white bg-[#f1752d] p-5 pt-10 text-white shadow-lg">
+      <div className="relative w-11/12 max-w-lg rounded-2xl border-4 border-white
+       bg-[rgb(45,189,153)] p-5 pt-10 text-white shadow-lg">
         <button
           className="absolute top-1 right-4 cursor-pointer border-none bg-transparent text-5xl font-light leading-none text-white"
           onClick={onClose}

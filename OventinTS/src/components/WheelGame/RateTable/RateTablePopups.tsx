@@ -86,12 +86,13 @@ const RateTablePopup: React.FC<RateTablePopupProps> = ({
 
 
   return (
-    <div className={`fixed inset-0 flex items-center justify-center bg-black/60 z-[1002] transition-opacity duration-300 
-      ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+    <div className={`fixed inset-0 flex items-center justify-center
+       bg-black/60 z-[1002] transition-opacity 
+       duration-300 ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
     }`}>
       <div
         className="flex justify-center items-center flex-col 
-                relative w-[90%] max-w-[500px] bg-[#f85a00] border-4 border-white border-solid rounded-[15px] p-[20px] text-white
+                relative w-[90%] max-w-[500px] bg-[rgb(45,189,153)] border-4 border-white border-solid rounded-[15px] p-[20px] text-white
                 shadow-[0_5px_20px_rgba(0,0,0,0.4)]"
       > 
         {/* Nút đóng */}
