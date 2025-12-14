@@ -1,170 +1,173 @@
-// import React, {useState, useEffect, memo} from 'react';
+import React, { useState, useEffect } from 'react';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
 
-// import { yupResolver } from '@hookform/resolvers/yup';
-// import * as yup from 'yup';
-// import {useForm} from 'react-hook-form';
-// import AlertTitle, { type AlertType } from "../AlertTitle/AlertTitle";
-// import { type User } from "../RegisterPopup/RegisterPopup"; 
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
+import ButtonOrange from '../Button/ButtonOranges';
+import AlertTitle, { type AlertType } from '../AlertTitle/AlertTitle';
 
-// interface ProfileFormProps {
-//   isOpen: boolean;
-//   onClose: () => void;
-//   currentUser: User | null;
-//   /* onResetSuccess: () => void;  */// Callback khi đặt lại mật khẩu thành công
-// }
-
-// interface ProfileForm{
-//   password: string;
-//   confirmPassword: string;
-// }
-
-// // Schema validation password
-// const validationSchema = yup.object().shape({
-//   fullName: yup
-//     .string()
-//     .required("Vui lòng nhập họ và tên")
-//     .matches(/^[^0-9]+$/, "Họ và tên không được chứa số.")
-//     .min(4, "Họ và tên phải có nhiều hơn 3 ký tự."),
-//   password: yup
-//     .string()
-//     .min(6, "Mật khẩu phải có ít nhất 6 ký tự.")
-//     .required("Vui lòng nhập mật khẩu"),
-//   confirmPassword: yup
-//     .string()
-//     .oneOf([yup.ref("password"), ""], "Mật khẩu không khớp.")
-//     .required("Vui lòng xác nhận mật khẩu"),
-// });
+/**
+ *    ====== UI InfoProfile ======
+ * Giao diện cho dữ liệu người dùng được lưu trong localStorage.
+ * Lấy từ RegisterPopup.tsx không bao gồm password và confirmPassword.
+ */
+interface StoredUser {
+  fullName: string;
+  phoneNumber: string;
+  dateOfBirth: string;
+  email?: string; // Email mới
+}
 
 
-// const ProfileForm: React.FC<ProfileFormProps> = ({currentUser}) => {
-//     const [alertState, setAlertState] = useState<{isOpen: boolean; type: AlertType; title: string; description?: string}>({
-//       isOpen: false,
-//       type: 'success',
-//       title: ''
-//     });
-  
-//     const { register, handleSubmit, formState: { errors }, reset } = useForm<ProfileFormProps>({
-//       resolver: yupResolver(validationSchema), 
-//       defaultValues: {
-//         password: "",
-//         confirmPassword: "",
-//       } 
-//     });
-  
-    
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-//     // useEffect(() => {
-//     //   if (!isOpen) {
-//     //     reset(); // Reset form field
-//     //     setIsShowPassword(false); // Ẩn mật khẩu
-//     //     setIsShowConfirmPassword(false); // Ẩn xác nhận mật khẩu
-//     //   }
-//     // }, [isOpen,reset]);
+// Giao diện cho dữ liệu form, chỉ chứa email, các field khác là chỉ đọc.
+interface ProfileFormData {
+  email: string;
+}
 
 
+// Init validate field
+const validationSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Email không hợp lệ')
+    .required('Vui lòng nhập email'),
+});
 
 
-//   return (
-//     <div className="min-h-screen flex items-center justify-center bg-gray-900 p-4">
-//       {/* FORM WRAPPER: Rộng 400px, không border, không nền */}
-//       <div className="w-[400px] bg-transparent border-none">
-        
-//         {/* 1. IMAGE TITLE */}
-//         <div className="flex justify-center mb-6">
-//           <img 
-//             src="https://via.placeholder.com/150x50?text=LOGO+HERE" 
-//             alt="Title Image" 
-//             className="h-auto max-w-full object-contain"
-//           />
-//         </div>
+// Component InfoProfile
+const InfoProfile: React.FC = () => {
+  const location = useLocation();
+  const [currentUser, setCurrentUser] = useState<StoredUser | null>(null);
 
-//         {/* 2. BUTTON TITLE  */}
-//         <div className="flex justify-center mb-4">
-//           <span className="
-//             inline-block 
-//             bg-blue-600 text-white font-bold uppercase tracking-wide
-//             py-2 px-6 rounded-full
-//             cursor-default select-none /* Không trỏ chuột, không bôi đen */
-//           ">
-//             Tài khoản cá nhân
-//           </span>
-//         </div>
+  // Alert custom
+  const [alertState, setAlertState] = useState<{isOpen: boolean; type: AlertType; title: string; description?: string}>({
+    isOpen: false,
+    type: 'success',
+    title: ''
+  });
 
-//         {/* 3. HR */}
-//         <hr className="border-gray-600 mb-8" />
+  // Validate
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm<ProfileFormData>({
+    resolver: yupResolver(validationSchema),
+  });
 
-//         {/* 4. Form */}
-//         <form className="flex flex-col gap-5">
+
+// eslint-disable-next-line react-hooks/exhaustive-deps
+useEffect(() => {
+    const userFromState = location.state?.user as StoredUser | undefined;
+
+    if (userFromState) {
+      // Ưu tiên lấy thông tin người dùng được truyền qua state
+      setCurrentUser(userFromState);
+      setValue('email', userFromState.email || '');
+    } else {
+      // Phương án dự phòng: Lấy người dùng cuối cùng từ localStorage
+      // (Hữu ích khi refresh trang hoặc truy cập trực tiếp)
+      const existingUsersRaw = localStorage.getItem('registeredUsers');
+      if (existingUsersRaw) {
+        const existingUsers: StoredUser[] = JSON.parse(existingUsersRaw);
+        if (existingUsers.length > 0) {
+          const lastUser = existingUsers[existingUsers.length - 1];
+          setCurrentUser(lastUser);
+          setValue('email', lastUser.email || '');
+        }
+      }
+    }
+  }, [location.state, setValue]);
+
+
+  // form lưu mail
+  const onSubmit: SubmitHandler<ProfileFormData> = (data) => {
+    if (!currentUser) return;
+
+    const existingUsersRaw = localStorage.getItem('registeredUsers');
+    const existingUsers: StoredUser[] = existingUsersRaw ? JSON.parse(existingUsersRaw) : [];
+
+    // Tìm và cập nhật email cho người dùng hiện tại
+    const userIndex = existingUsers.findIndex(user => user.phoneNumber === currentUser.phoneNumber);
+    if (userIndex !== -1) {
+      existingUsers[userIndex] = { ...existingUsers[userIndex], email: data.email };
+      localStorage.setItem('registeredUsers', JSON.stringify(existingUsers));
+      
+      setAlertState({
+        isOpen: true,
+        type: 'success',
+        title: 'Cập nhật thành công!',
+        description: 'Email của bạn đã được lưu.'
+      });
+    } else {
+        setAlertState({
+            isOpen: true,
+            type: 'error',
+            title: 'Lỗi!',
+            description: 'Không tìm thấy người dùng để cập nhật.'
+        });
+    }
+  };
+
+
+  if (!currentUser) {
+    return <div>Không tìm thấy thông tin người dùng. Vui lòng đăng ký.</div>;
+  }
+
+
+  const renderInput = (id: string, label: string, value: string, disabled: boolean = false) => (
+    <div className="relative pb-5">
+      <label htmlFor={id} className="block text-sm font-medium text-white/100 mb-1">
+        {label}
+      </label>
+      <input
+        id={id}
+        type="text"
+        defaultValue={value}
+        disabled={disabled}
+        className="w-full bg-white border rounded-[30px] p-2 focus:ring-2 outline-none transition border-white/30 focus:ring-[#233da3] disabled:bg-gray-200 disabled:cursor-not-allowed"
+      />
+    </div>
+  );
+
+
+  return (
+    <>
+      <AlertTitle
+        isOpen={alertState.isOpen}
+        type={alertState.type}
+        title={alertState.title}
+        description={alertState.description}
+        onClose={() => setAlertState({ ...alertState, isOpen: false })}
+      />
+      <div className="p-6 max-w-lg mx-auto bg-[url('/static/modal.png')] 
+                        bg-cover bg-center rounded-[20px] border-4 border-white mt-10">
+        <h2 className="text-2xl font-bold text-center text-white mb-6">Thông tin tài khoản</h2>
+        {/* Form */}
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3 text-[#233da3]">
+          {renderInput("fullName", "Họ và tên", currentUser.fullName, true)}
+          {renderInput("phoneNumber", "Số điện thoại", currentUser.phoneNumber, true)}
+          {renderInput("dateOfBirth", "Ngày sinh", currentUser.dateOfBirth, true)}
+          {renderInput("city", "Thành phố", "HCM", true)}
           
-//           {/* Họ tên */}
-//           <div>
-//             <label className="block text-white mb-2 font-medium ml-1">Họ và tên</label>
-//             <input 
-//               type="text" 
-//               className="w-full h-12 px-5 rounded-full bg-white text-blue-700 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400"
-//               placeholder="Nhập họ tên..."
-//             />
-//           </div>
+          <div className="relative pb-5">
+            <label htmlFor="email" className="block text-sm font-medium text-white/100 mb-1">
+              Email<span aria-hidden="true" className="text-[rgb(239,0,18)]">&thinsp;*</span>
+            </label>
+            <input
+              id="email"
+              type="email"
+              {...register("email")}
+              placeholder="Nhập email của bạn"
+              className={`w-full bg-white border rounded-[30px] p-2 focus:ring-2 outline-none transition ${errors.email ? 'border-red-500 focus:ring-red-500' : 'border-white/30 focus:ring-[#233da3]'}`}
+            />
+            {errors.email && <p className="absolute bottom-0 left-0 text-red-500 text-xs ml-2">{errors.email.message}</p>}
+          </div>
 
-//           {/* Ngày sinh */}
-//           <div>
-//             <label className="block text-white mb-2 font-medium ml-1">Email</label>
-//             <input 
-//               type="email" 
-//               className="w-full h-12 px-5 rounded-full bg-white text-blue-700 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400"
-//               placeholder="Nhập email..."
-//             />
-//           </div>
+          <ButtonOrange type="submit" className="w-[200px] h-12 text-lg mx-auto mt-4">Lưu thay đổi</ButtonOrange>
+        </form>
+      </div>
 
-//           {/* Thành phố */}
-//           <div>
-//             <label className="block text-white mb-2 font-medium ml-1">Số điện thoại</label>
-//             <input 
-//               type="tel" 
-//               className="w-full h-12 px-5 rounded-full bg-white text-blue-700 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400"
-//               placeholder="Nhập số điện thoại..."
-//             />
-//           </div>
+    </>
+  );
+};
 
-//           {/* Số đt */}
-//           <div>
-//             <label className="block text-white mb-2 font-medium ml-1">Tên đăng nhập</label>
-//             <input 
-//               type="text" 
-//               className="w-full h-12 px-5 rounded-full bg-white text-blue-700 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400"
-//               placeholder="Nhập username..."
-//             />
-//           </div>
-
-//           {/* Email */}
-//           <div>
-//             <label className="block text-white mb-2 font-medium ml-1">Mật khẩu</label>
-//             <input 
-//               type="password" 
-//               className="w-full h-12 px-5 rounded-full bg-white text-blue-700 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400"
-//               placeholder="Nhập mật khẩu..."
-//             />
-//           </div>
-
-//           {/* 5. BUTTON LƯU */}
-//           <button 
-//             type="button"
-//             className="
-//               mt-4 w-full h-12 
-//               bg-blue-600 text-white font-bold text-lg uppercase tracking-wider
-//               rounded-full
-//               hover:bg-blue-500 hover:shadow-lg hover:scale-[1.02]
-//               transition-all duration-200
-//             "
-//           >
-//             Lưu
-//           </button>
-
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ProfileForm;
+export default InfoProfile;

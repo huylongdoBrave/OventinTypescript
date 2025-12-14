@@ -10,6 +10,8 @@ interface ProfileProps {
   currentUser: User | null; // Thêm prop để nhận thông tin user đang đăng nhập
 }
 
+
+// Component Profile
 const Profile: React.FC<ProfileProps> = ({ onLogout, currentUser }) => {
   const navigate = useNavigate();
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
@@ -20,7 +22,6 @@ const Profile: React.FC<ProfileProps> = ({ onLogout, currentUser }) => {
     // Gọi hàm onLogout được truyền từ App.tsx để cập nhật state isLoggedIn
     // onLogout();
     // navigate('/', { state: { fromLogout: true } }); 
-
     navigate('/InfoProfile', { state: { user: currentUser } });   // Điều hướng về trang info-profile với thông tin user
   };
   
@@ -38,6 +39,7 @@ const Profile: React.FC<ProfileProps> = ({ onLogout, currentUser }) => {
     onLogout();
     navigate('/', { state: { fromLogout: true } });   // Điều hướng về trang chủ và gửi kèm state để báo hiệu là từ logout
   };
+
 
   return (
     <>

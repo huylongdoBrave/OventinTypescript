@@ -4,6 +4,7 @@ import LoginAccess from './components/LoginAcess.tsx';
 import Footer from './components/Footer.tsx'
 import WheelGame from './components/WheelGame/WheelGames.tsx';
 import Profile from './components/Profile/Profile.tsx';
+import InfoProfile from './components/Profile/InfoProfile.tsx';
 import Header from './components/Header.tsx';
 import LoginPopup from "./components/LoginPopup/LoginPopup.tsx";
 import RuleRegisterPopup from "./components/RegisterPopup/RuleRegisterPopup.tsx";
@@ -161,9 +162,13 @@ function App() {
 
         {/* Profile */}
         <Route path="/Profile" element={<Profile currentUser={userLogged} onLogout={handleAppLogout} />} />
+        
+        {/* Info Profile */}
+        <Route path="/InfoProfile" element={<InfoProfile />} />
 
         {/* Thể lệ */}
         <Route path="/RuleEvent" element={<RuleEvent />} />
+
       </Routes>
 
       <Footer />
