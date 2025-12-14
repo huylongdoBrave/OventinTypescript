@@ -88,9 +88,19 @@ useEffect(() => {
     // Tìm và cập nhật email cho người dùng hiện tại
     const userIndex = existingUsers.findIndex(user => user.phoneNumber === currentUser.phoneNumber);
     if (userIndex !== -1) {
-      existingUsers[userIndex] = { ...existingUsers[userIndex], email: data.email };
+      const updatedUser = { ...existingUsers[userIndex], email: data.email };
+      existingUsers[userIndex] = updatedUser;
       localStorage.setItem('registeredUsers', JSON.stringify(existingUsers));
       
+      // Cập nhật lại thông tin user hiện tại để phản ánh thay đổi
+      setCurrentUser(updatedUser);
+
+      // ĐỒNG BỘ: Cập nhật cả 'loggedInUser' trong localStorage
+      const loggedInUserRaw = localStorage.getItem('loggedInUser');
+      if (loggedInUserRaw) {
+        localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+      }
+
       setAlertState({
         isOpen: true,
         type: 'success',
@@ -139,7 +149,7 @@ useEffect(() => {
         onClose={() => setAlertState({ ...alertState, isOpen: false })}
       />
       <div className="p-6 max-w-lg mx-auto bg-[url('/static/modal.png')] 
-                        bg-cover bg-center rounded-[20px] border-4 border-white mt-10">
+                        bg-cover bg-center rounded-[20px] border-4 border-white mt-10 mb-10">
         <h2 className="text-2xl font-bold text-center text-white mb-6">Thông tin tài khoản</h2>
         {/* Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3 text-[#233da3]">
