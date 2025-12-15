@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, memo } from "react";
 import type { Prize } from "./WheelGames"; // Import kiểu Prize
-
+import AlertTitle, { type AlertType } from "../AlertTitle/AlertTitle";
 
 //     ====== UI POPUP BẢNG THÊM 1 MÓN PRIZE TRANG Zootopia  ======
 
@@ -34,6 +34,12 @@ const AddPrizePopup: React.FC<AddPrizePopupProps> = ({
   onAddPrize,
 }) => {
   const [formData, setFormData] = useState<FormDataState>(INITIAL_FORM_STATE);
+
+  const [alertState, setAlertState] = useState<{isOpen: boolean; type: AlertType; title: string; description?: string}>({
+    isOpen: false,
+    type: 'success',
+    title: ''
+  });
 
   // Reset form khi popup đóng
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -115,12 +121,34 @@ const AddPrizePopup: React.FC<AddPrizePopupProps> = ({
 
     onAddPrize(newPrize); // Gửi quà mới về cho component cha
     onClose(); // Đóng popup
+
+    setAlertState({
+      isOpen: true,
+      type: 'success',
+      title: 'Đã thêm quà mới!',
+
+    });
+
   };
 
 
   return (
     // Cũ
     // <div className="fixed inset-0 z-[1002] flex items-center justify-center bg-[black]/60 opacity-100">
+
+  <>
+    <AlertTitle
+      isOpen={alertState.isOpen}
+      type={alertState.type}
+      title={alertState.title}
+      description={alertState.description}
+      onClose={() => {
+        setAlertState({ ...alertState, isOpen: false });
+        if (alertState.type === 'success') {
+          onClose(); 
+        }
+      }}
+    />
 
     <div className={`fixed inset-0 z-[1002] flex items-center justify-center bg-black/60 transition-opacity duration-300 
       ${ isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -208,6 +236,8 @@ const AddPrizePopup: React.FC<AddPrizePopupProps> = ({
         </form>
       </div>
     </div>
+
+  </>
     
   );
 };

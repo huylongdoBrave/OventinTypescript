@@ -34,10 +34,36 @@ const Profile: React.FC<ProfileProps> = ({ onLogout, currentUser }) => {
   };
 
   // === Đăng xuất ===
-  const handleLogout = () => {
-    // Gọi hàm onLogout được truyền từ App.tsx để cập nhật state isLoggedIn
-    onLogout();
-    navigate('/', { state: { fromLogout: true } });   // Điều hướng về trang chủ và gửi kèm state để báo hiệu là từ logout
+  const handleLogout = async () => {
+    // Lấy token đã lưu từ localStorage (hoặc nơi bạn lưu trữ khác)
+    const token = localStorage.getItem('token');
+
+    try {
+      // Gọi API đăng xuất
+      const response = await fetch('https://api-dev.estuary.solutions:8443/ovaltine-web-api-dev/v1/auth/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          // Gửi token để server xác thực
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        // Nếu API trả về lỗi, vẫn có thể tiếp tục đăng xuất ở phía client
+        console.error('API logout không thành công, nhưng vẫn tiến hành đăng xuất ở client.');
+      }
+
+    } catch (error) {
+      console.error('Lỗi khi gọi API đăng xuất:', error);
+    } finally {
+      // Api done or fail thì phải thực hiện bước đăng xuất ở client
+      localStorage.removeItem('token'); // Xóa token
+      // có thể xóa các thông tin người dùng khác nếu có, Gọi hàm onLogout được truyền từ App.tsx để cập nhật state isLoggedIn
+      // localStorage.removeItem('currentUser');
+      onLogout(); // Cập nhật trạng thái đăng nhập toàn cục
+      navigate('/', { state: { fromLogout: true } }); // Điều hướng về trang chủ và gửi kèm state để báo hiệu là từ logout
+    }
   };
 
 

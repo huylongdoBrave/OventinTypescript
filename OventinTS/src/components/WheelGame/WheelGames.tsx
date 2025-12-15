@@ -278,7 +278,7 @@ const WheelGame: React.FC<WheelGameProps> = ({ isLoggedIn }) => {
       setPrizes((currentPrizes) => {
         const updatedPrizes = [...currentPrizes, newPrize];
         localStorage.setItem("oventinPrizes", JSON.stringify(updatedPrizes));
-        alert(`Đã thêm quà "${newPrize.name}"!`);
+        // alert(`Đã thêm quà "${newPrize.name}"!`);
         return updatedPrizes;
       });
     }, []); // Dependency rỗng, dùng functional update cho setPrizes
