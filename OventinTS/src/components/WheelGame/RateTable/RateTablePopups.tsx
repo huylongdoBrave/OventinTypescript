@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect, memo, useCallback } from "react";
 import { ReactSortable } from "react-sortablejs";
+import AlertTitle, { type AlertType } from "../../../components/AlertTitle/AlertTitle";
 import type { Prize } from "../WheelGames.tsx";
 import {PrizeRow} from "./PrizeRows.tsx";
 
@@ -21,6 +22,12 @@ const RateTablePopup: React.FC<RateTablePopupProps> = ({
   onApplyChanges,
 }) => {
   const [tempPrizes, setTempPrizes] = useState<Prize[]>(prizes);
+
+  const [alertState, setAlertState] = useState<{isOpen: boolean; type: AlertType; title: string; description?: string}>({
+    isOpen: false,
+    type: 'success',
+    title: ''
+  });
 
   
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -72,17 +79,36 @@ const RateTablePopup: React.FC<RateTablePopupProps> = ({
   // Cảnh báo sửa bị tràn tỉ lệ
   const handleApply = useCallback(() => {
         if (totalProbability > 100.01) {
-          alert(
-            `Cảnh báo tỉ lệ đang ${totalProbability.toFixed(2)}% . Vui lòng chỉnh tổng dưới 100%`
-          );
+          // alert(
+          //   `Cảnh báo tỉ lệ đang ${totalProbability.toFixed(2)}% . Vui lòng chỉnh tổng dưới 100%`
+          // );
+
+          setAlertState({
+            isOpen: true,
+            type: 'error',
+            title: 'Lỗi tỉ lệ đang vượt quá 100%!',
+            description: 'Nhập dưới 100% để áp dụng thay đổi.'
+          });
+
           return;
         } else if (totalProbability == 0) {
-          alert("Tổng tỉ lệ không thể bằng 0%. Hãy nhập lớn 0.");
+          // alert("Tổng tỉ lệ không thể bằng 0%. Hãy nhập lớn 0.");
+            setAlertState({
+              isOpen: true,
+              type: 'error',
+              title: 'Tổng tỉ lệ không thể bằng 0%!',
+              description: 'Hãy nhập lớn hơn 0.'
+            });
           return;
         }
+        setAlertState({
+          isOpen: true,
+          type: 'success',
+          title: 'Đã cập nhật tỉ lệ!'
+        });
+
         onApplyChanges(tempPrizes); // Gửi dữ liệu đã thay đổi ra component cha
-        onClose(); // Đóng popup
-    }, [totalProbability, tempPrizes, onApplyChanges, onClose]);
+    }, [totalProbability, tempPrizes, onApplyChanges]);
 
 
   return (
@@ -151,6 +177,20 @@ const RateTablePopup: React.FC<RateTablePopupProps> = ({
           </button>
         </center>
       </div>
+
+      <AlertTitle
+        isOpen={alertState.isOpen}
+        type={alertState.type}
+        title={alertState.title}
+        description={alertState.description}
+        onClose={() => {
+          setAlertState({ ...alertState, isOpen: false });
+          if (alertState.type === 'success') {
+            onClose(); 
+          }
+        }}
+      />
+
     </div>
   );
 };

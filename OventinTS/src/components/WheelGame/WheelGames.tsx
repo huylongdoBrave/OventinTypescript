@@ -270,8 +270,7 @@ const WheelGame: React.FC<WheelGameProps> = ({ isLoggedIn }) => {
   const handleApplyPrizeChanges = useCallback((updatedPrizes: Prize[]) => {
       setPrizes(updatedPrizes);
       localStorage.setItem("oventinPrizes", JSON.stringify(updatedPrizes));
-      alert("Đã cập nhật thành công!");
-    }, []); // Dependency rỗng vì hàm này không phụ thuộc vào state/props nào từ bên ngoài
+  }, []); // Dependency rỗng vì hàm này không phụ thuộc vào state/props nào từ bên ngoài
 
 
   //Thêm quà

@@ -7,6 +7,7 @@ import ForgotPasswordPopup from "../ForgotPassword/ForgotPasswordPopup";
 import RuleRegisterPopup from "../RegisterPopup/RuleRegisterPopup";
 import RegisterPopup, { type User } from "../RegisterPopup/RegisterPopup";
 import AlertTitle, { type AlertType } from "../AlertTitle/AlertTitle";
+
 //    ====== UI Login ======
 
 interface LoginPopupProps {
@@ -34,11 +35,14 @@ const validationSchema = yup.object().shape({
   password: yup
     .string()
     .required("Vui lòng nhập mật khẩu")
-    .min(6, "Mật khẩu phải có ít nhất 6 ký tự."),
+    .min(8, "Mật khẩu phải có ít nhất 8 ký tự."),
 });
 
+
+// Component LoginPopup
 const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuccess }) => {
   // const [formData, setFormData] = useState<UserLogin>(INITIAL_FORM_STATE);
+
   // Cấu hình yup
   const { register, handleSubmit, formState: { errors }, reset } = useForm<UserLogin>({
     resolver: yupResolver(validationSchema),
@@ -47,22 +51,25 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuc
       password: "",
     }
   });
+  // Cấu hình custom AlertTitle
+  const [alertState, setAlertState] = useState<{isOpen: boolean; type: AlertType; title: string; description?: string}>({
+    isOpen: false,
+    type: 'success',
+    title: ''
+  });
 
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isForgotPwPopup, setIsForgotPwPopup] = useState(false);
   const [isRuleRegisterPopup, setIsRuleRegisterPopup] = useState(false);
   const [isRegisterPopup, setIsRegisterPopup] = useState(false);
 
+  // state loading để khóa nút khi đang gọi API
+  const [isLoading, setIsLoading] = useState(false);
 
-  // State cho AlertTitle
-  const [alertState, setAlertState] = useState<{isOpen: boolean; type: AlertType; title: string; description?: string}>({
-    isOpen: false,
-    type: 'success',
-    title: ''
-  });
   const closeRuleRegisterPopup = useCallback(() => setIsRuleRegisterPopup(false), []);
   const closeRegisterPopup = useCallback(() => setIsRegisterPopup(false), []);
   const closeForgotPasswordPopup = useCallback(() => setIsForgotPwPopup(false), []);
+
   
   // Hàm xử lý popup quên mật khẩu
   const openForgotPasswordPopup = useCallback(() => {
@@ -70,11 +77,12 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuc
     onClose(); 
   }, [onClose]);
 
-    // Hàm xử lý popup điều khoản
+  // Hàm xử lý popup điều khoản
   const handleAgreeToRules = useCallback(() => {
     closeRuleRegisterPopup(); // Đóng popup điều khoản
     setIsRegisterPopup(true); // Mở popup đăng ký
   }, [closeRuleRegisterPopup]);
+
   // Mở popup điều khoản, đóng popup login
   const openRuleRegisterPopup = useCallback(() => {
     setIsRuleRegisterPopup(true);
@@ -91,6 +99,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuc
   }, [isOpen, reset]);
 
 
+  //  === Hàm xử lý submit form đăng nhập KIỂU CŨ ===
   // const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) =>{
   //   const { id, value} = e.target;
   //   setFormData((prevFormData) => ({
@@ -116,37 +125,93 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuc
   //     alert("Mật khẩu phải có ít nhất 6 ký tự.");
   //     return
   //   }
-  const onSubmit = (dataUser: UserLogin) => {
-    const { phoneNumber, password } = dataUser;
-    const existingUsersRaw = localStorage.getItem("registeredUsers");
-    const existingUsers: User[] = existingUsersRaw ? JSON.parse(existingUsersRaw) : [];
+  
+  const onSubmit = async (dataUser: UserLogin) => {
+    setIsLoading(true); // Bắt đầu loading
+    try {
+      const response = await fetch('https://api-dev.estuary.solutions:8443/ovaltine-web-api-dev/v1/auth/sign-in', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          phone: dataUser.phoneNumber, // API yêu cầu 'phone'
+          password: dataUser.password,
+        }),
+      });
 
-    // can use react-hook-form handles trimming, but manual trim is safer here.
-    const userExist = existingUsers.find(
-      (user) => user.phoneNumber === phoneNumber && user.password === password);
+      const responseData = await response.json();
+      if (!response.ok) {
+        // Nếu server trả về lỗi (status 4xx, 5xx)
+        throw new Error(responseData.message || 'Đăng nhập thất bại. Vui lòng thử lại.');
+      }
 
-    if (userExist) {
-      // alert("Đăng nhập thành công!");
-      // Gọi onLoginSuccess ngay lập tức để cập nhật trạng thái ứng dụng
-      onUserLoginSuccess(userExist);
+      const loggedInUser: User = {
+        fullName: responseData.user?.fullName || "Người dùng", // Lấy fullName từ API
+        phoneNumber: dataUser.phoneNumber,
+        dateOfBirth: responseData.user?.dateOfBirth || "", // Lấy dateOfBirth từ API
+        password: '',         // Các trường khác không cần thiết cho việc đăng nhập
+        confirmPassword: '',
+      };
+
+      // --- API THÀNH CÔNG: cập nhật trạng thái đăng nhập ---
+      onUserLoginSuccess(loggedInUser);
+      // Hiển thị thông báo thành công
       setAlertState({
         isOpen: true,
         type: 'success',
         title: 'Đăng nhập thành công!',
-        description: `Xin chào, ${userExist.fullName}!`
+        description: `Xin chào, ${loggedInUser.fullName}!`
       });
-      // Đóng popup login và thực hiện onLoginSuccess sau khi alert được đóng
-    } else {
-      // alert("Số ĐT hoặc password nhập chưa đúng.");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+      // --- Server trả về 400, 401, 404, 500.. ---
+      console.error("Lỗi API:", error);
+      // // Lấy câu thông báo lỗi từ Server (nếu có)
+      // const serverMessage = error.response?.data?.message || 'Có gì đó không đúng. Vui lòng thử lại.';
+
       setAlertState({
         isOpen: true,
         type: 'error',
         title: 'Đăng nhập thất bại',
-        description: 'Có gì đó không đúng.Vui lòng thử lại.'
-      });
+        description: error.message || 'Có gì đó không đúng. Vui lòng thử lại.'  // Hiển thị lỗi thật từ server (VD: Sai mật khẩu)
+      }); 
+
+    } finally {
+      setIsLoading(false); // Kết thúc loading
     }
+
+    // === KIỂM TRA ĐĂNG NHẬP TỪ LOCALSTORAGE (KHÔNG DÙNG API) ===
+    // const { phoneNumber, password } = dataUser;
+    // const existingUsersRaw = localStorage.getItem("registeredUsers");
+    // const existingUsers: User[] = existingUsersRaw ? JSON.parse(existingUsersRaw) : [];
+
+    // // can use react-hook-form handles trimming, but manual trim is safer here.
+    // const userExist = existingUsers.find(
+    //   (user) => user.phoneNumber === phoneNumber && user.password === password);
+
+    // if (userExist) {
+    //   // Gọi onLoginSuccess ngay lập tức để cập nhật trạng thái ứng dụng
+    //   onUserLoginSuccess(userExist);
+    //   setAlertState({
+    //     isOpen: true,
+    //     type: 'success',
+    //     title: 'Đăng nhập thành công!',
+    //     description: `Xin chào, ${userExist.fullName}!`
+    //   });
+    //   // Đóng popup login và thực hiện onLoginSuccess sau khi alert được đóng
+    // } else {
+    //   setAlertState({
+    //     isOpen: true,
+    //     type: 'error',
+    //     title: 'Đăng nhập thất bại',
+    //     description: 'Có gì đó không đúng.Vui lòng thử lại.'
+    //   });
+    // }
+
   }
   // };
+
 
   return (
   <>
@@ -212,10 +277,11 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuc
                     className={`w-full bg-white border rounded-[30px] p-2 focus:ring-2 
                       outline-none transition ${errors.password ? 'border-red-500 focus:ring-red-500' : 'border-white/30 focus:ring-blue-500'}`}
                   />
+                  {/* Ẩn mật khẩu */}
                   <button
                     type="button"
                     onClick={() => setIsShowPassword(!isShowPassword)}
-                    className="absolute inset-y-0 right-0 top-1 pr-3 flex items-center text-black/40 hover:text-black"
+                    className="absolute inset-y-0 right-0 top-4 pr-3 flex items-center text-black/40 hover:text-black"
                     aria-label={isShowPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
                   >
                     {isShowPassword ? (
@@ -237,10 +303,15 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuc
                   {/* Button chính */}
                   <ButtonOrange
                     type="submit"
+                    disabled={isLoading}
                     form="login-form"
                     className={`w-[200px] h-12 text-lg transition-colors duration-300`}
                   >
-                    Tiếp tục
+                    {isLoading ? ( 
+                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white mx-auto"></div>
+                    ) : (
+                      'Tiếp tục'
+                    )}
                   </ButtonOrange>
                   {/* Nút đóng 'x' */}
                   <button

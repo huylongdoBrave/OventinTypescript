@@ -29,7 +29,7 @@ function RuleEvent() {
              "
           >
             <div
-              className="items-center inset-0 bg-[url('/static/modal.png')] bg-[#ff9a24]  bg-top bg-no-repeat
+              className="items-center inset-0 bg-[#35D3B8]  bg-top bg-no-repeat
                         rounded-[20px] border-4 border-white"
             >
               {/* Nội dung table rule */}

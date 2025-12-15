@@ -62,7 +62,7 @@ const validationSchema = yup.object().shape({
 
   password: yup
     .string()
-    .min(6, "Mật khẩu phải có ít nhất 6 ký tự.")
+    .min(8, "Mật khẩu phải có ít nhất 8 ký tự.")
     .required("Vui lòng nhập mật khẩu"),
 
   confirmPassword: yup
@@ -70,6 +70,7 @@ const validationSchema = yup.object().shape({
     .oneOf([yup.ref("password"), ""], "Mật khẩu không khớp.")
     .required("Vui lòng xác nhận mật khẩu"),
 });
+
 
 const RegisterPopup: React.FC<RegisterPopupProps> = ({
   isOpen,
@@ -122,7 +123,7 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
   // };
 
 
-  // Xử lý submit
+  // Xử lý submit Dạng Cũ
     // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     // e.preventDefault();
     // const fullName = formData.fullName.trim();

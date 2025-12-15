@@ -26,8 +26,8 @@ const ImgLeftPopup: React.FC<ImgLeftPopupProps> = ({
         <div ref={dragRef} className="relative w-fit">
           <button
             onClick={onClose}
-            className="cursor-pointer cancel-drag-left absolute top-[-20px] -right-2.5 z-10 w-6 h-6 bg-orange-400 text-white rounded-full 
-            flex items-center justify-center text-lg font-bold leading-none hover:bg-orange-500 transition-colors"
+            className="cursor-pointer cancel-drag-left absolute top-[-10px] -right-5 z-10 w-6 h-6 bg-red-500 text-white rounded-full 
+            flex items-center justify-center text-lg font-bold leading-none hover:bg-red-600 transition-colors"
             aria-label="Đóng popup"
           >
             &times;

@@ -123,7 +123,7 @@ useEffect(() => {
   }
 
 
-  const renderInput = (id: string, label: string, value: string, disabled: boolean = false) => (
+  const renderInput = (id:string, label:string, value:string, disabled:boolean = false) => (
     <div className="relative pb-5">
       <label htmlFor={id} className="block text-sm font-medium text-white/100 mb-1">
         {label}
