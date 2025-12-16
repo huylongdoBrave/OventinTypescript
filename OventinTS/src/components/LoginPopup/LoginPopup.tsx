@@ -104,22 +104,22 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuc
     setIsLoading(true); // Bắt đầu loading
     try {
 
-      // Cách gọi API với fetch cũ
-      // const response = await fetch('https://api-dev.estuary.solutions:8443/ovaltine-web-api-dev/v1/auth/sign-in', {
-      // method: 'POST',
-      // headers: {
-      //   'Content-Type': 'application/json',
-      // },
-      // body: JSON.stringify({
-      //   phone: dataUser.phoneNumber, // API yêu cầu 'phone'
-      //   password: dataUser.password,
-      // }),
+        // Cách gọi API với fetch cũ
+        // const response = await fetch('https://api-dev.estuary.solutions:8443/ovaltine-web-api-dev/v1/auth/sign-in', {
+        // method: 'POST',
+        // headers: {
+        //   'Content-Type': 'application/json',
+        // },
+        // body: JSON.stringify({
+        //   phone: dataUser.phoneNumber, // API yêu cầu 'phone'
+        //   password: dataUser.password,
+        // }),
 
-      // const responseData = await response.json();
-      // if (!response.ok) {
-      //   // Nếu server trả về lỗi (status 4xx, 5xx)
-      //   throw new Error(responseData.message || 'Đăng nhập thất bại. Vui lòng thử lại.');
-      // }
+        // const responseData = await response.json();
+        // if (!response.ok) {
+        //   // Nếu server trả về lỗi (status 4xx, 5xx)
+        //   throw new Error(responseData.message || 'Đăng nhập thất bại. Vui lòng thử lại.');
+        // }
 
         // Sử dụng axios.post để gọi API
       const response = await axios.post('https://api-dev.estuary.solutions:8443/ovaltine-web-api-dev/v1/auth/sign-in', {
@@ -135,9 +135,9 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuc
       }
 
       const loggedInUser: User = {
-        fullName: responseData.user?.fullName || "Người dùng", // Lấy fullName từ API
+        fullName: responseData.data?.name || null, // Lấy fullName từ API
         phoneNumber: dataUser.phoneNumber,
-        dateOfBirth: responseData.user?.birthday || "", // Ánh xạ 'birthday' từ API sang 'dateOfBirth' của app
+        dateOfBirth: responseData.data?.birthday || null, // Ánh xạ 'birthday' từ API sang 'dateOfBirth' của app
         password: '',         // Các trường khác không cần thiết cho việc đăng nhập
         confirmPassword: '',
       };
@@ -150,21 +150,21 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuc
         title: 'Đăng nhập thành công!',
         description: `Xin chào, ${loggedInUser.fullName}!`
       });
+
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
-        // Axios tự động throw error cho status code 4xx, 5xx
-        // Thông tin lỗi chi tiết hơn nằm trong error.response
-      console.error("Lỗi API đăng nhập:", error);
-      setAlertState({
-        isOpen: true,
-        type: 'error',
-        title: 'Đăng nhập thất bại',
-        description: error.response?.data?.message || error.message || 'Có lỗi xảy ra. Vui lòng thử lại.'
-      }); 
+          // Axios tự động throw error cho status code 4xx, 5xx
+        console.error("Lỗi API đăng nhập:", error);
+        setAlertState({
+          isOpen: true,
+          type: 'error',
+          title: 'Đăng nhập thất bại',
+          description: error.response?.data?.message || error.message || 'Có lỗi xảy ra. Vui lòng thử lại.'
+        }); 
 
-    } finally {
-      setIsLoading(false); // Kết thúc loading
-    }
+      } finally {
+        setIsLoading(false); // Kết thúc loading
+      }
 
     // === KIỂM TRA ĐĂNG NHẬP TỪ LOCALSTORAGE (KHÔNG DÙNG API) ===
     // const { phoneNumber, password } = dataUser;

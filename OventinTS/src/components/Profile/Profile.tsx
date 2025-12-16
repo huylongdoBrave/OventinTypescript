@@ -45,9 +45,7 @@ const Profile: React.FC<ProfileProps> = ({ onLogout, currentUser }) => {
       //   method: 'POST',
 
         // Sử dụng axios.post để gọi API. Tham số thứ 3 là object cấu hình, chứa headers
-      await axios.post(
-        'https://api-dev.estuary.solutions:8443/ovaltine-web-api-dev/v1/auth/logout', 
-         null, // Không có body data, truyền null
+      await axios.post('https://api-dev.estuary.solutions:8443/ovaltine-web-api-dev/v1/auth/logout', null, // Không có body data, truyền null
         {
         headers: {
           // 'Content-Type': 'application/json',

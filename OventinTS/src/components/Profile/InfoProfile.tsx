@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useForm, type SubmitHandler } from 'react-hook-form';
-import { useLocation } from 'react-router-dom';
-
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-
-import ButtonOrange from '../Button/ButtonCustomA';
+import { useNavigate} from 'react-router-dom';
+import axios from 'axios';
+// import ButtonOrange from '../Button/ButtonCustomA';
 import AlertTitle, { type AlertType } from '../AlertTitle/AlertTitle';
 
 /**
@@ -17,30 +13,22 @@ import AlertTitle, { type AlertType } from '../AlertTitle/AlertTitle';
 interface StoredUser {
   fullName: string;
   phoneNumber: string;
-  dateOfBirth: string;
-  email?: string; // Email mới
+  dateOfBirth: string; // API trả về 'birthday'
+  email: string; // Email mới
 }
-
-
-// Giao diện cho dữ liệu form, chỉ chứa email, các field khác là chỉ đọc.
-interface ProfileFormData {
-  email: string;
-}
-
-
-// Init validate field
-const validationSchema = yup.object().shape({
-  email: yup
-    .string()
-    .email('Email không hợp lệ')
-    .required('Vui lòng nhập email'),
-});
 
 
 // Component InfoProfile
 const InfoProfile: React.FC = () => {
-  const location = useLocation();
-  const [currentUser, setCurrentUser] = useState<StoredUser | null>(null);
+  // const location = useLocation();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  // const [currentUser, setCurrentUser] = useState<StoredUser | null>();
+  const [currentUser, setCurrentUser] = useState<StoredUser | null>(() => {
+    // Khởi tạo state từ localStorage
+    const storedUser = localStorage.getItem('loggedInUser');
+    return storedUser ? JSON.parse(storedUser) as StoredUser : null;
+  });
 
   // Alert custom
   const [alertState, setAlertState] = useState<{isOpen: boolean; type: AlertType; title: string; description?: string}>({
@@ -49,75 +37,103 @@ const InfoProfile: React.FC = () => {
     title: ''
   });
 
-  // Validate
-  const { register, handleSubmit, formState: { errors }, setValue } = useForm<ProfileFormData>({
-    resolver: yupResolver(validationSchema),
-  });
-
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
-useEffect(() => {
-    const userFromState = location.state?.user as StoredUser | undefined;
-
-    if (userFromState) {
-      // Ưu tiên lấy thông tin người dùng được truyền qua state
-      setCurrentUser(userFromState);
-      setValue('email', userFromState.email || '');
-    } else {
-      // Phương án dự phòng: Lấy người dùng cuối cùng từ localStorage
-      // (Hữu ích khi refresh trang hoặc truy cập trực tiếp)
-      const existingUsersRaw = localStorage.getItem('registeredUsers');
-      if (existingUsersRaw) {
-        
-        const existingUsers: StoredUser[] = JSON.parse(existingUsersRaw);
-        if (existingUsers.length > 0) {
-          const lastUser = existingUsers[existingUsers.length - 1];
-          setCurrentUser(lastUser);
-          setValue('email', lastUser.email || '');
-        }
-      }
+  const getApiInfoProfile = async () => {
+    // 1. Lấy token từ localStorage
+    const token = localStorage.getItem('token'); 
+    if (!token) {
+      throw new Error("No token found"); // Báo lỗi nếu rỗng token
+      navigate('/');
     }
-  }, [location.state, setValue]);
 
-
-  // form lưu mail
-  const onSubmit: SubmitHandler<ProfileFormData> = (data) => {
-    if (!currentUser) return;
-
-    const existingUsersRaw = localStorage.getItem('registeredUsers');
-    const existingUsers: StoredUser[] = existingUsersRaw ? JSON.parse(existingUsersRaw) : [];
-
-    // Tìm và cập nhật email cho người dùng hiện tại
-    const userIndex = existingUsers.findIndex(user => user.phoneNumber === currentUser.phoneNumber);
-    if (userIndex !== -1) {
-      const updatedUser = { ...existingUsers[userIndex], email: data.email };
-      existingUsers[userIndex] = updatedUser;
-      localStorage.setItem('registeredUsers', JSON.stringify(existingUsers));
-      
-      // Cập nhật lại thông tin user hiện tại để phản ánh thay đổi
-      setCurrentUser(updatedUser);
-
-      // ĐỒNG BỘ: Cập nhật cả 'loggedInUser' trong localStorage
-      const loggedInUserRaw = localStorage.getItem('loggedInUser');
-      if (loggedInUserRaw) {
-        localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+    // 2. Gọi API GET kèm theo Header Authorization
+    return axios.get('https://api-dev.estuary.solutions:8443/ovaltine-web-api-dev/v1/members/me', {
+      headers: {
+        'Authorization': `Bearer ${token}`, // Cú pháp chuẩn: Bearer + dấu cách + token
+        'Content-Type': 'application/json'
       }
-
-      setAlertState({
-        isOpen: true,
-        type: 'success',
-        title: 'Cập nhật thành công!',
-        description: 'Email của bạn đã được lưu.'
-      });
-    } else {
-        setAlertState({
-            isOpen: true,
-            type: 'error',
-            title: 'Lỗi!',
-            description: 'Không tìm thấy người dùng để cập nhật.'
-        });
-    }
+    });
   };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+      const fetchLatestProfile = async () => {
+        try {
+          setIsLoading(true);
+          // Gọi API
+          const response = await getApiInfoProfile();           // Gọi Api
+          console.log("DATA PROFILE: ", response.data);         // Kiểm tra data trả về từ API
+          const UserData = response.data  // Lấy loại data json từ response
+
+          const StoredUser: StoredUser = {
+            fullName: UserData.data.fullName || UserData.data.full_name || UserData.data.name || "Chưa cập nhật",
+            phoneNumber: UserData.data.phoneNumber || UserData.data.phone || "Chưa cập nhật",
+            email: UserData.data.email || "Chưa cập nhật",
+            dateOfBirth: UserData.data.birthday || UserData.data.dateOfBirth || "",
+          };
+
+          // Cập nhật State để màn hình hiển thị dữ liệu mới 
+          setCurrentUser(StoredUser);
+
+          // Cập nhật ngược lại vào LocalStorage để lần sau vào load nhanh
+          localStorage.setItem('loggedInUser', JSON.stringify(UserData));
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+          console.error("Lỗi lấy thông tin mới (đang hiển thị thông tin cũ):", error);
+        if (error.response && error.response.status === 401) {
+            alert("Phiên đăng nhập hết hạn. Vui lòng đăng nhập lại.");
+            // localStorage.removeItem('token'); // Xóa token hư
+            navigate('/'); // Đá về trang chủ
+          }
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
+      fetchLatestProfile();
+  }, []);
+
+
+  // const onSubmit: SubmitHandler<ProfileFormData> = async (data) => {
+  //   const token = localStorage.getItem('token');
+  //   try {
+  //     // 1. Chuẩn bị dữ liệu gửi đi
+  //     // Chỉ gửi những trường API cho phép sửa (Ví dụ ở đây là email)
+  //     const payload = {
+  //       email: data.email,
+  //       // Nếu API yêu cầu gửi cả tên/sđt thì thêm vào:
+  //       // fullName: currentUser?.fullName, 
+  //       // phoneNumber: currentUser?.phoneNumber
+  //     };
+
+  //     // 2. Gọi API Cập nhật
+  //     const response = await axios.put('https://api-dev.estuary.solutions:8443/ovaltine-web-api-dev/v1/members/me', payload, {
+  //       headers: { Authorization: `Bearer ${token}` }
+  //     });
+  //     const updatedUser = response.data; // Lấy user mới nhất từ server trả về
+
+  //     // 3. Cập nhật State hiển thị
+  //     setCurrentUser(updatedUser);
+
+  //     // 4. Cập nhật localStorage (chỉ để đồng bộ Client)
+  //     localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+
+  //     setAlertState({
+  //       isOpen: true,
+  //       type: 'success',
+  //       title: 'Cập nhật thành công!',
+  //       description: 'Thông tin của bạn đã được lưu.'
+  //     });
+  //       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //   } catch (error: any) {
+  //     console.error("Lỗi cập nhật:", error);
+  //     setAlertState({
+  //       isOpen: true,
+  //       type: 'error',
+  //       title: 'Lỗi cập nhật!',
+  //       description: error.response?.data?.message || 'Có lỗi xảy ra khi cập nhật.'
+  //     });
+  //   }
+  // };
 
 
   if (!currentUser) {
@@ -153,29 +169,15 @@ useEffect(() => {
       <div className="p-6 max-w-lg mx-auto bg-[url('/static/modal.png')] 
                         bg-cover bg-center rounded-[20px] border-4 border-white mt-10 mb-10">
         <h2 className="text-2xl font-bold text-center text-white mb-6">Thông tin tài khoản</h2>
-        {/* Form */}
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3 text-[#233da3]">
+        {isLoading && <p>Đang đồng bộ dữ liệu...</p>} 
+        {/* Container for user info */}
+        <div className="flex flex-col gap-3 text-[#233da3]">
           {renderInput("fullName", "Họ và tên", currentUser.fullName, true)}
           {renderInput("phoneNumber", "Số điện thoại", currentUser.phoneNumber, true)}
-          {renderInput("dateOfBirth", "Ngày sinh", currentUser.dateOfBirth, true)}
+          {renderInput("birthday", "Ngày sinh", currentUser.dateOfBirth, true)}
           {renderInput("city", "Thành phố", "HCM", true)}
-          
-          <div className="relative pb-5">
-            <label htmlFor="email" className="block text-sm font-medium text-white/100 mb-1">
-              Email<span aria-hidden="true" className="text-[rgb(239,0,18)]">&thinsp;*</span>
-            </label>
-            <input
-              id="email"
-              type="email"
-              {...register("email")}
-              placeholder="Nhập email của bạn"
-              className={`w-full bg-white border rounded-[30px] p-2 focus:ring-2 outline-none transition ${errors.email ? 'border-red-500 focus:ring-red-500' : 'border-white/30 focus:ring-[#233da3]'}`}
-            />
-            {errors.email && <p className="absolute bottom-0 left-0 text-red-500 text-xs ml-2">{errors.email.message}</p>}
-          </div>
-
-          <ButtonOrange type="submit" className="w-[200px] h-12 text-lg mx-auto mt-4">Lưu thay đổi</ButtonOrange>
-        </form>
+          {renderInput("email", "Email", currentUser.email || 'Chưa cập nhật', true)}
+        </div>
       </div>
 
     </>
