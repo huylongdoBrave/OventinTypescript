@@ -41,7 +41,7 @@ const InfoProfile: React.FC = () => {
     // 1. Lấy token từ localStorage
     const token = localStorage.getItem('token'); 
     if (!token) {
-      throw new Error("No token found"); // Báo lỗi nếu rỗng token
+      throw new Error("No token found. Please logout and login again"); // Báo lỗi nếu rỗng token
       navigate('/');
     }
 

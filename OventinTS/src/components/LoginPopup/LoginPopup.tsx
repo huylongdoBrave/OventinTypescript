@@ -310,12 +310,12 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuc
               
               {/* Quên mật khẩu */}
               <div className="mt-8 text-[15px] flex justify-between items-center text-sm w-full">
-                <button onClick={openForgotPasswordPopup} type="button" className="font-medium text-[#ff0303] cursor-pointer
-                focus:outline-none hover:text-red-800" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>
+                <button onClick={openForgotPasswordPopup} type="button" className="font-medium text-[rgb(35,61,163)] cursor-pointer
+                focus:outline-none hover:text-blue-700" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>
                   Quên mật khẩu
                 </button>
-                <button onClick={openRuleRegisterPopup} type="button" className="font-medium text-[#ff0303] cursor-pointer 
-                focus:outline-none hover:text-red-800"
+                <button onClick={openRuleRegisterPopup} type="button" className="font-medium text-[rgb(35,61,163)] cursor-pointer 
+                focus:outline-none hover:text-blue-700"
                 style={{ textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>
                   Đăng ký
                 </button>
