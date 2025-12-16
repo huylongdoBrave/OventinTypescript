@@ -5,11 +5,12 @@ import { useLocation } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import ButtonOrange from '../Button/ButtonOranges';
+import ButtonOrange from '../Button/ButtonCustomA';
 import AlertTitle, { type AlertType } from '../AlertTitle/AlertTitle';
 
 /**
  *    ====== UI InfoProfile ======
+ * 
  * Giao diện cho dữ liệu người dùng được lưu trong localStorage.
  * Lấy từ RegisterPopup.tsx không bao gồm password và confirmPassword.
  */
@@ -67,6 +68,7 @@ useEffect(() => {
       // (Hữu ích khi refresh trang hoặc truy cập trực tiếp)
       const existingUsersRaw = localStorage.getItem('registeredUsers');
       if (existingUsersRaw) {
+        
         const existingUsers: StoredUser[] = JSON.parse(existingUsersRaw);
         if (existingUsers.length > 0) {
           const lastUser = existingUsers[existingUsers.length - 1];

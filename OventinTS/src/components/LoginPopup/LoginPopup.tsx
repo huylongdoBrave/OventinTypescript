@@ -2,9 +2,10 @@ import React ,{useState, useEffect, memo, useCallback} from "react";
 import {useForm} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import ButtonOrange from "../Button/ButtonOranges";
+import ButtonOrange from "../Button/ButtonCustomA";
 import ForgotPasswordPopup from "../ForgotPassword/ForgotPasswordPopup";
 import RuleRegisterPopup from "../RegisterPopup/RuleRegisterPopup";
+import axios from 'axios';
 import RegisterPopup, { type User } from "../RegisterPopup/RegisterPopup";
 import AlertTitle, { type AlertType } from "../AlertTitle/AlertTitle";
 
@@ -98,52 +99,39 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuc
     }
   }, [isOpen, reset]);
 
-
-  //  === Hàm xử lý submit form đăng nhập KIỂU CŨ ===
-  // const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) =>{
-  //   const { id, value} = e.target;
-  //   setFormData((prevFormData) => ({
-  //     ...prevFormData,
-  //     [id]: value,
-  //   }));
-  // }, []);
-
-  // const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   const phoneNumber = formData.phoneNumber.trim();
-  //   const password = formData.password.trim();
-  //   const phoneRegex = /^\d{10}$/;
-  //   if (!phoneNumber || !password){
-  //     alert("Vui lòng nhập đầy đủ thông tin!");
-  //     return;
-  //   }
-  //   if (!phoneRegex.test(phoneNumber)) {
-  //     alert("Số điện thoại không hợp lệ. Vui lòng nhập đúng 10 chữ số.");
-  //     return;
-  //   }
-  //   if (password.length < 6) {
-  //     alert("Mật khẩu phải có ít nhất 6 ký tự.");
-  //     return
-  //   }
   
   const onSubmit = async (dataUser: UserLogin) => {
     setIsLoading(true); // Bắt đầu loading
     try {
-      const response = await fetch('https://api-dev.estuary.solutions:8443/ovaltine-web-api-dev/v1/auth/sign-in', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          phone: dataUser.phoneNumber, // API yêu cầu 'phone'
-          password: dataUser.password,
-        }),
-      });
 
-      const responseData = await response.json();
-      if (!response.ok) {
-        // Nếu server trả về lỗi (status 4xx, 5xx)
-        throw new Error(responseData.message || 'Đăng nhập thất bại. Vui lòng thử lại.');
+      // Cách gọi API với fetch cũ
+      // const response = await fetch('https://api-dev.estuary.solutions:8443/ovaltine-web-api-dev/v1/auth/sign-in', {
+      // method: 'POST',
+      // headers: {
+      //   'Content-Type': 'application/json',
+      // },
+      // body: JSON.stringify({
+      //   phone: dataUser.phoneNumber, // API yêu cầu 'phone'
+      //   password: dataUser.password,
+      // }),
+
+      // const responseData = await response.json();
+      // if (!response.ok) {
+      //   // Nếu server trả về lỗi (status 4xx, 5xx)
+      //   throw new Error(responseData.message || 'Đăng nhập thất bại. Vui lòng thử lại.');
+      // }
+
+        // Sử dụng axios.post để gọi API
+      const response = await axios.post('https://api-dev.estuary.solutions:8443/ovaltine-web-api-dev/v1/auth/sign-in', {
+        phone: dataUser.phoneNumber, // API yêu cầu 'phone'
+        password: dataUser.password,
+      });
+      const responseData = response.data;
+
+      // --- API THÀNH CÔNG: Lấy và lưu token ---
+      const token = responseData.token;
+      if (token) {
+        localStorage.setItem('token', token); // Lưu token vào localStorage
       }
 
       const loggedInUser: User = {
@@ -156,30 +144,28 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuc
 
       // --- API THÀNH CÔNG: cập nhật trạng thái đăng nhập ---
       onUserLoginSuccess(loggedInUser);
-      // Hiển thị thông báo thành công
       setAlertState({
         isOpen: true,
         type: 'success',
         title: 'Đăng nhập thành công!',
         description: `Xin chào, ${loggedInUser.fullName}!`
       });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
-      // --- Server trả về 400, 401, 404, 500.. ---
-      console.error("Lỗi API:", error);
-      // // Lấy câu thông báo lỗi từ Server (nếu có)
-      // const serverMessage = error.response?.data?.message || 'Có gì đó không đúng. Vui lòng thử lại.';
-
+        // Axios tự động throw error cho status code 4xx, 5xx
+        // Thông tin lỗi chi tiết hơn nằm trong error.response
+      console.error("Lỗi API đăng nhập:", error);
       setAlertState({
         isOpen: true,
         type: 'error',
         title: 'Đăng nhập thất bại',
-        description: error.message || 'Có gì đó không đúng. Vui lòng thử lại.'  // Hiển thị lỗi thật từ server (VD: Sai mật khẩu)
+        description: error.response?.data?.message || error.message || 'Có lỗi xảy ra. Vui lòng thử lại.'
       }); 
 
     } finally {
       setIsLoading(false); // Kết thúc loading
     }
+
     // === KIỂM TRA ĐĂNG NHẬP TỪ LOCALSTORAGE (KHÔNG DÙNG API) ===
     // const { phoneNumber, password } = dataUser;
     // const existingUsersRaw = localStorage.getItem("registeredUsers");
@@ -208,7 +194,6 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ isOpen, onClose, onUserLoginSuc
     //   });
     // }
   }
-  // };
 
 
   return (

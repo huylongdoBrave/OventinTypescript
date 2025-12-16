@@ -11,9 +11,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const ButtonAdd: React.FC<ButtonProps> = ({ children, className, ...props }) => {
   const baseClasses = `
-    bg-[#ff6702] text-white font-black tracking-wider border-[3px] border-white 
+    bg-[#BBCB64] text-white font-black tracking-wider border-[3px] border-white 
     cursor-pointer shadow-lg transition-all duration-200 rounded-full inline-block
-    hover:bg-white hover:text-[#ff6702]
+    hover:bg-white hover:text-[#BBCB64]
     disabled:bg-gray-400 disabled:cursor-not-allowed
   `;
 

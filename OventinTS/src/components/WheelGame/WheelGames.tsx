@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback, memo } from "react";
 import { useLocation } from 'react-router-dom'; // Import useLocation
 // import { AnimatePresence } from "framer-motion";
-import ButtonOrange from "../Button/ButtonOranges.tsx";
+import ButtonOrange from "../Button/ButtonCustomA.tsx";
 
 import Wheel from "./Wheels.tsx";
 import ResultPopup from "./ResultPopups.tsx";

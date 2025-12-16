@@ -1,5 +1,5 @@
 import React, { memo, useState } from "react";
-import ButtonOrange from "../Button/ButtonOranges";
+import ButtonOrange from "../Button/ButtonCustomA";
 
 //    ====== UI POPUP ĐIỀU KHOẢN KHI ĐĂNG KÝ ======
 

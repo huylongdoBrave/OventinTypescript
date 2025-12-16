@@ -1,6 +1,6 @@
 import React ,{useState, useEffect, memo} from "react";
 // import { useNavigate } from "react-router-dom";
-import ButtonOrange from "../Button/ButtonOranges";
+import ButtonOrange from "../Button/ButtonCustomA";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {useForm} from 'react-hook-form';

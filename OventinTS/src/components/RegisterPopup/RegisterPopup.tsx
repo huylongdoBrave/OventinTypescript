@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useForm} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import ButtonOrange from "../Button/ButtonOranges";
+import ButtonOrange from "../Button/ButtonCustomA";
 import AlertTitle, { type AlertType } from "../AlertTitle/AlertTitle";
 import { Link } from "react-router-dom";
 // import RuleEvent from "../RuleEvent";
@@ -36,12 +36,10 @@ const validationSchema = yup.object().shape({
     .required("Vui lòng nhập họ và tên")
     .matches(/^[^0-9]+$/, "Họ và tên không được chứa số.")
     .min(4, "Họ và tên phải có nhiều hơn 3 ký tự."),
-
   phoneNumber: yup
     .string()
     .required("Vui lòng nhập số điện thoại")
     .matches(/^\d{10}$/, "Số điện thoại phải có đúng 10 chữ số, không nhập chữ."),
-
   dateOfBirth: yup
     .string()
     .required("Vui lòng nhập ngày sinh")
@@ -59,12 +57,10 @@ const validationSchema = yup.object().shape({
       }
       return age >= 4;
     }),
-
   password: yup
     .string()
     .min(8, "Mật khẩu phải có ít nhất 8 ký tự.")
     .required("Vui lòng nhập mật khẩu"),
-
   confirmPassword: yup
     .string()
     .oneOf([yup.ref("password"), ""], "Mật khẩu không khớp.")
@@ -72,6 +68,7 @@ const validationSchema = yup.object().shape({
 });
 
 
+// Component RegisterPopup
 const RegisterPopup: React.FC<RegisterPopupProps> = ({
   isOpen,
   onClose,
