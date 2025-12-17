@@ -117,7 +117,7 @@ const PrizeExchange: React.FC = () => {
                 <div className="mt-2 flex flex-row gap-1 items-center
                                 [-webkit-box-align:center]">
                    <img 
-                    src='/static/profile_icon.png' 
+                    src='/static/Zootopia.png' 
                     alt="icon" 
                     className="w-8 h-8 rounded-full "
                   /><span className="leading-normal text-[rgb(239,0,18)] text-3xl font-bold m-0">x{prize.price}</span>
