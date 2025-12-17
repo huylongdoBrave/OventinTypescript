@@ -77,7 +77,8 @@ const PrizeExchange: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className="top-5 w-full h-full relative z-0">
+      {/* Title */}
       <div className="flex justify-center items-center top-5 w-full h-full relative z-0">
         <img
           src="/static/PrizeExchange.png"
@@ -153,7 +154,22 @@ const PrizeExchange: React.FC = () => {
       </div>
       {/* End Danh Sách */}
 
+
+          <img
+            src="/static/fox.png"
+            alt="fox"
+            className="absolute z-[5] h-auto transition-all duration-300 ease-in-out hidden
+                lg:block lg:w-[150px] lg:bottom-[40px] lg:left-[0px]"
+          />
+          <img
+            src="/static/rabbit.png"
+            alt="rabbit"
+            className="absolute z-[5] h-auto transition-all duration-300 ease-in-out hidden
+                lg:block lg:w-[150px] lg:bottom-[40px] lg:right-[0px]"
+          />
+
     </div>
+    
   )
 }
 
