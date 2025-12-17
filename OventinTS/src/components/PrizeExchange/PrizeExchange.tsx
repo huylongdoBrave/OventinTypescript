@@ -22,6 +22,7 @@ const PrizeExchange: React.FC = () => {
   //   { id: 7, name: "Sạc dự phòng", points: 600, mainImage: "/static/fox.png", subImage: "https://via.placeholder.com/30" },
   //   { id: 8, name: "Áo thun Limited", points: 450, mainImage: "/static/fox.png", subImage: "https://via.placeholder.com/30" },
   // ]);
+  const BASE_PRIZE_IMG_URL = 'https://s3dev.estuary.solutions/ovaltine2024dev/';
   const [prizes, setPrizes] = useState<PrizeExchange[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -40,7 +41,7 @@ const PrizeExchange: React.FC = () => {
           name: item.name,
           price: item.price,
           quantity: item.quantity,
-          prizeImage: item.notiImg?.startsWith('http') ? item.notiImg : `/static/fox.png`
+          prizeImage: item.avatarId ? `${BASE_PRIZE_IMG_URL}${item.avatarId}`  : `/static/fox.png`
         }));
 
         setPrizes(mappedDataPrize);
@@ -89,7 +90,7 @@ const PrizeExchange: React.FC = () => {
       <div className="min-h-screen py-10 px-4">
         
         <div className="max-w-8xl mx-auto">
-        <h1 className="text-3xl font-bold text-center mb-10 text-gray-800">
+        <h1 className="text-3xl font-bold text-center mb-10 text-blue-900">
           Đổi Quà Thưởng
         </h1>
         <div className="flex flex-wrap justify-center gap-6 max-w-[844px] mx-auto">
@@ -109,7 +110,7 @@ const PrizeExchange: React.FC = () => {
                 <img 
                   src={prize.prizeImage} 
                   alt={prize.name} 
-                  className="w-3/4 h-auto object-contain mb-4" 
+                  className="w-4/4 h-auto object-contain mb-4" 
                 />
                 
                 <div className="mt-2 flex flex-row gap-1 items-center
@@ -127,18 +128,18 @@ const PrizeExchange: React.FC = () => {
                  [text-shadow:0_0_3px_rgb(255,255,255)] drop-shadow-[0_0_2px_rgb(255,255,255)]"> {/* che chữ: dùng truncate ? */}
                   {prize.name}
                 </h3>
-                <p className="text-sm text-gray-500 mb-3">
+                <p className="text-sm text-gray-700 mb-3 mt-2">
                  <span className="font-normal leading-normal text-[rgb(35,61,163)] text-base text-center max-w-[232px] mt-auto mb-0 mx-0
                   ">Còn</span>  {prize.quantity} phần quà
                 </p>
               </div>
                 <button 
                   disabled 
-                  className="
+                  className=" 
                     w-[60%] py-2.5 rounded-full 
                     bg-gray-300 text-gray-500 font-medium
                     cursor-not-allowed
-                    border border-gray-200
+                    border border-gray-200 mt-auto mb-4
                   "
                 >
                   Đổi quà

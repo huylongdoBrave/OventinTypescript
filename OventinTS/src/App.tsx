@@ -10,7 +10,7 @@ import LoginPopup from "./components/LoginPopup/LoginPopup.tsx";
 import RuleRegisterPopup from "./components/RegisterPopup/RuleRegisterPopup.tsx";
 import RegisterPopup, { type User } from "./components/RegisterPopup/RegisterPopup.tsx";
 import RuleEvent from './components/RuleEvent.tsx';
-import PrizeExchange from './components/PrizeExchange/PrizeChange.tsx';
+import PrizeExchange from './components/PrizeExchange/PrizeExchange.tsx';
 
 //    ====== APP CHÍNH QUẢN LÝ ROUTES VÀ TRẠNG THÁI ĐĂNG NHẬP  ======
 

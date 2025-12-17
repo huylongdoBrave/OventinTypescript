@@ -199,7 +199,7 @@ const InfoProfile: React.FC = () => {
             </span>
           </div>
           {/* Đường kẻ cho Tab 1 */}
-          <div className={`absolute w-43 md:w-66 lg:w-66 bottom-[-20px] left-[-10px] right-[10px] h-1 transition-colors duration-300 ${activeTab === 'personal' ? 'bg-blue-500 z-10' : 'bg-white/50'}`}></div>
+          <div className={`absolute w-43 md:w-66 lg:w-66 bottom-[-25px] left-[-10px] right-[10px] h-1 transition-colors duration-300 ${activeTab === 'personal' ? 'bg-blue-500 z-10' : 'bg-white/70'}`}></div>
         </div>
 
         {/* Tab 2 Wrapper */}
@@ -223,7 +223,7 @@ const InfoProfile: React.FC = () => {
             </span>
           </div>
           {/* Đường kẻ cho Tab 2 */}
-          <div className={`absolute w-43 md:w-66 lg:w-66 bottom-[-20px] left-[-10px] right-[10px] h-1 transition-colors duration-300 ${activeTab === 'recipient' ? 'bg-blue-500 z-10' : 'bg-white/50'}`}></div>
+          <div className={`absolute w-43 md:w-66 lg:w-66 bottom-[-25px] left-[-10px] right-[10px] h-1 transition-colors duration-300 ${activeTab === 'recipient' ? 'bg-blue-500 z-10' : 'bg-white/70'}`}></div>
         </div>
       </div>
 
