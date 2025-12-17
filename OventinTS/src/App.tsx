@@ -10,6 +10,9 @@ import LoginPopup from "./components/LoginPopup/LoginPopup.tsx";
 import RuleRegisterPopup from "./components/RegisterPopup/RuleRegisterPopup.tsx";
 import RegisterPopup, { type User } from "./components/RegisterPopup/RegisterPopup.tsx";
 import RuleEvent from './components/RuleEvent.tsx';
+import PrizeExchange from './components/PrizeExchange/PrizeChange.tsx';
+
+//    ====== APP CHÍNH QUẢN LÝ ROUTES VÀ TRẠNG THÁI ĐĂNG NHẬP  ======
 
 function App() {
 
@@ -159,6 +162,9 @@ function App() {
 
         {/* Trang sản phẩm */}
         {/* <Route path="/prizewheel/products" element={<ShowPrize />} /> */}
+
+        {/* Trang đổi quà */}
+        <Route path="/PrizeExchange" element={<PrizeExchange />} />
 
         {/* Profile */}
         <Route path="/Profile" element={<Profile currentUser={userLogged} onLogout={handleAppLogout} />} />

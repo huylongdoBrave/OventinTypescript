@@ -245,9 +245,21 @@ const InfoProfile: React.FC = () => {
       )}
 
       {activeTab === 'recipient' && (
-        <div className="p-6 max-w-lg mx-auto mt-10 mb-10 text-white text-center">
-          <p>Chức năng đang được phát triển.</p>
+        // <div className="p-6 max-w-lg mx-auto mt-10 mb-10 text-white text-center">
+          <div className="p-4 sm:p-6 max-w-lg w-sm lg:w-lg md:w-md mx-auto bg-[url('/static/modal.png')] 
+                  bg-center rounded-[20px] border-4 border-white mt-10 mb-10">
+          <h2 className="text-2xl font-bold text-center text-white mb-6">Thông tin người nhận</h2>
+          {isLoading && <p>Đang đồng bộ dữ liệu...</p>} 
+          {/* Container for user info */}
+          <div className="flex flex-col gap-3 text-[#233da3]">
+            {renderInput("fullName", "Họ và tên", currentUser.fullName, true)}
+            {renderInput("phoneNumber", "Số điện thoại", currentUser.phoneNumber, true)}
+            {renderInput("birthday", "Ngày sinh", currentUser.dateOfBirth, true)}
+            {renderInput("city", "Thành phố", "HCM", true)}
+            {renderInput("email", "Email", currentUser.email || 'Chưa cập nhật', true)}
+          </div>
         </div>
+        // </div>
       )}
 
     </>
