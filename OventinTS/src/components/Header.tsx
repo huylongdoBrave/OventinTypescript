@@ -171,8 +171,8 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
                                     [-webkit-text-stroke:1px_rgb(246,151,44)]"
                                     >x101</span>
               </div> 
-              <button
-                className="bg-[rgb(89,182,112)] text-white border-2 border-white rounded-full py-2 px-4 font-bold cursor-pointer 
+              <button disabled
+                className="bg-[rgb(89,182,112)] text-white border-2 border-white rounded-full py-2 px-4 font-bold cursor-not-allowed 
                 transition-colors shadow-[0_2px_2px_black] hover:bg-white hover:text-[rgb(89,182,112)]"
               >
                 Nhập mã
@@ -246,7 +246,9 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
                                     >x101</span>
               </div>
               <button
-                className="bg-[rgb(145,206,87)] text-white border-2 border-white rounded-full py-1 px-2 md:py-2 md:px-4 text-xs md:text-sm font-bold cursor-pointer 
+              disabled
+                className=" bg-[rgb(145,206,87)] text-white border-2 border-white rounded-full
+                 py-1 px-2 md:py-2 md:px-4 text-xs md:text-sm font-bold cursor-not-allowed 
                 transition-colors shadow-[0_2px_2px_black] hover:bg-white hover:text-[rgb(89,182,112)]"
               >
                 Nhập mã

@@ -253,10 +253,12 @@ const InfoProfile: React.FC = () => {
           {/* Container for user info */}
           <div className="flex flex-col gap-3 text-[#233da3]">
             {renderInput("fullName", "Họ và tên", currentUser.fullName, true)}
+            {renderInput("CMND", "CMND", 'Số căn cước công dân', true)}
             {renderInput("phoneNumber", "Số điện thoại", currentUser.phoneNumber, true)}
-            {renderInput("birthday", "Ngày sinh", currentUser.dateOfBirth, true)}
-            {renderInput("city", "Thành phố", "HCM", true)}
-            {renderInput("email", "Email", currentUser.email || 'Chưa cập nhật', true)}
+            {renderInput("city", "Thành phố", "HCM", true)} 
+            {renderInput("district", "Quận", 'Quận / Huyện', true)}
+            {renderInput("ward", "Phường/Xã", 'Phường/ Xã', true)}
+            {renderInput("address", "Địa chỉ", 'Số nhà, tên đường, khu vực', true)}
           </div>
         </div>
         // </div>

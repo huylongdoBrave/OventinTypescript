@@ -23,6 +23,7 @@ const PrizeExchange: React.FC = () => {
   //   { id: 8, name: "Áo thun Limited", points: 450, mainImage: "/static/fox.png", subImage: "https://via.placeholder.com/30" },
   // ]);
   const BASE_PRIZE_IMG_URL = 'https://s3dev.estuary.solutions/ovaltine2024dev/';
+  
   const [prizes, setPrizes] = useState<PrizeExchange[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);

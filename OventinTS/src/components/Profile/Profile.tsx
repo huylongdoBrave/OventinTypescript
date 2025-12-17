@@ -96,7 +96,7 @@ const Profile: React.FC<ProfileProps> = ({ onLogout, currentUser }) => {
             focus:outline-none cursor-pointer "
           >
             <span className="block skew-x-[10deg]">
-            Thông tin cá nhân
+              Thông tin cá nhân
             </span>
           </button>
 
