@@ -125,11 +125,11 @@ const PrizeExchange: React.FC = () => {
               </div>
 
               <div className="w-full text-center mt-4 px-1">
-                <h3 className="min-h-[3.5rem] line-clamp-2 flex items-center justify-center leading-normal text-[rgb(35,61,163)] text-center text-xl
+                <h3 className="min-h-[4rem] line-clamp-2 flex  justify-center leading-normal text-[rgb(35,61,163)] text-center text-xl
                  [text-shadow:0_0_3px_rgb(255,255,255)] drop-shadow-[0_0_2px_rgb(255,255,255)]"> {/* che chữ: dùng truncate ? */}
                   {prize.name}
                 </h3>
-                <p className="text-sm text-gray-700 mb-3 mt-2">
+                <p className="text-sm text-gray-900 mb-3 mt-2">
                  <span className="font-normal leading-normal text-[rgb(35,61,163)] text-base text-center max-w-[232px] mt-auto mb-0 mx-0
                   ">Còn</span>  {prize.quantity} phần quà
                 </p>
@@ -153,8 +153,6 @@ const PrizeExchange: React.FC = () => {
         </div>
       </div>
       {/* End Danh Sách */}
-
-
           <img
             src="/static/fox.png"
             alt="fox"
