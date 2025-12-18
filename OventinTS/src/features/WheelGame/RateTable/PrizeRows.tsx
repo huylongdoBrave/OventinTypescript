@@ -22,7 +22,7 @@ const PrizeRows: React.FC<PrizeRowProps> = ({
       className="flex items-center gap-2 p-2 mb-2 bg-white/10 rounded"
       data-prize-id={prize.id}
     >
-      <div className="w-8 text-center flex-shrink-0 font-mono">{prize.id}</div>
+      <div className="w-8 text-center shrink-0 font-mono">{prize.id}</div>
       <div
         className="prize-name-cell basis-[25%] flex-1 font-semibold truncate"
         style={{ cursor: "grab" }}
@@ -69,7 +69,7 @@ const PrizeRows: React.FC<PrizeRowProps> = ({
           %
         </span>
       </div>
-      <div style={{ marginLeft: "10px" }} className="w-8 flex-shrink-0">
+      <div style={{ marginLeft: "10px" }} className="w-8 shrink-0">
         <button
           className="w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center text-lg font-bold leading-none hover:bg-red-700 transition-colors"
           title="Xóa"

@@ -126,7 +126,7 @@ const PrizeExchange: React.FC = () => {
               </div>
 
               <div className="w-full text-center mt-4 px-1">
-                <h3 className="min-h-[4rem] line-clamp-2 flex  justify-center leading-normal text-[rgb(35,61,163)] text-center text-xl
+                <h3 className="min-h-16 line-clamp-2 flex  justify-center leading-normal text-[rgb(35,61,163)] text-center text-xl
                  [text-shadow:0_0_3px_rgb(255,255,255)] drop-shadow-[0_0_2px_rgb(255,255,255)]"> {/* che chữ: dùng truncate ? */}
                   {prize.name}
                 </h3>
@@ -157,14 +157,14 @@ const PrizeExchange: React.FC = () => {
           <img
             src="/static/fox.png"
             alt="fox"
-            className="absolute z-[5] h-auto transition-all duration-300 ease-in-out hidden
-                lg:block lg:w-[150px] lg:bottom-[40px] lg:left-[0px]"
+            className="absolute z-5 h-auto transition-all duration-300 ease-in-out hidden
+                lg:block lg:w-[150px] lg:bottom-10 lg:left-0"
           />
           <img
             src="/static/rabbit.png"
             alt="rabbit"
-            className="absolute z-[5] h-auto transition-all duration-300 ease-in-out hidden
-                lg:block lg:w-[150px] lg:bottom-[40px] lg:right-[0px]"
+            className="absolute z-5 h-auto transition-all duration-300 ease-in-out hidden
+                lg:block lg:w-[150px] lg:bottom-10 lg:right-0"
           />
 
     </div>

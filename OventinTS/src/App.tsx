@@ -10,7 +10,6 @@ import LoginPopup from "./features/LoginPopup/LoginPopup.tsx";
 import RuleRegisterPopup from "./features/RegisterPopup/RuleRegisterPopup.tsx";
 import RegisterPopup, { type User } from "./features/RegisterPopup/RegisterPopup.tsx";
 import RuleEvent from './features/RuleEvent.tsx';
-
 import PrizeExchange from './features/PrizeExchange/components/PrizeExchange.tsx';
 
 

@@ -13,7 +13,7 @@ function RuleEvent() {
         onClose={closeAttentionPopup}
       />
 
-      <div className=" fixed inset-0 flex justify-center py-10 mb-10 my-5 px-4 z-0">
+      <div className="  inset-0 flex justify-center py-10 mb-10 my-5 px-4 z-0 relative">
         {/* Container max width */}
         <div className="flex justify-center w-full max-w-[800px] pt-2.5">
           {/* Title */}
