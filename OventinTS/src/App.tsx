@@ -1,16 +1,18 @@
 import { Route, Routes } from 'react-router-dom';
 import { useState, useCallback, useEffect } from 'react';
-import LoginAccess from './components/LoginAcess.tsx';
-import Footer from './components/Footer.tsx'
-import WheelGame from './components/WheelGame/WheelGames.tsx';
-import Profile from './components/Profile/Profile.tsx';
-import InfoProfile from './components/Profile/InfoProfile.tsx';
-import Header from './components/Header.tsx';
-import LoginPopup from "./components/LoginPopup/LoginPopup.tsx";
-import RuleRegisterPopup from "./components/RegisterPopup/RuleRegisterPopup.tsx";
-import RegisterPopup, { type User } from "./components/RegisterPopup/RegisterPopup.tsx";
-import RuleEvent from './components/RuleEvent.tsx';
-import PrizeExchange from './components/PrizeExchange/PrizeExchange.tsx';
+import LoginAccess from './features/LoginAcess.tsx';
+import Footer from './features/Footer.tsx'
+import WheelGame from './features/WheelGame/WheelGames.tsx';
+import Profile from './features/Profile/components/Profile.tsx';
+import InfoProfile from './features/Profile/components/InfoProfile.tsx';
+import Header from './features/Header.tsx';
+import LoginPopup from "./features/LoginPopup/LoginPopup.tsx";
+import RuleRegisterPopup from "./features/RegisterPopup/RuleRegisterPopup.tsx";
+import RegisterPopup, { type User } from "./features/RegisterPopup/RegisterPopup.tsx";
+import RuleEvent from './features/RuleEvent.tsx';
+
+import PrizeExchange from './features/PrizeExchange/components/PrizeExchange.tsx';
+
 
 //    ====== APP CHÍNH QUẢN LÝ ROUTES VÀ TRẠNG THÁI ĐĂNG NHẬP  ======
 
@@ -72,12 +74,12 @@ function App() {
 
 
   // Kiểm tra user đã đăng nhập từ localStorage khi app được load
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const loggedInUserJSON = localStorage.getItem('loggedInUser');
     if (loggedInUserJSON) {
       try {
         const user = JSON.parse(loggedInUserJSON);
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setUserLogged(user);
         setIsLoggedIn(true);
       } catch (error) {

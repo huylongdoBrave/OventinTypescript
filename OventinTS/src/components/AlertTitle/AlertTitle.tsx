@@ -65,14 +65,14 @@ const AlertTitle: React.FC<AlertTitleProps> = ({
 
   return (
     <div
-      className={`fixed top-5 left-1/2 -translate-x-1/2 z-[2000] w-full max-w-md transition-all duration-300
+      className={`fixed top-5 left-1/2 -translate-x-1/2 z-2000 w-full max-w-md transition-all duration-300
                   ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'}`}
     >
       <div
         className={`flex items-center w-full p-4 rounded-lg shadow-lg ${config.bgClass}`}
         role="alert"
       >
-        <div className="flex-shrink-0">
+        <div className="shrink-0">
           {config.icon}
         </div>
         <div className="ml-3 text-sm font-medium text-left">
