@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
               {/* Menu Item Structure */}
               <li className="relative w-[100px] h-full flex justify-center group">
                 <NavLink
-                  to="/prizewheel/products"
+                  to="/Prize"
                   className={() =>
                     `flex items-center w-full h-full text-white no-underline box-border`
                   }
@@ -43,7 +43,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
                       className={`absolute bottom-[-45px] w-[90px] h-20 bg-[#8A8635] text-white rounded-lg
                             flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 
                             ${
-                              isActive ? "bg-(--menu-blue)" : "group-hover:bg-(--menu-red-hover)"
+                              isActive ? "bg-[var(--menu-blue)]" : "group-hover:bg-(--menu-red-hover)"
                             } `}
                     >
                       <img
@@ -69,7 +69,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
                       className={`absolute bottom-[-45px] w-[90px] h-20 bg-[#8A8635] text-white rounded-lg 
                             flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 ${
                               isActive
-                                ? "bg-(--menu-blue)"
+                                ? "bg-[var(--menu-blue)]"
                                 : "group-hover:bg-(--menu-red-hover)"
                             }`}
                     >
@@ -110,7 +110,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
                       className={`absolute bottom-[-45px] w-[90px] h-20 bg-[#8A8635] text-white rounded-lg 
                             flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 ${
                               isActive
-                                ? "bg-(--menu-blue)"
+                                ? "bg-[var(--menu-blue)]"
                                 : "group-hover:bg-(--menu-red-hover)"
                             }`}
                     >
@@ -289,14 +289,14 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
         <ul className="flex justify-center gap-4 list-none m-0 p-0 h-full">
           <li className="relative flex justify-center group">
             <NavLink
-              to="/prizewheel/products"
+              to="/Prize"
               className="flex items-center w-full h-full no-underline box-border"
             >
               {({ isActive }) => (
                 <div
                   className={`bottom-[35px] relative w-[70px] h-[70px] bg-[#8A8635] text-white rounded-lg 
                     flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md group-hover:bg-(--menu-red-hover) ${
-                      isActive ? "bg-(--menu-blue)" : ""
+                      isActive ? "bg-[var(--menu-blue)]" : ""
                     }`}
                 >
                   <img
@@ -322,7 +322,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
                 <div
                   className={`bottom-[35px] relative w-[75px] h-[70px] bg-[#8A8635] text-white rounded-lg 
                         flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md ${
-                          isActive ? "bg-(--menu-blue)" : "group-hover:bg-(--menu-red-hover)"
+                          isActive ? "bg-[var(--menu-blue)]" : "group-hover:bg-(--menu-red-hover)"
                         }`}
                 >
                   <img
@@ -362,7 +362,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
                 <div
                   className={`bottom-[35px] relative w-[75px] h-[70px] bg-[#8A8635] text-white rounded-lg 
                         flex flex-col justify-center items-center border-4 border-[#e6f3ff] transition-all gap-1 shadow-md ${
-                          isActive ? "bg-(--menu-blue)" : "group-hover:bg-(--menu-red-hover)"
+                          isActive ? "bg-[var(--menu-blue)]" : "group-hover:bg-(--menu-red-hover)"
                         }`}
                 >
                   <img

@@ -57,7 +57,6 @@ const ForgotPasswordPopup: React.FC<ForgotPasswordProps> = ({ isOpen, onClose })
   });
 
 
-   
   useEffect(() => {
     if (!isOpen) {
       reset();
@@ -80,8 +79,8 @@ const ForgotPasswordPopup: React.FC<ForgotPasswordProps> = ({ isOpen, onClose })
       setAlertState({
         isOpen: true,
         type: 'error',
-        title: 'Số không tồn tại trong hệ thống.',
-        description: 'Hãy nhập lại số khác.'
+        title: 'Số này chưa đăng ký.',
+        description: 'Hãy nhập số mặc định đăng ký.'
       });
     }
   };

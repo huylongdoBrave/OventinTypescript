@@ -11,6 +11,7 @@ import RuleRegisterPopup from "./features/RegisterPopup/RuleRegisterPopup.tsx";
 import RegisterPopup, { type User } from "./features/RegisterPopup/RegisterPopup.tsx";
 import RuleEvent from './features/RuleEvent.tsx';
 import PrizeExchange from './features/PrizeExchange/components/PrizeExchange.tsx';
+import Prize from './features/Prize/components/Prize.tsx';
 
 
 //    ====== APP CHÍNH QUẢN LÝ ROUTES VÀ TRẠNG THÁI ĐĂNG NHẬP  ======
@@ -138,6 +139,8 @@ function App() {
       onLoginClickFeater={openLoginPopup}
       onRegisterClickFeater={openRulePopup}
       />
+      <main>
+
 
         <LoginPopup 
           isOpen={isLoginPopup} 
@@ -161,8 +164,8 @@ function App() {
         <Route path="/" element={<WheelGame isLoggedIn={isLoggedIn}/>} />
         <Route path="/WheelGame" element={<WheelGame isLoggedIn={isLoggedIn}/>} />
 
-        {/* Trang sản phẩm */}
-        {/* <Route path="/prizewheel/products" element={<ShowPrize />} /> */}
+        {/* Trang quà */}
+        <Route path="/Prize" element={<Prize />} />
 
         {/* Trang đổi quà */}
         <Route path="/PrizeExchange" element={<PrizeExchange />} />
@@ -177,7 +180,7 @@ function App() {
         <Route path="/RuleEvent" element={<RuleEvent />} />
 
       </Routes>
-
+      </main>
       <Footer />
 
     </div>

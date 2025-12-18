@@ -306,7 +306,7 @@ const WheelGame: React.FC<WheelGameProps> = ({ isLoggedIn }) => {
   return (
     <>
 
-      <main>
+
         <div className="flex flex-col items-center w-full">
           <div className="flex justify-center items-center  w-full h-full relative z-0">
             <img
@@ -428,7 +428,7 @@ const WheelGame: React.FC<WheelGameProps> = ({ isLoggedIn }) => {
             />
           </div>
         </div>
-      </main>
+
       <p className="text-[#f5f5f5] text-[18px] lg:text-[20px] mt-5 text-center font-[1000] ">
         Bấm vào Vòng Quay May Mắn để bắt đầu quay bạn nhé!
       </p>

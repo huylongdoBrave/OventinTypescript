@@ -220,7 +220,7 @@ const InfoProfile: React.FC = () => {
             {renderInput("city", "Thành phố", getCityNameById(currentUser.city), true)} 
             {renderInput("district", "Quận", 'Quận / Huyện', true)}
             {renderInput("ward", "Phường/Xã", 'Phường/ Xã', true)}
-            {renderInput("address", "Địa chỉ", 'Số nhà, tên đường, khu vực', true)}
+            {renderInput("address", "Địa chỉ", currentUser.address, true)}
           </div>
         </div>
         // </div>

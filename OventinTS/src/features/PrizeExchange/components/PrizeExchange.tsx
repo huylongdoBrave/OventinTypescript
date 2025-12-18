@@ -1,5 +1,6 @@
-import React ,{useState, useEffect} from "react";
+import React ,{useState, useEffect, useRef, useCallback} from "react";
 import axios from "axios";
+import ImgLeftPopup from "../../StickyDragPopup/ImgLeftPopups";
 
 interface PrizeExchange {
   id: number;
@@ -27,6 +28,9 @@ const PrizeExchange: React.FC = () => {
   const [prizes, setPrizes] = useState<PrizeExchange[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const dragRefLeft = useRef<HTMLDivElement>(null!);
+  const [isStickyPopupLeft, setIsStickyPopupLeft] = useState(true);
+  const closeStickyPopupLeft = useCallback(() => setIsStickyPopupLeft(false), []);
 
 
   useEffect(() => {
@@ -78,7 +82,8 @@ const PrizeExchange: React.FC = () => {
   }
 
   return (
-    <div className="top-5 w-full h-full relative z-0">
+
+  <div className="top-5 w-full h-full relative z-0">
       {/* Title */}
       <div className="flex justify-center items-center top-5 w-full h-full relative z-0">
         <img
@@ -154,6 +159,7 @@ const PrizeExchange: React.FC = () => {
         </div>
       </div>
       {/* End Danh Sách */}
+
           <img
             src="/static/fox.png"
             alt="fox"
@@ -166,9 +172,14 @@ const PrizeExchange: React.FC = () => {
             className="absolute z-5 h-auto transition-all duration-300 ease-in-out hidden
                 lg:block lg:w-[150px] lg:bottom-10 lg:right-0"
           />
+          <ImgLeftPopup
+            isOpen={isStickyPopupLeft}
+            onClose={closeStickyPopupLeft}
+            dragRef={dragRefLeft}
+          />
 
-    </div>
-    
+  </div>
+
   )
 }
 
