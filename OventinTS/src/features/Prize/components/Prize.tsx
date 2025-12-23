@@ -1,4 +1,4 @@
-import React , {useState, useEffect}  from 'react'
+import {useState, useEffect}  from 'react'
 import PrizeDetailPopup from './PrizeDetailPopup';
 import {type Prize as PrizeType } from '../../WheelGame/WheelGames'; // Import Prize type
 

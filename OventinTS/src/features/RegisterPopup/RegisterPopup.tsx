@@ -65,6 +65,7 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
   isOpen,
   onClose,
 }) => {
+
   // === STATE FORM ===
   const { register, handleSubmit: handleRegisterSubmit, formState: { errors }, reset } = useForm<User>({
     resolver: yupResolver(validationSchema),
@@ -101,6 +102,7 @@ const RegisterPopup: React.FC<RegisterPopupProps> = ({
       setIsConfirmRegister(false);
     }
   }, [isOpen, reset]);
+  
 
   const onSubmit = (data: User) => {   // Xử lý submit
       const existingUsersRaw = localStorage.getItem("registeredUsers");

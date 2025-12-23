@@ -138,7 +138,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
                       alt="Thêm"
                       className="h-7"
                     />
-                    <span className="text-sm font-medium">Thêm</span>
+                    <span className="text-sm font-medium">Home</span>
                   </div>
                 </a>
               </li>
@@ -389,7 +389,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, onLoginClickFeater, onRegis
                   alt="Thêm"
                   className="h-6"
                 />
-                <span className="text-xs font-medium">Thêm</span>
+                <span className="text-xs font-medium">Home</span>
               </div>
             </a>
           </li>

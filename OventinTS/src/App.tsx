@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { useState, useCallback, useEffect } from 'react';
-import LoginAccess from './features/LoginAcess.tsx';
+// import LoginAccess from './features/LoginAcess.tsx';
 import Footer from './features/Footer.tsx'
 import WheelGame from './features/WheelGame/WheelGames.tsx';
 import Profile from './features/Profile/components/Profile.tsx';
@@ -88,46 +88,47 @@ function App() {
       }
     }
   }, []);
+  
 
   //  === TRẠNG THÁI XÁC THỰC QUYỀN XEM TRANG ZOOTOPIA ===
   //      Quyền xem trang với 3 trạng thái: đang kiểm tra, đã xác thực, chưa xác thực
-  const [authStatus, setAuthStatus] = useState<'checking' | 'authenticated' | 'unauthenticated'>('checking');
+  // const [authStatus, setAuthStatus] = useState<'checking' | 'authenticated' | 'unauthenticated'>('checking');
 
-  // Kiểm tra đăng nhập quyền xem trang Zootopia
-  useEffect(() => {
-    const checkAccessSession = () => {
-      const sessionData = localStorage.getItem("accessSession");
-      if (sessionData) {
-        try {
-          const session = JSON.parse(sessionData);
-          const now = new Date().getTime();
-          const sessionDuration = 50 * 60 * 1000; // Phiên truy cập hợp lệ trong 50 phút
+  // // Kiểm tra đăng nhập quyền xem trang Zootopia
+  // useEffect(() => {
+  //   const checkAccessSession = () => {
+  //     const sessionData = localStorage.getItem("accessSession");
+  //     if (sessionData) {
+  //       try {
+  //         const session = JSON.parse(sessionData);
+  //         const now = new Date().getTime();
+  //         const sessionDuration = 50 * 60 * 1000; // Phiên truy cập hợp lệ trong 50 phút
 
-          if (session.isLoggedIn && (now - session.timestamp < sessionDuration)) {
-            setAuthStatus('authenticated'); 
-          } else {
-            localStorage.removeItem("accessSession"); 
-            setAuthStatus('unauthenticated');
-          }
-        } catch (error) {
-          localStorage.removeItem("accessSession"); 
-          setAuthStatus('unauthenticated');
-          console.error("Error parsing session data:", error);
-        }
-      } else {
-        setAuthStatus('unauthenticated');
-      }
-    };
-    checkAccessSession();
-  }, []); // Chạy một lần khi component được mount
+  //         if (session.isLoggedIn && (now - session.timestamp < sessionDuration)) {
+  //           setAuthStatus('authenticated'); 
+  //         } else {
+  //           localStorage.removeItem("accessSession"); 
+  //           setAuthStatus('unauthenticated');
+  //         }
+  //       } catch (error) {
+  //         localStorage.removeItem("accessSession"); 
+  //         setAuthStatus('unauthenticated');
+  //         console.error("Error parsing session data:", error);
+  //       }
+  //     } else {
+  //       setAuthStatus('unauthenticated');
+  //     }
+  //   };
+  //   checkAccessSession();
+  // }, []); // Chạy một lần khi component được mount
 
-  // Chờ kiểm tra phiên hoàn tất
-  if (authStatus === 'checking') {
-    return null; // Hoặc 1 component loading toàn màn hình
-  }
-  if (authStatus === 'unauthenticated') {
-    return <LoginAccess onLoginSuccess={() => setAuthStatus('authenticated')} />
-  }
+  // // Chờ kiểm tra phiên hoàn tất
+  // if (authStatus === 'checking') {
+  //   return null; // Hoặc 1 component loading toàn màn hình
+  // }
+  // if (authStatus === 'unauthenticated') {
+  //   return <LoginAccess onLoginSuccess={() => setAuthStatus('authenticated')} />
+  // }
   //  === ENDING XỬ LÝ XÁC THỰC ===
 
 

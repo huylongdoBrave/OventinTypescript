@@ -1,5 +1,9 @@
 import { useState, useCallback } from "react";
-import AttentionWheelPopup from "./WheelGame/AttentionWheelPopups";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import AttentionWheelPopup from "./WheelGame/AttentionWheelPopups"; 
+
+
 
 function RuleEvent() {
   const [isExpandedRuleText, setIsExpandedRuleText] = useState(false);
@@ -12,6 +16,7 @@ function RuleEvent() {
         isOpen={isAttentionPopupOpen}
         onClose={closeAttentionPopup}
       />
+      
 
       <div className="  inset-0 flex justify-center py-10 mb-10 my-5 px-4 z-0 relative">
         {/* Container max width */}
@@ -179,21 +184,23 @@ function RuleEvent() {
               </div>
             </div>
           </div>
+        </div>
 
           <img
             src="/static/fox.png"
             alt="fox"
             className="absolute z-5 h-auto transition-all duration-300 ease-in-out hidden
-                lg:block lg:w-[150px] lg:bottom-10 lg:left-0"
+                lg:block lg:w-[150px] lg:bottom-10 lg:left-[-200px]"
           />
           <img
             src="/static/rabbit.png"
             alt="rabbit"
             className="absolute z-5 h-auto transition-all duration-300 ease-in-out hidden
-                lg:block lg:w-[150px] lg:bottom-10 lg:right-0"
+                lg:block lg:w-[150px] lg:bottom-10 lg:right-[-200px]"
           />
-        </div>
+
       </div>
+
     </>
   );
 }
